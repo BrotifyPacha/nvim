@@ -2,7 +2,7 @@
 "plug.vim file should be placed under:
 "~/.config/nvim/autoload/plug.vim - for unix
 "~/AppData/Local/nvim/autoload/plug.vim for windows
-call plug#begin(stdpath('data').'/plugged')
+call plug#begin(stdpath('config').'/plugged')
 "call plug#begin(stdpath('data').'/plugged')
 "
 Plug 'tpope/vim-surround'
