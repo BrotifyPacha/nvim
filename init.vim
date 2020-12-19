@@ -6,6 +6,9 @@ call plug#begin(stdpath('config').'/plugged')
 "call plug#begin(stdpath('data').'/plugged')
 "
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-fugitive'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'tpope/vim-vinegar'
 Plug 'reedes/vim-colors-pencil'
 "Plug 'vim-airline/vim-airline'
@@ -69,8 +72,19 @@ cnoreabbrev vsp bel vsp
 " }}}1
 
 "Mappings {{{1
-nnoremap <leader><leader> /<++><cr>c4l
+inoremap ' ''<left>
+inoremap ` ``<left>
+inoremap " ""<left>
+inoremap ( ()<left>
+inoremap ) ()<left>
+inoremap [ []<left>
+inoremap ] []<left>
+inoremap { {}<left>
+inoremap } {}<left>
 
+
+nnoremap <leader><leader> /<++><cr>c4l
+tnoremap <Esc> <C-\><C-n>
 
 nnoremap <C-w>s :bel sp<CR>
 nnoremap <C-w>S :bel vsp<CR>

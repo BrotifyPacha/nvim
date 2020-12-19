@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =9
+let g:netrw_dirhist_9='P:/android/SchedulerApp/app/src/main/java/brotifypacha/scheduler/view_schedule_fragment'
+let g:netrw_dirhist_8='P:/android/SchedulerApp/app/src/main/java/brotifypacha/scheduler'
+let g:netrw_dirhist_7='P:/android/SchedulerApp/app/src/main/java/brotifypacha'
+let g:netrw_dirhist_6='P:/android/SchedulerApp/app/src/main/java'
+let g:netrw_dirhist_5='P:/android/SchedulerApp/app/src/main'
+let g:netrw_dirhist_4='P:/python/lan_chatter'
+let g:netrw_dirhist_3='P:\python\lan_chatter'
+let g:netrw_dirhist_2='P:\android\SchedulerApp/app/src/main/java/brotifypacha/scheduler'
+let g:netrw_dirhist_1='P:\android\SchedulerApp/app/src/main/java/brotifypacha'
+let g:netrw_dirhist_0='P:\android\SchedulerApp/app/src/main/java'

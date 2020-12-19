@@ -1,0 +1,11 @@
+{
+  "coc.preferences.formatOnSaveFiletypes": [
+    "c",
+    "python",
+    "json",
+    "html",
+    "css",
+    "javascript"
+  ],
+  "java.home": "C:\\Program Files\\Android\\Android Studio\\jre"
+}
