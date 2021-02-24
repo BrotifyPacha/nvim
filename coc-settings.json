@@ -1,11 +1,9 @@
 {
-  "coc.preferences.formatOnSaveFiletypes": [
-    "c",
-    "python",
-    "json",
-    "html",
-    "css",
-    "javascript"
-  ],
-  "java.home": "C:\\Program Files\\Android\\Android Studio\\jre"
+  "coc.preferences.formatOnSaveFiletypes": ["c", "python"],
+  "java.home": "C:\\Program Files\\Android\\Android Studio\\jre",
+  "intelephense.licenceKey": "OOF",
+
+  "explorer.width": 30,
+  "explorer.icon.enableNerdfont": true,
+  "explorer.previewAction.onHover": false
 }
