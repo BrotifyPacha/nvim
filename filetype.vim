@@ -12,7 +12,7 @@ augroup help_filetype
 augroup end
 
 augroup vim_filetype
-  autocmd BufWinEnter *.vim set foldmethod=marker
+  autocmd BufWinEnter *.vim setlocal foldmethod=marker
   autocmd BufWinEnter *.vim let b:surround_{char2nr('f')} = "\"{{{\r\"}}}"
 augroup end
 

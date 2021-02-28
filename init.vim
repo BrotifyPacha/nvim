@@ -10,12 +10,14 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tommcdo/vim-exchange'
 Plug 'wellle/targets.vim'
-Plug 'reedes/vim-colors-pencil'
+Plug 'brotifypacha/vim-colors-pencil'
 Plug 'psliwka/vim-smoothie'
 Plug 'Raimondi/delimitMate'
 Plug 'liuchengxu/vim-which-key'
 Plug 'airblade/vim-gitgutter'
-Plug 'vim-airline/vim-airline'
+Plug 'chrisjohnson/vim-foldfunctions'
+Plug 'tmhedberg/SimpylFold'
+" Plug 'vim-airline/vim-airline'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
@@ -24,7 +26,7 @@ set nocompatible
 
 
 "{{{ General settings
-filetype plugin on
+filetype plugin indent on
 syntax on
 set omnifunc=syntaxcomplete#Complete
 set nu
@@ -53,6 +55,23 @@ set wildoptions+=pum " Enable pop up menu
 
 set smartcase
 set ignorecase
+
+"{{{ Foldings
+
+set fillchars=fold:-
+
+set foldlevel=1
+set foldminlines=3
+set foldtext=MyFoldText()
+function! MyFoldText()
+  let n = v:foldend - v:foldstart + 1
+  let line = getline(v:foldstart)
+  let spc = substitute(line, '^\s*\zs.*', '', '')
+  let txt = substitute(line, '^\s*', '', 'g')
+  let txt = substitute(txt, '{', '', 'g')
+  return  spc . v:folddashes . " " . txt . " --- " . n . " "
+endfunction
+"}}}
 
 " Проверка правильности написания слов"
 
