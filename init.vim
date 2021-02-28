@@ -55,6 +55,7 @@ set wildoptions+=pum " Enable pop up menu
 
 set smartcase
 set ignorecase
+set lazyredraw
 
 "{{{ Foldings
 
