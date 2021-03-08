@@ -77,6 +77,16 @@ let g:which_key_map.g = {
       \ }
 
 
+let g:which_key_map.r = {
+      \ 'name' : '+refactor' ,
+      \ 'r' : [':call RenameLocalVariable()' , 'rename local'],
+      \ 'R' : [':call RenameClassVariable()' , 'rename class var']        ,
+      \ 't' : [':call ToggleMultilineArgs()' , 'toggle args'],
+      \ 'v' : [':call ExtractVariable()'     , 'extract variable'],
+      \ 'm' : [':call ExtractMethod()'       , 'extract method'],
+      \ 'd' : [':call AddDocString()'        , 'extract method'],
+      \ }
+
 let g:which_key_map.b = {
       \ 'name' : '+buffer' ,
       \ '1' : ['b1'        , 'buffer 1']        ,
