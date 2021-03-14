@@ -1,7 +1,7 @@
 " Map leader to which_key
 nnoremap <silent> <leader> :silent WhichKey '<Space>'<CR>
 nnoremap <silent> <F2> :silent WhichKey '<F2>'<CR>
-vnoremap <silent> <leader> :silent <c-u> :silent WhichKeyVisual '<Space>'<CR>
+vnoremap <silent> <leader> :silent <C-u>WhichKeyVisual '<Space>'<CR>
 
 " Define a separator
 let g:which_key_sep = '→'
@@ -33,7 +33,7 @@ let g:which_key_map['\'] = [ '<Plug>CommentaryLine'       , 'comment' ]
 let g:which_key_map['e'] = [ ':CocCommand explorer'       , 'explorer' ]
 let g:which_key_map['l'] = [ ':vert bel split'            , 'split right']
 let g:which_key_map['h'] = [ ':bel split'            , 'split down']
-let g:which_key_map['d'] = [ ':cd %:h'       , 'cwd to this' ]
+let g:which_key_map[' '] = [ ':call SearchForMacroPlaceholder()', 'go to next '.g:macro_placeholder ]
 
 let g:which_key_map.w = {
       \ 'name' : '+window' ,
@@ -61,12 +61,14 @@ function OpenGrep(inCurrentFile)
     endfor
 endfunction
 
+
 let g:which_key_map.s = {
       \ 'name' : '+search' ,
       \ 'f' : [':call feedkeys("\<esc>:find ") ' , 'find file'],
       \ 'g' : [':call OpenGrep(0)'               , 'grep files'],
       \ 'G' : [':call OpenGrep(1)'               , 'grep this File'],
       \ }
+
 
 let g:which_key_map.g = {
       \ 'name' : '+git' ,
@@ -80,12 +82,19 @@ let g:which_key_map.g = {
 let g:which_key_map.r = {
       \ 'name' : '+refactor' ,
       \ 'r' : [':call RenameLocalVariable()' , 'rename local'],
-      \ 'R' : [':call RenameClassVariable()' , 'rename class var']        ,
       \ 't' : [':call ToggleMultilineArgs()' , 'toggle args'],
-      \ 'v' : [':call ExtractVariable()'     , 'extract variable'],
-      \ 'm' : [':call ExtractMethod()'       , 'extract method'],
-      \ 'd' : [':call AddDocString()'        , 'extract method'],
+      \ 'd' : [':call AddDocString()'        , 'add doc string'],
       \ }
+vnoremap <leader>re :<C-u>call ExtractMethod()<cr>
+
+
+let g:which_key_map.f = {
+      \ 'name' : '+file action' ,
+      \ 'f' : [':CocCommand prettier.formatFile' , 'format file'],
+      \ 'dt' : [':diffthis' , 'diff this'],
+      \ 'ds' : [':DiffSaved' , 'diff saved'],
+      \ }
+
 
 let g:which_key_map.b = {
       \ 'name' : '+buffer' ,
@@ -98,7 +107,6 @@ let g:which_key_map.b = {
       \ 'p' : ['bprevious' , 'previous-buffer'] 
       \ }
 
-
 let g:which_key_spell_map = {
       \ '<F2>' : [':set spell!', 'toggle spell'],
       \ 'g' : ['zg', 'spelled good'],
@@ -108,7 +116,6 @@ let g:which_key_spell_map = {
       \ 'l' : [']s', 'next misspelled'],
       \ }
 call which_key#register('<F2>', "g:which_key_spell_map")
-
 
 " Register which key map
 call which_key#register('<Space>', "g:which_key_map")

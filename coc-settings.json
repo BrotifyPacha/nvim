@@ -4,6 +4,7 @@
   "intelephense.licenceKey": "OOF",
 
   "explorer.width": 30,
+  "explorer.file.showHiddenFiles": true,
   "explorer.icon.enableNerdfont": true,
   "explorer.previewAction.onHover": false,
   "explorer.keyMappings.global": {

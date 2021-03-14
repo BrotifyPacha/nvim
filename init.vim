@@ -90,7 +90,7 @@ colo pencil
 set bg=dark "Or bg=light if you feeling moody
 
 let mapleader=' '
-let jumpvar='<++>'
+let g:macro_placeholder='<++>'
 
 "{{{ Sourcing settings for plugins
 source $HOME\AppData\Local\nvim\plug-config\coc-settings.vim
@@ -104,13 +104,48 @@ cnoreabbrev h vertical botright help
 cnoreabbrev vsf vert bel sf
 cnoreabbrev vsp bel vsp
 cnoreabbrev sp bel sp
+
+inoreabbrev fucntion function
+inoreabbrev fucniton function
+inoreabbrev funciton function 
+inoreabbrev pubcli public
+inoreabbrev publci public
+inoreabbrev pbulci public
+inoreabbrev puclbi public
+inoreabbrev swithc switch
+inoreabbrev swtihc switch
+inoreabbrev siwthc switch
+inoreabbrev calss class
+inoreabbrev clss class
+inoreabbrev thsi this
+inoreabbrev esle else
+inoreabbrev eher here
+
 " }}}1
 
 " Mappings {{{
+
+nnoremap vv ^v$h
 
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<Tab>"
 
 tnoremap <Esc> <C-\><C-n>
 
+function! SearchForMacroPlaceholder()
+  call search(g:macro_placeholder, "cw")
+  execute "normal! c" . strlen(g:macro_placeholder) . "l "
+  startinsert
+endfunction
+
+function! s:DiffWithSaved()
+  let filetype=&ft
+  diffthis
+  bel vnew | r # | normal! 1GddzR
+  diffthis
+  execute "setlocal bt=nofile bh=wipe nobl noswf ro ft=" . filetype
+  wincmd p
+  normal! zR
+endfunction
+com! DiffSaved call s:DiffWithSaved()
 
