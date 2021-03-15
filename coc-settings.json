@@ -1,7 +1,10 @@
 {
   "coc.preferences.formatOnSaveFiletypes": ["c", "python"],
-  "java.home": "C:\\Program Files\\Android\\Android Studio\\jre",
-  "intelephense.licenceKey": "OOF",
+  "intelephense.environment.includePaths": [
+      "J:\\workspace\\"
+  ],
+
+  "intelephense.diagnostics.undefinedTypes": false,
 
   "explorer.width": 30,
   "explorer.file.showHiddenFiles": true,
@@ -10,4 +13,6 @@
   "explorer.keyMappings.global": {
     "L": "open:vsplit"
   }
+
+
 }

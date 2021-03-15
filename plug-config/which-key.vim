@@ -24,41 +24,43 @@ augroup which_key
 augroup end
 
 let g:which_key_max_size = 0
-let g:which_key_hspace = 50
+let g:which_key_hspace = 40
 
 " Create map to add keys to
 let g:which_key_map =  {}
 
-let g:which_key_map['\'] = [ '<Plug>CommentaryLine'       , 'comment' ]
-let g:which_key_map['e'] = [ ':CocCommand explorer'       , 'explorer' ]
-let g:which_key_map['l'] = [ ':vert bel split'            , 'split right']
-let g:which_key_map['h'] = [ ':bel split'            , 'split down']
+let g:which_key_map['\'] = [ '<Plug>CommentaryLine' , 'comment' ]
+let g:which_key_map['e'] = [ ':CocCommand explorer' , 'explorer' ]
+let g:which_key_map['l'] = [ '<C-w>l'               , 'move right']
+let g:which_key_map['h'] = [ '<C-w>h'               , 'move left']
+let g:which_key_map['j'] = [ '<C-w>j'               , 'move down']
+let g:which_key_map['k'] = [ '<C-w>k'               , 'move up']
 let g:which_key_map[' '] = [ ':call SearchForMacroPlaceholder()', 'go to next '.g:macro_placeholder ]
 
 let g:which_key_map.w = {
       \ 'name' : '+window' ,
-      \ 'q' : [':q'        , 'quit'],
-      \ 'w' : [':w'        , 'save'],
-      \ 'r' : ['<C-w>r'    , 'rotate'],
-      \ 'h' : ['<C-w>h'    , 'go left'],
-      \ 'j' : ['<C-w>j'    , 'go down'],
-      \ 'k' : ['<C-w>k'    , 'go up'],
-      \ 'l' : ['<C-w>l'    , 'go right'],
-      \ 'o' : ['<C-w>o'    , 'make the only'],
+      \ 'q' : [':q'             , 'quit'],
+      \ 'w' : [':w'             , 'save'],
+      \ 'r' : ['<C-w>r'         , 'rotate'],
+      \ 'h' : [':vert top split', 'split left'],
+      \ 'j' : [':bel split'     , 'split below'],
+      \ 'k' : [':top split'     , 'split above'],
+      \ 'l' : [':vert bel split', 'split right'],
+      \ 'o' : ['<C-w>o'         , 'make the only'],
       \ }
 
 function OpenGrep(inCurrentFile)
-    let command = "\<esc>:vimgrep//j "
-    let tail = ""
-    if a:inCurrentFile
-        let tail = "%"
-    else
-        let tail = "**/*." . expand("%:e")
-    endif
-    call feedkeys(command . tail)
-    for c in range(1, len(tail) + 3)
-        call feedkeys("\<left>")
-    endfor
+  let command = "\<esc>:vimgrep//j "
+  let tail = ""
+  if a:inCurrentFile
+    let tail = "%"
+  else
+    let tail = "**/*." . expand("%:e")
+  endif
+  call feedkeys(command . tail)
+  for c in range(1, len(tail) + 3)
+    call feedkeys("\<left>")
+  endfor
 endfunction
 
 
@@ -76,6 +78,7 @@ let g:which_key_map.g = {
       \ 'k' : [':GitGutterPrevHunk' , 'previous hunk'],
       \ 'u' : [':GitGutterUndoHunk' , 'undo hunk'],
       \ 's' : [':GitGutterStageHunk', 'stage hunk'],
+      \ 'p' : [':GitGutterPreviewHunk', 'preview hunk'],
       \ }
 
 
@@ -90,9 +93,16 @@ vnoremap <leader>re :<C-u>call ExtractMethod()<cr>
 
 let g:which_key_map.f = {
       \ 'name' : '+file action' ,
-      \ 'f' : [':CocCommand prettier.formatFile' , 'format file'],
-      \ 'dt' : [':diffthis' , 'diff this'],
-      \ 'ds' : [':DiffSaved' , 'diff saved'],
+      \ 'f'    : [':CocCommand prettier.formatFile', 'format file'],
+      \ 'r'    : [':edit!'                         , 'refresh file'],
+      \ '1'    : [':edit! ++enc=cp1251'            , 'open in cp1251'],
+      \ '0'    : [':edit! ++enc=utf-8'             , 'open in UTF-8'],
+      \ }
+
+let g:which_key_map.d = {
+      \ 'name' : '+diff action' ,
+      \ 't'   : [':diffthis'    , 'diff this'],
+      \ 's'   : [':DiffSaved'   , 'diff saved'],
       \ }
 
 
@@ -108,12 +118,11 @@ let g:which_key_map.b = {
       \ }
 
 let g:which_key_spell_map = {
-      \ '<F2>' : [':set spell!', 'toggle spell'],
+      \ 't' : [':set spell!', 'toggle spell'],
       \ 'g' : ['zg', 'spelled good'],
       \ 'b' : ['zw', 'spelled bad'],
       \ 'u' : [':spellundo', 'spell undo'],
-      \ 'h' : ['[s', 'last misspelled'],
-      \ 'l' : [']s', 'next misspelled'],
+      \ '<F2>' : ['1z=', 'auto correct'],
       \ }
 call which_key#register('<F2>', "g:which_key_spell_map")
 

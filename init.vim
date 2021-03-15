@@ -1,4 +1,4 @@
-"" Specify a directory for plugins
+" Specify a directory for plugins
 "plug.vim file should be placed under:
 "~/.config/nvim/autoload/plug.vim - for unix
 "~/AppData/Local/nvim/autoload/plug.vim for windows
@@ -17,16 +17,14 @@ Plug 'Raimondi/delimitMate'
 Plug 'liuchengxu/vim-which-key'
 Plug 'airblade/vim-gitgutter'
 Plug 'chrisjohnson/vim-foldfunctions'
-Plug 'tmhedberg/SimpylFold'
+" Plug 'tmhedberg/SimpylFold'
 " Plug 'vim-airline/vim-airline'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-call plug#end()
-
-set nocompatible
-
+call plug#end() "}}}
 
 "{{{ General settings
+set nocompatible
 filetype plugin indent on
 syntax on
 set omnifunc=syntaxcomplete#Complete
@@ -58,6 +56,11 @@ set smartcase
 set ignorecase
 set lazyredraw
 
+colo pencil
+set bg=dark "Or bg=light if you feeling moody
+
+" }}}
+
 "{{{ Foldings
 
 set fillchars=fold:-
@@ -75,31 +78,21 @@ function! MyFoldText()
 endfunction
 "}}}
 
-" Проверка правильности написания слов"
+"{{{ Lang and Spell stuff
 
-set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯЁЖ;
-      \ABCDEFGHIJKLMNOPQRSTUVWXYZ~:,
-      \фисвуапршолдьтщзйкыегмцчня;
-      \abcdefghijklmnopqrstuvwxyz
+set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯХЪЖБЮЁ;
+           \ABCDEFGHIJKLMNOPQRSTUVWXYZ{}:<>~,
+           \фисвуапршолдьтщзйкыегмцчняхъэюё;
+           \abcdefghijklmnopqrstuvwxyz[]'.`
 
+set langmap+=Э;\\"
+set langmap+=ж;\\;
+set langmap+=б;\\,
+set langmap+=№;#
 set spelllang=en,ru
-
 "}}}
 
-colo pencil
-set bg=dark "Or bg=light if you feeling moody
-
-let mapleader=' '
-let g:macro_placeholder='<++>'
-
-"{{{ Sourcing settings for plugins
-source $HOME\AppData\Local\nvim\plug-config\coc-settings.vim
-source $HOME\AppData\Local\nvim\plug-config\welle-targets.vim
-source $HOME\AppData\Local\nvim\plug-config\which-key.vim
-source $HOME\AppData\Local\nvim\plug-config\gitgutter.vim
-"}}}
-
-" Abbreviations {{{1
+" Abbreviations {{{
 cnoreabbrev h vertical botright help
 cnoreabbrev vsf vert bel sf
 cnoreabbrev vsp bel vsp
@@ -121,9 +114,35 @@ inoreabbrev thsi this
 inoreabbrev esle else
 inoreabbrev eher here
 
-" }}}1
+inoreabbrev осуществояется осуществляется 
+inoreabbrev осуществялется осуществляется 
+inoreabbrev подклбючатеся подключается
+inoreabbrev подколючается подключается
+inoreabbrev подклбючается подключается
+inoreabbrev подклбючается подключается
+inoreabbrev пдклбючается подключается
+inoreabbrev возварщаяет возвращает  
+inoreabbrev получате получает
+inoreabbrev проихсодит происходит
+inoreabbrev берется берётся
+inoreabbrev исхояд исходя
+inoreabbrev ихсодя исходя
+inoreabbrev ихсояд исходя
+inoreabbrev сулчае случае
+
+" }}}
 
 " Mappings {{{
+let mapleader=' '
+let g:macro_placeholder='<++>'
+function! SearchForMacroPlaceholder()
+  call search(g:macro_placeholder, "cw")
+  execute "normal! c" . strlen(g:macro_placeholder) . "l "
+  startinsert
+endfunction
+
+" Useless bind to make which-key delay work
+nnoremap <leader>+ <nop> 
 
 nnoremap vv ^v$h
 
@@ -132,12 +151,9 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<Tab>"
 
 tnoremap <Esc> <C-\><C-n>
 
-function! SearchForMacroPlaceholder()
-  call search(g:macro_placeholder, "cw")
-  execute "normal! c" . strlen(g:macro_placeholder) . "l "
-  startinsert
-endfunction
+" }}}
 
+" Commands
 function! s:DiffWithSaved()
   let filetype=&ft
   diffthis
@@ -149,3 +165,9 @@ function! s:DiffWithSaved()
 endfunction
 com! DiffSaved call s:DiffWithSaved()
 
+"{{{ Sourcing settings for plugins
+source $HOME\AppData\Local\nvim\plug-config\coc-settings.vim
+source $HOME\AppData\Local\nvim\plug-config\welle-targets.vim
+source $HOME\AppData\Local\nvim\plug-config\which-key.vim
+source $HOME\AppData\Local\nvim\plug-config\gitgutter.vim
+"}}}
