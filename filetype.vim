@@ -5,6 +5,14 @@ augroup netrw_autocomands
   autocmd BufEnter,BufWinEnter NetrwTreeListing vertical resize 35
 augroup end
 
+augroup girarlog_filetype
+  autocmd!
+  autocmd BufEnter,BufWinEnter * if &ft =='girarlog' 
+              \| edit!
+              \| setlocal readonly
+              \| normal G
+augroup end
+
 augroup help_filetype
   autocmd BufEnter * if &l:buftype ==# 'help' | vert resize 80 | endif
 augroup end
