@@ -124,7 +124,7 @@ inoreabbrev подколючается подключается
 inoreabbrev подклбючается подключается
 inoreabbrev подклбючается подключается
 inoreabbrev пдклбючается подключается
-inoreabbrev возварщаяет возвращает  
+inoreabbrev возварщаяет возвращает
 inoreabbrev получате получает
 inoreabbrev проихсодит происходит
 inoreabbrev берется берётся
@@ -132,6 +132,17 @@ inoreabbrev исхояд исходя
 inoreabbrev ихсодя исходя
 inoreabbrev ихсояд исходя
 inoreabbrev сулчае случае
+inoreabbrev присутсвтует присутствует
+inoreabbrev присутствиует присутствует
+inoreabbrev присутстсвует присутствует
+inoreabbrev приуствствует присутствует
+inoreabbrev приутствует присутствует
+inoreabbrev прсутствует присутствует
+inoreabbrev отсутсвтует отсутствует
+inoreabbrev отсутствиует отсутствует
+inoreabbrev отсутстсвует отсутствует
+inoreabbrev отуствствует отсутствует
+inoreabbrev отутствует отсутствует
 
 " }}}
 
