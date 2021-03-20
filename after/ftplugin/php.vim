@@ -5,8 +5,6 @@ setlocal include=\\(\\(require\\\|include\\)\\(_once\\)\\?\\\|new\\\|use\\)\\s*\
 setlocal define=\\s*\\(class\\\|function\\\|define\\)
 set includeexpr=IncludeFunc(v:fname)
 
-
-" $foo = new Provas_Model_User()
 function! IncludeFunc(fname)
   let parts = split(a:fname, "\\")
   if len(parts) > 1
@@ -160,10 +158,13 @@ function! GetFuncEnd()
   return funcend
 endfunction
 
+vnoremap <buffer>gc :<C-u>execute "normal! '<O/*"<cr>:<C-u>execute "normal! '>o*/"<cr>
 " Php macros
-let @a = "A;\<esc>"
+let @a = "mmA;\<esc>`m"
 let @t = "$this->"
+let @e = "echo "
 
 " Abbreviations
 iabbrev <buffer> func function
+inoreabbrev <buffer> eol PHP_EOL
 
