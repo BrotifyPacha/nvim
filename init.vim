@@ -56,6 +56,7 @@ set smartcase
 set ignorecase
 set lazyredraw
 set noswapfile
+set regexpengine=1
 
 colo pencil
 set bg=dark "Or bg=light if you feeling moody
