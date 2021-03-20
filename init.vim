@@ -160,6 +160,10 @@ nnoremap <leader>+ <nop>
 
 nnoremap vv ^v$h
 
+" F key maps
+nnoremap <F6> :set list!<cr>
+nnoremap <F5> :nohl<cr>
+
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<Tab>"
 
