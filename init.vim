@@ -70,13 +70,14 @@ set fillchars=fold:-
 set foldlevel=1
 set foldminlines=3
 set foldtext=MyFoldText()
+set foldopen=block,hor,insert,jump,mark,percent,quickfix,search,tag,undo
 function! MyFoldText()
   let n = v:foldend - v:foldstart + 1
   let line = getline(v:foldstart)
   let spc = substitute(line, '^\s*\zs.*', '', '')
   let txt = substitute(line, '^\s*', '', 'g')
   let txt = substitute(txt, '{', '', 'g')
-  return  spc . v:folddashes . " " . txt . " --- " . n . " "
+  return  spc . v:folddashes . " " . txt . " - " . n . " "
 endfunction
 "}}}
 
