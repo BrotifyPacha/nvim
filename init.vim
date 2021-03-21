@@ -175,9 +175,11 @@ tnoremap <Esc> <C-\><C-n>
 function! s:DiffWithSaved()
   let filetype=&ft
   diffthis
-  bel vnew | r # | normal! 1GddzR
-  diffthis
+  bel vnew
+  r #
+  normal! 1GddzR
   execute "setlocal bt=nofile bh=wipe nobl noswf ro ft=" . filetype
+  diffthis
   wincmd p
   normal! zR
 endfunction
