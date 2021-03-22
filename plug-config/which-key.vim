@@ -101,8 +101,9 @@ let g:which_key_map.f = {
 
 let g:which_key_map.d = {
       \ 'name' : '+diff action' ,
-      \ 't'   : [':diffthis'    , 'diff this'],
+      \ 'w'   : [':windo diffthis'    , 'diff windows'],
       \ 's'   : [':DiffSaved'   , 'diff saved'],
+      \ 'o'   : [':DiffOff'   , 'close diff windows'],
       \ }
 
 

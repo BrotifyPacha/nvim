@@ -185,6 +185,15 @@ function! s:DiffWithSaved()
 endfunction
 com! DiffSaved call s:DiffWithSaved()
 
+function s:DiffOff()
+  let curbuf = bufnr("%")
+  echom curbuf
+  windo if (&bt == "nofile") | bw! | endif
+  execute "buffer ".curbuf
+  diffoff
+endfunction
+com! DiffOff call s:DiffOff()
+
 "{{{ Sourcing settings for plugins
 source $HOME\AppData\Local\nvim\plug-config\coc-settings.vim
 source $HOME\AppData\Local\nvim\plug-config\welle-targets.vim
