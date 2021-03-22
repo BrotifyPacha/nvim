@@ -74,10 +74,13 @@ let g:which_key_map.s = {
 
 let g:which_key_map.g = {
       \ 'name' : '+git' ,
-      \ 'j' : [':GitGutterNextHunk' , 'next hunk'],
-      \ 'k' : [':GitGutterPrevHunk' , 'previous hunk'],
-      \ 'u' : [':GitGutterUndoHunk' , 'undo hunk'],
-      \ 's' : [':GitGutterStageHunk', 'stage hunk'],
+      \ 'l' : [':G push' ,              'push'],
+      \ 'h' : [':G pull' ,              'pull'],
+      \ 'g' : [':bel vert G' ,          'status'],
+      \ 'j' : [':GitGutterNextHunk' ,   'next hunk'],
+      \ 'k' : [':GitGutterPrevHunk' ,   'previous hunk'],
+      \ 'u' : [':GitGutterUndoHunk' ,   'undo hunk'],
+      \ 's' : [':GitGutterStageHunk',   'stage hunk'],
       \ 'p' : [':GitGutterPreviewHunk', 'preview hunk'],
       \ }
 
