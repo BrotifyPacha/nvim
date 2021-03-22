@@ -76,6 +76,7 @@ let g:which_key_map.g = {
       \ 'name' : '+git' ,
       \ 'l' : [':G push' ,              'push'],
       \ 'h' : [':G pull' ,              'pull'],
+      \ 'v' : [':bel vert G log' ,      'view log'],
       \ 'g' : [':bel vert G' ,          'status'],
       \ 'j' : [':GitGutterNextHunk' ,   'next hunk'],
       \ 'k' : [':GitGutterPrevHunk' ,   'previous hunk'],
