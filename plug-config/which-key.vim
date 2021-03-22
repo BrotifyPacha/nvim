@@ -29,12 +29,15 @@ let g:which_key_hspace = 40
 " Create map to add keys to
 let g:which_key_map =  {}
 
+" Make useless keybind invisible
+let g:which_key_map['+'] = 'which_key_ignore'
+
 let g:which_key_map['\'] = [ '<Plug>CommentaryLine' , 'comment' ]
 let g:which_key_map['e'] = [ ':CocCommand explorer' , 'explorer' ]
-let g:which_key_map['l'] = [ '<C-w>l'               , 'move right']
-let g:which_key_map['h'] = [ '<C-w>h'               , 'move left']
-let g:which_key_map['j'] = [ '<C-w>j'               , 'move down']
-let g:which_key_map['k'] = [ '<C-w>k'               , 'move up']
+let g:which_key_map['l'] = [ '<C-w>l'               , 'which_key_ignore']
+let g:which_key_map['h'] = [ '<C-w>h'               , 'which_key_ignore']
+let g:which_key_map['j'] = [ '<C-w>j'               , 'which_key_ignore']
+let g:which_key_map['k'] = [ '<C-w>k'               , 'which_key_ignore']
 let g:which_key_map[' '] = [ ':call SearchForMacroPlaceholder()', 'go to next '.g:macro_placeholder ]
 
 let g:which_key_map.w = {
