@@ -90,7 +90,7 @@ function! AddDocString()
 endfunction
 
 function! RenameLocalVariable()
-  normal! F$l"*yiw
+  normal! "*yiw
   let renamefrom = @*
 
   " сохраняем начальное положение курсора
