@@ -42,9 +42,9 @@ let g:which_key_map.w = {
       \ 'q' : [':q'             , 'quit'],
       \ 'w' : [':w'             , 'save'],
       \ 'r' : ['<C-w>r'         , 'rotate'],
-      \ 'h' : [':vert top split', 'split left'],
+      \ 'h' : [':vsplit', 'split left'],
       \ 'j' : [':bel split'     , 'split below'],
-      \ 'k' : [':top split'     , 'split above'],
+      \ 'k' : [':split'         , 'split above'],
       \ 'l' : [':vert bel split', 'split right'],
       \ 'o' : ['<C-w>o'         , 'make the only'],
       \ }
