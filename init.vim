@@ -101,6 +101,8 @@ cnoreabbrev vsf vert bel sf
 cnoreabbrev vsp bel vsp
 cnoreabbrev sp bel sp
 
+inoreabbrev fynction function
+inoreabbrev fycntion function
 inoreabbrev fucntion function
 inoreabbrev fucniton function
 inoreabbrev funciton function 
