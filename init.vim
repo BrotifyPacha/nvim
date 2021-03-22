@@ -151,7 +151,8 @@ let mapleader=' '
 let g:macro_placeholder='<++>'
 function! SearchForMacroPlaceholder()
   call search(g:macro_placeholder, "cw")
-  execute "normal! c" . strlen(g:macro_placeholder) . "l "
+  execute "normal! c" . strlen(g:macro_placeholder) . "l"
+  normal l
   startinsert
 endfunction
 
