@@ -38,6 +38,10 @@ let g:which_key_map['l'] = [ '<C-w>l'               , 'which_key_ignore']
 let g:which_key_map['h'] = [ '<C-w>h'               , 'which_key_ignore']
 let g:which_key_map['j'] = [ '<C-w>j'               , 'which_key_ignore']
 let g:which_key_map['k'] = [ '<C-w>k'               , 'which_key_ignore']
+let g:which_key_map['H'] = [ ':vsplit'              , 'which_key_ignore']
+let g:which_key_map['J'] = [ ':bel split'           , 'which_key_ignore']
+let g:which_key_map['K'] = [ ':split'               , 'which_key_ignore']
+let g:which_key_map['L'] = [ ':vert bel split'      , 'which_key_ignore']
 let g:which_key_map[' '] = [ ':call SearchForMacroPlaceholder()', 'go to next '.g:macro_placeholder ]
 
 let g:which_key_map.w = {
@@ -45,10 +49,6 @@ let g:which_key_map.w = {
       \ 'q' : [':q'             , 'quit'],
       \ 'w' : [':w'             , 'save'],
       \ 'r' : ['<C-w>r'         , 'rotate'],
-      \ 'h' : [':vsplit', 'split left'],
-      \ 'j' : [':bel split'     , 'split below'],
-      \ 'k' : [':split'         , 'split above'],
-      \ 'l' : [':vert bel split', 'split right'],
       \ 'o' : ['<C-w>o'         , 'make the only'],
       \ }
 
