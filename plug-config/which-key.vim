@@ -1,6 +1,7 @@
 " Map leader to which_key
 nnoremap <silent> <leader> :silent WhichKey '<Space>'<CR>
 nnoremap <silent> <F2> :silent WhichKey '<F2>'<CR>
+nnoremap <silent> <F8> :silent WhichKey '<F8>'<CR>
 vnoremap <silent> <leader> :silent <C-u>WhichKeyVisual '<Space>'<CR>
 
 " Define a separator
@@ -98,11 +99,7 @@ vnoremap <leader>re :<C-u>call ExtractMethod()<cr>
 
 
 let g:which_key_map.f = {
-      \ 'name' : '+file action' ,
-      \ 'f'    : [':CocCommand prettier.formatFile', 'format file'],
-      \ 'r'    : [':edit!'                         , 'refresh file'],
-      \ '1'    : [':edit! ++enc=cp1251'            , 'open in cp1251'],
-      \ '0'    : [':edit! ++enc=utf-8'             , 'open in UTF-8'],
+      \ 'name' : '+filetype action',
       \ }
 
 let g:which_key_map.d = {
@@ -128,7 +125,15 @@ let g:which_key_spell_map = {
       \ '<F2>' : [':ToggleSpell', 'toggle spell'],
       \ '<F3>' : [':AutoCorrectWord','auto correct'],
       \ }
+let g:which_key_util_map = {
+      \ '<F8>' : [':edit!'                         , 'refresh file'],
+      \ '1'    : [':edit! ++enc=utf-8'             , 'open in UTF-8'],
+      \ '2'    : [':edit! ++enc=cp1251'            , 'open in cp1251'],
+      \ '='    : [':CocCommand prettier.formatFile', 'format file'],
+      \ }
+
 call which_key#register('<F2>', "g:which_key_spell_map")
+call which_key#register('<F8>', "g:which_key_util_map")
 
 " Register which key map
 call which_key#register('<Space>', "g:which_key_map")
