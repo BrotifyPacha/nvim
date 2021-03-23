@@ -32,7 +32,6 @@ let g:which_key_map =  {}
 " Make useless keybind invisible
 let g:which_key_map['+'] = 'which_key_ignore'
 
-let g:which_key_map['\'] = [ '<Plug>CommentaryLine' , 'comment' ]
 let g:which_key_map['e'] = [ ':CocCommand explorer' , 'explorer' ]
 let g:which_key_map['l'] = [ '<C-w>l'               , 'which_key_ignore']
 let g:which_key_map['h'] = [ '<C-w>h'               , 'which_key_ignore']
