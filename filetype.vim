@@ -14,6 +14,10 @@ augroup girarlog_filetype
               \| normal G
 augroup end
 
+augroup CocNoStatusline
+  autocmd BufEnter,BufWinEnter * if &l:ft == "coc-explorer" | setlocal statusline=~ | endif
+augroup end
+
 augroup help_filetype
   autocmd!
   autocmd BufEnter * if &l:buftype ==# 'help' | vert resize 80 | endif
