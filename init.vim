@@ -222,6 +222,33 @@ function s:AutoCorrectWord()
 endfunction
 com! AutoCorrectWord call s:AutoCorrectWord()
 
+"{{{ Custom status line
+set statusline=%!MyStatusLine()
+function MyStatusLine()
+  let mdstr = mode()
+  if (mdstr[0] == "n")
+    let mdstr = "Normal"
+    let higr = "Cursor"
+  elseif (mdstr[0] == "v")
+    let mdstr = "Visual"
+    let higr = "Todo"
+  elseif (mdstr[0] == "i")
+    let mdstr = "Insert"
+    let higr = "TabLineSel"
+  elseif (mdstr[0] == "c")
+    let mdstr = "Command"
+    let higr = "lCursor"
+  endif
+  let md = "%#".higr."#%6.9( ".mdstr." %#Normal#%)"
+  let column  = "%3.5c"
+  let line  = "%3.5l"
+  let ruler = "%( |".column." | ".line." |%3.3p%%  %)"
+  let filetail = "%t"
+  let fileflags = " %-8.20(%m%r%w%q%)"
+  let fileinfo = filetail . fileflags
+  return md . " " . fileinfo . "%=" . "%y" . ruler
+endfunction
+"}}}
 "{{{ Sourcing settings for plugins
 source $HOME\AppData\Local\nvim\plug-config\coc-settings.vim
 source $HOME\AppData\Local\nvim\plug-config\welle-targets.vim
