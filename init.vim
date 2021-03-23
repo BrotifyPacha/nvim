@@ -197,6 +197,29 @@ function s:DiffOff()
 endfunction
 com! DiffOff call s:DiffOff()
 
+function s:ToggleSpell()
+  if (&spell == "nospell")
+    set spell
+    syntax off
+  else
+    set nospell
+    syntax on
+  endif
+endfunction
+com! ToggleSpell call s:ToggleSpell()
+
+function s:AutoCorrectWord()
+  let curspell = &spell
+  set spell
+  normal 1z=
+  if curspell
+    set spell
+  else
+    set nospell
+  endif
+endfunction
+com! AutoCorrectWord call s:AutoCorrectWord()
+
 "{{{ Sourcing settings for plugins
 source $HOME\AppData\Local\nvim\plug-config\coc-settings.vim
 source $HOME\AppData\Local\nvim\plug-config\welle-targets.vim

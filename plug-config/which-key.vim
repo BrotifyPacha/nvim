@@ -123,11 +123,11 @@ let g:which_key_map.b = {
       \ }
 
 let g:which_key_spell_map = {
-      \ 't' : [':set spell!', 'toggle spell'],
-      \ 'g' : ['zg', 'spelled good'],
-      \ 'b' : ['zw', 'spelled bad'],
-      \ 'u' : [':spellundo', 'spell undo'],
-      \ '<F2>' : ['1z=', 'auto correct'],
+      \ 'g' :    ['zg',           'spelled good'],
+      \ 'b' :    ['zw',           'spelled bad'],
+      \ 'u' :    [':spellundo',   'spell undo'],
+      \ '<F2>' : [':ToggleSpell', 'toggle spell'],
+      \ '<F3>' : [':AutoCorrectWord','auto correct'],
       \ }
 call which_key#register('<F2>', "g:which_key_spell_map")
 
