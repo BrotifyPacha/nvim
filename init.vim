@@ -198,12 +198,14 @@ endfunction
 com! DiffOff call s:DiffOff()
 
 function s:ToggleSpell()
-  if (&spell == "nospell")
+  if (&spell == 0)
     set spell
     syntax off
   else
     set nospell
     syntax on
+    " Re-source gitgutter config to load linked highlight groups
+    source $HOME\AppData\Local\nvim\plug-config\gitgutter.vim
   endif
 endfunction
 com! ToggleSpell call s:ToggleSpell()
