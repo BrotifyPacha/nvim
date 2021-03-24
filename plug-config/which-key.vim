@@ -69,23 +69,23 @@ endfunction
 
 let g:which_key_map.s = {
       \ 'name' : '+search' ,
-      \ 'f' : [':call feedkeys("\<esc>:find ") ' , 'find file'],
-      \ 'g' : [':call OpenGrep(0)'               , 'grep files'],
-      \ 'G' : [':call OpenGrep(1)'               , 'grep this File'],
+      \ 'f' : [':call feedkeys("\<esc>:find ")' , 'find file'],
+      \ 'g' : [':call OpenGrep(0)'              , 'grep files'],
+      \ 'G' : [':call OpenGrep(1)'              , 'grep this File'],
       \ }
 
 
 let g:which_key_map.g = {
       \ 'name' : '+git' ,
-      \ 'l' : [':G push' ,              'push'],
-      \ 'h' : [':G pull' ,              'pull'],
-      \ 'v' : [':bel vert G log' ,      'view log'],
-      \ 'g' : [':bel vert G' ,          'status'],
-      \ 'j' : [':GitGutterNextHunk' ,   'next hunk'],
-      \ 'k' : [':GitGutterPrevHunk' ,   'previous hunk'],
-      \ 'u' : [':GitGutterUndoHunk' ,   'undo hunk'],
-      \ 's' : [':GitGutterStageHunk',   'stage hunk'],
-      \ 'p' : [':GitGutterPreviewHunk', 'preview hunk'],
+      \ 'l' : [':G push'               , 'push'],
+      \ 'h' : [':G pull'               , 'pull'],
+      \ 'v' : [':bel vert G log'       , 'view log'],
+      \ 'g' : [':bel vert G'           , 'status'],
+      \ 'j' : [':GitGutterNextHunk'    , 'next hunk'],
+      \ 'k' : [':GitGutterPrevHunk'    , 'previous hunk'],
+      \ 'u' : [':GitGutterUndoHunk'    , 'undo hunk'],
+      \ 's' : [':GitGutterStageHunk'   , 'stage hunk'],
+      \ 'p' : [':GitGutterPreviewHunk' , 'preview hunk'],
       \ }
 
 
@@ -104,31 +104,34 @@ let g:which_key_map.f = {
 
 let g:which_key_map.d = {
       \ 'name' : '+diff action' ,
-      \ 'w'   : [':windo diffthis'    , 'diff windows'],
-      \ 's'   : [':DiffSaved'   , 'diff saved'],
-      \ 'o'   : [':DiffOff'   , 'close diff windows'],
+      \ 'w'   : [':windo diffthis'                 , 'diff windows'],
+      \ 's'   : [':DiffSaved'                      , 'diff saved'],
+      \ 'o'   : [':DiffOff'                        , 'close diff windows'],
       \ }
 
 
 let g:which_key_map.b = {
       \ 'name' : '+buffer' ,
-      \ 'd' : ['bd'        , 'delete-buffer']   ,
-      \ 'l' : ['buffers'   , 'list buffers']     ,
-      \ 'n' : ['bnext'     , 'next buffer']     ,
-      \ 'p' : ['bprevious' , 'previous buffer'] 
+      \ 'd' : ['bd'                                , 'delete-buffer'],
+      \ 'l' : ['buffers'                           , 'list buffers'],
+      \ 'n' : ['bnext'                             , 'next buffer'],
+      \ 'p' : ['bprevious'                         , 'previous buffer'],
       \ }
 
 let g:which_key_spell_map = {
-      \ 'g' :    ['zg',           'spelled good'],
-      \ 'b' :    ['zw',           'spelled bad'],
-      \ 'u' :    [':spellundo',   'spell undo'],
-      \ '<F2>' : [':ToggleSpell', 'toggle spell'],
-      \ '<F3>' : [':AutoCorrectWord','auto correct'],
+      \ 'g' :    ['zg'                             , 'spelled good'],
+      \ 'b' :    ['zw'                             , 'spelled bad'],
+      \ 'u' :    [':spellundo'                     , 'spell undo'],
+      \ '<F2>' : [':ToggleSpell'                   , 'toggle spell'],
+      \ '<F3>' : [':AutoCorrectWord'               , 'auto correct'],
       \ }
 let g:which_key_util_map = {
       \ '<F8>' : [':edit!'                         , 'refresh file'],
       \ '1'    : [':edit! ++enc=utf-8'             , 'open in UTF-8'],
       \ '2'    : [':edit! ++enc=cp1251'            , 'open in cp1251'],
+      \ '3'    : [':set ff=dos'                    , 'set ff=dos'],
+      \ '4'    : [':set ff=unix'                   , 'set ff=unix'],
+      \ '-'    : [':cd %:h'                        , 'cd to file'],
       \ '='    : [':CocCommand prettier.formatFile', 'format file'],
       \ }
 
