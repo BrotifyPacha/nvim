@@ -23,7 +23,7 @@ function Lightline()
   let md = Hl(higr, "%6.10( ".mdstr." %)")
   let column  = "%2.5c"
   let line  = "%2.5l"
-  let ruler = "%( ".column." | ".line." |%3.3p%%  %)"
+  let ruler = "%( ".column." | ".line."/%1.150L |%3.3p %)"
   let filetail = "%t"
   let fileflags = " %-0.10(%m%r%w%q%)"  
   let fileinfo = filetail . fileflags
