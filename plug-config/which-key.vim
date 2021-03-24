@@ -2,6 +2,7 @@
 nnoremap <silent> <leader> :silent WhichKey '<Space>'<CR>
 nnoremap <silent> <F2> :silent WhichKey '<F2>'<CR>
 nnoremap <silent> <F8> :silent WhichKey '<F8>'<CR>
+nnoremap <silent> <F9> :silent WhichKey '<F9>'<CR>
 vnoremap <silent> <leader> :silent <C-u>WhichKeyVisual '<Space>'<CR>
 
 " Define a separator
@@ -135,8 +136,24 @@ let g:which_key_util_map = {
       \ '='    : [':CocCommand prettier.formatFile', 'format file'],
       \ }
 
+let g:which_key_term_map = {
+      \ '<F9>' : [':term'                          , 'open term'],
+      \ '<F10>': [':call LaunchTermInGitDir()'     , 'open term in root'],
+      \ '<F11>': [':term python'                   , 'open python'],
+      \ }
+
+function LaunchTermInGitDir()
+  let path = FugitiveGitDir()[0:-5]
+  if (len(path) != 0)
+    call feedkeys("\<esc>:term\<cr>acd /D ".path."\<cr>")
+  else
+    call feedkeys("\<esc>:term\<cr>acd /D ".expand("%:h"))
+  endif
+endfunction
+
 call which_key#register('<F2>', "g:which_key_spell_map")
 call which_key#register('<F8>', "g:which_key_util_map")
+call which_key#register('<F9>', "g:which_key_term_map")
 
 " Register which key map
 call which_key#register('<Space>', "g:which_key_map")
