@@ -130,15 +130,6 @@ function! ExtractMethod()
   startinsert
 endfunction
 
-augroup LoadPhpTemplate
-  autocmd!
-  autocmd BufEnter *.php if line("$") == 1 && getline(1) == "" | call AddPhpBlock() | endif
-augroup end 
-
-function! AddPhpBlock()
-  call feedkeys("i<?php?>\<esc>hi\<cr>\<esc>O")
-endfunction
-
 function! GetFuncStart(includeDoc)
   let funcstart = search("function", "cnbW")
   " если перед определением функции следуюет коммент если он следует то
@@ -169,3 +160,20 @@ let @e = "echo "
 iabbrev <buffer> func function
 inoreabbrev <buffer> eol PHP_EOL
 
+
+" Creates php block with empty line as last
+" <?php
+"
+" ?>
+"
+function! AddPhpBlock()
+  normal! i<?php
+  normal! 3o
+  normal! ki?>
+  normal! k
+  startinsert
+endfunction
+
+if (line("$") == 1 && getline(1) == "")
+  call AddPhpBlock() 
+endif

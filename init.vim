@@ -166,7 +166,7 @@ nnoremap vv ^v$h
 
 " F key maps
 nnoremap <F6> :set list!<cr>
-nnoremap <F5> :nohl<cr>
+nnoremap <F5> :nohl \| match \| echo "Cleared highlight and search"<cr>
 
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<Tab>"
