@@ -92,16 +92,12 @@ endfunction
 function! RenameLocalVariable()
   normal! "*yiw
   let renamefrom = @*
-
   " сохраняем начальное положение курсора
   let initpos = getpos(".") 
-
   " сохраняем положение экрана
   normal L 
   let screenlowpos = getpos(".")
-
   call setpos(".", initpos)
-
   " просим новое название переменной
   call inputsave()
   let renameto = input("Rename local variable $" . renamefrom . " to: $")
@@ -114,8 +110,13 @@ function! RenameLocalVariable()
   call setpos(".", screenlowpos)
   normal zb
   call setpos(".", initpos)
-  call feedkeys("*N")
-  echo funcstart[1] . " " . funcend[1]
+
+  "Подсвечиваем измененные элементы
+  highlight! link HiRenameLocalVariable NONE
+  highlight! link HiRenameLocalVariable Cursor
+  execute 'match'
+  execute 'match HiRenameLocalVariable "\<'.renameto.'\>"'
+  echom funcstart[1] . " " . funcend[1]
 endfunction
 
 function! ExtractMethod()
