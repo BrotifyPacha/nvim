@@ -1,10 +1,3 @@
-" Map leader to which_key
-nnoremap <silent> <leader> :silent WhichKey '<Space>'<CR>
-nnoremap <silent> <F2> :silent WhichKey '<F2>'<CR>
-nnoremap <silent> <F8> :silent WhichKey '<F8>'<CR>
-nnoremap <silent> <F9> :silent WhichKey '<F9>'<CR>
-vnoremap <silent> <leader> :silent <C-u>WhichKeyVisual '<Space>'<CR>
-
 " Define a separator
 let g:which_key_sep = '→'
 
@@ -35,6 +28,7 @@ let g:which_key_map =  {}
 let g:which_key_map['+'] = 'which_key_ignore'
 
 let g:which_key_map['e'] = [ ':CocCommand explorer' , 'explorer' ]
+let g:which_key_map['f'] = [ ':call WhichKeyByFiletype()', '+filetype action' ]
 let g:which_key_map['l'] = [ '<C-w>l'               , 'which_key_ignore']
 let g:which_key_map['h'] = [ '<C-w>h'               , 'which_key_ignore']
 let g:which_key_map['j'] = [ '<C-w>j'               , 'which_key_ignore']
@@ -44,6 +38,14 @@ let g:which_key_map['J'] = [ ':bel split'           , 'which_key_ignore']
 let g:which_key_map['K'] = [ ':split'               , 'which_key_ignore']
 let g:which_key_map['L'] = [ ':vert bel split'      , 'which_key_ignore']
 let g:which_key_map[' '] = [ ':call SearchForMacroPlaceholder()', 'go to next '.g:macro_placeholder ]
+
+function WhichKeyByFiletype()
+  if (len(&ft) == 0)
+    WhichKey "vim"
+    return
+  endif
+  WhichKey &ft
+endfunction
 
 let g:which_key_map.w = {
       \ 'name' : '+window' ,
@@ -98,11 +100,6 @@ let g:which_key_map.r = {
       \ }
 vnoremap <leader>re :<C-u>call ExtractMethod()<cr>
 
-
-let g:which_key_map.f = {
-      \ 'name' : '+filetype action',
-      \ }
-
 let g:which_key_map.d = {
       \ 'name' : '+diff action' ,
       \ 'w'   : [':windo diffthis'                 , 'diff windows'],
@@ -126,6 +123,14 @@ let g:which_key_spell_map = {
       \ '<F2>' : [':ToggleSpell'                   , 'toggle spell'],
       \ '<F3>' : [':AutoCorrectWord'               , 'auto correct'],
       \ }
+
+let g:which_key_list_map = {
+      \ '<F5>' : ['call feedkeys(":registers\<cr>")'  , 'list registers'],
+      \ '<F6>' : ['call feedkeys(":buffers\<cr>")'    , 'list buffers'],
+      \ '<F7>' : ['call feedkeys(":autocmd ")'        , 'list buffers'],
+      \ '<F8>' : ['call feedkeys(":10messages\<cr>")' , 'list 10 last messages'],
+      \ }
+
 let g:which_key_util_map = {
       \ '<F8>' : [':edit!'                         , 'refresh file'],
       \ '1'    : [':edit! ++enc=utf-8'             , 'open in UTF-8'],
@@ -151,9 +156,34 @@ function LaunchTermInGitDir()
   endif
 endfunction
 
-call which_key#register('<F2>', "g:which_key_spell_map")
-call which_key#register('<F8>', "g:which_key_util_map")
-call which_key#register('<F9>', "g:which_key_term_map")
-
 " Register which key map
-call which_key#register('<Space>', "g:which_key_map")
+call which_key#register('<Space>'                 , "g:which_key_map")
+call which_key#register('spell_menu'              , "g:which_key_spell_map")
+call which_key#register('list_menu'               , "g:which_key_list_map")
+call which_key#register('file_menu'               , "g:which_key_util_map")
+call which_key#register('display_menu'            , "g:which_key_display_map")
+call which_key#register('term_menu'               , "g:which_key_term_map")
+
+" Map leader to which_key
+nnoremap <silent> <leader> :silent WhichKey '<Space>'<CR>
+nnoremap <silent> <F2> :silent WhichKey 'spell_menu'<CR>
+nnoremap <silent> <F3> :silent WhichKey 'list_menu'<CR>
+nnoremap <silent> <F4> :silent WhichKey 'file_menu'<CR>
+nnoremap <silent> <F9> :silent WhichKey 'term_menu'<CR>
+vnoremap <silent> <leader> :silent <C-u>WhichKeyVisual '<Space>'<CR>
+
+" Filetype specific keymaps maps - starts via <leade>f
+let g:which_key_vim_map = {
+      \ 'h'    : [':vert bo split $vimruntime\syntax\hitest.vim | so % | wincmd p | wincmd q' , 'open hitest'],
+      \ 'g'    : [':call feedkeys(":call SynStack()\<cr>")' , 'show hi group'],
+      \ 's'    : [':source $MYVIMRC'                       , 'source vimrc'],
+      \}
+
+function! SynStack()
+  echom map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name, fg, bg")')
+endfunc
+call which_key#register('vim', "g:which_key_vim_map")
+
+let g:which_key_php_map = {
+      \}
+
