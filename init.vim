@@ -17,6 +17,7 @@ Plug 'Raimondi/delimitMate'
 Plug 'liuchengxu/vim-which-key'
 Plug 'airblade/vim-gitgutter'
 Plug 'chrisjohnson/vim-foldfunctions'
+Plug 'lilydjwg/colorizer'
 " Plug 'tmhedberg/SimpylFold'
 " Plug 'vim-airline/vim-airline'
 
@@ -229,4 +230,5 @@ source $HOME\AppData\Local\nvim\plug-config\coc-settings.vim
 source $HOME\AppData\Local\nvim\plug-config\welle-targets.vim
 source $HOME\AppData\Local\nvim\plug-config\which-key.vim
 source $HOME\AppData\Local\nvim\plug-config\gitgutter.vim
+source $HOME\AppData\Local\nvim\plug-config\colorizer.vim
 "}}}
