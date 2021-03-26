@@ -52,7 +52,7 @@ set path+=**
 set hidden
 set wildmenu
 set wildoptions+=pum " Enable pop up menu 
-
+set noshowcmd
 set smartcase
 set ignorecase
 set lazyredraw
