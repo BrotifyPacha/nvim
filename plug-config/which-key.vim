@@ -84,6 +84,7 @@ let g:which_key_map.g = {
       \ 'h' : [':G pull'               , 'pull'],
       \ 'v' : [':bel vert G log'       , 'view log'],
       \ 'g' : [':bel vert G'           , 'status'],
+      \ 'b' : [':G blame'              , 'status'],
       \ 'j' : [':GitGutterNextHunk'    , 'next hunk'],
       \ 'k' : [':GitGutterPrevHunk'    , 'previous hunk'],
       \ 'u' : [':GitGutterUndoHunk'    , 'undo hunk'],
