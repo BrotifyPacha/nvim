@@ -6,7 +6,4 @@ let g:gitgutter_sign_removed_above_and_below = '|'
 let g:gitgutter_sign_modified_removed = '~'
 
 let g:gitgutter_map_keys = 0
-
-highlight link GitGutterAdd DiffAdd
-highlight link GitGutterChange DiffChange
-highlight link GitGutterDelete DiffDelete
+let g:pencil_gutter_color = 1
