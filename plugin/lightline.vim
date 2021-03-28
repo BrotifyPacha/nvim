@@ -12,13 +12,30 @@ function Lightline()
   let fileflags = "%-0.10(%m%r%w%q%)"
 
   let secOptional = []
+  " Detecting whether we are drawing statusline for the buffer that the cursor
+  " is in or not
   if (actual_curbuf == bufnr())
+    " Drawing optional data only if g:lightline_optional is set
     if (get(g:, "lightline_optional", 1))
+
+      if (exists('g:did_coc_loaded'))
+        let coc_section = []
+        if (exists('b:coc_diagnostic_info') && b:coc_diagnostic_info['error'] > 0)
+          call add(coc_section, Hl("DiffRemoved", b:coc_diagnostic_info['error']."E"))
+        endif
+        if (exists('b:coc_diagnostic_info') && b:coc_diagnostic_info['warning'] > 0)
+          call add(coc_section, Hl("DiffChange", b:coc_diagnostic_info['warning']."!"))
+        endif
+        call add(secOptional, "%-3.8(".join(coc_section, ", ")."%)")
+      endif
+
+      " Detecting amount of lines that have trailing white spaces
       let trailingCount = s:CountTrailingSpaces()
       if (trailingCount > 0)
         let secTrailing = Hl("DiffChange", "".trailingCount)
         call add(secOptional, secTrailing)
       endif
+
     endif
     if (get(g:, "lightline_fugitive", 1))
       let fugbranch = FugitiveHead()
