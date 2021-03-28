@@ -139,7 +139,13 @@ let g:which_key_util_map = {
       \ '4'    : [':set ff=unix'                   , 'set ff=unix'],
       \ '-'    : [':cd %:h'                        , 'cd to file'],
       \ '='    : [':CocCommand prettier.formatFile', 'format file'],
+      \ ' '    : [':call RemoveTrailingWhitespaces()', 'go to trailing whitespace'],
       \ }
+function RemoveTrailingWhitespaces()
+  normal! mm
+  execute "%s/\\s\\+$//"
+  normal! `m
+endfunction
 
 let g:which_key_term_map = {
       \ '<F9>' : [':term'                          , 'open term'],
