@@ -28,7 +28,11 @@ function Lightline()
       endif
     endif
   endif
-  return join([secMode, filetail, fileflags, "%=", join(secOptional, " "), secRuler])
+
+  let buf_fileenc = getbufvar(actual_curbuf, "&fileencoding")
+  let buf_ff = getbufvar(actual_curbuf, "&ff")
+  let encoding = Hl("MoreMsg", buf_fileenc."[".buf_ff."]")
+  return join([secMode, filetail, fileflags, encoding, "%=", join(secOptional, " "), secRuler])
 endfunction
 
 function Hl(group, text)
