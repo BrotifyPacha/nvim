@@ -104,6 +104,8 @@ let g:which_key_map.d = {
       \ 'name' : '+diff action' ,
       \ 'w'   : [':windo diffthis'                 , 'diff windows'],
       \ 's'   : [':DiffSaved'                      , 'diff saved'],
+      \ 'h'   : [':diffget'                        , 'pull from other file'],
+      \ 'l'   : [':diffput'                        , 'put to other file'],
       \ 'o'   : [':DiffOff'                        , 'close diff windows'],
       \ }
 
