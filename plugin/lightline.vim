@@ -10,6 +10,10 @@ function Lightline()
   let filetail = "%t"
   let fileflags = "%-0.10(%m%r%w%q%)"
 
+  let buf_fileenc = getbufvar(actual_curbuf, "&fileencoding")
+  let buf_ff = getbufvar(actual_curbuf, "&ff")
+  let encoding = Hl("MoreMsg", buf_fileenc."[".buf_ff."]")
+
   let secOptional = []
   " Detecting whether we are drawing statusline for the buffer that the cursor
   " is in or not
@@ -45,9 +49,6 @@ function Lightline()
     endif
   endif
 
-  let buf_fileenc = getbufvar(actual_curbuf, "&fileencoding")
-  let buf_ff = getbufvar(actual_curbuf, "&ff")
-  let encoding = Hl("MoreMsg", buf_fileenc."[".buf_ff."]")
   return join([secMode, "%<", filetail, fileflags, encoding, "%=", join(secOptional, " "), secRuler])
 endfunction
 
