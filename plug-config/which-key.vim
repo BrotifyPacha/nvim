@@ -134,7 +134,7 @@ let g:which_key_list_map = {
       \ }
 
 let g:which_key_util_map = {
-      \ '<F8>' : [':edit!'                         , 'refresh file'],
+      \ '<F4>' : [':edit!'                         , 'refresh file'],
       \ '1'    : [':edit! ++enc=utf-8'             , 'open in UTF-8'],
       \ '2'    : [':edit! ++enc=cp1251'            , 'open in cp1251'],
       \ '3'    : [':set ff=dos'                    , 'set ff=dos'],
