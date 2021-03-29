@@ -5,8 +5,7 @@ function Lightline()
   let mode = GetMode()
   let secMode = Hl(GetModeHighlight(mode), "%6.10( ".GetModeTitle(mode)." %)")
 
-  let line  = "%2.5l"
-  let secRuler = Hl("MoreMsg", " %(%2.5c | %2.5l/%1.150L | %2.3p %)")
+  let secRuler = Hl("MoreMsg", " %(%2.5v | %2.5l/%1.150L | %2.3p %)")
 
   let filetail = "%t"
   let fileflags = "%-0.10(%m%r%w%q%)"
