@@ -105,6 +105,8 @@ let g:which_key_map.d = {
       \ 'name' : '+diff action' ,
       \ 'w'   : [':windo diffthis'                 , 'diff windows'],
       \ 's'   : [':DiffSaved'                      , 'diff saved'],
+      \ 'h'   : [':diffget'                        , 'pull from other file'],
+      \ 'l'   : [':diffput'                        , 'put to other file'],
       \ 'o'   : [':DiffOff'                        , 'close diff windows'],
       \ }
 
@@ -133,14 +135,20 @@ let g:which_key_list_map = {
       \ }
 
 let g:which_key_util_map = {
-      \ '<F8>' : [':edit!'                         , 'refresh file'],
+      \ '<F4>' : [':edit!'                         , 'refresh file'],
       \ '1'    : [':edit! ++enc=utf-8'             , 'open in UTF-8'],
       \ '2'    : [':edit! ++enc=cp1251'            , 'open in cp1251'],
       \ '3'    : [':set ff=dos'                    , 'set ff=dos'],
       \ '4'    : [':set ff=unix'                   , 'set ff=unix'],
       \ '-'    : [':cd %:h'                        , 'cd to file'],
       \ '='    : [':CocCommand prettier.formatFile', 'format file'],
+      \ ' '    : [':call RemoveTrailingWhitespaces()', 'go to trailing whitespace'],
       \ }
+function RemoveTrailingWhitespaces()
+  normal! mm
+  execute "%s/\\s\\+$//"
+  normal! `m
+endfunction
 
 let g:which_key_term_map = {
       \ '<F9>' : [':term'                          , 'open term'],

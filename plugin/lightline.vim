@@ -5,20 +5,49 @@ function Lightline()
   let mode = GetMode()
   let secMode = Hl(GetModeHighlight(mode), "%6.10( ".GetModeTitle(mode)." %)")
 
-  let line  = "%2.5l"
-  let secRuler = Hl("MoreMsg", " %(%2.5c | %2.5l/%1.150L | %2.3p %)")
+  let secRuler = Hl("MoreMsg", " %(%2.5v | %2.5l/%1.150L | %2.3p %)")
 
   let filetail = "%t"
   let fileflags = "%-0.10(%m%r%w%q%)"
 
+  let buf_fileenc = getbufvar(actual_curbuf, "&fileencoding")
+  let buf_ff = getbufvar(actual_curbuf, "&ff")
+  let encoding = Hl("MoreMsg", buf_fileenc."[".buf_ff."]")
+
   let secOptional = []
+  " Detecting whether we are drawing statusline for the buffer that the cursor
+  " is in or not
   if (actual_curbuf == bufnr())
+    
+    if (mode == "v")
+      let visualSelected = VisualSelectionSize()
+      call add(secOptional, Hl("CursorLineNr", visualSelected))
+    endif
+
+
+    " Drawing optional data only if g:lightline_optional is set
     if (get(g:, "lightline_optional", 1))
+
+      if (exists('g:did_coc_loaded'))
+        let coc_section = []
+        if (exists('b:coc_diagnostic_info') && b:coc_diagnostic_info['error'] > 0)
+          call add(coc_section, Hl("DiffRemoved", b:coc_diagnostic_info['error']."E"))
+        endif
+        if (exists('b:coc_diagnostic_info') && b:coc_diagnostic_info['warning'] > 0)
+          call add(coc_section, Hl("DiffChange", b:coc_diagnostic_info['warning']."!"))
+        endif
+        if len(coc_section) > 0
+          call add(secOptional, "%-3.8(".join(coc_section, ", ")."%)")
+        endif
+      endif
+
+      " Detecting amount of lines that have trailing white spaces
       let trailingCount = s:CountTrailingSpaces()
       if (trailingCount > 0)
         let secTrailing = Hl("DiffChange", "".trailingCount)
         call add(secOptional, secTrailing)
       endif
+
     endif
     if (get(g:, "lightline_fugitive", 1))
       let fugbranch = FugitiveHead()
@@ -28,7 +57,16 @@ function Lightline()
       endif
     endif
   endif
-  return join([secMode, filetail, fileflags, "%=", join(secOptional, " "), secRuler])
+
+  return join([
+        \secMode, 
+        \"%<", 
+        \filetail, 
+        \fileflags, 
+        \encoding, 
+        \"%=", 
+        \join(secOptional, " "), 
+        \secRuler])
 endfunction
 
 function Hl(group, text)
@@ -62,6 +100,16 @@ function GetMode()
   elseif (mdstr[0] == "t")
     return "t"
   endif
+endfunction
+
+function GetVisualType()
+  let mdstr = mode()
+  if (mdstr ==# "V")
+    return "V"
+  elseif (mdstr == "\<C-v>")
+    return "cv"
+  endif
+  return "v"
 endfunction
 
 function GetModeTitle(mode)
@@ -103,4 +151,24 @@ function! s:CountTrailingSpaces()
   let arr = map(getline(0, "$"), {n, s -> s[-1:-1]==" "})
   let trailing = count(arr, 1)
   return trailing
+endfunction
+
+function! VisualSelectionSize()
+  if mode() == "v"
+    " Exit and re-enter visual mode, because the marks " ('< and '>) have not been updated yet.
+    exe "normal \<ESC>gv"
+    if line("'<") != line("'>")
+      return (line("'>") - line("'<") + 1) .  ' '
+    else
+      return (col("'>") - col("'<") + 1) .  ' '
+    endif
+  elseif mode() == "V"
+    exe "normal \<ESC>gv"
+    return (line("'>") - line("'<") + 1) .  ' '
+  elseif mode() == "\<C-V>"
+    exe "normal \<ESC>gv"
+    return (line("'>") - line("'<") + 1) .  'x' .  (abs(col("'>") - col("'<")) + 1) .  ' '
+  else
+    return ''
+  endif
 endfunction
