@@ -111,6 +111,7 @@ inoreabbrev funciton function
 inoreabbrev pubcli public
 inoreabbrev publci public
 inoreabbrev pbulci public
+inoreabbrev pbulic public
 inoreabbrev puclbi public
 inoreabbrev swithc switch
 inoreabbrev swtihc switch
@@ -120,6 +121,8 @@ inoreabbrev clss class
 inoreabbrev thsi this
 inoreabbrev esle else
 inoreabbrev eher here
+inoreabbrev taht that
+inoreabbrev thta that
 
 inoreabbrev осуществояется осуществляется 
 inoreabbrev осуществялется осуществляется 
@@ -185,7 +188,7 @@ function! s:DiffWithSaved()
   bel vnew
   r #
   normal! 1GddzR
-  execute "setlocal bt=nofile bh=wipe nobl noswf ro ft=" . filetype
+  execute "setlocal bt=nofile bh=wipe noma nobl noswf readonly ft=" . filetype
   diffthis
   wincmd p
   normal! zR
