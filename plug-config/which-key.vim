@@ -53,7 +53,19 @@ let g:which_key_map.w = {
       \ 'w' : [':w'             , 'save'],
       \ 'r' : ['<C-w>r'         , 'rotate'],
       \ 'o' : ['<C-w>o'         , 'make the only'],
+      \ 't' : [':call ToggleMaximizedWindow()', 'maximize/minimize window'],
       \ }
+
+function ToggleMaximizedWindow()
+  if exists("g:custom_is_window_maximized")
+    unlet g:custom_is_window_maximized
+    wincmd =
+  else
+    let g:custom_is_window_maximized = 1
+    wincmd _
+    wincmd |
+  endif
+endfunction
 
 function OpenGrep(inCurrentFile)
   let command = "\<esc>:vimgrep//j "
