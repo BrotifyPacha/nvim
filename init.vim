@@ -168,6 +168,10 @@ nnoremap <leader>+ <nop>
 
 nnoremap vv ^v$h
 
+" Shortening most use mapping in key length
+" If you need cw - use ce
+nnoremap cw ciw
+
 " F key maps
 nnoremap <silent> <F5> :nohl \| match<cr>
 nnoremap <silent> <F6> :set list!<cr>
