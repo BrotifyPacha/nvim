@@ -9,7 +9,13 @@ function Lightline()
   let actual_curbuf = winbufnr(g:statusline_winid)
   let isCurBuf = actual_curbuf == bufnr()
   let mode = GetMode()
-  let secMode = Hl(GetModeHighlight(mode), "%6.10( ".GetModeTitle(mode)." %)")
+  let secModeHiglight = ""
+  if isCurBuf
+    let secModeHiglight = GetModeHighlight(mode)
+  else
+    let secModeHiglight = "Search"
+  endif
+  let secMode = Hl(secModeHiglight, "%6.10( ".GetModeTitle(mode)." %)")
 
   let secRuler = Hl(
         \"MoreMsg", 
