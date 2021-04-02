@@ -60,6 +60,7 @@ set noswapfile
 set regexpengine=1
 set endofline
 
+let g:pencil_gutter_color = 1
 colo pencil
 set bg=dark "Or bg=light if you feeling moody
 
@@ -111,6 +112,7 @@ inoreabbrev funciton function
 inoreabbrev pubcli public
 inoreabbrev publci public
 inoreabbrev pbulci public
+inoreabbrev pbulic public
 inoreabbrev puclbi public
 inoreabbrev swithc switch
 inoreabbrev swtihc switch
@@ -120,6 +122,8 @@ inoreabbrev clss class
 inoreabbrev thsi this
 inoreabbrev esle else
 inoreabbrev eher here
+inoreabbrev taht that
+inoreabbrev thta that
 
 inoreabbrev осуществояется осуществляется 
 inoreabbrev осуществялется осуществляется 
@@ -156,13 +160,15 @@ let g:macro_placeholder='<++>'
 function! SearchForMacroPlaceholder()
   call search(g:macro_placeholder, "cw")
   execute "normal! c" . strlen(g:macro_placeholder) . "l"
-  normal l
-  startinsert
+  startinsert!
 endfunction
 
 " Useless bind to make which-key delay work
 nnoremap <leader>+ <nop> 
 
+" Shortening most used mappings
+" If you need cw - use ce
+nnoremap cw ciw
 nnoremap vv ^v$h
 
 " F key maps
@@ -185,7 +191,7 @@ function! s:DiffWithSaved()
   bel vnew
   r #
   normal! 1GddzR
-  execute "setlocal bt=nofile bh=wipe nobl noswf ro ft=" . filetype
+  execute "setlocal bt=nofile bh=wipe noma nobl noswf readonly ft=" . filetype
   diffthis
   wincmd p
   normal! zR

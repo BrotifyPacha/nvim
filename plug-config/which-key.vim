@@ -1,14 +1,14 @@
 " Define a separator
-let g:which_key_sep = '→'
+let g:which_key_sep = ''
 
 " Not a fan of floating windows for this
 let g:which_key_use_floating_win = 0
 
 " Change the colors if you want
-highlight default link WhichKey          Operator
-highlight default link WhichKeySeperator DiffAdded
-highlight default link WhichKeyGroup     Identifier
-highlight default link WhichKeyDesc      Function
+highlight default link WhichKey           ErrorMsg
+highlight default link WhichKeySeperator  MoreMsg
+highlight default link WhichKeyGroup      Identifier
+highlight default link WhichKeyDesc       Function
 
 
 " Hide status line
@@ -53,7 +53,19 @@ let g:which_key_map.w = {
       \ 'w' : [':w'             , 'save'],
       \ 'r' : ['<C-w>r'         , 'rotate'],
       \ 'o' : ['<C-w>o'         , 'make the only'],
+      \ 't' : [':call ToggleMaximizedWindow()', 'maximize/minimize window'],
       \ }
+
+function ToggleMaximizedWindow()
+  if exists("g:custom_is_window_maximized")
+    unlet g:custom_is_window_maximized
+    wincmd =
+  else
+    let g:custom_is_window_maximized = 1
+    wincmd _
+    wincmd |
+  endif
+endfunction
 
 function OpenGrep(inCurrentFile)
   let command = "\<esc>:vimgrep//j "
@@ -84,6 +96,7 @@ let g:which_key_map.g = {
       \ 'h' : [':G pull'               , 'pull'],
       \ 'v' : [':bel vert G log'       , 'view log'],
       \ 'g' : [':bel vert G'           , 'status'],
+      \ 'b' : [':G blame'              , 'status'],
       \ 'j' : [':GitGutterNextHunk'    , 'next hunk'],
       \ 'k' : [':GitGutterPrevHunk'    , 'previous hunk'],
       \ 'u' : [':GitGutterUndoHunk'    , 'undo hunk'],
@@ -180,11 +193,12 @@ nnoremap <silent> <F4> :silent WhichKey 'file_menu'<CR>
 nnoremap <silent> <F9> :silent WhichKey 'term_menu'<CR>
 vnoremap <silent> <leader> :silent <C-u>WhichKeyVisual '<Space>'<CR>
 
-" Filetype specific keymaps maps - starts via <leade>f
+" Filetype specific keymaps maps - starts via <leader>f
 let g:which_key_vim_map = {
       \ 'h'    : [':vert bo split $vimruntime\syntax\hitest.vim | so % | wincmd p | wincmd q' , 'open hitest'],
       \ 'g'    : [':call feedkeys(":call SynStack()\<cr>")' , 'show hi group'],
-      \ 's'    : [':source $MYVIMRC'                       , 'source vimrc'],
+      \ 'v'    : [':source $MYVIMRC'                        , 'source vimrc'],
+      \ 's'    : [':set statusline= '                       , 'disable statusline'],
       \}
 
 function! SynStack()
