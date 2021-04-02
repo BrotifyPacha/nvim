@@ -197,7 +197,8 @@ vnoremap <silent> <leader> :silent <C-u>WhichKeyVisual '<Space>'<CR>
 let g:which_key_vim_map = {
       \ 'h'    : [':vert bo split $vimruntime\syntax\hitest.vim | so % | wincmd p | wincmd q' , 'open hitest'],
       \ 'g'    : [':call feedkeys(":call SynStack()\<cr>")' , 'show hi group'],
-      \ 's'    : [':source $MYVIMRC'                       , 'source vimrc'],
+      \ 'v'    : [':source $MYVIMRC'                        , 'source vimrc'],
+      \ 's'    : [':set statusline= '                       , 'disable statusline'],
       \}
 
 function! SynStack()
