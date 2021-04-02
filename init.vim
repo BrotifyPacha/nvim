@@ -60,6 +60,7 @@ set noswapfile
 set regexpengine=1
 set endofline
 
+let g:pencil_gutter_color = 1
 colo pencil
 set bg=dark "Or bg=light if you feeling moody
 
@@ -166,11 +167,10 @@ endfunction
 " Useless bind to make which-key delay work
 nnoremap <leader>+ <nop> 
 
-nnoremap vv ^v$h
-
-" Shortening most use mapping in key length
+" Shortening most used mappings
 " If you need cw - use ce
 nnoremap cw ciw
+nnoremap vv ^v$h
 
 " F key maps
 nnoremap <silent> <F5> :nohl \| match<cr>
