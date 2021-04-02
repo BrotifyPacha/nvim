@@ -193,7 +193,7 @@ nnoremap <silent> <F4> :silent WhichKey 'file_menu'<CR>
 nnoremap <silent> <F9> :silent WhichKey 'term_menu'<CR>
 vnoremap <silent> <leader> :silent <C-u>WhichKeyVisual '<Space>'<CR>
 
-" Filetype specific keymaps maps - starts via <leade>f
+" Filetype specific keymaps maps - starts via <leader>f
 let g:which_key_vim_map = {
       \ 'h'    : [':vert bo split $vimruntime\syntax\hitest.vim | so % | wincmd p | wincmd q' , 'open hitest'],
       \ 'g'    : [':call feedkeys(":call SynStack()\<cr>")' , 'show hi group'],
