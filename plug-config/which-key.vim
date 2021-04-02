@@ -1,14 +1,14 @@
 " Define a separator
-let g:which_key_sep = '→'
+let g:which_key_sep = ''
 
 " Not a fan of floating windows for this
 let g:which_key_use_floating_win = 0
 
 " Change the colors if you want
-highlight default link WhichKey          Operator
-highlight default link WhichKeySeperator DiffAdded
-highlight default link WhichKeyGroup     Identifier
-highlight default link WhichKeyDesc      Function
+highlight default link WhichKey           ErrorMsg
+highlight default link WhichKeySeperator  MoreMsg
+highlight default link WhichKeyGroup      Identifier
+highlight default link WhichKeyDesc       Function
 
 
 " Hide status line
