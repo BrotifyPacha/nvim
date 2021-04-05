@@ -1,9 +1,9 @@
 echom "Loaded PHP config"
-set tabstop=4 softtabstop=4 shiftwidth=4
-set suffixesadd=.php
+setlocal tabstop=4 softtabstop=4 shiftwidth=4
+setlocal suffixesadd=.php
 setlocal include=\\(\\(require\\\|include\\)\\(_once\\)\\?\\\|new\\\|use\\)\\s*\\zs\\(\\S*\\s\\{-}\\)\\ze\\(\\sas\\\|(\\)
 setlocal define=\\s*\\(class\\\|function\\\|define\\)
-set includeexpr=IncludeFunc(v:fname)
+setlocal includeexpr=IncludeFunc(v:fname)
 
 function! IncludeFunc(fname)
   let parts = split(a:fname, "\\")
