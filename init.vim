@@ -172,7 +172,9 @@ nnoremap cw ciw
 nnoremap vv ^v$h
 
 " F key maps
-nnoremap <silent> <F5> :nohl \| match<cr>
+
+" Remove search highlighting / remove match groups / update gutter
+nnoremap <silent> <F5> :nohl \| match \| GitGutterAll<cr>
 nnoremap <silent> <F6> :set list!<cr>
 nnoremap <silent> <F7> :set wrap!<cr>
 nnoremap <F8> :ColorToggle<cr>
