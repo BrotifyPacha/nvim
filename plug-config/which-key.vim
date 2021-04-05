@@ -147,14 +147,14 @@ let g:which_key_list_map = {
       \ }
 
 let g:which_key_util_map = {
-      \ '<F4>' : [':edit!'                         , 'refresh file'],
+      \ '<F4>' : [':CocCommand prettier.formatFile', 'format file'],
+      \ '<F5>' : [':edit!'                         , 'refresh file'],
+      \ '`'    : [':cd %:h'                        , 'cd to file'],
       \ '1'    : [':edit! ++enc=utf-8'             , 'open in UTF-8'],
       \ '2'    : [':edit! ++enc=cp1251'            , 'open in cp1251'],
       \ '3'    : [':set ff=dos'                    , 'set ff=dos'],
       \ '4'    : [':set ff=unix'                   , 'set ff=unix'],
-      \ '-'    : [':cd %:h'                        , 'cd to file'],
-      \ '='    : [':CocCommand prettier.formatFile', 'format file'],
-      \ ' '    : [':call RemoveTrailingWhitespaces()', 'go to trailing whitespace'],
+      \ 'dt'    : [':call RemoveTrailingWhitespaces()', 'remove trailing whitespaces'],   
       \ }
 function RemoveTrailingWhitespaces()
   normal! mm
