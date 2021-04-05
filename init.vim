@@ -59,6 +59,7 @@ set lazyredraw
 set noswapfile
 set regexpengine=1
 set endofline
+set diffopt+=vertical
 
 let g:pencil_gutter_color = 1
 colo pencil

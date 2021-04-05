@@ -96,6 +96,7 @@ let g:which_key_map.g = {
       \ 'h' : [':G pull'               , 'pull'],
       \ 'v' : [':bel vert G log'       , 'view log'],
       \ 'g' : [':bel vert G'           , 'status'],
+      \ 'd' : [':Gdiffsplit'           , 'diff with index'],
       \ 'b' : [':G blame'              , 'status'],
       \ 'j' : [':GitGutterNextHunk'    , 'next hunk'],
       \ 'k' : [':GitGutterPrevHunk'    , 'previous hunk'],
@@ -121,7 +122,6 @@ let g:which_key_map.d = {
       \ 'l'   : [':diffput'                        , 'put to other file'],
       \ 'o'   : [':DiffOff'                        , 'close diff windows'],
       \ }
-
 
 let g:which_key_map.b = {
       \ 'name' : '+buffer' ,
