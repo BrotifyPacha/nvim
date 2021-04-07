@@ -2,7 +2,12 @@
 "plug.vim file should be placed under:
 "~/.config/nvim/autoload/plug.vim - for unix
 "~/AppData/Local/nvim/autoload/plug.vim for windows
-call plug#begin(stdpath('config').'/plugged')
+if (has("nvim"))
+  let g:config_location = stdpath('config')
+else
+  let g:config_location = "~/.vim"
+endif
+call plug#begin(g:config_location . '/plugged')
 "call plug#begin(stdpath('data').'/plugged')
 
 Plug 'tpope/vim-surround'
@@ -12,16 +17,20 @@ Plug 'tpope/vim-repeat'
 Plug 'tommcdo/vim-exchange'
 Plug 'wellle/targets.vim'
 Plug 'brotifypacha/vim-colors-pencil'
-Plug 'psliwka/vim-smoothie'
 Plug 'Raimondi/delimitMate'
-Plug 'liuchengxu/vim-which-key'
 Plug 'airblade/vim-gitgutter'
 Plug 'chrisjohnson/vim-foldfunctions'
 Plug 'lilydjwg/colorizer'
-" Plug 'tmhedberg/SimpylFold'
-" Plug 'vim-airline/vim-airline'
 
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+if (has("timers") && has("float"))
+  Plug 'psliwka/vim-smoothie'
+endif
+
+if (v:version >= 800)
+  Plug 'liuchengxu/vim-which-key'
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+endif
+
 call plug#end() "}}}
 
 "{{{ General settings
@@ -38,20 +47,17 @@ set softtabstop=2
 set shiftwidth=2
 set scrolloff=2 
 
-set listchars=eol:$,tab:<->,trail:~,nbsp:+
+set listchars=eol:$,tab:>-,trail:~,nbsp:+
 " set list
 
 set t_Co=256
-set termguicolors
 set showmatch
-set inccommand=nosplit
 set incsearch
 set hlsearch
 set laststatus=2
 set path+=**
 set hidden
 set wildmenu
-set wildoptions+=pum " Enable pop up menu 
 set noshowcmd
 set smartcase
 set ignorecase
@@ -60,6 +66,12 @@ set noswapfile
 set regexpengine=1
 set endofline
 set diffopt+=vertical
+
+if (has("nvim"))
+  set wildoptions+=pum " Enable pop up menu 
+  set inccommand=nosplit
+  set termguicolors
+endif
 
 let g:pencil_gutter_color = 1
 colo pencil
@@ -183,7 +195,9 @@ nnoremap <F8> :ColorToggle<cr>
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<Tab>"
 
-tnoremap <Esc> <C-\><C-n>
+if (has("nvim"))
+  tnoremap <Esc> <C-\><C-n>
+endif
 
 " }}}
 
@@ -201,7 +215,7 @@ function! s:DiffWithSaved()
 endfunction
 com! DiffSaved call s:DiffWithSaved()
 
-function s:DiffOff()
+function! s:DiffOff()
   let curbuf = bufnr("%")
   echom curbuf
   windo if (&bt == "nofile") | bw! | endif
@@ -210,20 +224,18 @@ function s:DiffOff()
 endfunction
 com! DiffOff call s:DiffOff()
 
-function s:ToggleSpell()
+function! s:ToggleSpell()
   if (&spell == 0)
     set spell
     syntax off
   else
     set nospell
     syntax on
-    " Re-source gitgutter config to load linked highlight groups
-    source $HOME\AppData\Local\nvim\plug-config\gitgutter.vim
   endif
 endfunction
 com! ToggleSpell call s:ToggleSpell()
 
-function s:AutoCorrectWord()
+function! s:AutoCorrectWord()
   let curspell = &spell
   set spell
   normal 1z=
@@ -237,9 +249,12 @@ com! AutoCorrectWord call s:AutoCorrectWord()
 
 
 "{{{ Sourcing settings for plugins
-source $HOME\AppData\Local\nvim\plug-config\coc-settings.vim
-source $HOME\AppData\Local\nvim\plug-config\welle-targets.vim
-source $HOME\AppData\Local\nvim\plug-config\which-key.vim
-source $HOME\AppData\Local\nvim\plug-config\gitgutter.vim
-source $HOME\AppData\Local\nvim\plug-config\colorizer.vim
+if (v:version >= 800)
+  execute "source " . g:config_location . "/plug-config/coc-settings.vim"
+  execute "source " . g:config_location . "/plug-config/which-key.vim"
+endif
+
+execute "source " . g:config_location . "/plug-config/welle-targets.vim"
+execute "source " . g:config_location . "/plug-config/gitgutter.vim"
+execute "source " . g:config_location . "/plug-config/colorizer.vim"
 "}}}
