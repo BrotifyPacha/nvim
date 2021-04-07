@@ -254,6 +254,7 @@ if (v:version >= 800)
   execute "source " . g:config_location . "/plug-config/which-key.vim"
 endif
 
+
 execute "source " . g:config_location . "/plug-config/welle-targets.vim"
 execute "source " . g:config_location . "/plug-config/gitgutter.vim"
 execute "source " . g:config_location . "/plug-config/colorizer.vim"
