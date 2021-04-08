@@ -5,15 +5,19 @@ let s:lines_icon = ""
 let s:chars_icon = ""
 
 set statusline=%!Lightline()
-function Lightline()
-  let actual_curbuf = winbufnr(g:statusline_winid)
-  let isCurBuf = actual_curbuf == bufnr()
+function! Lightline()
   let mode = GetMode()
   let secModeHiglight = ""
-  if isCurBuf
-    let secModeHiglight = GetModeHighlight(mode)
+  if v:version >= 800
+    let actual_curbuf = winbufnr(g:statusline_winid)
+    let isCurBuf = actual_curbuf == bufnr()
+    if isCurBuf
+      let secModeHiglight = GetModeHighlight(mode)
+    else
+      let secModeHiglight = "Search"
+    endif
   else
-    let secModeHiglight = "Search"
+    let secModeHiglight = GetModeHighlight(mode)
   endif
   let secMode = Hl(secModeHiglight, "%6.10( ".GetModeTitle(mode)." %)")
 
@@ -24,52 +28,26 @@ function Lightline()
   let filetail = "%t"
   let fileflags = "%-0.10(%m%r%w%q%)"
 
-  let buf_fileenc = getbufvar(actual_curbuf, "&fileencoding")
-  let buf_ff = getbufvar(actual_curbuf, "&ff")
-  let encoding = Hl("MoreMsg", buf_fileenc."[".buf_ff."]")
+  if v:version < 800 || actual_curbuf == bufnr()
+    let buf_fileenc = getbufvar(actual_curbuf, "&fileencoding")
+    let buf_ff = getbufvar(actual_curbuf, "&ff")
+    let encoding = Hl("MoreMsg", buf_fileenc."[".buf_ff."]")
+    let fileflags = fileflags." ".encoding
+    " Drawing optional data only if g:lightline_optional is set
+  endif
 
   let secOptional = []
-  " Detecting whether we are drawing statusline for the buffer that the cursor
-  " is in or not
-  if (actual_curbuf == bufnr())
-    
-    if (mode == "v")
-      let visualSelected = VisualSelectionSize()
-      call add(secOptional, Hl("CursorLineNr", visualSelected))
-    endif
 
+  if get(g:, "lightline_show_visual", 1)
+    call add(secOptional, Hl("CursorLineNr", "%{GetVisSection()}"))
+  endif
 
-    " Drawing optional data only if g:lightline_optional is set
-    if (get(g:, "lightline_optional", 1))
+  if get(g:, "lightline_show_trailing", 1)
+    call add(secOptional, Hl("DiffChange", "%{GetTrailingSpaceSection()}"))
+  endif
 
-      if (exists('g:did_coc_loaded'))
-        let coc_section = []
-        if (exists('b:coc_diagnostic_info') && b:coc_diagnostic_info['error'] > 0)
-          call add(coc_section, Hl("DiffRemoved", b:coc_diagnostic_info['error']."E"))
-        endif
-        if (exists('b:coc_diagnostic_info') && b:coc_diagnostic_info['warning'] > 0)
-          call add(coc_section, Hl("DiffChange", b:coc_diagnostic_info['warning']."!"))
-        endif
-        if len(coc_section) > 0
-          call add(secOptional, "%-3.8(".join(coc_section, ", ")."%)")
-        endif
-      endif
-
-      " Detecting amount of lines that have trailing white spaces
-      let trailingCount = s:CountTrailingSpaces()
-      if (trailingCount > 0)
-        let secTrailing = Hl("DiffChange", s:trailing_icon.trailingCount)
-        call add(secOptional, secTrailing)
-      endif
-
-    endif
-    if (get(g:, "lightline_fugitive", 1))
-      let fugbranch = FugitiveHead()
-      if (len(fugbranch) != 0)
-        let secBranch = Hl("DiffAdd", s:git_branch_icon." ". fugbranch)
-        call add(secOptional, secBranch)
-      endif
-    endif
+  if get(g:, "lightline_fugitive", 1)
+    call add(secOptional, Hl("DiffAdd", "%{GetGitSection()}"))
   endif
 
   return join([
@@ -77,13 +55,44 @@ function Lightline()
         \"%<", 
         \filetail, 
         \fileflags, 
-        \encoding, 
         \"%=", 
-        \join(secOptional, " "), 
+        \join(secOptional, " "),
         \secRuler])
 endfunction
 
-function Hl(group, text)
+function! GetVisSection()
+  if (GetMode() == "v")
+    let visualSelected = VisualSelectionSize()
+    return visualSelected
+  endif
+  return ""
+endfunction
+
+function! GetTrailingSpaceSection()
+  let arr = getline(0, "$")
+  let trailing = 0
+  for line in arr
+    if line[-1:-1] == " "
+      let trailing = trailing + 1
+    endif
+  endfor
+  if trailing > 0
+    return s:trailing_icon . trailing . ""
+  else
+    return ""
+  endif
+endfunction
+
+function! GetGitSection()
+  let fugbranch = FugitiveHead()
+  if (len(fugbranch) != 0)
+    return s:git_branch_icon." ". fugbranch
+  else
+    return ""
+  endif
+endfunction
+
+function! Hl(group, text)
   return "%#" . a:group . "#" . a:text . "%#Normal#"
 endfunction
 
@@ -94,7 +103,7 @@ endfunction
 " c - command
 " r - replace
 " t - terminal
-function GetMode()
+function! GetMode()
   let mdstr = mode()
   if (mdstr[0] == "n")
     return "n"
@@ -126,7 +135,7 @@ function GetVisualType()
   return "v"
 endfunction
 
-function GetModeTitle(mode)
+function! GetModeTitle(mode)
   if (a:mode == "n")
     return "Normal"
   elseif (a:mode == "v")
@@ -144,7 +153,7 @@ function GetModeTitle(mode)
   endif
 endfunction
 
-function GetModeHighlight(mode)
+function! GetModeHighlight(mode)
   if (a:mode == "n")
     return "Cursor"
   elseif (a:mode == "v")
@@ -158,13 +167,6 @@ function GetModeHighlight(mode)
   elseif (a:mode == "t")
     return "lCursor"
   endif
-endfunction
-
-function! s:CountTrailingSpaces()
-  let arr = getline(0, "$")
-  let arr = map(getline(0, "$"), {n, s -> s[-1:-1]==" "})
-  let trailing = count(arr, 1)
-  return trailing
 endfunction
 
 function! VisualSelectionSize()
