@@ -28,7 +28,7 @@ function! Lightline()
   let filetail = "%t"
   let fileflags = "%-0.10(%m%r%w%q%)"
 
-  if v:version < 800 || actual_curbuf == bufnr()
+  if v:version >= 800
     let buf_fileenc = getbufvar(actual_curbuf, "&fileencoding")
     let buf_ff = getbufvar(actual_curbuf, "&ff")
     let encoding = Hl("MoreMsg", buf_fileenc."[".buf_ff."]")
@@ -125,7 +125,7 @@ function! GetMode()
   endif
 endfunction
 
-function GetVisualType()
+function! GetVisualType()
   let mdstr = mode()
   if (mdstr ==# "V")
     return "V"
