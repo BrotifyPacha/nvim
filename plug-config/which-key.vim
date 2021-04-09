@@ -64,11 +64,11 @@ let g:which_key_map.w = {
       \ 'o' : ['<C-w>o'         , 'make the only'],
       \ 't' : [':call ToggleMaximizedWindow()', 'maximize/minimize window'],
       \ }
-nnoremap <leader>q :q<cr>
-nnoremap <leader>w :w<cr>
-nnoremap <leader>r <C-w>r
-nnoremap <leader>o <C-w>o
-nnoremap <leader>t :call ToggleMaximizedWindow()<cr>
+nnoremap <leader>wq :q<cr>
+nnoremap <leader>ww :w<cr>
+nnoremap <leader>wr <C-w>r
+nnoremap <leader>wo <C-w>o
+nnoremap <leader>wt :call ToggleMaximizedWindow()<cr>
 
 function! ToggleMaximizedWindow()
   if exists("g:custom_is_window_maximized")
@@ -119,18 +119,17 @@ let g:which_key_map.g = {
       \ 'p' : [':GitGutterPreviewHunk' , 'preview hunk'],
       \ }
 
-
-nnoremap <leader>l :G push<cr>
-nnoremap <leader>h :G pull<cr>
-nnoremap <leader>v :bel vert G log<cr>
-nnoremap <leader>g :bel vert G<cr>
-nnoremap <leader>d :Gdiffsplit<cr>
-nnoremap <leader>b :G blame<cr>
-nnoremap <leader>j :GitGutterNextHunk<cr>
-nnoremap <leader>k :GitGutterPrevHunk<cr>
-nnoremap <leader>u :GitGutterUndoHunk<cr>
-nnoremap <leader>s :GitGutterStageHunk<cr>
-nnoremap <leader>p :GitGutterPreviewHunk<cr>
+nnoremap <leader>gl :G push<cr>
+nnoremap <leader>gh :G pull<cr>
+nnoremap <leader>gv :bel vert G log<cr>
+nnoremap <leader>gg :bel vert G<cr>
+nnoremap <leader>gd :Gdiffsplit<cr>
+nnoremap <leader>gb :G blame<cr>
+nnoremap <leader>gj :GitGutterNextHunk<cr>
+nnoremap <leader>gk :GitGutterPrevHunk<cr>
+nnoremap <leader>gu :GitGutterUndoHunk<cr>
+nnoremap <leader>gs :GitGutterStageHunk<cr>
+nnoremap <leader>gp :GitGutterPreviewHunk<cr>
 
 let g:which_key_map.r = {
       \ 'name' : '+refactor' ,
@@ -149,11 +148,11 @@ let g:which_key_map.d = {
       \ 'o'   : [':DiffOff'                        , 'close diff windows'],
       \ }
 
-nnoremap <leader>w :windo diffthis<cr>
-nnoremap <leader>s :DiffSaved<cr>
-nnoremap <leader>h :diffget<cr>
-nnoremap <leader>l :diffput<cr>
-nnoremap <leader>o :DiffOff<cr>
+nnoremap <leader>dw :windo diffthis<cr>
+nnoremap <leader>ds :DiffSaved<cr>
+nnoremap <leader>dh :diffget<cr>
+nnoremap <leader>dl :diffput<cr>
+nnoremap <leader>do :DiffOff<cr>
 
 let g:which_key_map.b = {
       \ 'name' : '+buffer' ,
@@ -186,13 +185,8 @@ let g:which_key_util_map = {
       \ '2'    : [':edit! ++enc=cp1251'            , 'open in cp1251'],
       \ '3'    : [':set ff=dos'                    , 'set ff=dos'],
       \ '4'    : [':set ff=unix'                   , 'set ff=unix'],
-      \ 'dt'    : [':call RemoveTrailingWhitespaces()', 'remove trailing whitespaces'],   
+      \ ' '   : ['call feedkeys("mm:%s/\\s\\+$//\<cr>`m")', 'remove trailing whitespaces'],
       \ }
-function! RemoveTrailingWhitespaces()
-  normal! mm
-  execute "%s/\\s\\+$//"
-  normal! `m
-endfunction
 
 let g:which_key_term_map = {
       \ '<F9>' : [':term'                          , 'open term'],
@@ -209,15 +203,6 @@ function! LaunchTermInGitDir()
   endif
 endfunction
 
-" Register which key map
-call which_key#register('<Space>'                 , "g:which_key_map")
-call which_key#register('spell_menu'              , "g:which_key_spell_map")
-call which_key#register('list_menu'               , "g:which_key_list_map")
-call which_key#register('file_menu'               , "g:which_key_util_map")
-call which_key#register('display_menu'            , "g:which_key_display_map")
-call which_key#register('term_menu'               , "g:which_key_term_map")
-
-
 " Filetype specific keymaps maps - starts via <leader>f
 let g:which_key_vim_map = {
       \ 'h'    : [':vert bo split $vimruntime\syntax\hitest.vim | so % | wincmd p | wincmd q' , 'open hitest'],
@@ -231,6 +216,15 @@ function! SynStack()
 endfunc
 " Map leader to which_key
 if v:version >= 800
+  " Register which key map
+  call which_key#register('<Space>'                 , "g:which_key_map")
+  call which_key#register('spell_menu'              , "g:which_key_spell_map")
+  call which_key#register('list_menu'               , "g:which_key_list_map")
+  call which_key#register('file_menu'               , "g:which_key_util_map")
+  call which_key#register('display_menu'            , "g:which_key_display_map")
+  call which_key#register('term_menu'               , "g:which_key_term_map")
+
+
   nnoremap <silent> <leader> :silent WhichKey '<Space>'<CR>
   nnoremap <silent> <F2> :silent WhichKey 'spell_menu'<CR>
   nnoremap <silent> <F3> :silent WhichKey 'list_menu'<CR>
