@@ -251,8 +251,8 @@ com! AutoCorrectWord call s:AutoCorrectWord()
 "{{{ Sourcing settings for plugins
 if (v:version >= 800)
   execute "source " . g:config_location . "/plug-config/coc-settings.vim"
-  execute "source " . g:config_location . "/plug-config/which-key.vim"
 endif
+execute "source " . g:config_location . "/plug-config/which-key.vim"
 
 
 execute "source " . g:config_location . "/plug-config/welle-targets.vim"

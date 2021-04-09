@@ -39,7 +39,16 @@ let g:which_key_map['K'] = [ ':split'               , 'which_key_ignore']
 let g:which_key_map['L'] = [ ':vert bel split'      , 'which_key_ignore']
 let g:which_key_map[' '] = [ ':call SearchForMacroPlaceholder()', 'go to next '.g:macro_placeholder ]
 
-function WhichKeyByFiletype()
+nnoremap <leader>l <C-w>l
+nnoremap <leader>h <C-w>h
+nnoremap <leader>j <C-w>j
+nnoremap <leader>k <C-w>k
+nnoremap <leader>H :vsplit<cr>
+nnoremap <leader>J :bel split<cr>
+nnoremap <leader>K :split<cr>
+nnoremap <leader>L :vert bel split<cr>
+
+function! WhichKeyByFiletype()
   if (len(&ft) == 0)
     WhichKey "vim"
     return
@@ -55,8 +64,13 @@ let g:which_key_map.w = {
       \ 'o' : ['<C-w>o'         , 'make the only'],
       \ 't' : [':call ToggleMaximizedWindow()', 'maximize/minimize window'],
       \ }
+nnoremap <leader>q :q<cr>
+nnoremap <leader>w :w<cr>
+nnoremap <leader>r <C-w>r
+nnoremap <leader>o <C-w>o
+nnoremap <leader>t :call ToggleMaximizedWindow()<cr>
 
-function ToggleMaximizedWindow()
+function! ToggleMaximizedWindow()
   if exists("g:custom_is_window_maximized")
     unlet g:custom_is_window_maximized
     wincmd =
@@ -67,7 +81,7 @@ function ToggleMaximizedWindow()
   endif
 endfunction
 
-function OpenGrep(inCurrentFile)
+function! OpenGrep(inCurrentFile)
   let command = "\<esc>:vimgrep//j "
   let tail = ""
   if a:inCurrentFile
@@ -106,6 +120,18 @@ let g:which_key_map.g = {
       \ }
 
 
+nnoremap <leader>l :G push<cr>
+nnoremap <leader>h :G pull<cr>
+nnoremap <leader>v :bel vert G log<cr>
+nnoremap <leader>g :bel vert G<cr>
+nnoremap <leader>d :Gdiffsplit<cr>
+nnoremap <leader>b :G blame<cr>
+nnoremap <leader>j :GitGutterNextHunk<cr>
+nnoremap <leader>k :GitGutterPrevHunk<cr>
+nnoremap <leader>u :GitGutterUndoHunk<cr>
+nnoremap <leader>s :GitGutterStageHunk<cr>
+nnoremap <leader>p :GitGutterPreviewHunk<cr>
+
 let g:which_key_map.r = {
       \ 'name' : '+refactor' ,
       \ 'r' : [':call RenameLocalVariable()' , 'rename local'],
@@ -122,6 +148,12 @@ let g:which_key_map.d = {
       \ 'l'   : [':diffput'                        , 'put to other file'],
       \ 'o'   : [':DiffOff'                        , 'close diff windows'],
       \ }
+
+nnoremap <leader>w :windo diffthis<cr>
+nnoremap <leader>s :DiffSaved<cr>
+nnoremap <leader>h :diffget<cr>
+nnoremap <leader>l :diffput<cr>
+nnoremap <leader>o :DiffOff<cr>
 
 let g:which_key_map.b = {
       \ 'name' : '+buffer' ,
@@ -156,7 +188,7 @@ let g:which_key_util_map = {
       \ '4'    : [':set ff=unix'                   , 'set ff=unix'],
       \ 'dt'    : [':call RemoveTrailingWhitespaces()', 'remove trailing whitespaces'],   
       \ }
-function RemoveTrailingWhitespaces()
+function! RemoveTrailingWhitespaces()
   normal! mm
   execute "%s/\\s\\+$//"
   normal! `m
@@ -168,7 +200,7 @@ let g:which_key_term_map = {
       \ '<F11>': [':term python'                   , 'open python'],
       \ }
 
-function LaunchTermInGitDir()
+function! LaunchTermInGitDir()
   let path = FugitiveGitDir()[0:-5]
   if (len(path) != 0)
     call feedkeys("\<esc>:term\<cr>acd /D ".path."\<cr>")
@@ -185,13 +217,6 @@ call which_key#register('file_menu'               , "g:which_key_util_map")
 call which_key#register('display_menu'            , "g:which_key_display_map")
 call which_key#register('term_menu'               , "g:which_key_term_map")
 
-" Map leader to which_key
-nnoremap <silent> <leader> :silent WhichKey '<Space>'<CR>
-nnoremap <silent> <F2> :silent WhichKey 'spell_menu'<CR>
-nnoremap <silent> <F3> :silent WhichKey 'list_menu'<CR>
-nnoremap <silent> <F4> :silent WhichKey 'file_menu'<CR>
-nnoremap <silent> <F9> :silent WhichKey 'term_menu'<CR>
-vnoremap <silent> <leader> :silent <C-u>WhichKeyVisual '<Space>'<CR>
 
 " Filetype specific keymaps maps - starts via <leader>f
 let g:which_key_vim_map = {
@@ -204,7 +229,17 @@ let g:which_key_vim_map = {
 function! SynStack()
   echom map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name, fg, bg")')
 endfunc
-call which_key#register('vim', "g:which_key_vim_map")
+" Map leader to which_key
+if v:version >= 800
+  nnoremap <silent> <leader> :silent WhichKey '<Space>'<CR>
+  nnoremap <silent> <F2> :silent WhichKey 'spell_menu'<CR>
+  nnoremap <silent> <F3> :silent WhichKey 'list_menu'<CR>
+  nnoremap <silent> <F4> :silent WhichKey 'file_menu'<CR>
+  nnoremap <silent> <F9> :silent WhichKey 'term_menu'<CR>
+  vnoremap <silent> <leader> :silent <C-u>WhichKeyVisual '<Space>'<CR>
+
+  call which_key#register('vim', "g:which_key_vim_map")
+endif
 
 let g:which_key_php_map = {
       \}
