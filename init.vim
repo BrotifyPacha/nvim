@@ -21,6 +21,7 @@ Plug 'Raimondi/delimitMate'
 Plug 'airblade/vim-gitgutter'
 Plug 'chrisjohnson/vim-foldfunctions'
 Plug 'lilydjwg/colorizer'
+Plug 'qpkorr/vim-renamer'
 
 if (has("timers") && has("float"))
   Plug 'psliwka/vim-smoothie'
