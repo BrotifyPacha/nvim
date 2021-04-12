@@ -190,25 +190,21 @@ let g:which_key_util_map = {
       \ }
 
 let g:which_key_term_map = {
-      \ '<F9>' : [':term'                          , 'open term'],
-      \ '<F10>': [':call LaunchTermInGitDir()'     , 'open term in root'],
-      \ '<F11>': [':term python'                   , 'open python'],
+      \ '<F9>' : [':call OpenTerminal()'                 , 'open term'],
+      \ '<F10>': [':call RunCommand("python", "")'       , 'open python'],
       \ }
-
-function! LaunchTermInGitDir()
-  let path = FugitiveGitDir()[0:-5]
-  if (len(path) != 0)
-    call feedkeys("\<esc>:term\<cr>acd /D ".path."\<cr>")
-  else
-    call feedkeys("\<esc>:term\<cr>acd /D ".expand("%:h"))
-  endif
-endfunction
 
 " Filetype specific keymaps maps - starts via <leader>f
 let g:which_key_vim_map = {
       \ 'h'    : [':vert bo split $vimruntime\syntax\hitest.vim | so % | wincmd p | wincmd q' , 'open hitest'],
       \ 'g'    : [':call feedkeys(":call SynStack()\<cr>")' , 'show hi group'],
+      \ 'r'    : [':source %'                               , 'source %'],
       \ 'v'    : [':source $MYVIMRC'                        , 'source vimrc'],
+      \}
+
+let g:which_key_python_map = {
+      \ 'i'    : [':call feedkeys("G?\\v^(import|from)\<cr>o")' , 'go to imports'],
+      \ 'r'    : [':call RunCommand("python", expand("%"))' , 'run python script'],
       \}
 
 function! SynStack()
@@ -233,6 +229,7 @@ if v:version >= 800
   vnoremap <silent> <leader> :silent <C-u>WhichKeyVisual '<Space>'<CR>
 
   call which_key#register('vim', "g:which_key_vim_map")
+  call which_key#register('python', "g:which_key_python_map")
 endif
 
 let g:which_key_php_map = {
