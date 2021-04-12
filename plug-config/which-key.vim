@@ -156,7 +156,7 @@ nnoremap <leader>do :DiffOff<cr>
 
 let g:which_key_map.b = {
       \ 'name' : '+buffer' ,
-      \ 'd' : ['bd'                                , 'delete-buffer'],
+      \ 'b' : [':bw!'                              , 'wipe buffer'],
       \ 'l' : ['buffers'                           , 'list buffers'],
       \ 'n' : ['bnext'                             , 'next buffer'],
       \ 'p' : ['bprevious'                         , 'previous buffer'],
@@ -209,7 +209,6 @@ let g:which_key_vim_map = {
       \ 'h'    : [':vert bo split $vimruntime\syntax\hitest.vim | so % | wincmd p | wincmd q' , 'open hitest'],
       \ 'g'    : [':call feedkeys(":call SynStack()\<cr>")' , 'show hi group'],
       \ 'v'    : [':source $MYVIMRC'                        , 'source vimrc'],
-      \ 's'    : [':set statusline= '                       , 'disable statusline'],
       \}
 
 function! SynStack()
