@@ -1,0 +1,50 @@
+
+snippet if "If block" b
+if ${1:bool}:
+	${2:pass}
+
+endsnippet
+
+snippet ife "If else block" bA
+if ${1:bool}:
+	${2:pass}
+else:
+	${3:pass}
+
+endsnippet
+
+snippet def "def func" bA
+def ${1:func_name}($2):
+	${3:pass}
+
+endsnippet	
+
+snippet try "Try except block" b
+try:
+	${2:${VISUAL:pass}}
+except ${1:KeyboardInterrupt}:
+	print("$1")
+
+endsnippet
+
+snippet class "Class definition" bA
+class ${1:MyClass}(${2:Object}):
+
+	def __init__(self$3):
+		${3/(\, )?(\w+)/self.$2 = $2\n/g}
+
+	$0
+endsnippet
+
+snippet ifmain "if name == main block" b
+def main():
+	${1:pass}
+
+if __name__ == "__main__":
+	main()
+
+endsnippet
+
+snippet todo "Todo comment" b
+# TODO $1
+endsnippet

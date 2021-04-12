@@ -185,6 +185,7 @@ let g:which_key_util_map = {
       \ '2'    : [':edit! ++enc=cp1251'            , 'open in cp1251'],
       \ '3'    : [':set ff=dos'                    , 'set ff=dos'],
       \ '4'    : [':set ff=unix'                   , 'set ff=unix'],
+      \ 's'    : [':UltiSnipsEdit'                 , 'edit snippets'],
       \ ' '   : ['call feedkeys("mm:%s/\\s\\+$//\<cr>`m")', 'remove trailing whitespaces'],
       \ }
 

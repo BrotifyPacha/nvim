@@ -22,6 +22,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'chrisjohnson/vim-foldfunctions'
 Plug 'lilydjwg/colorizer'
 Plug 'qpkorr/vim-renamer'
+Plug 'SirVer/ultisnips'
 
 if (has("timers") && has("float"))
   Plug 'psliwka/vim-smoothie'
@@ -259,4 +260,5 @@ execute "source " . g:config_location . "/plug-config/which-key.vim"
 execute "source " . g:config_location . "/plug-config/welle-targets.vim"
 execute "source " . g:config_location . "/plug-config/gitgutter.vim"
 execute "source " . g:config_location . "/plug-config/colorizer.vim"
+execute "source " . g:config_location . "/plug-config/ulti.vim"
 "}}}
