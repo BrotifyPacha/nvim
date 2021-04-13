@@ -74,11 +74,15 @@ if (has("nvim"))
   set wildoptions+=pum " Enable pop up menu 
   set inccommand=nosplit
   set termguicolors
+
+  set signcolumn=yes:2
+else
+  set numberwidth=6
 endif
 
 let g:pencil_gutter_color = 1
-colo pencil
 set bg=dark "Or bg=light if you feeling moody
+colo pencil
 
 " }}}
 
@@ -194,8 +198,6 @@ nnoremap <silent> <F5> :nohl \| match \| GitGutterAll<cr>
 nnoremap <silent> <F6> :set list!<cr>
 nnoremap <silent> <F7> :set wrap!<cr>
 nnoremap <F8> :ColorToggle<cr>
-
-cnoremap <ESC> <ESC>:redraw! \| echo " "<cr>
 
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<Tab>"
