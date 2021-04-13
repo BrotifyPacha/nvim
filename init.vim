@@ -191,8 +191,13 @@ nnoremap <leader>+ <nop>
 nnoremap cw ciw
 nnoremap vv ^v$h
 
-" F key maps
+nnoremap p p==
+vnoremap p pgv=
 
+vnoremap < <gv
+vnoremap > >gv
+
+" F key maps
 " Remove search highlighting / remove match groups / update gutter
 nnoremap <silent> <F5> :nohl \| match \| GitGutterAll<cr>
 nnoremap <silent> <F6> :set list!<cr>
