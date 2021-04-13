@@ -195,6 +195,8 @@ nnoremap <silent> <F6> :set list!<cr>
 nnoremap <silent> <F7> :set wrap!<cr>
 nnoremap <F8> :ColorToggle<cr>
 
+cnoremap <ESC> <ESC>:redraw! \| echo " "<cr>
+
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<Tab>"
 
