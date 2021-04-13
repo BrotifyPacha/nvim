@@ -68,6 +68,7 @@ set noswapfile
 set regexpengine=1
 set endofline
 set diffopt+=vertical
+set virtualedit=block
 
 if (has("nvim"))
   set wildoptions+=pum " Enable pop up menu 
