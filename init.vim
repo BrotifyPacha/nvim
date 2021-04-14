@@ -24,6 +24,8 @@ Plug 'lilydjwg/colorizer'
 Plug 'qpkorr/vim-renamer'
 Plug 'SirVer/ultisnips'
 
+Plug 'StanAngeloff/php.vim', { 'for': ['php', 'html', 'blade.php'] }
+
 if (has("timers") && has("float"))
   Plug 'psliwka/vim-smoothie'
 endif
