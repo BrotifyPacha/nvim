@@ -25,10 +25,6 @@ Plug 'qpkorr/vim-renamer'
 
 Plug 'StanAngeloff/php.vim', { 'for': ['php', 'html', 'blade.php'] }
 
-if (has("timers") && has("float"))
-  Plug 'psliwka/vim-smoothie'
-endif
-
 if (v:version >= 800)
   Plug 'liuchengxu/vim-which-key'
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
