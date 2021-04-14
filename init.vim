@@ -22,7 +22,6 @@ Plug 'airblade/vim-gitgutter'
 Plug 'chrisjohnson/vim-foldfunctions'
 Plug 'lilydjwg/colorizer'
 Plug 'qpkorr/vim-renamer'
-Plug 'SirVer/ultisnips'
 
 Plug 'StanAngeloff/php.vim', { 'for': ['php', 'html', 'blade.php'] }
 
@@ -33,6 +32,10 @@ endif
 if (v:version >= 800)
   Plug 'liuchengxu/vim-which-key'
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
+endif
+
+if (v:version >= 740 && has("python3"))
+  Plug 'SirVer/ultisnips'
 endif
 
 call plug#end() "}}}
