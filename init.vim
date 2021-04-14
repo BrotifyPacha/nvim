@@ -198,6 +198,9 @@ vnoremap p pgv=
 vnoremap < <gv
 vnoremap > >gv
 
+nnoremap <c-l> :cnext<cr>zt
+nnoremap <c-h> :cprev<cr>zt
+
 " F key maps
 " Remove search highlighting / remove match groups / update gutter
 nnoremap <silent> <F5> :nohl \| match \| GitGutterAll<cr>
