@@ -81,6 +81,9 @@ else
   set numberwidth=6
 endif
 
+" Update time for gitgutter
+set updatetime=100
+
 let g:pencil_gutter_color = 1
 set bg=dark "Or bg=light if you feeling moody
 colo pencil
