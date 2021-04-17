@@ -76,7 +76,7 @@ if (has("nvim"))
   set inccommand=nosplit
   set termguicolors
 
-  set signcolumn=yes:2
+  set signcolumn=yes
 else
   set numberwidth=6
 endif
