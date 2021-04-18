@@ -19,11 +19,16 @@ Plug 'wellle/targets.vim'
 Plug 'brotifypacha/vim-colors-pencil'
 Plug 'Raimondi/delimitMate'
 Plug 'airblade/vim-gitgutter'
-Plug 'chrisjohnson/vim-foldfunctions'
 Plug 'lilydjwg/colorizer'
 Plug 'qpkorr/vim-renamer'
 
 Plug 'StanAngeloff/php.vim', { 'for': ['php', 'html', 'blade.php'] }
+
+if (has("nvim"))
+  Plug 'nvim-treesitter/nvim-treesitter'
+  Plug 'nvim-treesitter/playground'
+  Plug 'nvim-treesitter/nvim-treesitter-refactor'
+endif
 
 if (v:version >= 800)
   Plug 'liuchengxu/vim-which-key'
@@ -278,4 +283,47 @@ execute "source " . g:config_location . "/plug-config/welle-targets.vim"
 execute "source " . g:config_location . "/plug-config/gitgutter.vim"
 execute "source " . g:config_location . "/plug-config/colorizer.vim"
 execute "source " . g:config_location . "/plug-config/ulti.vim"
-"}}}
+
+if (has("nvim"))
+
+  set foldmethod=expr
+  set foldexpr=nvim_treesitter#foldexpr()
+
+lua <<EOF
+  require 'nvim-treesitter.install'.compilers = { "gcc" }
+  require 'nvim-treesitter.configs'.setup {
+    query_linter = {
+      enable = true,
+      use_virtual_text = true,
+      lint_events = {"BufWrite", "CursorHold"},
+    },
+    highlight = {
+      enable = true,
+      use_languagetree = false, -- Use this to enable language injection
+    },
+    indent = {
+      enable = true
+    },
+    -- Use :TSPlaygroundToggle
+    playground = {
+      enable = true,
+      disable = {},
+      updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
+      persist_queries = false, -- Whether the query persists across vim sessions
+      keybindings = {
+        toggle_query_editor = 'o',
+        toggle_hl_groups = 'i',
+        toggle_injected_languages = 't',
+        toggle_anonymous_nodes = 'a',
+        toggle_language_display = 'I',
+        focus_language = 'f',
+        unfocus_language = 'F',
+        update = 'R',
+        goto_node = '<cr>',
+        show_help = '?',
+      }
+    }
+  }
+EOF
+endif
+
