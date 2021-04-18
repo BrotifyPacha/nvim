@@ -19,14 +19,14 @@ Plug 'wellle/targets.vim'
 Plug 'brotifypacha/vim-colors-pencil'
 Plug 'Raimondi/delimitMate'
 Plug 'airblade/vim-gitgutter'
-Plug 'lilydjwg/colorizer'
-Plug 'qpkorr/vim-renamer'
+Plug 'lilydjwg/colorizer', { 'on': 'ColorToggle' }
+Plug 'qpkorr/vim-renamer', { 'on': 'Renamer' }
 
 Plug 'StanAngeloff/php.vim', { 'for': ['php', 'html', 'blade.php'] }
 
 if (has("nvim"))
   Plug 'nvim-treesitter/nvim-treesitter'
-  Plug 'nvim-treesitter/playground'
+  Plug 'nvim-treesitter/playground', { 'on': 'TSPlaygroundToggle' }
   Plug 'nvim-treesitter/nvim-treesitter-refactor'
 endif
 
