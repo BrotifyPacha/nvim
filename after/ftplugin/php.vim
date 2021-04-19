@@ -16,53 +16,6 @@ function! IncludeFunc(fname)
   return fp
 endfunction
 
-function! ConvertToMultilineArgs()
-  let initpos = getpos(".")
-  call search("(", "cW")
-  let lbrack = getpos(".")
-  normal %
-  if getcurpos[2] - lbrack[2] < 5 "
-    call setpos(".", initpos)
-    return
-  endif
-  call setpos(".", lbrack)
-  execute "normal a\<cr>\<esc>"
-  call setpos(".", lbrack)
-  execute "normal %i\<cr>\<esc>"
-  call setpos(".", lbrack)
-  normal j^
-  let linenum = line(".")
-  execute "s/\\v,([^(]*\\))@!/,\\r/g"
-  execute "normal V" . linenum . "G="
-  call setpos(".", initpos)
-endfunction
-
-function! ConvertToOneLineArgs()
-  let initpos = getpos(".")
-  call search("(", "cW")
-  let lbrack = getpos(".")
-  execute "normal Jh%"
-  let lines = line(".") - lbrack[1] + 1
-  call setpos(".", lbrack)
-  execute "normal " . lines . "J"
-  call setpos(".", initpos)
-  silent! execute "s/(\\s\\+/(/g"
-  call setpos(".", initpos)
-endfunction
-
-function! ToggleMultilineArgs()
-  normal mm
-  let argend = line(".") 
-  normal %
-  let argstart = line(".") 
-  normal `m
-  if (argstart == argend)
-    silent! call ConvertToMultilineArgs()
-  else
-    call ConvertToOneLineArgs()
-  endif
-endfunction
-
 function! AddDocString()
   let funcstart = GetFuncStart(0)
   let docstart = GetFuncStart(1)
