@@ -133,11 +133,22 @@ nnoremap <leader>gp :GitGutterPreviewHunk<cr>
 
 let g:which_key_map.r = {
       \ 'name' : '+refactor' ,
-      \ 'r' : [':call RenameLocalVariable()' , 'rename local'],
-      \ 't' : [':call ToggleMultilineArgs()' , 'toggle args'],
-      \ 'd' : [':call AddDocString()'        , 'add doc string'],
+      \ 'r' : [':call RenameLocalVariable()'              , 'rename local'],
+      \ 't' : [':call formatting#toggle_multiline_args()' , 'toggle args'],
+      \ 's' : [':call formatting#go_snake_case(0)'        , 'go snake_case'],
+      \ 'S' : [':call formatting#go_snake_case(1)'        , 'go SNAKE_CASE'],
+      \ 'c' : [':call formatting#go_camel_case(0)'        , 'go camelCase'],
+      \ 'C' : [':call formatting#go_camel_case(1)'        , 'go CamelCase'],
+      \ 'd' : [':call AddDocString()'                     , 'add doc string'],
       \ }
-vnoremap <leader>re :<C-u>call ExtractMethod()<cr>
+
+nnoremap <leader>rr :call RenameLocalVariable()<cr>
+nnoremap <leader>rt :call formatting#toggle_multiline_args()<cr>
+nnoremap <leader>rs :call formatting#go_snake_case(0)<cr>
+nnoremap <leader>rS :call formatting#go_snake_case(1)<cr>
+nnoremap <leader>rc :call formatting#go_camel_case(0)<cr>
+nnoremap <leader>rC :call formatting#go_camel_case(1)<cr>
+nnoremap <leader>rd :call AddDocString()<cr>
 
 let g:which_key_map.d = {
       \ 'name' : '+diff action' ,
