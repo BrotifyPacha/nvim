@@ -1,4 +1,3 @@
-echom "Loaded PHP config"
 setlocal tabstop=4 softtabstop=4 shiftwidth=4
 setlocal suffixesadd=.php
 setlocal include=\\(\\(require\\\|include\\)\\(_once\\)\\?\\\|new\\\|use\\)\\s*\\zs\\(\\S*\\s\\{-}\\)\\ze\\(\\sas\\\|(\\)
