@@ -83,7 +83,7 @@ if (has("nvim"))
 
   set signcolumn=yes
 else
-  set numberwidth=6
+  set numberwidth=4
 endif
 
 " Update time for gitgutter
