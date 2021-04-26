@@ -10,8 +10,9 @@ endif
 call plug#begin(g:config_location . '/plugged')
 "call plug#begin(stdpath('data').'/plugged')
 
-Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tommcdo/vim-exchange'
