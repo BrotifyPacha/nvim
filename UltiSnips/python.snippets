@@ -1,27 +1,27 @@
 
 snippet if "If block" b
-if ${1:bool}:
-	${2:pass}
+if ${1}:
+	${2:${VISUAL}}
 
 endsnippet
 
 snippet ife "If else block" bA
-if ${1:bool}:
-	${2:pass}
+if ${1}:
+	${2:${VISUAL}}
 else:
-	${3:pass}
+	${3}
 
 endsnippet
 
 snippet def "def func" bA
-def ${1:func_name}($2):
-	${3:pass}
+def ${1}(self${2:, }):
+	${3:${VISUAL}}
 
 endsnippet	
 
 snippet try "Try except block" b
 try:
-	${2:${VISUAL:pass}}
+	${2:${VISUAL}}
 except ${1:KeyboardInterrupt}:
 	print("$1")
 

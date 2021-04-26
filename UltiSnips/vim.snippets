@@ -1,6 +1,24 @@
 
 snippet func "function" bA
-function! ${1:f_name}($2)
+function! ${1}($2)
 	${0:${VISUAL}}
 endfunction
+endsnippet
+
+snippet if "if statement" b
+if ${1}
+	${0:${VISUAL}}
+endif
+endsnippet
+
+snippet ife "if else statement" b
+if ${2}
+	${1}
+else
+	${0}
+endif
+endsnippet
+
+snippet exec "execute command" bA
+execute "${0:${VISUAL}}"
 endsnippet
