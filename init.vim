@@ -39,7 +39,7 @@ if (v:version >= 800)
 endif
 
 if (v:version >= 704)
-  if has("python3"))
+  if (has("python3"))
     Plug 'SirVer/ultisnips'
   endif
   Plug 'vim-syntastic/syntastic', { 'for': ['php', 'html'] }
