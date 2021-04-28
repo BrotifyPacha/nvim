@@ -38,6 +38,8 @@ let g:which_key_map['J'] = [ ':bel split'           , 'which_key_ignore']
 let g:which_key_map['K'] = [ ':split'               , 'which_key_ignore']
 let g:which_key_map['L'] = [ ':vert bel split'      , 'which_key_ignore']
 let g:which_key_map[' '] = [ ':call SearchForMacroPlaceholder()', 'go to next '.g:macro_placeholder ]
+let g:which_key_map['o'] = [ ':Goyo'                , 'goyo' ]
+
 
 nnoremap <leader>l <C-w>l
 nnoremap <leader>h <C-w>h
@@ -47,6 +49,7 @@ nnoremap <leader>H :vsplit<cr>
 nnoremap <leader>J :bel split<cr>
 nnoremap <leader>K :split<cr>
 nnoremap <leader>L :vert bel split<cr>
+nnoremap <leader>o :Goyo<cr>
 
 function! WhichKeyByFiletype()
   if (len(&ft) == 0)
