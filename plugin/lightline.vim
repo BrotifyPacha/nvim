@@ -46,7 +46,7 @@ function! Lightline()
     call add(secOptional, Hl("DiffChange", "%{GetTrailingSpaceSection()}"))
   endif
 
-  if get(g:, "lightline_fugitive", 1)
+  if exists('g:loaded_fugitive')
     call add(secOptional, Hl("DiffAdd", "%{GetGitSection()}"))
   endif
 
