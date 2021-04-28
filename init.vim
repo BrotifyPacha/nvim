@@ -22,6 +22,7 @@ Plug 'Raimondi/delimitMate'
 Plug 'airblade/vim-gitgutter'
 Plug 'lilydjwg/colorizer', { 'on': 'ColorToggle' }
 Plug 'qpkorr/vim-renamer', { 'on': 'Renamer' }
+Plug 'junegunn/goyo.vim'
 Plug 'kien/ctrlp.vim'
 
 Plug 'StanAngeloff/php.vim', { 'for': ['php', 'html', 'blade.php'] }
