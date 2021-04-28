@@ -1,4 +1,8 @@
 " Generic programming related typos
+
+inoreabbrev argumetns arguments
+inoreabbrev argumens arguments
+
 inoreabbrev fynction function
 inoreabbrev fycntion function
 inoreabbrev fucntion function
