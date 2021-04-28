@@ -111,8 +111,10 @@ let g:which_key_map.g = {
       \ 'name' : '+git' ,
       \ 'l' : [':G push'               , 'push'],
       \ 'h' : [':G pull'               , 'pull'],
-      \ 'v' : [':bel vert G log'       , 'view log'],
+      \ 'v' : [':bel vert G log --oneline --graph --decorate --branches', 'view log'],
       \ 'g' : [':bel vert G'           , 'status'],
+      \ 'c' : [':bel vert G'           , 'commit'],
+      \ 'a' : [':bel vert G'           , 'amend'],
       \ 'd' : [':Gdiffsplit'           , 'diff with index'],
       \ 'b' : [':G blame'              , 'status'],
       \ 'j' : [':GitGutterNextHunk'    , 'next hunk'],
@@ -124,8 +126,10 @@ let g:which_key_map.g = {
 
 nnoremap <leader>gl :G push<cr>
 nnoremap <leader>gh :G pull<cr>
-nnoremap <leader>gv :bel vert G log<cr>
+nnoremap <leader>gv :bel vert G log --oneline --graph --decorate --branches<cr>
 nnoremap <leader>gg :bel vert G<cr>
+nnoremap <leader>gc :G commit<cr>
+nnoremap <leader>ga :G commit --amend<cr>
 nnoremap <leader>gd :Gdiffsplit<cr>
 nnoremap <leader>gb :G blame<cr>
 nnoremap <leader>gj :GitGutterNextHunk<cr>
