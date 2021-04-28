@@ -38,8 +38,11 @@ if (v:version >= 800)
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
 endif
 
-if (v:version >= 740 && has("python3"))
-  Plug 'SirVer/ultisnips'
+if (v:version >= 704)
+  if has("python3"))
+    Plug 'SirVer/ultisnips'
+  endif
+  Plug 'vim-syntastic/syntastic', { 'for': ['php', 'html'] }
 endif
 
 call plug#end() "}}}
