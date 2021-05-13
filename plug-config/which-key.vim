@@ -208,8 +208,11 @@ let g:which_key_util_map = {
       \ }
 
 let g:which_key_term_map = {
-      \ '<F9>' : [':call OpenTerminal()'                 , 'open term'],
-      \ '<F10>': [':call RunCommand("python", "")'       , 'open python'],
+      \ '<F9>' : [':call ReopenTerminal()'         , 're-open term'],
+      \ '<F10>': [':call NewTerminal()'            , 'open new term'],
+      \ 'p': [':call RunCommand("python", "")'     , 'open python'],
+      \ 'q': [':setlocal syntax='                  , 'clear syntax'],
+      \ 'l': [':setlocal syntax=log'               , 'log syntax'],
       \ }
 
 " Filetype specific keymaps maps - starts via <leader>f
