@@ -141,6 +141,7 @@ cnoreabbrev h vertical botright help
 cnoreabbrev vsf vert bel sf
 cnoreabbrev vsp bel vsp
 cnoreabbrev sp bel sp
+cnoreabbrev bw! bn \| bw! #
 
 execute "source " . g:config_location ."/"."abbreviation.vim"
 " }}}
