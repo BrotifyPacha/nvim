@@ -169,7 +169,8 @@ xnoremap id :<C-u>normal! ggVG<cr>
 nnoremap cy "*y
 nnoremap cp :set paste \| normal! "*p:set nopaste<cr>
 
-nnoremap p p=`]
+nnoremap p p=`]^
+nnoremap P P=`]^
 vnoremap p pgv=
 
 " F key maps
