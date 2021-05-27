@@ -4,6 +4,8 @@ setlocal include=\\(\\(require\\\|include\\)\\(_once\\)\\?\\\|new\\\|use\\)\\s*\
 setlocal define=\\s*\\(class\\\|function\\\|define\\)
 setlocal includeexpr=IncludeFunc(v:fname)
 
+setlocal commentstring=//%s
+
 function! IncludeFunc(fname)
   let parts = split(a:fname, "\\")
   if len(parts) > 1
