@@ -176,7 +176,7 @@ vnoremap p pgv=
 
 nnoremap C :call ChangeTillSymbol()<cr>
 
-function! ChangeTillSemicolon()
+function! ChangeTillSymbol()
   let line = getline('.')
   if line =~ '[,;:]$'
     let symbol = line[len(line)-1]
