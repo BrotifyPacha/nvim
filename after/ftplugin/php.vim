@@ -8,10 +8,10 @@ function! IncludeFunc(fname)
   let parts = split(a:fname, "\\")
   if len(parts) > 1
     let fp = "../".substitute(a:fname, "\\", "/", "g") . ".php"
-    echom fp
+    " echom fp
   else
     let fp = "../". substitute(a:fname, "_", "/", "g") . ".php"
-    echom fp
+    " echom fp
   endif
   return fp
 endfunction
