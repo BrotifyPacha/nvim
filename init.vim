@@ -174,6 +174,18 @@ nnoremap p p=`]^
 nnoremap P P=`]^
 vnoremap p pgv=
 
+nnoremap C :call ChangeTillSymbol()<cr>
+
+function! ChangeTillSymbol()
+  let line = getline('.')
+  if line =~ '[,;:]$'
+    let symbol = line[len(line)-1]
+    call feedkeys('ct' . symbol)
+  else
+    call feedkeys('c$')
+  endif
+endfunction
+
 " F key maps
 " Remove search highlighting / remove match groups / update gutter
 nnoremap <silent> <F5> :nohl \| match \| GitGutterAll<cr>
@@ -247,6 +259,7 @@ execute "source " . g:config_location . "/"."plug-config/which-key.vim"
 execute "source " . g:config_location ."/"."plug-config/welle-targets.vim"
 execute "source " . g:config_location ."/"."plug-config/gitgutter.vim"
 execute "source " . g:config_location ."/"."plug-config/colorizer.vim"
+execute "source " . g:config_location ."/"."plug-config/goyo.vim"
 execute "source " . g:config_location ."/"."plug-config/ulti.vim"
 
 if (has("nvim"))
