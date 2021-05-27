@@ -116,14 +116,11 @@ inoreabbrev <buffer> eol PHP_EOL
 " Creates php block with empty line as last
 " <?php
 "
-" ?>
 "
 function! AddPhpBlock()
   normal! i<?php
-  normal! 3o
-  normal! ki?>
+  normal! 2o
   normal! k
-  startinsert
 endfunction
 
 if (line("$") == 1 && getline(1) == "")
