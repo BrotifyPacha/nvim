@@ -64,24 +64,18 @@ let g:which_key_map.w = {
       \ 'q' : [':q'             , 'quit'],
       \ 'w' : [':w'             , 'save'],
       \ 'r' : ['<C-w>r'         , 'rotate'],
-      \ 'o' : ['<C-w>o'         , 'make the only'],
-      \ 't' : [':call ToggleMaximizedWindow()', 'maximize/minimize window'],
+      \ '3' : [':call ChangeWindowSize(3)', 'resize window to 1/3'],
+      \ '4' : [':call ChangeWindowSize(4)', 'resize window to 1/4'],
       \ }
+
 nnoremap <leader>wq :q<cr>
 nnoremap <leader>ww :w<cr>
 nnoremap <leader>wr <C-w>r
-nnoremap <leader>wo <C-w>o
-nnoremap <leader>wt :call ToggleMaximizedWindow()<cr>
+nnoremap <leader>w3 :call ChangeWindowSize(3)<cr>
+nnoremap <leader>w4 :call ChangeWindowSize(4)<cr>
 
-function! ToggleMaximizedWindow()
-  if exists("g:custom_is_window_maximized")
-    unlet g:custom_is_window_maximized
-    wincmd =
-  else
-    let g:custom_is_window_maximized = 1
-    wincmd _
-    wincmd |
-  endif
+function! ChangeWindowSize(size)
+  execute 'vert resize ' &columns / a:size
 endfunction
 
 function! OpenGrep(inCurrentFile)
