@@ -121,7 +121,7 @@ let g:which_key_map.g = {
 nnoremap <leader>gl :G push<cr>
 nnoremap <leader>gh :G pull<cr>
 nnoremap <leader>gv :bel vert G log --oneline --graph --decorate --branches<cr>
-nnoremap <leader>gg :bel vert G<cr>
+nnoremap <leader>gg :bel vert G<cr>:wincmd L<cr>
 nnoremap <leader>gc :G commit<cr>
 nnoremap <leader>ga :G commit --amend<cr>
 nnoremap <leader>gd :Gdiffsplit<cr>
