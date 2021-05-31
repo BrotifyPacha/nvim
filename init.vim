@@ -261,6 +261,7 @@ execute "source " . g:config_location . "/"."plug-config/which-key.vim"
 execute "source " . g:config_location ."/"."plug-config/welle-targets.vim"
 execute "source " . g:config_location ."/"."plug-config/gitgutter.vim"
 execute "source " . g:config_location ."/"."plug-config/colorizer.vim"
+execute "source " . g:config_location ."/"."plug-config/ctrlp.vim"
 execute "source " . g:config_location ."/"."plug-config/goyo.vim"
 execute "source " . g:config_location ."/"."plug-config/ulti.vim"
 
