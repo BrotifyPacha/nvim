@@ -140,6 +140,7 @@ let g:which_key_map.r = {
       \ 'S' : [':call formatting#go_snake_case(1)'        , 'go SNAKE_CASE'],
       \ 'c' : [':call formatting#go_camel_case(0)'        , 'go camelCase'],
       \ 'C' : [':call formatting#go_camel_case(1)'        , 'go CamelCase'],
+      \ 'm' : [':call formatting#squash_blank_lines()'    , 'merge blanks'],
       \ 'd' : [':call AddDocString()'                     , 'add doc string'],
       \ }
 

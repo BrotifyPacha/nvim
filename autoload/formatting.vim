@@ -69,3 +69,21 @@ function! formatting#go_camel_case(start_upper)
   execute "normal! ciw\<c-r>=str\<cr>\<esc>"
   normal! `m
 endfunction
+
+function! formatting#squash_blank_lines()
+  normal! dipO
+endfunction
+
+" testing.function(testing(nice_variable));
+function! formatting#delete_surrounding_func()
+  normal ds)mm
+  call search('\(\s\|(\|=\)', 'b')
+  normal ld`m
+endfunction
+
+" testing.function(testing(nice_variable, second_var));
+function! formatting#change_surrounding_func()
+  normal! F(
+  call search('\(\s\|(\|=\)', 'b')
+  call feedkeys('lct(')
+endfunction
