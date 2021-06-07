@@ -84,6 +84,8 @@ set endofline
 set diffopt+=vertical
 set virtualedit=block
 
+set grepprg=grep\ -Rin\ $*\ --exclude-dir={vendor,logs}\ /dev/null
+
 if (has("nvim"))
   set wildoptions+=pum " Enable pop up menu 
   set inccommand=nosplit
