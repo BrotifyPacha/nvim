@@ -19,13 +19,25 @@ function! Lightline()
   else
     let secModeHiglight = GetModeHighlight(mode)
   endif
-  let secMode = Hl(secModeHiglight, "%6.10( ".GetModeTitle(mode)." %)")
 
-  let secRuler = Hl(
-        \"MoreMsg", 
-        \" %(%2.5v | %2.5l/%1.150L".s:lines_icon." | %1.3p".s:percent_icon."%)")
+  let is_small = winwidth(g:statusline_winid) <= 60
 
-  let filetail = "%t"
+  let secMode = Hl(
+     \secModeHiglight,
+     \"%3.10( ".GetModeTitle(mode, is_small)." %)"
+     \)
+
+  if is_small
+    let secRuler = Hl(
+          \"MoreMsg", 
+          \" %(%2.5v | %1.5l/%1.150L".s:lines_icon."%) ")
+  else
+    let secRuler = Hl(
+          \"MoreMsg", 
+          \" %(%2.5v | %2.5l/%1.150L".s:lines_icon." | %1.3p".s:percent_icon."%)")
+  endif
+
+  let filetail = "%{GetFilePath()}"
   let fileflags = "%-0.10(%m%r%w%q%)"
 
   if v:version >= 800
@@ -42,7 +54,7 @@ function! Lightline()
     call add(secOptional, Hl("CursorLineNr", "%{GetVisSection()}"))
   endif
 
-  if get(g:, "lightline_show_trailing", 1)
+  if get(g:, "lightline_show_trailing", 1) && !is_small
     call add(secOptional, Hl("DiffChange", "%{GetTrailingSpaceSection()}"))
   endif
 
@@ -50,14 +62,24 @@ function! Lightline()
     call add(secOptional, Hl("DiffAdd", "%{GetGitSection()}"))
   endif
 
-  return join([
+  if (is_small)
+    return join([
         \secMode, 
         \"%<", 
         \filetail, 
-        \fileflags, 
         \"%=", 
         \join(secOptional, " "),
         \secRuler])
+  else
+    return join([
+          \secMode, 
+          \"%<", 
+          \filetail, 
+          \fileflags,
+          \"%=", 
+          \join(secOptional, " "),
+          \secRuler])
+  endif
 endfunction
 
 function! GetVisSection()
@@ -94,6 +116,17 @@ endfunction
 
 function! Hl(group, text)
   return "%#" . a:group . "#" . a:text . "%#Normal#"
+endfunction
+
+function GetFilePath()
+  let path = expand("%")
+  let lastTwoElements = substitute(
+        \path,
+        \'.*[/\\]\ze[^/\\]\+[/\\][^/\\]\+$',
+        \'',
+        \'i'
+        \)
+  return lastTwoElements
 endfunction
 
 " Returns:
@@ -135,20 +168,41 @@ function! GetVisualType()
   return "v"
 endfunction
 
-function! GetModeTitle(mode)
+function! GetModeTitle(mode, is_short)
   if (a:mode == "n")
+    if a:is_short
+      return "N"
+    endif
     return "Normal"
   elseif (a:mode == "v")
+    if a:is_short 
+      return "V"
+    endif
     return "Visual"
   elseif (a:mode == "i")
+    if a:is_short
+      return "I"
+    endif
     return "Insert"
   elseif (a:mode == "c")
+    if a:is_short 
+      return "C"
+    endif
     return "Command"
   elseif (a:mode == "r")
+    if a:is_short 
+      return "R"
+    endif
     return "Replace"
   elseif (a:mode == "t")
+    if a:is_short 
+      return "T"
+    endif
     return "Terminal"
   else
+    if a:is_short 
+      return "N"
+    endif
     return "Normal"
   endif
 endfunction
