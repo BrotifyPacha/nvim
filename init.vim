@@ -179,6 +179,9 @@ nnoremap p p=`]^
 nnoremap P P=`]^
 vnoremap p pgv=
 
+nnoremap [t :tabprevious<cr>
+nnoremap ]t :tabnext<cr>
+
 nnoremap C :call ChangeTillSymbol()<cr>
 
 function! ChangeTillSymbol()
