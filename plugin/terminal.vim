@@ -17,6 +17,7 @@ function! NewTerminal()
       echo "removed " . id
     endif
   endfor
+  call feedkeys("aPS1='$ '\<cr>clear\<cr>")
 endfunction
 
 function! ReopenTerminal()
