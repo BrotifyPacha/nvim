@@ -71,8 +71,10 @@ let g:which_key_map.w = {
 nnoremap <leader>wq :q<cr>
 nnoremap <leader>ww :w<cr>
 nnoremap <leader>wr <C-w>r
+nnoremap <leader>w2 :call ChangeWindowSize(2)<cr>
 nnoremap <leader>w3 :call ChangeWindowSize(3)<cr>
 nnoremap <leader>w4 :call ChangeWindowSize(4)<cr>
+nnoremap <leader>w5 :call ChangeWindowSize(5)<cr>
 
 function! ChangeWindowSize(size)
   execute 'vert resize ' &columns / a:size
