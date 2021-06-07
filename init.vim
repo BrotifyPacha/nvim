@@ -165,8 +165,8 @@ nnoremap <leader>+ <nop>
 nnoremap cw ciw
 nnoremap vv ^v$h
 
-nnoremap dsf :call formatting#delete_surrounding_func<cr>
-nnoremap csf :call formatting#change_surrounding_func<cr>
+nnoremap dsf :call formatting#delete_surrounding_func()<cr>
+nnoremap csf :call formatting#change_surrounding_func()<cr>
 
 " declating Document text object
 onoremap id :<C-u>normal! ggVG<cr>
