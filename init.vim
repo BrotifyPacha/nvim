@@ -291,7 +291,7 @@ lua <<EOF
       use_languagetree = false, -- Use this to enable language injection
     },
     indent = {
-      enable = true
+      enable = false
     },
     -- Use :TSPlaygroundToggle
     playground = {
