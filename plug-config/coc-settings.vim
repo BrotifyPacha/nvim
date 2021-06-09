@@ -1,7 +1,6 @@
 " CocExplorer
 
 
-set updatetime=300
 " enable sign column by default so it wont jump in and out
 set signcolumn=yes
 
