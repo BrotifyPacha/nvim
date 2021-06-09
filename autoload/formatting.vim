@@ -72,6 +72,7 @@ endfunction
 
 function! formatting#squash_blank_lines()
   normal! dipO
+  normal! cc
 endfunction
 
 " testing.function(testing(nice_variable));
