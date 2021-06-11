@@ -125,6 +125,43 @@ function! MyFoldText()
   return  spc . v:folddashes . " " . txt . " - " . n . " "
 endfunction
 "}}}
+"
+
+set tabline=%!MyTabLine()
+function MyTabLine()
+  let s = ''
+  for i in range(tabpagenr('$'))
+    " select the highlighting
+    if i + 1 == tabpagenr()
+        let s .= '%#TabLineSel#'
+    else
+        let s .= '%#TabLine#'
+    endif
+
+    " set the tab page number (for mouse clicks)
+    let s .= '%' . (i + 1) . 'T'
+
+    " the label is made by MyTabLabel()
+    let s .= ' %{MyTabLabel(' . (i + 1) . ')} '
+  endfor
+
+  " after the last tab fill with TabLineFill and reset tab page nr
+  let s .= '%#TabLineFill#%T'
+
+  " right-align the label to close the current tab page
+  if tabpagenr('$') > 1
+    let s .= '%=%#TabLine#%999X X '
+  endif
+
+  return s
+endfunction
+
+function! MyTabLabel(n)
+  let winnr = tabpagewinnr(a:n)
+  let cwd = getcwd(winnr, a:n)
+  let cwd = substitute(cwd, '.*[/\\]', '', '')
+  return cwd
+endfunction
 
 "{{{ Lang and Spell stuff
 
@@ -146,6 +183,7 @@ cnoreabbrev vsf vert bel sf
 cnoreabbrev vsp bel vsp
 cnoreabbrev sp bel sp
 cnoreabbrev bw! bn \| bw! #
+cnoreabbrev cd tcd
 
 execute "source " . g:config_location ."/"."abbreviation.vim"
 " }}}

@@ -169,6 +169,16 @@ nnoremap <leader>dh :diffget<cr>
 nnoremap <leader>dl :diffput<cr>
 nnoremap <leader>do :DiffOff<cr>
 
+let g:which_key_map.t = {
+      \ 'name' : '+tab' ,
+      \ 't' : [':tabnew'                            , 'create new tab'],
+      \ 'c' : [':tabclose'                          , 'close current tab'],
+      \ 'l' : [':tabnext'                           , 'go right tab'],
+      \ 'h' : [':tabprevious'                       , 'go left tab'],
+      \ 'L' : [':tabmove +1'                        , 'move tab right'],
+      \ 'H' : [':tabmove -1'                        , 'move tab left'],
+      \ }
+
 let g:which_key_map.b = {
       \ 'name' : '+buffer' ,
       \ 'b' : [':bw!'                              , 'wipe buffer'],
