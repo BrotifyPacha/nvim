@@ -204,15 +204,24 @@ let g:which_key_list_map = {
 
 let g:which_key_util_map = {
       \ '<F4>' : [':CocCommand prettier.formatFile', 'format file'],
-      \ '<F5>' : [':edit!'                         , 'refresh file'],
-      \ '`'    : [':cd %:h'                        , 'cd to file'],
-      \ '1'    : [':edit! ++enc=utf-8'             , 'open in UTF-8'],
-      \ '2'    : [':edit! ++enc=cp1251'            , 'open in cp1251'],
       \ '3'    : [':set ff=dos'                    , 'set ff=dos'],
       \ '4'    : [':set ff=unix'                   , 'set ff=unix'],
-      \ 's'    : [':UltiSnipsEdit'                 , 'edit snippets'],
-      \ ' '   : ['call feedkeys("mm:%s/\\s\\+$//\<cr>`m")', 'remove trailing whitespaces'],
       \ }
+
+let g:which_key_util_map.e = {
+            \ 'name' : '+edit in enc',
+            \ 'e' : [':edit!' , 'edit as is'],
+            \ 'c' : [':edit! ++enc=cp1251' , 'edit as cp1251'],
+            \ 'u' : [':edit! ++enc=utf-8' , 'edit as utf8'],
+            \ 'l' : [':edit! ++enc=latin1' , 'edit as latin1'],
+            \ }
+
+let g:which_key_util_map.c = {
+            \ 'name' : '+convert',
+            \ 'c' : [':set fileencoding=cp1251 | w!' , 'convert to cp1251'],
+            \ 'u' : [':set fileencoding=utf8 | w!'   , 'convert to utf8'],
+            \ 'l' : [':set fileencoding=latin1 | w!' , 'convert to latin1'],
+            \ }
 
 let g:which_key_term_map = {
       \ '<F9>' : [':call ReopenTerminal()'         , 're-open term'],
