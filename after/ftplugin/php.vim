@@ -104,7 +104,7 @@ function! GetFuncEnd()
   return funcend
 endfunction
 
-vnoremap <buffer>gc :<C-u>execute "normal! '<O/*"<cr>:<C-u>execute "normal! '>o*/"<cr>
+" vnoremap <buffer>gc :<C-u>execute "normal! '<O/*"<cr>:<C-u>execute "normal! '>o*/"<cr>
 " Php macros
 let @a = "mmA;\<esc>`m"
 let @t = "$this->"
