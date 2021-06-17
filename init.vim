@@ -112,7 +112,7 @@ endtry
 
 set fillchars=fold:-
 
-set foldlevel=1
+set foldlevel=0
 set foldminlines=3
 set foldtext=MyFoldText()
 set foldopen=block,hor,insert,jump,mark,percent,quickfix,search,tag,undo
