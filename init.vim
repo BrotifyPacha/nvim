@@ -210,6 +210,10 @@ nnoremap csf :call formatting#change_surrounding_func()<cr>
 
 nnoremap Q @@
 
+nnoremap q? <nop>
+nnoremap q/ <nop>
+nnoremap q: <nop>
+
 nmap s <Plug>Ysurround
 nmap ss <Plug>Yssurround
 nnoremap S s
