@@ -208,6 +208,10 @@ nnoremap vv ^v$h
 nnoremap dsf :call formatting#delete_surrounding_func()<cr>
 nnoremap csf :call formatting#change_surrounding_func()<cr>
 
+nmap s <Plug>Ysurround
+nmap ss <Plug>Yssurround
+nnoremap S s
+
 " declating Document text object
 onoremap id :<C-u>normal! ggVG<cr>
 xnoremap id :<C-u>normal! ggVG<cr>
