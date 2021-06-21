@@ -23,6 +23,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'lilydjwg/colorizer', { 'on': 'ColorToggle' }
 Plug 'qpkorr/vim-renamer', { 'on': 'Renamer' }
 Plug 'junegunn/goyo.vim', { 'on': 'Goyo'}
+Plug 'junegunn/vim-easy-align'
 Plug 'kien/ctrlp.vim'
 
 Plug 'StanAngeloff/php.vim', { 'for': ['php', 'html', 'blade.php'] }
@@ -199,6 +200,10 @@ endfunction
 
 " Useless bind to make which-key delay work
 nnoremap <leader>+ <nop> 
+
+" Easy align mappings
+nmap ga <Plug>(EasyAlign)
+xmap ga <Plug>(EasyAlign)
 
 " Shortening most used mappings
 " If you need cw - use ce
