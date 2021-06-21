@@ -171,12 +171,11 @@ nnoremap <leader>do :DiffOff<cr>
 
 let g:which_key_map.t = {
       \ 'name' : '+tab' ,
+      \ 'd' : [':tcd %:h'                           , 'change tab dir to file'],
       \ 't' : [':tabnew'                            , 'create new tab'],
       \ 'c' : [':tabclose'                          , 'close current tab'],
-      \ 'l' : [':tabnext'                           , 'go right tab'],
-      \ 'h' : [':tabprevious'                       , 'go left tab'],
-      \ 'L' : [':tabmove +1'                        , 'move tab right'],
-      \ 'H' : [':tabmove -1'                        , 'move tab left'],
+      \ 'l' : [':tabmove +1'                        , 'move tab right'],
+      \ 'h' : [':tabmove -1'                        , 'move tab left'],
       \ }
 
 let g:which_key_map.b = {
