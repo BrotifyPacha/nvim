@@ -1,13 +1,19 @@
-" Generic programming related typos
+" Eng
 
 inoreabbrev argumetns arguments
 inoreabbrev argumens arguments
+
+inoreabbrev seperate separate
+inoreabbrev seperete separate
 
 inoreabbrev fynction function
 inoreabbrev fycntion function
 inoreabbrev fucntion function
 inoreabbrev fucniton function
 inoreabbrev funciton function 
+
+inoreabbrev repsnonse response
+inoreabbrev respone response
 
 inoreabbrev pubcli public
 inoreabbrev publci public
@@ -27,8 +33,39 @@ inoreabbrev swithc switch
 inoreabbrev swtihc switch
 inoreabbrev siwthc switch
 
-inoreabbrev casr case
+
+inoreabbrev loging logging
+
+inoreabbrev excpet except
+inoreabbrev exceto except
+inoreabbrev excetp except
+inoreabbrev expet except
+
+inoreabbrev aarry array
+inoreabbrev arrrya array
+
+inoreabbrev objetc object
+inoreabbrev ojbetc object
+inoreabbrev ovjet object
+
+inoreabbrev reutrn return
+
+inoreabbrev wirte write
+inoreabbrev witre write
+
+inoreabbrev clsoe close
+inoreabbrev clse close
+
+inoreabbrev stieng string
+inoreabbrev stng string
+
+inoreabbrev errror error
+inoreabbrev erroe error
+
+inoreabbrev paht path
+
 inoreabbrev caase case
+inoreabbrev casr case
 
 inoreabbrev calss class
 inoreabbrev clss class
@@ -49,78 +86,63 @@ inoreabbrev tehn then
 
 inoreabbrev taht that
 inoreabbrev thta that
+inoreabbrev thah that
 
-inoreabbrev excpet except
-inoreabbrev exceto except
-inoreabbrev excetp except
-inoreabbrev expet except
-
-inoreabbrev tyr try
-inoreabbrev tyr try
-
-inoreabbrev yse yes
-
-inoreabbrev aarry array
-inoreabbrev arrrya array
-
-inoreabbrev paht path
-
-inoreabbrev reutrn return
-
-inoreabbrev repsnonse response
-inoreabbrev respone response
-
-inoreabbrev stieng string
-inoreabbrev stng string
-
-inoreabbrev errror error
-inoreabbrev erroe error
+inoreabbrev eher here
 
 inoreabbrev dont don't
 inoreabbrev Dont Don't
 inoreabbrev Im I'm
 
-" Personal
+inoreabbrev tyr try
+inoreabbrev tyr try
+inoreabbrev tye try
+
+inoreabbrev cathc catch
+
+inoreabbrev yse yes
+
+inoreabbrev eb be
+
+" Ru
 inoreabbrev осуществояется осуществляется 
 inoreabbrev осуществялется осуществляется 
 inoreabbrev подклбючатеся подключается
 inoreabbrev подколючается подключается
 inoreabbrev подклбючается подключается
 inoreabbrev подклбючается подключается
+inoreabbrev присутствиует присутствует
+inoreabbrev присутстсвует присутствует
+inoreabbrev приуствствует присутствует
 inoreabbrev пдклбючается подключается
+inoreabbrev присутсвтует присутствует
+inoreabbrev отсутствиует отсутствует
+inoreabbrev отсутстсвует отсутствует
+inoreabbrev отуствствует отсутствует
+inoreabbrev приутствует присутствует
+inoreabbrev прсутствует присутствует
+inoreabbrev отсутсвтует отсутствует
+inoreabbrev отутствует отсутствует
 inoreabbrev возварщаяет возвращает
-inoreabbrev получате получает
 inoreabbrev проихсодит происходит
-inoreabbrev берется берётся
+inoreabbrev треьуемых требуемых
+inoreabbrev требуемхы требуемых
+inoreabbrev получате получает
 inoreabbrev исхояд исходя
 inoreabbrev ихсодя исходя
 inoreabbrev ихсояд исходя
 inoreabbrev сулчае случае
-inoreabbrev присутсвтует присутствует
-inoreabbrev присутствиует присутствует
-inoreabbrev присутстсвует присутствует
-inoreabbrev приуствствует присутствует
-inoreabbrev приутствует присутствует
-inoreabbrev прсутствует присутствует
-inoreabbrev отсутсвтует отсутствует
-inoreabbrev отсутствиует отсутствует
-inoreabbrev отсутстсвует отсутствует
-inoreabbrev отуствствует отсутствует
-inoreabbrev отутствует отсутствует
+inoreabbrev протсо просто
+inoreabbrev порсто просто
+inoreabbrev гоовря говоря
+inoreabbrev когад когда
+inoreabbrev былва была
+inoreabbrev дял для
+inoreabbrev чот что
 
-inoreabbrev seperate separate
-inoreabbrev seperete separate
+inoreabbrev берется берётся
+inoreabbrev ждем ждём
+inoreabbrev еж ёж
 
-inoreabbrev eher here
 
-inoreabbrev objetc object
-inoreabbrev ojbetc object
-inoreabbrev ovjet object
 
-inoreabbrev wirte write
-inoreabbrev witre write
-
-inoreabbrev clsoe close
-inoreabbrev clse close
-
-inoreabbrev loging logging
