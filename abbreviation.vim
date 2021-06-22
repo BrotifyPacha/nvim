@@ -27,6 +27,9 @@ inoreabbrev swithc switch
 inoreabbrev swtihc switch
 inoreabbrev siwthc switch
 
+inoreabbrev casr case
+inoreabbrev caase case
+
 inoreabbrev calss class
 inoreabbrev clss class
 
@@ -41,6 +44,9 @@ inoreabbrev esls else
 inoreabbrev elfi elif
 inoreabbrev efli elif
 
+inoreabbrev thne then
+inoreabbrev tehn then
+
 inoreabbrev taht that
 inoreabbrev thta that
 
@@ -51,6 +57,8 @@ inoreabbrev expet except
 
 inoreabbrev tyr try
 inoreabbrev tyr try
+
+inoreabbrev yse yes
 
 inoreabbrev aarry array
 inoreabbrev arrrya array
@@ -64,6 +72,13 @@ inoreabbrev respone response
 
 inoreabbrev stieng string
 inoreabbrev stng string
+
+inoreabbrev errror error
+inoreabbrev erroe error
+
+inoreabbrev dont don't
+inoreabbrev Dont Don't
+inoreabbrev Im I'm
 
 " Personal
 inoreabbrev осуществояется осуществляется 
