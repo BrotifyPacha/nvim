@@ -37,7 +37,6 @@ let g:which_key_map['H'] = [ ':vsplit'              , 'which_key_ignore']
 let g:which_key_map['J'] = [ ':bel split'           , 'which_key_ignore']
 let g:which_key_map['K'] = [ ':split'               , 'which_key_ignore']
 let g:which_key_map['L'] = [ ':vert bel split'      , 'which_key_ignore']
-let g:which_key_map[' '] = [ ':call SearchForMacroPlaceholder()', 'go to next '.g:macro_placeholder ]
 let g:which_key_map['o'] = [ ':Goyo'                , 'goyo' ]
 
 

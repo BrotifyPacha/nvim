@@ -191,12 +191,7 @@ execute "source " . g:config_location ."/"."abbreviation.vim"
 
 " Mappings {{{
 let mapleader=' '
-let g:macro_placeholder='<++>'
-function! SearchForMacroPlaceholder()
-  call search(g:macro_placeholder, "cw")
-  execute "normal! c" . strlen(g:macro_placeholder) . "l"
-  startinsert!
-endfunction
+nnoremap <leader><leader> :call search('<++>', 'cw')<cr>c4l
 
 " Useless bind to make which-key delay work
 nnoremap <leader>+ <nop> 
