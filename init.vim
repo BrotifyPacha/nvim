@@ -26,6 +26,9 @@ Plug 'junegunn/goyo.vim', { 'on': 'Goyo'}
 Plug 'junegunn/vim-easy-align'
 Plug 'kien/ctrlp.vim'
 
+Plug 'vim-scripts/ingo-library'
+Plug 'vim-scripts/AdvancedSorters'
+
 Plug 'iamcco/markdown-preview.nvim',
             \{ 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug'] }
 
