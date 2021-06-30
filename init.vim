@@ -84,6 +84,7 @@ set regexpengine=1
 set endofline
 set diffopt+=vertical
 set virtualedit=block
+set colorcolumn=80
 
 set grepprg=grep\ -Rin\ $*\ --exclude-dir={vendor,logs}\ /dev/null
 
