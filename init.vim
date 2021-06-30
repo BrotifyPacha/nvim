@@ -26,6 +26,9 @@ Plug 'junegunn/goyo.vim', { 'on': 'Goyo'}
 Plug 'junegunn/vim-easy-align'
 Plug 'kien/ctrlp.vim'
 
+Plug 'iamcco/markdown-preview.nvim',
+            \{ 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug'] }
+
 Plug 'StanAngeloff/php.vim', { 'for': ['php', 'html', 'blade.php'] }
 
 if (has("nvim"))

@@ -242,6 +242,10 @@ let g:which_key_python_map = {
       \ 'r'    : [':call RunCommand("python", expand("%"))' , 'run python script'],
       \}
 
+let g:which_key_markdown_map = {
+      \ 'p'    : [':MarkdownPreviewToggle' , 'toggle preview'],
+      \}
+
 function! SynStack()
   echom map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name, fg, bg")')
 endfunc
@@ -265,6 +269,7 @@ if v:version >= 800
 
   call which_key#register('vim', "g:which_key_vim_map")
   call which_key#register('python', "g:which_key_python_map")
+  call which_key#register('markdown', "g:which_key_markdown_map")
 endif
 
 let g:which_key_php_map = {
