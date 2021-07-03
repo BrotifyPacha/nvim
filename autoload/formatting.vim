@@ -73,6 +73,7 @@ endfunction
 function! formatting#squash_blank_lines()
   normal! dipO
   normal! cc
+  call repeat#set("\<Plug>fmt_sbl")
 endfunction
 
 " testing.function(testing(nice_variable));
@@ -80,11 +81,24 @@ function! formatting#delete_surrounding_func()
   normal ds)mm
   call search('\(\s\|(\|=\)', 'b')
   normal ld`m
+  call repeat#set("\<Plug>fmt_dsf")
 endfunction
 
 " testing.function(testing(nice_variable, second_var));
-function! formatting#change_surrounding_func()
+function! formatting#change_surrounding_func(func_name)
   normal! F(
+
+  if len(a:func_name) > 0
+    let func_name = a:func_name
+  else
+    let func_name = input("Change function to: ")
+  endif
+
   call search('\(\s\|(\|=\)', 'b')
-  call feedkeys('lct(')
+  execute "norm lct(" . func_name
+  call repeat#set(":call formatting#change_surrounding_func('".func_name."')\<cr>")
 endfunction
+
+nmap <Plug>fmt_sbl :call formatting#squash_blank_lines()<cr>
+nmap <Plug>fmt_dsf :call formatting#delete_surrounding_func()<cr>
+nmap <Plug>fmt_csf :call formatting#change_surrounding_func('')<cr>
