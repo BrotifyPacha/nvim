@@ -35,7 +35,7 @@ endfunction
 function! formatting#toggle_multiline_args()
   normal mm
   let argend = line(".")
-  normal %
+  normal! %
   let argstart = line(".")
   normal `m
   if (argstart == argend)
@@ -43,7 +43,9 @@ function! formatting#toggle_multiline_args()
   else
     silent! call s:convert_to_one_line_args()
   endif
+  call repeat#set("\<Plug>fmt_tgla", 1)
 endfunction
+nmap <Plug>fmt_tgla :call formatting#toggle_multiline_args()<cr>
 
 function! formatting#go_snake_case(screaming)
   normal! mm
