@@ -2,7 +2,7 @@ let g:goyo_linenr = 1
 let g:goyo_colorcolumn = 1
 
 function! s:goyo_enter()
-  Goyo 70%+20%x100%
+  Goyo 75%+25%x100%
   set statusline=%!Lightline()
   GitGutterEnable
 
