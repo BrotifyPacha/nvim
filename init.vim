@@ -211,6 +211,7 @@ xmap ga <Plug>(EasyAlign)
 " If you need cw - use ce
 nnoremap cw ciw
 nnoremap vv ^v$h
+nnoremap Y yg_
 
 nnoremap dsf :call formatting#delete_surrounding_func()<cr>
 nnoremap csf :call formatting#change_surrounding_func('')<cr>
