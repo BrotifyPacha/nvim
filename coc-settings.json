@@ -14,7 +14,10 @@
   "explorer.previewAction.onHover": false,
   "explorer.keyMappings.global": {
     "L": "open:vsplit"
-  }
+  },
 
+  "diagnostic.infoSign": "i",
+  "diagnostic.warningSign": "w",
+  "diagnostic.errorSign": "x"
 
 }
