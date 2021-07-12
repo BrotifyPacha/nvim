@@ -48,5 +48,5 @@ function! RunCommand(command, args)
 endfunction
 
 function! SetLocals()
-  setlocal nonu noma signcolumn=yes:1
+  setlocal nonu noma signcolumn=yes:1 scrolloff=1
 endfunction
