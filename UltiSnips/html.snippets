@@ -1,0 +1,136 @@
+
+snippet ! "html skeleton" bA
+<!DOCTYPE html>
+<html>
+	<head>
+
+	<title>${1:Title}</title>
+	${2:<link rel="stylesheet" href="$3">}
+	</head>
+	<body${4: class="$5"}>
+		${0:${VISUAL}}
+	</body>
+</html>
+endsnippet
+
+snippet head "general head snippet" bA
+<head>
+	${0:${VISUAL}}
+</head>
+endsnippet
+
+snippet body "general body snippet" bA
+<body>
+	${0:${VISUAL}}
+</body>
+endsnippet
+
+snippet div "general tag snippet" bA
+<${1:div}${2: class="$3"}>
+	${0:${VISUAL}}
+</${1/(\w+).*/$1/}>
+endsnippet
+
+snippet a "general a snippet" bA
+<${1:a}${2: href="$3"}>
+	${0:${VISUAL}}
+</${1/(\w+).*/$1/}>
+endsnippet
+
+snippet link "general link snippet" bA
+<link rel="${1:stylesheet}" href="$2">
+endsnippet
+
+snippet 'h([1-6])' "headers snippet" rAb
+<h`!p snip.rv = match.group(1)`>
+	${0:${VISUAL}}
+</h`!p snip.rv = match.group(1)`>
+endsnippet
+
+post_jump "create_dynamic_tabstops(snip)"
+snippet '(\d+)(ol|ul)' "ol/ul snippet" rAb
+`!p
+snip.rv = snip.mkline(
+	"<" + match.group(2) + "${1: class=\"$2\"}>"
+)
+snip >> 1
+for i in range(int(match.group(1))):
+	if i == 0:
+		snip += "<li${3: class=\"$4\"}>$"+ str(i+5) +"</li>"
+	else:
+		snip += "<li$3>$"+ str(i+5) +"</li>"
+snip << 1
+
+snip += "</" + match.group(2) + ">"
+snip += "$0"
+`
+endsnippet
+
+snippet '(ol|ul)' "ol/ul general snippet" rAb
+<`!p snip.rv = match.group(1)`${1: class="$2"}>
+	<li${3: class="$4"}>$5</li>
+</`!p snip.rv = match.group(1)`>
+$0
+endsnippet
+
+post_jump "create_dynamic_tabstops(snip)"
+snippet '(\d+) (\d+) table' "table snippet usage: col row table" rAb
+`!p
+snip.rv = snip.mkline("<table${1: class=\"$2\"}>")
+phCounter = 6
+for rowNum in range(int(match.group(2))):
+	snip.reset_indent()
+	snip >> 1
+	if rowNum == 0:
+		snip += "<tr${3: class=\"$4\"}>"
+	else:
+		snip += "<tr$3>"
+	
+	for colNum in range(int(match.group(1))):
+		snip.reset_indent()
+		snip >> 2
+		phCounter += 1
+		if rowNum == 0:
+			if colNum == 0:
+				snip += "<th${5: class=\"$6\"}>$" + str(phCounter) + "</th>"
+			else:
+				snip += "<th$5>$" + str(phCounter) + "</th>"
+		else:
+			snip += "<td$5>$" + str(phCounter) + "</td>"
+
+	snip.reset_indent()
+	snip >> 1
+
+	snip += "</tr>"
+
+snip.reset_indent()
+snip += "</table>"
+snip += "$0"
+`	
+endsnippet
+
+
+global !p
+
+def create_dynamic_tabstops(snip):
+	anon_snippet_body = ""
+
+	start = snip.snippet_start[0]
+	end = snip.snippet_end[0]
+
+	# Append current line into anonymous snippet
+	for i in range(start, end + 1):
+		anon_snippet_body += snip.buffer[i]
+		anon_snippet_body += "" if i == end else "\n"
+
+	# Delete expanded snippet line till second to last line
+	for i in range(start, end):
+		del snip.buffer[start]
+
+	# Empty last expanded snippet line while preserving the line
+	snip.buffer[start] = ''
+
+	# Expand anonymous snippet
+	snip.expand_anon(anon_snippet_body)
+
+endglobal
