@@ -1,5 +1,29 @@
 extends html
 
+snippet tphp "php root tag" bA
+<?php
+${0:${VISUAL}}
+?>
+endsnippet
+
+snippet techo "php echo tag" wA
+<?= $0 ?>
+endsnippet
+
+snippet tif "php if tag" b
+<?php if ($1): ?>
+${0:${VISUAL}}
+<?php endif; ?>
+endsnippet
+
+snippet tife "php if tag" b
+<?php if ($1): ?>
+${2:${VISUAL}}
+<?php else: ?>
+$0
+<?php endif; ?>
+endsnippet
+
 snippet if "if statement" b
 if ($1) {
 	${0:${VISUAL}}
