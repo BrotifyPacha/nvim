@@ -1,3 +1,4 @@
+extends html
 
 snippet if "if statement" bA
 if (${1}) {
@@ -18,15 +19,5 @@ function $1($2)
 {
 	${0:${VISUAL}}
 }
-endsnippet
-
-snippet bt "Simple html block" bA
-<${1}>
-	${0:${VISUAL}}
-</${1/(\w+).*/$1/}>
-endsnippet
-
-snippet it "Inline tag" A
-<${1}>${0:${VISUAL}}</${1/(\w+).*/$1/}>
 endsnippet
 
