@@ -31,10 +31,8 @@ snippet div "general tag snippet" bA
 </${1/(\w+).*/$1/}>
 endsnippet
 
-snippet a "general a snippet" bA
-<${1:a}${2: href="$3"}>
-	${0:${VISUAL}}
-</${1/(\w+).*/$1/}>
+snippet a "link snippet" bA
+<a${1: class="$2" }href="$3">${0:${VISUAL}}</a>
 endsnippet
 
 snippet link "general link snippet" bA
