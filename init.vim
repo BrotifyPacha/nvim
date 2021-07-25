@@ -15,24 +15,34 @@ Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
-Plug 'tommcdo/vim-exchange'
 Plug 'wellle/targets.vim'
 Plug 'brotifypacha/vim-colors-pencil'
-Plug 'Raimondi/delimitMate'
 Plug 'airblade/vim-gitgutter'
+Plug 'Raimondi/delimitMate', { 'on': [] }
 Plug 'lilydjwg/colorizer', { 'on': 'ColorToggle' }
 Plug 'qpkorr/vim-renamer', { 'on': 'Renamer' }
 Plug 'brotifypacha/goyo.vim', { 'on': 'Goyo'}
-Plug 'junegunn/vim-easy-align'
-Plug 'kien/ctrlp.vim'
-
-Plug 'vim-scripts/ingo-library'
-Plug 'vim-scripts/AdvancedSorters'
-
+Plug 'junegunn/vim-easy-align', { 'on': '<Plug>(EasyAlign)' }
+Plug 'kien/ctrlp.vim', { 'on': 'CtrlP' }
+nnoremap <silent> <C-p> :<C-u>CtrlP<cr>
+Plug 'tommcdo/vim-exchange', { 'on': ['<Plug>(Exchange)', '<Plug>(ExchangeLine)'] }
+nmap cx <Plug>(Exchange)
+nmap cxx <Plug>(ExchangeLine)
+Plug 'vim-scripts/ingo-library', { 'on': [] }
+Plug 'vim-scripts/AdvancedSorters', { 'on': [] }
 Plug 'iamcco/markdown-preview.nvim',
             \{ 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug'] }
 
 Plug 'StanAngeloff/php.vim', { 'for': ['php', 'html', 'blade.php'] }
+
+augroup load_on_insert
+  autocmd!
+  autocmd InsertEnter * call plug#load('delimitMate')
+augroup END
+augroup load_on_command
+    autocmd!
+    autocmd CmdlineEnter * call plug#load('ingo-library', 'AdvancedSorters')
+augroup END
 
 if (has("nvim"))
   Plug 'nvim-treesitter/nvim-treesitter'
@@ -42,7 +52,7 @@ endif
 
 if (v:version >= 800)
   Plug 'liuchengxu/vim-which-key'
-  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  Plug 'neoclide/coc.nvim', {'branch': 'release', 'for': ['vim', 'php', 'python', 'json', 'markdown']}
 endif
 
 if (v:version >= 704)
@@ -58,8 +68,8 @@ call plug#end() "}}}
 
 "{{{ General settings
 set nocompatible
-filetype plugin indent on
 syntax on
+filetype plugin indent on
 set omnifunc=syntaxcomplete#Complete
 set nu
 
