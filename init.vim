@@ -25,7 +25,7 @@ Plug 'wellle/targets.vim'
 Plug 'brotifypacha/vim-colors-pencil'
 Plug 'airblade/vim-gitgutter'
 Plug 'Raimondi/delimitMate', { 'on': [] }
-Plug 'lilydjwg/colorizer', { 'on': 'ColorToggle' }
+Plug 'norcalli/nvim-colorizer.lua'
 Plug 'qpkorr/vim-renamer', { 'on': 'Renamer' }
 Plug 'brotifypacha/goyo.vim', { 'on': 'Goyo'}
 Plug 'junegunn/vim-easy-align', { 'on': '<Plug>(EasyAlign)' }
@@ -343,7 +343,6 @@ execute "source " . g:config_location . "/"."plug-config/which-key.vim"
 
 execute "source " . g:config_location ."/"."plug-config/welle-targets.vim"
 execute "source " . g:config_location ."/"."plug-config/gitgutter.vim"
-execute "source " . g:config_location ."/"."plug-config/colorizer.vim"
 execute "source " . g:config_location ."/"."plug-config/ctrlp.vim"
 execute "source " . g:config_location ."/"."plug-config/goyo.vim"
 execute "source " . g:config_location ."/"."plug-config/ulti.vim"
@@ -354,6 +353,12 @@ if (has("nvim"))
   set foldexpr=nvim_treesitter#foldexpr()
 
 lua <<EOF
+  require 'colorizer'.setup {
+    '*'; -- Highlight all files, but customize some others.
+    css = { rgb_fn = true; }; -- Enable parsing rgb(...) functions in css.
+    html = { names = false; }; -- Disable parsing "names" like Blue or Gray
+    '!vim'
+  }
   require 'nvim-treesitter.install'.compilers = { "gcc" }
   require 'nvim-treesitter.configs'.setup {
     query_linter = {
