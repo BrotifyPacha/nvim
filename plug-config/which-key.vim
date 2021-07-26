@@ -111,12 +111,10 @@ let g:which_key_map.g = {
       \ 'c' : [':bel vert G'           , 'commit'],
       \ 'a' : [':bel vert G'           , 'amend'],
       \ 'd' : [':Gdiffsplit'           , 'diff with index'],
-      \ 'b' : [':G blame'              , 'status'],
-      \ 'j' : [':GitGutterNextHunk'    , 'next hunk'],
-      \ 'k' : [':GitGutterPrevHunk'    , 'previous hunk'],
-      \ 'u' : [':GitGutterUndoHunk'    , 'undo hunk'],
-      \ 's' : [':GitGutterStageHunk'   , 'stage hunk'],
-      \ 'p' : [':GitGutterPreviewHunk' , 'preview hunk'],
+      \ 'b' : [':lua require\"gitsigns\".blame_line(true)' , 'status'],
+      \ 'u' : [':lua require\"gitsigns\".reset_hunk()'     , 'undo hunk'],
+      \ 's' : [':lua require\"gitsigns\".stage_hunk()'     , 'stage hunk'],
+      \ 'p' : [':lua require\"gitsigns\".preview_hunk()'   , 'preview hunk'],
       \ }
 
 nnoremap <leader>gl :G push<cr>
@@ -124,14 +122,11 @@ nnoremap <leader>gh :G pull<cr>
 nnoremap <leader>gv :bel vert G log --oneline --graph --decorate --branches<cr>
 nnoremap <leader>gg :bel vert G<cr>:wincmd L<cr>
 nnoremap <leader>gc :G commit<cr>
-nnoremap <leader>ga :G commit --amend<cr>
 nnoremap <leader>gd :Gdiffsplit<cr>
-nnoremap <leader>gb :G blame<cr>
-nnoremap <leader>gj :GitGutterNextHunk<cr>
-nnoremap <leader>gk :GitGutterPrevHunk<cr>
-nnoremap <leader>gu :GitGutterUndoHunk<cr>
-nnoremap <leader>gs :GitGutterStageHunk<cr>
-nnoremap <leader>gp :GitGutterPreviewHunk<cr>
+nnoremap <leader>gb :lua require'gitsigns'.blame_line(true)<cr>
+nnoremap <leader>gu :lua require'gitsigns'.reset_hunk()<cr>
+nnoremap <leader>gs :lua require'gitsigns'.stage_hunk()<cr>
+nnoremap <leader>gp :lua require'gitsigns'.preview_hunk()<cr>
 
 let g:which_key_map.r = {
       \ 'name' : '+refactor' ,

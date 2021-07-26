@@ -16,6 +16,8 @@ let g:loaded_tarPlugin   = 1
 let g:loaded_zipPlugin   = 1
 let g:loaded_netrwPlugin = 1
 
+Plug 'nvim-lua/plenary.nvim'
+Plug 'lewis6991/gitsigns.nvim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-surround'
@@ -23,7 +25,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'wellle/targets.vim'
 Plug 'brotifypacha/vim-colors-pencil'
-Plug 'airblade/vim-gitgutter'
 Plug 'Raimondi/delimitMate', { 'on': [] }
 Plug 'norcalli/nvim-colorizer.lua'
 Plug 'qpkorr/vim-renamer', { 'on': 'Renamer' }
@@ -120,7 +121,7 @@ else
   set numberwidth=4
 endif
 
-" Update time for gitgutter
+" Update time for gitsigns
 set updatetime=100
 
 try
@@ -203,8 +204,9 @@ set spelllang=en,ru
 
 " Abbreviations {{{
 cnoreabbrev h vertical botright help
-cnoreabbrev vsf vert bel sf
-cnoreabbrev vsp bel vsp
+cnoreabbrev vsf vert bel s
+cnoreabbrev vsp bel vs
+
 cnoreabbrev sp bel sp
 cnoreabbrev bw! bn \| bw! #
 cnoreabbrev cd tcd
@@ -256,8 +258,8 @@ vnoremap p pgv=
 nnoremap [t :tabprevious<cr>
 nnoremap ]t :tabnext<cr>
 
-nnoremap [g :GitGutterPrevHunk<cr>
-nnoremap ]g :GitGutterNextHunk<cr>
+nnoremap [g :lua require'gitsigns'.prev_hunk()<cr>
+nnoremap ]g :lua require'gitsigns'.next_hunk()<cr>
 
 nnoremap C :call ChangeTillSymbol()<cr>
 
@@ -272,8 +274,8 @@ function! ChangeTillSymbol()
 endfunction
 
 " F key maps
-" Remove search highlighting / remove match groups / update gutter
-nnoremap <silent> <F5> :nohl \| match \| GitGutterAll<cr>
+" Remove search highlighting / remove match groups
+nnoremap <silent> <F5> :nohl \| match<cr>
 nnoremap <silent> <F6> :set list!<cr>
 nnoremap <silent> <F7> :set wrap!<cr>
 nnoremap <F8> :ColorToggle<cr>
@@ -342,7 +344,6 @@ execute "source " . g:config_location . "/"."plug-config/which-key.vim"
 
 
 execute "source " . g:config_location ."/"."plug-config/welle-targets.vim"
-execute "source " . g:config_location ."/"."plug-config/gitgutter.vim"
 execute "source " . g:config_location ."/"."plug-config/ctrlp.vim"
 execute "source " . g:config_location ."/"."plug-config/goyo.vim"
 execute "source " . g:config_location ."/"."plug-config/ulti.vim"
@@ -353,6 +354,7 @@ if (has("nvim"))
   set foldexpr=nvim_treesitter#foldexpr()
 
 lua <<EOF
+  require 'gitsigns'.setup()
   require 'colorizer'.setup {
     '*'; -- Highlight all files, but customize some others.
     css = { rgb_fn = true; }; -- Enable parsing rgb(...) functions in css.
