@@ -10,6 +10,12 @@ endif
 call plug#begin(g:config_location . '/plugged')
 "call plug#begin(stdpath('data').'/plugged')
 
+"Disable default plugins
+let g:loaded_matchit     = 1
+let g:loaded_tarPlugin   = 1
+let g:loaded_zipPlugin   = 1
+let g:loaded_netrwPlugin = 1
+
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-surround'
