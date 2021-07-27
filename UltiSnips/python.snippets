@@ -27,13 +27,17 @@ except ${1:KeyboardInterrupt}:
 
 endsnippet
 
+post_jump "create_dynamic_tabstops(snip)"
 snippet class "Class definition" bA
-class ${1:MyClass}(${2:Object}):
-
-	def __init__(self$3):
-		${3/(\, )?(\w+)/self.$2 = $2\n/g}
-
-	$0
+`!p
+snip.rv = snip.mkline("class $1(${2:Object}):\n")
+snip >> 1
+snip += "def __init__(self${3:, $4}):"
+snip >> 1
+indent = snip.indent
+snip.reset_indent()
+snip += "${4/[\W]*(\w+)[\W]*/" +indent+ "self.$1 = $1\n/g}"
+`
 endsnippet
 
 snippet main "if name == main block" bA
@@ -48,3 +52,22 @@ endsnippet
 snippet todo "Todo comment" bA
 # TODO $1
 endsnippet
+
+global !p
+def create_dynamic_tabstops(snip):
+	anon_snippet_body = ""
+	start = snip.snippet_start[0]
+	end = snip.snippet_end[0]
+	# Append current line into anonymous snippet
+	for i in range(start, end + 1):
+		anon_snippet_body += snip.buffer[i]
+
+		anon_snippet_body += "" if i == end else "\n"
+	# Delete expanded snippet line till second to last line
+	for i in range(start, end):
+		del snip.buffer[start]
+	# Empty last expanded snippet line while preserving the line
+	snip.buffer[start] = ''
+	# Expand anonymous snippet
+	snip.expand_anon(anon_snippet_body)
+endglobal
