@@ -4,7 +4,6 @@ let g:goyo_colorcolumn = 1
 function! s:goyo_enter()
   Goyo 75%+25%x100%
   set statusline=%!Lightline()
-  GitGutterEnable
 
 endfunction
 
