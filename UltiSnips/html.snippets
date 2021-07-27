@@ -21,16 +21,20 @@ snippet head "general head snippet" bA
 </head>
 endsnippet
 
-snippet body "general body snippet" bA
-<body>
-	${0:${VISUAL}}
-</body>
+snippet '(body|div|main|header|footer|section)' "general head/body snippet" bAr
+<`!p snip.rv = match.group(1)`${1: class="$2"}>
+${0:${VISUAL}}
+</`!p snip.rv = match.group(1)`>
 endsnippet
 
-snippet div "general tag snippet" bA
-<${1:div}${2: class="$3"}>
+snippet tag "general multiline tag snippet" bA
+<${1:div} class="$2">
 	${0:${VISUAL}}
 </${1/(\w+).*/$1/}>
+endsnippet
+
+snippet itag "general inline tag snippet" bA
+<${1:div} class="$2">${0:${VISUAL}}</${1/(\w+).*/$1/}>
 endsnippet
 
 snippet a "link snippet" bA
