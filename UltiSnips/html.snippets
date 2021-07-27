@@ -1,13 +1,15 @@
 
 snippet ! "html skeleton" bA
 <!DOCTYPE html>
-<html>
+<html lang="${1|en_US,ru_RU|}">
 	<head>
 
-	<title>${1:Title}</title>
-	${2:<link rel="stylesheet" href="$3">}
+		<meta charset="utf-8">
+		<title>${2:Title}</title>
+		<link rel="stylesheet" href="$3">
+
 	</head>
-	<body${4: class="$5"}>
+	<body class="$4">
 		${0:${VISUAL}}
 	</body>
 </html>
