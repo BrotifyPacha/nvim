@@ -1,30 +1,26 @@
 
 snippet 'if\s' "If block" bAr
 if ${1}:
-	${2:${VISUAL}}
-
+	${0:${VISUAL}}
 endsnippet
 
 snippet ife "If else block" bA
 if ${1}:
 	${2:${VISUAL}}
 else:
-	${3}
-
+	$0
 endsnippet
 
 snippet def "def func" bA
-def ${1}(self${2:, }):
-	${3:${VISUAL}}
-
+def ${1}(${2:self, $3}):
+	${0:${VISUAL}}
 endsnippet	
 
 snippet try "Try except block" b
 try:
-	${2:${VISUAL}}
+	${0:${VISUAL}}
 except ${1:KeyboardInterrupt}:
 	print("$1")
-
 endsnippet
 
 post_jump "create_dynamic_tabstops(snip)"
