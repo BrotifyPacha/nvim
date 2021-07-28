@@ -16,6 +16,16 @@ def ${1}(${2:self, $3}):
 	${0:${VISUAL}}
 endsnippet	
 
+snippet for "for loop" bA
+for $1 in $2:
+	${0:${VISUAL}}
+endsnippet
+
+snippet '(with|while)' "with/while constructs" bAr
+`!p snip.rv = match.group(1)` $1:
+	${0:${VISUAL}}
+endsnippet
+
 snippet try "Try except block" b
 try:
 	${0:${VISUAL}}
