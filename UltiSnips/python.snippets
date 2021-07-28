@@ -71,3 +71,7 @@ def create_dynamic_tabstops(snip):
 	# Expand anonymous snippet
 	snip.expand_anon(anon_snippet_body)
 endglobal
+
+snippet '(^|[\s(])(print|input|enumerate|range|len)' "Standard lib functions" Ar
+`!p snip.rv = match.group(1) + match.group(2)`($1)$0
+endsnippet
