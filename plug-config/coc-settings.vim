@@ -1,5 +1,17 @@
 " CocExplorer
 
+let g:coc_global_extensions = [
+            \ 'coc-explorer',
+            \ '@yaegassy/coc-intelephense',
+            \ 'coc-pyright',
+            \ 'coc-tsserver',
+            \ 'coc-html',
+            \ 'coc-css',
+            \ 'coc-markdownlint',
+            \ 'coc-json',
+            \ 'coc-prettier'
+            \ ]
+
 
 " enable sign column by default so it wont jump in and out
 set signcolumn=yes
