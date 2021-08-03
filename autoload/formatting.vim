@@ -81,8 +81,12 @@ endfunction
 " testing.function(testing(nice_variable));
 function! formatting#delete_surrounding_func()
   normal ds)mm
-  call search('\(\s\|(\|=\)', 'b')
-  normal ld`m
+  call search('\(\s\|(\|=\|^\)', 'be')
+  if getpos('.')[2] != 1
+      normal ld`m
+  else
+      normal d`m
+  endif
   call repeat#set("\<Plug>fmt_dsf")
 endfunction
 
@@ -96,8 +100,12 @@ function! formatting#change_surrounding_func(func_name)
     let func_name = input("Change function to: ")
   endif
 
-  call search('\(\s\|(\|=\)', 'b')
-  execute "norm lct(" . func_name
+  call search('\(\s\|(\|=\|^\)', 'b')
+  if getpos('.')[2] != 1
+      execute "norm lct(" . func_name
+  else
+      execute "norm ct(" . func_name
+  endif
   call repeat#set(":call formatting#change_surrounding_func('".func_name."')\<cr>")
 endfunction
 
