@@ -279,6 +279,7 @@ nnoremap <silent> <F5> :nohl \| match<cr>
 nnoremap <silent> <F6> :set list!<cr>
 nnoremap <silent> <F7> :set wrap!<cr>
 nnoremap <F8> :ColorizerToggle<cr>
+nnoremap <Backspace> :bn \| bw! #<cr>
 
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<Tab>"
