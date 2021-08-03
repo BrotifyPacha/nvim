@@ -109,7 +109,7 @@ set diffopt+=vertical
 set virtualedit=block
 set colorcolumn=80
 
-set grepprg=grep\ -Rin\ $*\ --exclude-dir={vendor,logs}\ /dev/null
+set grepprg=grep\ -Rin\ $*\ --exclude-dir={.git,vendor,logs}\ /dev/null
 
 if (has("nvim"))
   set wildoptions+=pum " Enable pop up menu 
