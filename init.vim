@@ -261,6 +261,8 @@ nnoremap ]t :tabnext<cr>
 nnoremap [g :lua require'gitsigns'.prev_hunk()<cr>
 nnoremap ]g :lua require'gitsigns'.next_hunk()<cr>
 
+nnoremap gF :e <cfile><cr>
+
 nnoremap C :call ChangeTillSymbol()<cr>
 
 function! ChangeTillSymbol()
