@@ -32,7 +32,6 @@ require "telescope".setup{
     },
     pickers = {
         buffers = {
-            initial_mode = 'normal',
             theme = 'dropdown',
             previewer = false
         },
