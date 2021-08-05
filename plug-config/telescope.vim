@@ -29,6 +29,10 @@ lua << EOF
 require "telescope".setup{
     defaults = {
         layout_strategy = 'vertical',
+        layout_config = {
+            mirror = true,
+            width = 0.6,
+        },
     },
     pickers = {
         buffers = {
