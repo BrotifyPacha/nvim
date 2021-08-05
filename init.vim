@@ -16,6 +16,8 @@ let g:loaded_tarPlugin   = 1
 let g:loaded_zipPlugin   = 1
 let g:loaded_netrwPlugin = 1
 
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'tpope/vim-commentary'
@@ -30,8 +32,6 @@ Plug 'norcalli/nvim-colorizer.lua'
 Plug 'qpkorr/vim-renamer', { 'on': 'Renamer' }
 Plug 'brotifypacha/goyo.vim', { 'on': 'Goyo'}
 Plug 'junegunn/vim-easy-align', { 'on': '<Plug>(EasyAlign)' }
-Plug 'kien/ctrlp.vim', { 'on': 'CtrlP' }
-nnoremap <silent> <C-p> :<C-u>CtrlP<cr>
 Plug 'tommcdo/vim-exchange', { 'on': ['<Plug>(Exchange)', '<Plug>(ExchangeLine)'] }
 nmap cx <Plug>(Exchange)
 nmap cxx <Plug>(ExchangeLine)
@@ -347,7 +347,7 @@ execute "source " . g:config_location . "/"."plug-config/which-key.vim"
 
 
 execute "source " . g:config_location ."/"."plug-config/welle-targets.vim"
-execute "source " . g:config_location ."/"."plug-config/ctrlp.vim"
+execute "source " . g:config_location ."/"."plug-config/telescope.vim"
 execute "source " . g:config_location ."/"."plug-config/goyo.vim"
 execute "source " . g:config_location ."/"."plug-config/ulti.vim"
 
