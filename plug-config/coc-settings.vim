@@ -5,6 +5,7 @@ let g:coc_global_extensions = [
             \ '@yaegassy/coc-intelephense',
             \ 'coc-pyright',
             \ 'coc-tsserver',
+            \ 'coc-lua',
             \ 'coc-html',
             \ 'coc-css',
             \ 'coc-markdownlint',
