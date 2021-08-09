@@ -33,12 +33,20 @@ require "telescope".setup{
             mirror = true,
             width = 0.6,
         },
+        file_ignore_patterns = {
+            'node_modules',
+            'vendor',
+            '.git'
+        },
     },
     pickers = {
         buffers = {
             theme = 'dropdown',
             previewer = false
         },
-        -- find_files = { theme = 'dropdown' }
+        find_files = {
+            -- theme = 'dropdown'
+            hidden = true
+        }
     }
 }
