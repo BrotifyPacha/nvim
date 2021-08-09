@@ -7,22 +7,22 @@ autocmd User TelescopeFindPre call s:TelescopeHighlight()
 
 
 function! s:TelescopeHighlight()
-	highlight TelescopeSelection      guifg=#2C81FB gui=bold
-	highlight TelescopeSelectionCaret guifg=#2C81FB
+    highlight TelescopeSelection      guifg=#20BBFC gui=bold
+	highlight TelescopeSelectionCaret guifg=#20BBFC gui=bold
 	highlight TelescopeMultiSelection guifg=#fff guibg=#2C81FB
 	highlight TelescopeNormal         guibg=#00000
 
 	" Border highlight groups
-    highlight TelescopeBorder         guifg=#FFFFFF gui=bold
+    highlight TelescopeBorder         guifg=#FFFFFF
     highlight TelescopePromptBorder   guifg=#FFFFFF gui=bold
-    highlight TelescopeResultsBorder  guifg=#FFFFFF gui=bold
-    highlight TelescopePreviewBorder  guifg=#FFFFFF gui=bold
+    highlight TelescopeResultsBorder  guifg=#D4D4D4
+    highlight TelescopePreviewBorder  guifg=#D4D4D4
 
 	" Highlight characters your input matches
-	highlight TelescopeMatching       guifg=#E32791
+    highlight TelescopeMatching       guifg=#20BBFC gui=italic
 
 	" Color the prompt prefix
-	highlight TelescopePromptPrefix   guifg=#2C81FB
+	highlight TelescopePromptPrefix   guifg=#20BBFC
 endfunction
 
 lua << EOF
