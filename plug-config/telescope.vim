@@ -51,7 +51,13 @@ require "telescope".setup{
         },
         find_files = {
             -- theme = 'dropdown'
-            hidden = true
+            find_command = {
+                'rg',
+                '--files',
+                '--glob',
+                '!{vendor,.git,node_modules}',
+                '--hidden'
+            }
         }
     }
 }
