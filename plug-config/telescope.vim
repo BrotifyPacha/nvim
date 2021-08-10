@@ -40,6 +40,9 @@ require "telescope".setup{
             '.spl$',
             '.sug$',
         },
+        selection_caret = ' > ',
+        entry_prefix = '   ',
+        prompt_prefix = ' > ',
     },
     pickers = {
         buffers = {
