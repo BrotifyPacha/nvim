@@ -37,8 +37,9 @@ let g:which_key_map['H'] = [ ':vsplit'              , 'which_key_ignore']
 let g:which_key_map['J'] = [ ':bel split'           , 'which_key_ignore']
 let g:which_key_map['K'] = [ ':split'               , 'which_key_ignore']
 let g:which_key_map['L'] = [ ':vert bel split'      , 'which_key_ignore']
-let g:which_key_map['o'] = [ ':Goyo'                , 'goyo' ]
-
+let g:which_key_map['o'] = [ ':let g:goyo_preset=1 \|Goyo' , 'goyo' ]
+let g:which_key_map['p'] = [ ':let g:goyo_preset=2 \|Goyo' , 'goyo' ]
+let g:which_key_map['i'] = [ ':let g:goyo_preset=3 \|Goyo' , 'goyo' ]
 
 nnoremap <leader>l <C-w>l
 nnoremap <leader>h <C-w>h
@@ -48,7 +49,9 @@ nnoremap <leader>H :vsplit<cr>
 nnoremap <leader>J :bel split<cr>
 nnoremap <leader>K :split<cr>
 nnoremap <leader>L :vert bel split<cr>
-nnoremap <leader>o :Goyo<cr>
+nnoremap <leader>o :let g:goyo_preset=1 \|Goyo<cr>
+nnoremap <leader>p :let g:goyo_preset=2 \|Goyo<cr>
+nnoremap <leader>i :let g:goyo_preset=3 \|Goyo<cr>
 
 function! WhichKeyByFiletype()
   if (len(&ft) == 0)
