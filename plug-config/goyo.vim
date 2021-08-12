@@ -11,11 +11,11 @@ function! s:goyo_enter()
     " Writing preset
     Goyo 85+3x100%
     set statusline=%!Lightline()
-    set wrap
     echom "Writing preset"
   elseif g:goyo_preset == 3
     " Note taking preset
     set nonu
+    set wrap
     echom "Note-taking preset"
     
   else
