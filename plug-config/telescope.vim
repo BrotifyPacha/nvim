@@ -1,6 +1,7 @@
 
 nnoremap <C-p> :Telescope find_files<cr>
 nnoremap <C-b> :Telescope buffers<cr>
+nnoremap <C-g> :Telescope live_grep<cr>
 nnoremap - :Telescope current_buffer_fuzzy_find<cr>
 
 autocmd User TelescopeFindPre call s:TelescopeHighlight()
