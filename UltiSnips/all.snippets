@@ -7,7 +7,7 @@ no sea takimata sanctus est Lorem ipsum dolor sit amet.
 """
 endglobal
 
-snippet 'lorem\*?(\d+)?' "Lorem ipsum" r
+snippet '[Ll][Oo][Rr][Ee][Mm]\*?(\d+)?' "Lorem ipsum" r
 `!p
 if not(match.group(1)):
 	snip.rv = LOREM
