@@ -252,8 +252,8 @@ xnoremap id :<C-u>normal! ggVG<cr>
 nnoremap cy "*y
 nnoremap cp :set paste \| normal! "*p:set nopaste<cr>
 
-nnoremap p p=`]^
-nnoremap P P=`]^
+nnoremap p p=`[
+nnoremap P mmP=`[`m
 vnoremap p pgv=
 
 nnoremap [t :tabprevious<cr>
