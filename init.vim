@@ -86,7 +86,7 @@ set expandtab
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
-set scrolloff=2 
+set scrolloff=4 
 
 set listchars=eol:$,tab:>-,trail:~,nbsp:+
 " set list
