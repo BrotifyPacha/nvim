@@ -38,9 +38,9 @@ require "telescope".setup{
         file_ignore_patterns = {
             'node_modules',
             'vendor',
-            '.git',
-            '.spl$',
-            '.sug$',
+            '\\.git',
+            '\\.spl$',
+            '\\.sug$',
         },
         selection_caret = ' > ',
         entry_prefix = '   ',
