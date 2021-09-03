@@ -14,8 +14,22 @@ snippet 'fore\s' "for loop with else block" bAr
 {% endfor %}
 endsnippet
 
-snippet iblock "content inline block"
-{% block $1 %}$0{% endblock %}
+snippet 'if\s' "if block" bAr
+{% if $1 %}
+	${0:${VISUAL}}
+{% endif %}
+endsnippet
+
+snippet 'ife\s' "if with else block" bAr
+{% if $1 %}
+	${0:${VISUAL}}
+{% else %}
+	
+{% endif %}
+endsnippet
+
+snippet iblock "content inline block" w
+{% block $1 %}${0:${VISUAL}}{% endblock %}
 endsnippet
 
 snippet block "content block"
@@ -24,11 +38,11 @@ snippet block "content block"
 {% endblock %}
 endsnippet
 
-snippet {% "block autoclosure" A
+snippet '{%' "block autoclosure" Awr
 {% ${0:${VISUAL}} %}
 endsnippet
 
-snippet {{ "variable autoclosure" A
+snippet '{{' "variable autoclosure" Awr
 {{ ${0:${VISUAL}} }}
 endsnippet
 
