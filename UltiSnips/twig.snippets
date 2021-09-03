@@ -1,0 +1,34 @@
+extends html
+
+snippet 'for\s' "for loop" bAr
+{% for $1 in $2 %}
+	${0:${VISUAL}}
+{% endfor %}
+endsnippet
+
+snippet 'fore\s' "for loop with else block" bAr
+{% for $1 in $2 %}
+	${0:${VISUAL}}
+{% else %}
+	
+{% endfor %}
+endsnippet
+
+snippet iblock "content inline block"
+{% block $1 %}$0{% endblock %}
+endsnippet
+
+snippet block "content block"
+{% block $1 %}
+	${0:${VISUAL}}
+{% endblock %}
+endsnippet
+
+snippet {% "block autoclosure" A
+{% ${0:${VISUAL}} %}
+endsnippet
+
+snippet {{ "variable autoclosure" A
+{{ ${0:${VISUAL}} }}
+endsnippet
+
