@@ -1,5 +1,7 @@
 au BufNewFile,BufRead *.class,*.java,*.jav setf java
 
+au BufNewFile,BufRead *.csx setf cs
+
 augroup pacha_netrw_autocomands
   autocmd!
   autocmd filetype netrw vertical resize 35
