@@ -59,7 +59,7 @@ endif
 
 if (v:version >= 800)
   Plug 'liuchengxu/vim-which-key'
-  Plug 'neoclide/coc.nvim', {'branch': 'release', 'for': ['vim', 'php', 'python', 'json', 'markdown']}
+  Plug 'neoclide/coc.nvim'
 endif
 
 if (v:version >= 704)

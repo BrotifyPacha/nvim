@@ -17,7 +17,11 @@ function! NewTerminal()
       echo "removed " . id
     endif
   endfor
-  call feedkeys("aPS1='$ '\<cr>clear\<cr>")
+  if has('unix')
+      call feedkeys("aPS1='$ '\<cr>clear\<cr>")
+  else
+      call feedkeys("aset PROMPT=$$ \<cr>cls\<cr>")
+  endif
 endfunction
 
 function! ReopenTerminal()
