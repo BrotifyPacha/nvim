@@ -33,8 +33,6 @@ Plug 'qpkorr/vim-renamer', { 'on': 'Renamer' }
 Plug 'brotifypacha/goyo.vim', { 'on': 'Goyo'}
 Plug 'junegunn/vim-easy-align', { 'on': '<Plug>(EasyAlign)' }
 Plug 'tommcdo/vim-exchange', { 'on': ['<Plug>(Exchange)', '<Plug>(ExchangeLine)'] }
-nmap cx <Plug>(Exchange)
-nmap cxx <Plug>(ExchangeLine)
 Plug 'nelsyeung/twig.vim'
 Plug 'vim-scripts/ingo-library', { 'on': [] }
 Plug 'vim-scripts/AdvancedSorters', { 'on': [] }
@@ -223,9 +221,15 @@ nnoremap <leader><leader> :call search('<++>', 'cw')<cr>c4l
 " Useless bind to make which-key delay work
 nnoremap <leader>+ <nop> 
 
+
+""" Plugin mappings
 " Easy align mappings
 nmap ga <Plug>(EasyAlign)
 xmap ga <Plug>(EasyAlign)
+" Exchange mappings
+nmap cx <Plug>(Exchange)
+nmap cxx <Plug>(ExchangeLine)
+
 
 " Shortening most used mappings
 " If you need cw - use ce
