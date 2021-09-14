@@ -35,6 +35,7 @@ Plug 'junegunn/vim-easy-align', { 'on': '<Plug>(EasyAlign)' }
 Plug 'tommcdo/vim-exchange', { 'on': ['<Plug>(Exchange)', '<Plug>(ExchangeLine)'] }
 nmap cx <Plug>(Exchange)
 nmap cxx <Plug>(ExchangeLine)
+Plug 'nelsyeung/twig.vim'
 Plug 'vim-scripts/ingo-library', { 'on': [] }
 Plug 'vim-scripts/AdvancedSorters', { 'on': [] }
 Plug 'iamcco/markdown-preview.nvim',
@@ -347,6 +348,7 @@ execute "source " . g:config_location . "/"."plug-config/which-key.vim"
 
 
 execute "source " . g:config_location ."/"."plug-config/welle-targets.vim"
+execute "source " . g:config_location ."/"."plug-config/delimitMate.vim"
 execute "source " . g:config_location ."/"."plug-config/telescope.vim"
 execute "source " . g:config_location ."/"."plug-config/goyo.vim"
 execute "source " . g:config_location ."/"."plug-config/ulti.vim"
