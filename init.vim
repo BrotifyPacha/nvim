@@ -269,6 +269,9 @@ nnoremap ]g :lua require'gitsigns'.next_hunk()<cr>
 
 nnoremap gF :e <cfile><cr>
 
+inoremap <C-f> <C-x><C-f>
+inoremap <C-l> <C-x><C-l>
+
 nnoremap C :call ChangeTillSymbol()<cr>
 
 function! ChangeTillSymbol()
