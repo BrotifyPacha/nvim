@@ -36,6 +36,7 @@ Plug 'tommcdo/vim-exchange', { 'on': ['<Plug>(Exchange)', '<Plug>(ExchangeLine)'
 nmap cx <Plug>(Exchange)
 nmap cxx <Plug>(ExchangeLine)
 Plug 'nelsyeung/twig.vim'
+Plug 'baskerville/vim-sxhkdrc'
 Plug 'vim-scripts/ingo-library', { 'on': [] }
 Plug 'vim-scripts/AdvancedSorters', { 'on': [] }
 Plug 'iamcco/markdown-preview.nvim',
