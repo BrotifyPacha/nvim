@@ -16,30 +16,35 @@ let g:loaded_tarPlugin   = 1
 let g:loaded_zipPlugin   = 1
 let g:loaded_netrwPlugin = 1
 
+" Utils
 Plug 'nvim-lua/popup.nvim'
-Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-lua/plenary.nvim'
+Plug 'vim-scripts/ingo-library', { 'on': [] }
+Plug 'nvim-telescope/telescope.nvim'
 Plug 'lewis6991/gitsigns.nvim'
+" General
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'wellle/targets.vim'
-Plug 'brotifypacha/vim-colors-pencil'
 Plug 'Raimondi/delimitMate', { 'on': [] }
-Plug 'norcalli/nvim-colorizer.lua'
-Plug 'qpkorr/vim-renamer', { 'on': 'Renamer' }
-Plug 'brotifypacha/goyo.vim', { 'on': 'Goyo'}
-Plug 'junegunn/vim-easy-align', { 'on': '<Plug>(EasyAlign)' }
 Plug 'tommcdo/vim-exchange', { 'on': ['<Plug>(Exchange)', '<Plug>(ExchangeLine)'] }
-Plug 'nelsyeung/twig.vim'
-Plug 'vim-scripts/ingo-library', { 'on': [] }
 Plug 'vim-scripts/AdvancedSorters', { 'on': [] }
+" Visual
+Plug 'brotifypacha/vim-colors-pencil'
+Plug 'norcalli/nvim-colorizer.lua'
+Plug 'junegunn/vim-easy-align', { 'on': '<Plug>(EasyAlign)' }
+Plug 'brotifypacha/goyo.vim', { 'on': 'Goyo'}
+" Filetype specific
+Plug 'nelsyeung/twig.vim'
+Plug 'baskerville/vim-sxhkdrc'
+Plug 'StanAngeloff/php.vim', { 'for': ['php', 'html', 'blade.php'] }
+" Misc
+Plug 'qpkorr/vim-renamer', { 'on': 'Renamer' }
 Plug 'iamcco/markdown-preview.nvim',
             \{ 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug'] }
-
-Plug 'StanAngeloff/php.vim', { 'for': ['php', 'html', 'blade.php'] }
 
 augroup load_on_insert
   autocmd!
