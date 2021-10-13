@@ -103,7 +103,6 @@ set laststatus=2
 set path+=**
 set hidden
 set wildmenu
-set noshowcmd
 set smartcase
 set ignorecase
 set lazyredraw
