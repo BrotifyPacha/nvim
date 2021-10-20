@@ -258,8 +258,8 @@ nnoremap S s
 onoremap id :<C-u>normal! ggVG<cr>
 xnoremap id :<C-u>normal! ggVG<cr>
 
-nnoremap cy "+y
-nnoremap cp :set paste \| normal! "+p:set nopaste<cr>
+nnoremap cy "*y
+nnoremap cp :set paste \| normal! "*p:set nopaste<cr>
 
 nnoremap p p=`[
 nnoremap P mmP=`[`m
