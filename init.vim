@@ -268,8 +268,11 @@ vnoremap p pgv=
 nnoremap [t :tabprevious<cr>
 nnoremap ]t :tabnext<cr>
 
-nnoremap [g :lua require'gitsigns'.prev_hunk()<cr>
-nnoremap ]g :lua require'gitsigns'.next_hunk()<cr>
+nnoremap [g :lua require'gitsigns'.prev_hunk()<cr>zz
+nnoremap ]g :lua require'gitsigns'.next_hunk()<cr>zz
+
+nnoremap n nzz
+nnoremap N Nzz
 
 nnoremap gF :e <cfile><cr>
 
