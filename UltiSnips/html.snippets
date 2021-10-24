@@ -1,5 +1,5 @@
 
-snippet ! "html skeleton" bA
+snippet ! "html skeleton" b
 <!DOCTYPE html>
 <html lang="ru_RU">
 	<head>
@@ -21,38 +21,38 @@ snippet head "general head snippet" b
 </head>
 endsnippet
 
-snippet '(body|div|main|header|footer|section)' "general head/body snippet" bAr
+snippet '(body|div|main|header|footer|section)' "general head/body snippet" br
 <`!p snip.rv = match.group(1)`${1: class="$2"}>
 ${0:${VISUAL}}
 </`!p snip.rv = match.group(1)`>
 endsnippet
 
-snippet tag "general multiline tag snippet" bA
+snippet tag "general multiline tag snippet" b
 <${1:div} class="$2">
 	${0:${VISUAL}}
 </${1/(\w+).*/$1/}>
 endsnippet
 
-snippet itag "general inline tag snippet" bA
+snippet itag "general inline tag snippet" b
 <${1:div} class="$2">${0:${VISUAL}}</${1/(\w+).*/$1/}>
 endsnippet
 
-snippet a "link snippet" bA
+snippet a "link snippet" b
 <a${1: class="$2" }href="$3">${0:${VISUAL}}</a>
 endsnippet
 
-snippet link "general link snippet" bA
+snippet link "general link snippet" b
 <link rel="${1:stylesheet}" href="$2">
 endsnippet
 
-snippet 'h([1-6])' "headers snippet" rAb
+snippet 'h([1-6])' "headers snippet" rb
 <h`!p snip.rv = match.group(1)`>
 	${0:${VISUAL}}
 </h`!p snip.rv = match.group(1)`>
 endsnippet
 
 post_jump "create_dynamic_tabstops(snip)"
-snippet '(\d+)(ol|ul)' "ol/ul snippet" rAb
+snippet '(\d+)(ol|ul)' "ol/ul snippet" rb
 `!p
 snip.rv = snip.mkline(
 	"<" + match.group(2) + "${1: class=\"$2\"}>"
@@ -70,7 +70,7 @@ snip += "$0"
 `
 endsnippet
 
-snippet '(ol|ul)' "ol/ul general snippet" rAb
+snippet '(ol|ul)' "ol/ul general snippet" rb
 <`!p snip.rv = match.group(1)`${1: class="$2"}>
 	<li${3: class="$4"}>$5</li>
 </`!p snip.rv = match.group(1)`>
@@ -78,7 +78,7 @@ $0
 endsnippet
 
 post_jump "create_dynamic_tabstops(snip)"
-snippet '(\d+) (\d+) table' "table snippet usage: col row table" rAb
+snippet '(\d+) (\d+) table' "table snippet usage: col row table" rb
 `!p
 snip.rv = snip.mkline("<table${1: class=\"$2\"}>")
 phCounter = 6
