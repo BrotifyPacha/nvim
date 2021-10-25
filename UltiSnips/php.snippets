@@ -38,8 +38,12 @@ if ($1) {
 }
 endsnippet
 
-snippet func "function" bA
-function $1($2)
+snippet '((public|static|private|protected) )*func(tion)?\s?' "function" Abr
+`!p
+whole = match.group(0)
+withoutLastWord = whole.split()[0:-1]
+withoutLastWord.append('function')
+snip.rv = ' '.join(withoutLastWord) ` ${1:name}($2)
 {
 	${0:${VISUAL}}
 }
