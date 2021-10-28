@@ -154,17 +154,13 @@ nnoremap <leader>rd :call AddDocString()<cr>
 let g:which_key_map.d = {
       \ 'name' : '+diff action' ,
       \ 'w'   : [':windo diffthis'                 , 'diff windows'],
-      \ 's'   : [':DiffSaved'                      , 'diff saved'],
       \ 'h'   : [':diffget'                        , 'pull from other file'],
       \ 'l'   : [':diffput'                        , 'put to other file'],
-      \ 'o'   : [':DiffOff'                        , 'close diff windows'],
       \ }
 
 nnoremap <leader>dw :windo diffthis<cr>
-nnoremap <leader>ds :DiffSaved<cr>
 nnoremap <leader>dh :diffget<cr>
 nnoremap <leader>dl :diffput<cr>
-nnoremap <leader>do :DiffOff<cr>
 
 let g:which_key_map.t = {
       \ 'name' : '+tab' ,
@@ -188,7 +184,6 @@ let g:which_key_spell_map = {
       \ 'b' :    ['zw'                             , 'spelled bad'],
       \ 'u' :    [':spellundo'                     , 'spell undo'],
       \ '<F2>' : [':ToggleSpell'                   , 'toggle spell'],
-      \ '<F3>' : [':AutoCorrectWord'               , 'auto correct'],
       \ }
 
 let g:which_key_list_map = {

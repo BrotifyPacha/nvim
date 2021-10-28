@@ -163,22 +163,17 @@ function MyTabLine()
     else
         let s .= '%#TabLine#'
     endif
-
     " set the tab page number (for mouse clicks)
     let s .= '%' . (i + 1) . 'T'
-
     " the label is made by MyTabLabel()
     let s .= ' %{MyTabLabel(' . (i + 1) . ')} '
   endfor
-
   " after the last tab fill with TabLineFill and reset tab page nr
   let s .= '%#TabLineFill#%T'
-
   " right-align the label to close the current tab page
   if tabpagenr('$') > 1
     let s .= '%=%#TabLine#%999X X '
   endif
-
   return s
 endfunction
 
@@ -304,60 +299,12 @@ endif
 
 " }}}
 
-" Commands
-function! s:DiffWithSaved()
-  let filetype=&ft
-  diffthis
-  bel vnew
-  r #
-  normal! 1GddzR
-  execute "setlocal bt=nofile bh=wipe noma nobl noswf readonly ft=" . filetype
-  diffthis
-  wincmd p
-  normal! zR
-endfunction
-com! DiffSaved call s:DiffWithSaved()
-
-function! s:DiffOff()
-  let curbuf = bufnr("%")
-  echom curbuf
-  windo if (&bt == "nofile") | bw! | endif
-  execute "buffer ".curbuf
-  diffoff
-endfunction
-com! DiffOff call s:DiffOff()
-
-function! s:ToggleSpell()
-  if (&spell == 0)
-    set spell
-    syntax off
-  else
-    set nospell
-    syntax on
-  endif
-endfunction
-com! ToggleSpell call s:ToggleSpell()
-
-function! s:AutoCorrectWord()
-  let curspell = &spell
-  set spell
-  normal 1z=
-  if curspell
-    set spell
-  else
-    set nospell
-  endif
-endfunction
-com! AutoCorrectWord call s:AutoCorrectWord()
-
 
 "{{{ Sourcing settings for plugins
 if (v:version >= 800)
   execute "source " . g:config_location ."/"."plug-config/coc-settings.vim"
 endif
 execute "source " . g:config_location . "/"."plug-config/which-key.vim"
-
-
 execute "source " . g:config_location ."/"."plug-config/welle-targets.vim"
 execute "source " . g:config_location ."/"."plug-config/delimitMate.vim"
 execute "source " . g:config_location ."/"."plug-config/telescope.vim"
