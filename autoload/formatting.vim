@@ -3,7 +3,7 @@ function! s:convert_to_multiline_args()
   call search("(", "cW")
   let lbrack = getpos(".")
   normal %
-  if getcurpos[2] - lbrack[2] < 5 "
+  if getcurpos()[2] - lbrack[2] < 2 "
     call setpos(".", initpos)
     return
   endif
@@ -43,7 +43,7 @@ function! formatting#toggle_multiline_args()
   else
     silent! call s:convert_to_one_line_args()
   endif
-  call repeat#set(":call formatting#toggle_multiline_args()\<cr>")
+  call repeat#set(":call formatting#toggle_multiline_args()\<cr>", 0)
 endfunction
 
 function! formatting#go_snake_case(screaming)
