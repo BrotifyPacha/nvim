@@ -43,9 +43,8 @@ function! formatting#toggle_multiline_args()
   else
     silent! call s:convert_to_one_line_args()
   endif
-  call repeat#set("\<Plug>fmt_tgla", 1)
+  call repeat#set(":call formatting#toggle_multiline_args()\<cr>")
 endfunction
-nmap <Plug>fmt_tgla :call formatting#toggle_multiline_args()<cr>
 
 function! formatting#go_snake_case(screaming)
   normal! mm
@@ -75,7 +74,7 @@ endfunction
 function! formatting#squash_blank_lines()
   normal! dipO
   normal! cc
-  call repeat#set("\<Plug>fmt_sbl")
+  call repeat#set(":call formatting#squash_blank_lines()\<cr>")
 endfunction
 
 " testing.function(testing(nice_variable));
@@ -87,7 +86,7 @@ function! formatting#delete_surrounding_func()
   else
       normal d`m
   endif
-  call repeat#set("\<Plug>fmt_dsf")
+  call repeat#set(":call formatting#delete_surrounding_func()\<cr>")
 endfunction
 
 " testing.function(testing(nice_variable, second_var));
@@ -109,6 +108,3 @@ function! formatting#change_surrounding_func(func_name)
   call repeat#set(":call formatting#change_surrounding_func('".func_name."')\<cr>")
 endfunction
 
-nmap <Plug>fmt_sbl :call formatting#squash_blank_lines()<cr>
-nmap <Plug>fmt_dsf :call formatting#delete_surrounding_func()<cr>
-nmap <Plug>fmt_csf :call formatting#change_surrounding_func('')<cr>
