@@ -3,7 +3,7 @@ function! s:convert_to_multiline_args()
   call search("(", "cW")
   let lbrack = getpos(".")
   normal %
-  if getcurpos()[2] - lbrack[2] < 2 "
+  if (initpos[1] != lbrack[1]) || (getcurpos()[2] - lbrack[2] < 2)
     call setpos(".", initpos)
     return
   endif
