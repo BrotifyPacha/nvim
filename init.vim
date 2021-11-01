@@ -263,6 +263,9 @@ nnoremap ]t :tabnext<cr>
 nnoremap [g :lua require'gitsigns'.prev_hunk()<cr>zz
 nnoremap ]g :lua require'gitsigns'.next_hunk()<cr>zz
 
+nnoremap gmp ddmm}P`m:call repeat#set("gmp") \| echo ""<cr>
+nnoremap gmP ddkmm{p`m:call repeat#set("gmP") \| echo ""<cr>
+
 nnoremap n nzz
 nnoremap N Nzz
 
