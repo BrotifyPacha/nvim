@@ -250,6 +250,18 @@ nnoremap S s
 " declating Document text object
 onoremap id :<C-u>normal! ggVG<cr>
 xnoremap id :<C-u>normal! ggVG<cr>
+" declaring Expression text object
+onoremap ie :<C-u>call <SID>ExpressionTextObj()<cr>
+xnoremap ie :<C-u>call <SID>ExpressionTextObj()<cr>
+
+function! s:ExpressionTextObj() abort
+    normal! ^f=
+    call search('[^ ]')
+    normal! mm
+    normal! $
+    call search('[^;]', 'bc')
+    normal v`m
+endfunction
 
 nnoremap cy "*y
 nnoremap cp :set paste \| normal! "*p:set nopaste<cr>
