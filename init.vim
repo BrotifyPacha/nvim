@@ -314,7 +314,10 @@ if (has("nvim"))
 endif
 
 " }}}
-
+augroup highlight_yank
+    autocmd!
+    autocmd TextYankPost * lua require('vim.highlight').on_yank({higroup='PmenuSel', timeout=250})
+augroup END
 
 "{{{ Sourcing settings for plugins
 if (v:version >= 800)
