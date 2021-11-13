@@ -254,6 +254,9 @@ xnoremap id :lua require 'mytextobj'.documentTextObj()<cr>
 " declaring Expression text object
 onoremap ie :lua require 'mytextobj'.expressionTextObj()<cr>
 xnoremap ie :lua require 'mytextobj'.expressionTextObj()<cr>
+" declaring Indent text object
+onoremap ii :lua require 'mytextobj'.indentTextObj()<cr>
+xnoremap ii :lua require 'mytextobj'.indentTextObj()<cr>
 
 nnoremap cy "*y
 nnoremap cp :set paste \| normal! "*p:set nopaste<cr>
