@@ -245,6 +245,7 @@ nnoremap q: <nop>
 
 nmap s <Plug>Ysurround
 nmap ss <Plug>Yssurround
+vmap s <Plug>VSurround
 nnoremap S s
 
 " declating Document text object
