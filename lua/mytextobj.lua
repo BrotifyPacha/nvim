@@ -9,30 +9,44 @@ function M.expressionTextObj()
     local initPos = vim.api.nvim_win_get_cursor(0)
     local currLine = vim.api.nvim_get_current_line()
 
-    local s, e = string.find(currLine, '[=:]')
+    -- find separator : or =
+    local expSep = string.find(currLine, '[=:]')
+    if expSep == nil then return end
+
+    -- detect what separator found
+    local sym = string.sub(currLine, expSep, expSep)
+    local s = string.find(currLine, '[^' .. sym .. '%s]', expSep)
     if s == nil then return end
 
-    local sym = string.sub(currLine, s, s)
-    local s, e = string.find(currLine, '[^' .. sym .. '%s]', s)
-    if s == nil then return end
-
+    -- mark expression start
     local expStart = { initPos[1], s - 1 }
 
-    local s, e = string.find(currLine, '[({[]', s)
+    -- find any sort of a bracket from the end and jump using %
+    local s = findFromEnd(currLine, '[({[]')
     if s ~= nil then
         local bracketPos = { initPos[1], s - 1 }
         vim.api.nvim_win_set_cursor(0, bracketPos)
         vim.api.nvim_command('normal! %')
     end
 
+    -- go to end of the line
+    vim.api.nvim_command('normal! $')
     local newPos = vim.api.nvim_win_get_cursor(0)
     local currLine = vim.api.nvim_get_current_line()
-    local s, e = string.find(currLine, '[^;}%s$]', newPos[2] + 1 + 1)
 
-    if s ~= nil then
-        local expEnd = { newPos[1], s - 1 }
+    local s = nil
+    if sym == '=' then
+        s = findFromEnd(currLine, '[^;%s]')
+    elseif sym == ':' then
+        s = findFromEnd(currLine, '[^,%s]')
     end
-    local expEnd = newPos
+
+    local expEnd = {}
+    if s ~= nil then
+        expEnd = { newPos[1], s - 1 }
+    else
+        expEnd = newPos
+    end
 
     updateVisualSelection(0, expStart, expEnd)
 end
@@ -53,6 +67,12 @@ local function updateVisualSelection(buf, startPos, endPos, linewise)
         vim.api.nvim_exec("normal! v", false)
     end
     vim.api.nvim_win_set_cursor(buf, endPos)
+end
+
+function findFromEnd(str, pattern)
+    s = str:reverse():find(pattern)
+    if s == nil then return nil end
+    return str:len() - s + 1
 end
 
 return M
