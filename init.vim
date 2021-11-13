@@ -249,20 +249,11 @@ vmap s <Plug>VSurround
 nnoremap S s
 
 " declating Document text object
-onoremap id :<C-u>normal! ggVG<cr>
-xnoremap id :<C-u>normal! ggVG<cr>
+onoremap id :lua require 'mytextobj'.documentTextObj()<cr>
+xnoremap id :lua require 'mytextobj'.documentTextObj()<cr>
 " declaring Expression text object
-onoremap ie :<C-u>call <SID>ExpressionTextObj()<cr>
-xnoremap ie :<C-u>call <SID>ExpressionTextObj()<cr>
-
-function! s:ExpressionTextObj() abort
-    normal! ^f=
-    call search('[^ ]')
-    normal! mm
-    normal! $
-    call search('[^;]', 'bc')
-    normal v`m
-endfunction
+onoremap ie :lua require 'mytextobj'.expressionTextObj()<cr>
+xnoremap ie :lua require 'mytextobj'.expressionTextObj()<cr>
 
 nnoremap cy "*y
 nnoremap cp :set paste \| normal! "*p:set nopaste<cr>
