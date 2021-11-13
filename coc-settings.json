@@ -18,6 +18,8 @@
 
   "diagnostic.infoSign": "i",
   "diagnostic.warningSign": "w",
-  "diagnostic.errorSign": "x"
+  "diagnostic.errorSign": "x",
+
+  "Lua.diagnostics.globals": [ "vim" ]
 
 }
