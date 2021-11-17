@@ -139,7 +139,7 @@ let g:PHP_vintage_case_default_indent = 1
 
 set fillchars=fold:-
 
-set foldlevel=0
+set foldlevel=99
 set foldminlines=3
 set foldtext=MyFoldText()
 set foldopen=block,hor,insert,jump,mark,percent,quickfix,search,tag,undo
