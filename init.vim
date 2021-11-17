@@ -350,7 +350,27 @@ lua <<EOF
       use_languagetree = false, -- Use this to enable language injection
     },
     indent = {
-      enable = true
+      enable = true,
+      disable = { "php" }
+    },
+    refactor = {
+        highlight_current_scope = {
+            enable = true,
+            disable = { "php" }
+        },
+        highlight_definitions = { enable = true },
+        smart_rename = {
+            enable = true,
+            keymaps = {
+                smart_rename = "<space>rr"
+            }
+        },
+        navigation = {
+            enable = true,
+            keymaps = {
+                list_definitions_toc = "gO"
+            }
+        }
     },
     -- Use :TSPlaygroundToggle
     playground = {
