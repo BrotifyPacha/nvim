@@ -100,6 +100,8 @@ set diffopt+=vertical
 set virtualedit=block
 set colorcolumn=80
 
+set mouse=a
+
 set grepprg=grep\ -Rin\ $*\ --exclude-dir={.git,vendor,logs}\ /dev/null
 
 if (has("nvim"))
