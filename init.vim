@@ -41,6 +41,7 @@ Plug 'brotifypacha/goyo.vim', { 'on': 'Goyo'}
 Plug 'nelsyeung/twig.vim'
 Plug 'baskerville/vim-sxhkdrc'
 Plug 'StanAngeloff/php.vim', { 'for': ['php', 'html', 'blade.php'] }
+Plug 'jwalton512/vim-blade'
 " Misc
 Plug 'qpkorr/vim-renamer', { 'on': 'Renamer' }
 Plug 'iamcco/markdown-preview.nvim',
