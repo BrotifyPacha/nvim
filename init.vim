@@ -19,9 +19,14 @@ let g:loaded_netrwPlugin = 1
 " Utils
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
-Plug 'vim-scripts/ingo-library', { 'on': [] }
 Plug 'nvim-telescope/telescope.nvim'
-Plug 'lewis6991/gitsigns.nvim'
+Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'nvim-treesitter/nvim-treesitter-refactor'
+Plug 'nvim-treesitter/nvim-treesitter-textobjects'
+Plug 'nvim-treesitter/playground', { 'on': 'TSPlaygroundToggle' }
+Plug 'SirVer/ultisnips'
+Plug 'liuchengxu/vim-which-key'
+Plug 'neoclide/coc.nvim'
 " General
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-unimpaired'
@@ -29,52 +34,35 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'wellle/targets.vim'
-Plug 'Raimondi/delimitMate', { 'on': [] }
+Plug 'Raimondi/delimitMate'
 Plug 'tommcdo/vim-exchange', { 'on': ['<Plug>(Exchange)', '<Plug>(ExchangeLine)'] }
-Plug 'vim-scripts/AdvancedSorters', { 'on': [] }
 " Visual
+Plug 'lewis6991/gitsigns.nvim'
 Plug 'brotifypacha/vim-colors-pencil'
 Plug 'norcalli/nvim-colorizer.lua'
 Plug 'junegunn/vim-easy-align', { 'on': '<Plug>(EasyAlign)' }
 Plug 'brotifypacha/goyo.vim', { 'on': 'Goyo'}
 " Filetype specific
-Plug 'nelsyeung/twig.vim'
 Plug 'baskerville/vim-sxhkdrc'
 Plug 'StanAngeloff/php.vim', { 'for': ['php', 'html', 'blade.php'] }
+Plug 'nelsyeung/twig.vim'
 Plug 'jwalton512/vim-blade'
-" Misc
-Plug 'qpkorr/vim-renamer', { 'on': 'Renamer' }
 Plug 'iamcco/markdown-preview.nvim',
             \{ 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug'] }
+" Tools
+Plug 'qpkorr/vim-renamer', { 'on': 'Renamer' }
+Plug 'vim-scripts/ingo-library', { 'on': [] }
+Plug 'vim-scripts/AdvancedSorters', { 'on': [] }
+
+call plug#end() "}}}
 
 augroup load_on_insert
   autocmd!
-  autocmd InsertEnter * call plug#load('delimitMate')
 augroup END
 augroup load_on_command
     autocmd!
     autocmd CmdlineEnter * call plug#load('ingo-library', 'AdvancedSorters')
 augroup END
-
-if (has("nvim"))
-  Plug 'nvim-treesitter/nvim-treesitter'
-  Plug 'nvim-treesitter/playground', { 'on': 'TSPlaygroundToggle' }
-  Plug 'nvim-treesitter/nvim-treesitter-refactor'
-  Plug 'nvim-treesitter/nvim-treesitter-textobjects'
-endif
-
-if (v:version >= 800)
-  Plug 'liuchengxu/vim-which-key'
-  Plug 'neoclide/coc.nvim'
-endif
-
-if (v:version >= 704)
-  if (has("python3"))
-    Plug 'SirVer/ultisnips'
-  endif
-endif
-
-call plug#end() "}}}
 
 "{{{ General settings
 set nocompatible
@@ -306,9 +294,7 @@ nnoremap <F8> :ColorizerToggle<cr>
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<Tab>"
 
-if (has("nvim"))
-  tnoremap <Esc> <C-\><C-n>
-endif
+tnoremap <Esc> <C-\><C-n>
 
 " }}}
 augroup highlight_yank
@@ -317,9 +303,7 @@ augroup highlight_yank
 augroup END
 
 "{{{ Sourcing settings for plugins
-if (v:version >= 800)
-  execute "source " . g:config_location ."/"."plug-config/coc-settings.vim"
-endif
+execute "source " . g:config_location ."/"."plug-config/coc-settings.vim"
 execute "source " . g:config_location . "/"."plug-config/which-key.vim"
 execute "source " . g:config_location ."/"."plug-config/welle-targets.vim"
 execute "source " . g:config_location ."/"."plug-config/delimitMate.vim"
