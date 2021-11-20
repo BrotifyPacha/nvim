@@ -113,6 +113,8 @@ set colorcolumn=80
 
 set grepprg=grep\ -Rin\ $*\ --exclude-dir={.git,vendor,logs}\ /dev/null
 
+set mouse=a
+
 if (has("nvim"))
   set wildoptions+=pum " Enable pop up menu 
   set inccommand=nosplit
