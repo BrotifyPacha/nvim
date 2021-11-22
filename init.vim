@@ -1,12 +1,6 @@
 " Specify a directory for plugins
-"plug.vim file should be placed under:
-"~/.config/nvim/autoload/plug.vim - for unix
-"~/AppData/Local/nvim/autoload/plug.vim for windows
-if (has("nvim"))
-  let g:config_location = stdpath('config')
-else
-  let g:config_location = "~/.vim"
-endif
+let g:config_location = stdpath('config')
+
 call plug#begin(g:config_location . '/plugged')
 "call plug#begin(stdpath('data').'/plugged')
 
@@ -65,56 +59,40 @@ augroup load_on_command
 augroup END
 
 "{{{ General settings
-set nocompatible
-syntax on
-filetype plugin indent on
 set omnifunc=syntaxcomplete#Complete
-set nu
 
+set signcolumn=yes
+set number
+set colorcolumn=80
 set nowrap
+
 set linebreak
 set expandtab
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
-set scrolloff=4 
-
-set listchars=eol:$,tab:>-,trail:~,nbsp:+
-" set list
+set scrolloff=4
 
 set t_Co=256
+set listchars=eol:$,tab:>-,trail:~,nbsp:+
 set showmatch
-set incsearch
-set hlsearch
-set laststatus=2
-set path+=**
-set hidden
-set wildmenu
-set smartcase
-set ignorecase
-set lazyredraw
-set noswapfile
-set regexpengine=1
-set endofline
-set diffopt+=vertical
-set virtualedit=block
-set colorcolumn=80
 
 set mouse=a
+set hidden
+set path+=**
+set smartcase
+set ignorecase
+set noswapfile
+set regexpengine=1
+set diffopt+=vertical
+set virtualedit=block
 
 set grepprg=grep\ -Rin\ $*\ --exclude-dir={.git,vendor,logs}\ /dev/null
 
-set mouse=a
-
-if (has("nvim"))
-  set wildoptions+=pum " Enable pop up menu 
-  set inccommand=nosplit
-  set termguicolors
-
-  set signcolumn=yes
-else
-  set numberwidth=4
-endif
+set wildmenu
+set wildoptions+=pum " Enable pop up menu 
+set inccommand=nosplit
+set termguicolors
 
 " Update time for gitsigns
 set updatetime=100
