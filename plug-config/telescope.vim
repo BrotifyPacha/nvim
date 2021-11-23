@@ -61,7 +61,7 @@ require "telescope".setup{
                 'rg',
                 '--files',
                 '--glob',
-                '!{vendor,.git,node_modules}',
+                '!{vendor,.git,node_modules,.svn}',
                 '--hidden'
             }
         }
