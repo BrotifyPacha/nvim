@@ -311,7 +311,7 @@ lua <<EOF
     },
     indent = {
       enable = true,
-      disable = { "php" }
+      -- disable = { "php" }
     },
     refactor = {
         highlight_current_scope = {
