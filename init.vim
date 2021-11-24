@@ -45,18 +45,10 @@ Plug 'iamcco/markdown-preview.nvim',
             \{ 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug'] }
 " Tools
 Plug 'qpkorr/vim-renamer', { 'on': 'Renamer' }
-Plug 'vim-scripts/ingo-library', { 'on': [] }
-Plug 'vim-scripts/AdvancedSorters', { 'on': [] }
+Plug 'vim-scripts/ingo-library'
+Plug 'vim-scripts/AdvancedSorters'
 
 call plug#end() "}}}
-
-augroup load_on_insert
-  autocmd!
-augroup END
-augroup load_on_command
-    autocmd!
-    autocmd CmdlineEnter * call plug#load('ingo-library', 'AdvancedSorters')
-augroup END
 
 "{{{ General settings
 set omnifunc=syntaxcomplete#Complete
