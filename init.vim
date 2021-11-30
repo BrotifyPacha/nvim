@@ -21,6 +21,7 @@ Plug 'nvim-treesitter/playground', { 'on': 'TSPlaygroundToggle' }
 Plug 'SirVer/ultisnips'
 Plug 'liuchengxu/vim-which-key'
 Plug 'neoclide/coc.nvim'
+Plug 'vim-vdebug/vdebug'
 " General
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-unimpaired'
@@ -284,6 +285,7 @@ execute "source " . g:config_location ."/"."plug-config/delimitMate.vim"
 execute "source " . g:config_location ."/"."plug-config/telescope.vim"
 execute "source " . g:config_location ."/"."plug-config/goyo.vim"
 execute "source " . g:config_location ."/"."plug-config/ulti.vim"
+execute "source " . g:config_location ."/"."plug-config/vdebug.vim"
 
 if (has("nvim"))
 
@@ -346,7 +348,7 @@ lua <<EOF
 
                 -- Or you can define your own textobjects like this
                 ["ie"] = {
-                    php = "(assignment_expression) @right",
+                --     php = "(assignment_expression) @right",
                 --     python = "(function_definition) @function",
                 --     cpp = "(function_definition) @function",
                 --     c = "(function_definition) @function",
