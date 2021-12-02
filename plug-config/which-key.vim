@@ -65,6 +65,7 @@ let g:which_key_map.w = {
       \ 'name' : '+window' ,
       \ 'q' : [':q'             , 'quit'],
       \ 'w' : [':w'             , 'save'],
+      \ 'd' : [':windo diffthis', 'diff windows'],
       \ 'r' : ['<C-w>r'         , 'rotate'],
       \ '3' : [':call ChangeWindowSize(3)', 'resize window to 1/3'],
       \ '4' : [':call ChangeWindowSize(4)', 'resize window to 1/4'],
@@ -72,6 +73,7 @@ let g:which_key_map.w = {
 
 nnoremap <leader>wq :q<cr>
 nnoremap <leader>ww :w<cr>
+nnoremap <leader>wd :windo diffthis<cr>
 nnoremap <leader>wr <C-w>r
 nnoremap <leader>w2 :call ChangeWindowSize(2)<cr>
 nnoremap <leader>w3 :call ChangeWindowSize(3)<cr>
@@ -81,28 +83,6 @@ nnoremap <leader>w5 :call ChangeWindowSize(5)<cr>
 function! ChangeWindowSize(size)
   execute 'vert resize ' &columns / a:size
 endfunction
-
-function! OpenGrep(inCurrentFile)
-  let command = "\<esc>:vimgrep//j "
-  let tail = ""
-  if a:inCurrentFile
-    let tail = "%"
-  else
-    let tail = "**/*." . expand("%:e")
-  endif
-  call feedkeys(command . tail)
-  for c in range(1, len(tail) + 3)
-    call feedkeys("\<left>")
-  endfor
-endfunction
-
-
-let g:which_key_map.s = {
-      \ 'name' : '+search' ,
-      \ 'f' : [':call feedkeys("\<esc>:find ")' , 'find file'],
-      \ 'g' : [':call OpenGrep(0)'              , 'grep files'],
-      \ 'G' : [':call OpenGrep(1)'              , 'grep this File'],
-      \ }
 
 
 let g:which_key_map.g = {
@@ -151,16 +131,6 @@ nnoremap <leader>rc :call formatting#go_camel_case(0)<cr>
 nnoremap <leader>rC :call formatting#go_camel_case(1)<cr>
 nnoremap <leader>rd :call AddDocString()<cr>
 
-let g:which_key_map.d = {
-      \ 'name' : '+diff action' ,
-      \ 'w'   : [':windo diffthis'                 , 'diff windows'],
-      \ 'h'   : [':diffget'                        , 'pull from other file'],
-      \ 'l'   : [':diffput'                        , 'put to other file'],
-      \ }
-
-nnoremap <leader>dw :windo diffthis<cr>
-nnoremap <leader>dh :diffget<cr>
-nnoremap <leader>dl :diffput<cr>
 
 let g:which_key_map.t = {
       \ 'name' : '+tab' ,
@@ -189,7 +159,7 @@ let g:which_key_spell_map = {
 let g:which_key_list_map = {
       \ '<F5>' : ['call feedkeys(":registers\<cr>")'  , 'list registers'],
       \ '<F6>' : ['call feedkeys(":buffers\<cr>")'    , 'list buffers'],
-      \ '<F7>' : ['call feedkeys(":autocmd ")'        , 'list buffers'],
+      \ '<F7>' : ['call feedkeys(":autocmd ")'        , 'list autocmds'],
       \ '<F8>' : ['call feedkeys(":10messages\<cr>")' , 'list 10 last messages'],
       \ }
 
@@ -243,27 +213,25 @@ function! SynStack()
   echom map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name, fg, bg")')
 endfunc
 " Map leader to which_key
-if v:version >= 800
-  " Register which key map
-  call which_key#register('<Space>'                 , "g:which_key_map")
-  call which_key#register('spell_menu'              , "g:which_key_spell_map")
-  call which_key#register('list_menu'               , "g:which_key_list_map")
-  call which_key#register('file_menu'               , "g:which_key_util_map")
-  call which_key#register('display_menu'            , "g:which_key_display_map")
-  call which_key#register('term_menu'               , "g:which_key_term_map")
+" Register which key map
+call which_key#register('<Space>'                 , "g:which_key_map")
+call which_key#register('spell_menu'              , "g:which_key_spell_map")
+call which_key#register('list_menu'               , "g:which_key_list_map")
+call which_key#register('file_menu'               , "g:which_key_util_map")
+call which_key#register('display_menu'            , "g:which_key_display_map")
+call which_key#register('term_menu'               , "g:which_key_term_map")
 
 
-  nnoremap <silent> <leader> :silent WhichKey '<Space>'<CR>
-  nnoremap <silent> <F2> :silent WhichKey 'spell_menu'<CR>
-  nnoremap <silent> <F3> :silent WhichKey 'list_menu'<CR>
-  nnoremap <silent> <F4> :silent WhichKey 'file_menu'<CR>
-  nnoremap <silent> <F9> :silent WhichKey 'term_menu'<CR>
-  vnoremap <silent> <leader> :silent <C-u>WhichKeyVisual '<Space>'<CR>
+nnoremap <silent> <leader> :silent WhichKey '<Space>'<CR>
+nnoremap <silent> <F2> :silent WhichKey 'spell_menu'<CR>
+nnoremap <silent> <F3> :silent WhichKey 'list_menu'<CR>
+nnoremap <silent> <F4> :silent WhichKey 'file_menu'<CR>
+nnoremap <silent> <F9> :silent WhichKey 'term_menu'<CR>
+vnoremap <silent> <leader> :silent <C-u>WhichKeyVisual '<Space>'<CR>
 
-  call which_key#register('vim', "g:which_key_vim_map")
-  call which_key#register('python', "g:which_key_python_map")
-  call which_key#register('markdown', "g:which_key_markdown_map")
-endif
+call which_key#register('vim', "g:which_key_vim_map")
+call which_key#register('python', "g:which_key_python_map")
+call which_key#register('markdown', "g:which_key_markdown_map")
 
 let g:which_key_php_map = {
       \}
