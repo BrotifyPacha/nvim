@@ -198,6 +198,10 @@ let g:which_key_vim_map = {
       \ 'g'    : [':call feedkeys(":call SynStack()\<cr>")' , 'show hi group'],
       \ 'r'    : [':source %'                               , 'source %'],
       \ 'v'    : [':source $MYVIMRC'                        , 'source vimrc'],
+      \ 'c'    : {
+          \ 'name' : 'change filetype',
+          \ 'p' : [':set ft=php', 'php']
+          \}
       \}
 
 let g:which_key_python_map = {
