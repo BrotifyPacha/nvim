@@ -6,6 +6,8 @@ setlocal includeexpr=IncludeFunc(v:fname)
 
 setlocal commentstring=//%s
 
+setlocal iskeyword+=$
+
 function! IncludeFunc(fname)
   let parts = split(a:fname, "\\")
   if len(parts) > 1
