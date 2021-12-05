@@ -21,7 +21,9 @@ Plug 'nvim-treesitter/playground', { 'on': 'TSPlaygroundToggle' }
 Plug 'SirVer/ultisnips'
 Plug 'liuchengxu/vim-which-key'
 Plug 'neoclide/coc.nvim'
-Plug 'vim-vdebug/vdebug'
+Plug 'mfussenegger/nvim-dap'
+Plug 'Pocco81/DAPInstall.nvim'
+Plug 'rcarriga/nvim-dap-ui'
 " General
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-unimpaired'
@@ -285,7 +287,7 @@ execute "source " . g:config_location ."/"."plug-config/delimitMate.vim"
 execute "source " . g:config_location ."/"."plug-config/telescope.vim"
 execute "source " . g:config_location ."/"."plug-config/goyo.vim"
 execute "source " . g:config_location ."/"."plug-config/ulti.vim"
-execute "source " . g:config_location ."/"."plug-config/vdebug.vim"
+execute "source " . g:config_location ."/"."plug-config/dap_config.lua"
 
 if (has("nvim"))
 
