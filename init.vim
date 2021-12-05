@@ -54,7 +54,7 @@ call plug#end() "}}}
 "{{{ General settings
 set omnifunc=syntaxcomplete#Complete
 
-set signcolumn=yes
+set signcolumn=auto:1-2
 set number
 set colorcolumn=80
 set nowrap
