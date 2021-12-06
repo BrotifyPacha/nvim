@@ -48,16 +48,16 @@ require("dapui").setup({
         elements = {
             -- Provide as ID strings or tables with 'id' and 'size' keys
             { id = 'breakpoints', size = 0.15 },
-            { id = 'scopes', size = 0.35 },
-            { id = 'watches', size = 0.15 },
+            { id = 'scopes', size = 0.50 },
+            { id = 'watches', size = 0.35 },
         },
-        size = 70,
+        size = 60,
         position = 'left', -- Can be 'left', 'right', 'top', 'bottom'
     },
     tray = {
         elements = {
             'repl',
-            { id = 'stacks', size = 0.35 },
+            -- { id = 'stacks', size = 0.35 },
         },
         size = 10,
         position = 'bottom', -- Can be 'left', 'right', 'top', 'bottom'
