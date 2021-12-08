@@ -311,7 +311,7 @@ lua <<EOF
     },
     highlight = {
       enable = true,
-      use_languagetree = false, -- Use this to enable language injection
+      use_languagetree = true, -- Use this to enable language injection
     },
     indent = {
       enable = true,
@@ -350,7 +350,8 @@ lua <<EOF
 
                 -- Or you can define your own textobjects like this
                 ["ie"] = {
-                --     php = "(assignment_expression) @right",
+                   php = "@expression.inner",
+                   lua = "@expression.inner"
                 --     python = "(function_definition) @function",
                 --     cpp = "(function_definition) @function",
                 --     c = "(function_definition) @function",
