@@ -26,7 +26,8 @@ dap.configurations.php = {
         name = 'Listen for Xdebug',
         stopOnEntry = true,
         pathMappings = {
-            ['/var/www'] = '/home/brotifypacha/personal/projects/php-personal-home-page/app'
+            ['/var/www'] = '/home/brotifypacha/personal/projects/php-personal-home-page/app',
+            ['/home/pgusev/workspace/sms-platform-helper'] = '${workspaceFolder}',
         },
         port = 9000
     }
@@ -73,7 +74,7 @@ require("dapui").setup({
     windows = { indent = 1 },
 })
 
-flags = { noremap = true, silent = true }
+local flags = { noremap = true, silent = true }
 
 vim.api.nvim_set_keymap('n', '<leader>ds', ':lua require("dap").continue()<cr>',          flags)
 vim.api.nvim_set_keymap('n', '<leader>dj', ':lua require("dap").step_over()<cr>',         flags)
