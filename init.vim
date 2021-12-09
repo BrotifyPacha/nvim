@@ -148,6 +148,10 @@ endfunction
 function! MyTabLabel(n)
   let winnr = tabpagewinnr(a:n)
   let cwd = getcwd(winnr, a:n)
+  if cwd =~ 'trunk'
+      let cwd = substitute(cwd, '[/\\]trunk.*', '', '')
+      return matchstr(cwd, '\w\+/\w\+$')
+  endif
   let cwd = substitute(cwd, '.*[/\\]', '', '')
   return cwd
 endfunction
