@@ -27,7 +27,8 @@ dap.configurations.php = {
         stopOnEntry = true,
         pathMappings = {
             ['/var/www'] = '/home/brotifypacha/personal/projects/php-personal-home-page/app',
-            ['/home/pgusev/workspace/retorr'] = '${worspaceFolder}',
+            ['/home/pgusev/workspace/sms-platform-helper'] = '${workspaceFolder}',
+            ['/home/pgusev/workspace/retorr'] = '${workspaceFolder}',
         },
         port = 9000
     }
@@ -74,20 +75,18 @@ require("dapui").setup({
     windows = { indent = 1 },
 })
 
-vim.api.nvim_set_keymap('n', '<leader>ds', ':lua require("dap").continue()<cr>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>dj', ':lua require("dap").step_over()<cr>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>dl', ':lua require("dap").step_into()<cr>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>dh', ':lua require("dap").step_out()<cr>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('', '<leader>dd', ':lua require("dap").toggle_breakpoint()<cr>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('', '<F11>', ':lua require("dapui").toggle()<cr>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('', '<leader>de', '<cmd>lua require("dapui").eval()<cr>', { noremap = true, silent = true })
+local flags = { noremap = true, silent = true }
 
--- nnoremap <silent> <F5> :lua require'dap'.continue()<CR>
--- nnoremap <silent> <F10> :lua require'dap'.step_over()<CR>
--- nnoremap <silent> <F11> :lua require'dap'.step_into()<CR>
--- nnoremap <silent> <F12> :lua require'dap'.step_out()<CR>
--- nnoremap <silent> <leader>b :lua require'dap'.toggle_breakpoint()<CR>
--- nnoremap <silent> <leader>B :lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>
--- nnoremap <silent> <leader>lp :lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>
--- nnoremap <silent> <leader>dr :lua require'dap'.repl.open()<CR>
--- nnoremap <silent> <leader>dl :lua require'dap'.run_last()<CR>
+vim.api.nvim_set_keymap('n', '<leader>ds', ':lua require("dap").continue()<cr>',          flags)
+vim.api.nvim_set_keymap('n', '<leader>dj', ':lua require("dap").step_over()<cr>',         flags)
+vim.api.nvim_set_keymap('n', '<leader>dl', ':lua require("dap").step_into()<cr>',         flags)
+vim.api.nvim_set_keymap('n', '<leader>dh', ':lua require("dap").step_out()<cr>',          flags)
+vim.api.nvim_set_keymap('',  '<leader>dd', ':lua require("dap").toggle_breakpoint()<cr>', flags)
+vim.api.nvim_set_keymap('',  '<F11>',      ':lua require("dapui").toggle()<cr>',          flags)
+vim.api.nvim_set_keymap('',  '<leader>de', ':lua require("dapui").eval()<cr>',            flags)
+
+vim.api.nvim_set_keymap('n', '<up>',    ':lua require("dap").continue()<cr>',  flags)
+vim.api.nvim_set_keymap('n', '<down>',  ':lua require("dap").step_over()<cr>', flags)
+vim.api.nvim_set_keymap('n', '<right>', ':lua require("dap").step_into()<cr>', flags)
+vim.api.nvim_set_keymap('n', '<left>',  ':lua require("dap").step_out()<cr>',  flags)
+
