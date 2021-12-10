@@ -57,8 +57,8 @@ require("dapui").setup({
     },
     tray = {
         elements = {
-            'repl',
-            -- { id = 'stacks', size = 0.35 },
+            -- 'repl',
+            'stacks',
         },
         size = 10,
         position = 'bottom', -- Can be 'left', 'right', 'top', 'bottom'
