@@ -26,7 +26,8 @@ dap.configurations.php = {
         name = 'Listen for Xdebug',
         stopOnEntry = true,
         pathMappings = {
-            ['/var/www'] = '/home/brotifypacha/personal/projects/php-personal-home-page/app'
+            ['/var/www'] = '/home/brotifypacha/personal/projects/php-personal-home-page/app',
+            ['/home/pgusev/workspace/retorr'] = '${worspaceFolder}',
         },
         port = 9000
     }
