@@ -50,8 +50,6 @@ nnoremap <leader>J :bel split<cr>
 nnoremap <leader>K :split<cr>
 nnoremap <leader>L :vert bel split<cr>
 nnoremap <leader>o :let g:goyo_preset=1 \|Goyo<cr>
-nnoremap <leader>p :let g:goyo_preset=2 \|Goyo<cr>
-nnoremap <leader>i :let g:goyo_preset=3 \|Goyo<cr>
 
 function! WhichKeyByFiletype()
   if (len(&ft) == 0)
@@ -70,15 +68,6 @@ let g:which_key_map.w = {
       \ '3' : [':call ChangeWindowSize(3)', 'resize window to 1/3'],
       \ '4' : [':call ChangeWindowSize(4)', 'resize window to 1/4'],
       \ }
-
-nnoremap <leader>wq :q<cr>
-nnoremap <leader>ww :w<cr>
-nnoremap <leader>wd :windo diffthis<cr>
-nnoremap <leader>wr <C-w>r
-nnoremap <leader>w2 :call ChangeWindowSize(2)<cr>
-nnoremap <leader>w3 :call ChangeWindowSize(3)<cr>
-nnoremap <leader>w4 :call ChangeWindowSize(4)<cr>
-nnoremap <leader>w5 :call ChangeWindowSize(5)<cr>
 
 function! ChangeWindowSize(size)
   execute 'vert resize ' &columns / a:size
@@ -122,15 +111,6 @@ let g:which_key_map.r = {
       \ 'm' : [':call formatting#squash_blank_lines()'    , 'merge blanks'],
       \ 'd' : [':call AddDocString()'                     , 'add doc string'],
       \ }
-
-nnoremap <leader>rr :call RenameLocalVariable()<cr>
-nnoremap <leader>rt :call formatting#toggle_multiline_args()<cr>
-nnoremap <leader>rs :call formatting#go_snake_case(0)<cr>
-nnoremap <leader>rS :call formatting#go_snake_case(1)<cr>
-nnoremap <leader>rc :call formatting#go_camel_case(0)<cr>
-nnoremap <leader>rC :call formatting#go_camel_case(1)<cr>
-nnoremap <leader>rd :call AddDocString()<cr>
-
 
 let g:which_key_map.t = {
       \ 'name' : '+tab' ,
@@ -213,6 +193,15 @@ let g:which_key_markdown_map = {
       \ 'p'    : [':MarkdownPreviewToggle' , 'toggle preview'],
       \}
 
+let g:which_key_php_map = {
+            \ 'a' : [':call ToggleArtisanServer()', 'toggle artisan serve']
+            \}
+
+function! ToggleArtisanServer()
+    lua require('phpartisan').toggleArtisanServer()
+endfunction
+
+
 function! SynStack()
   echom map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name, fg, bg")')
 endfunc
@@ -226,7 +215,7 @@ call which_key#register('display_menu'            , "g:which_key_display_map")
 call which_key#register('term_menu'               , "g:which_key_term_map")
 
 
-nnoremap <silent> <leader> :silent WhichKey '<Space>'<CR>
+nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
 nnoremap <silent> <F2> :silent WhichKey 'spell_menu'<CR>
 nnoremap <silent> <F3> :silent WhichKey 'list_menu'<CR>
 nnoremap <silent> <F4> :silent WhichKey 'file_menu'<CR>
@@ -236,7 +225,6 @@ vnoremap <silent> <leader> :silent <C-u>WhichKeyVisual '<Space>'<CR>
 call which_key#register('vim', "g:which_key_vim_map")
 call which_key#register('python', "g:which_key_python_map")
 call which_key#register('markdown', "g:which_key_markdown_map")
+call which_key#register('php', 'g:which_key_php_map')
 
-let g:which_key_php_map = {
-      \}
 

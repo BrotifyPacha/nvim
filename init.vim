@@ -298,6 +298,8 @@ if (has("nvim"))
   set foldmethod=expr
   set foldexpr=nvim_treesitter#foldexpr()
 
+  lua require 'helpers'
+
 lua <<EOF
   require 'gitsigns'.setup()
   require 'colorizer'.setup {
