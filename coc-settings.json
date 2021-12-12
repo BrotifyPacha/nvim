@@ -14,6 +14,8 @@
   "diagnostic.warningSign": "w",
   "diagnostic.errorSign": "x",
 
+  "intelephense.progress.enable": false,
+
   "Lua.diagnostics.globals": [ "vim" ]
 
 }
