@@ -150,7 +150,7 @@ function! MyTabLabel(n)
   let cwd = getcwd(winnr, a:n)
   if cwd =~ 'trunk'
       let cwd = substitute(cwd, '[/\\]trunk.*', '', '')
-      return matchstr(cwd, '\w\+/\w\+$')
+      return matchstr(cwd, '[^/]\+/[^/]\+$')
   endif
   let cwd = substitute(cwd, '.*[/\\]', '', '')
   return cwd
