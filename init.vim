@@ -122,6 +122,7 @@ endfunction
 "
 
 set tabline=%!MyTabLine()
+set showtabline=2
 function MyTabLine()
   let s = ''
   for i in range(tabpagenr('$'))
