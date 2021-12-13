@@ -27,7 +27,12 @@ let g:which_key_map =  {}
 " Make useless keybind invisible
 let g:which_key_map['+'] = 'which_key_ignore'
 
-let g:which_key_map['e'] = [ ':CocCommand explorer' , 'explorer' ]
+let g:which_key_map['e'] = [ ':call OpenExplorerInPWD()' , 'explorer' ]
+function! OpenExplorerInPWD()
+    let pwd = trim(execute('pwd'))
+    execute('CocCommand explorer ' . pwd )
+endfunction
+
 let g:which_key_map['f'] = [ ':call WhichKeyByFiletype()', '+filetype action' ]
 let g:which_key_map['l'] = [ '<C-w>l'               , 'which_key_ignore']
 let g:which_key_map['h'] = [ '<C-w>h'               , 'which_key_ignore']
@@ -41,6 +46,7 @@ let g:which_key_map['o'] = [ ':let g:goyo_preset=1 \|Goyo' , 'goyo' ]
 let g:which_key_map['p'] = [ ':let g:goyo_preset=2 \|Goyo' , 'goyo' ]
 let g:which_key_map['i'] = [ ':let g:goyo_preset=3 \|Goyo' , 'goyo' ]
 
+nnoremap <leader>e :<C-u>call OpenExplorerInPWD()<cr>
 nnoremap <leader>l <C-w>l
 nnoremap <leader>h <C-w>h
 nnoremap <leader>j <C-w>j
