@@ -203,6 +203,38 @@ let g:which_key_php_map = {
             \ 'a' : [':call ToggleArtisanServer()', 'toggle artisan serve']
             \}
 
+let g:which_key_project_map = {
+            \ 'name' : 'project menu',
+            \ 't': [ ':call ToggleLibAndProject()', 'toggle library and project' ],
+            \ }
+    
+
+let s:resourcesMapping = {
+            \ 'embla' : {
+                \ 'salute-content-pusher/common/trunk' : 'salute-content-pusher/text/trunk',
+                \ 'salute-content-pusher/text/trunk' : 'salute-content-pusher/common/trunk',
+                \}
+            \}
+
+function! ToggleLibAndProject()
+    let pwd = execute('pwd')
+    echo pwd
+    if (pwd =~ 'embla.immo')
+        let pwdPre = matchstr(pwd,'.*/repository')
+        let type = matchstr(pwd,'/repository/\(projects\|libraries\)')
+        let nameStart = matchend(pwd,'/repository/\(projects\|libraries/php\d\)/')
+        let name = pwd[nameStart:]
+        let path = ''
+        if (type =~ 'projects')
+            let path = pwdPre . '/libraries/php5/' . s:resourcesMapping['embla'][name]
+        else
+            let path = pwdPre . '/projects/' . s:resourcesMapping['embla'][name]
+        endif
+        echo path
+        execute('tcd ' . trim(path) )
+    endif
+endfunction
+
 function! ToggleArtisanServer()
     lua require('phpartisan').toggleArtisanServer()
 endfunction
@@ -219,9 +251,11 @@ call which_key#register('list_menu'               , "g:which_key_list_map")
 call which_key#register('file_menu'               , "g:which_key_util_map")
 call which_key#register('display_menu'            , "g:which_key_display_map")
 call which_key#register('term_menu'               , "g:which_key_term_map")
+call which_key#register('project_menu'            , 'g:which_key_project_map')
 
 
 nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
+nnoremap <silent> <F1> :silent WhichKey 'project_menu'<CR>
 nnoremap <silent> <F2> :silent WhichKey 'spell_menu'<CR>
 nnoremap <silent> <F3> :silent WhichKey 'list_menu'<CR>
 nnoremap <silent> <F4> :silent WhichKey 'file_menu'<CR>
