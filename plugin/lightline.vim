@@ -14,7 +14,7 @@ function! Lightline()
     if isCurBuf
       let secModeHiglight = GetModeHighlight(mode)
     else
-      let secModeHiglight = "Search"
+      let secModeHiglight = "StatusLineNC"
     endif
   else
     let secModeHiglight = GetModeHighlight(mode)
@@ -29,11 +29,11 @@ function! Lightline()
 
   if is_small
     let secRuler = Hl(
-          \"MoreMsg", 
+          \"StatusLineFaded", 
           \" %(%2.5v | %1.5l/%1.150L".s:lines_icon."%) ")
   else
     let secRuler = Hl(
-          \"MoreMsg", 
+          \"StatusLineFaded", 
           \" %(%2.5v | %2.5l/%1.150L".s:lines_icon." | %1.3p".s:percent_icon."%)")
   endif
 
@@ -43,7 +43,7 @@ function! Lightline()
   if v:version >= 800
     let buf_fileenc = getbufvar(actual_curbuf, "&fileencoding")
     let buf_ff = getbufvar(actual_curbuf, "&ff")
-    let encoding = Hl("MoreMsg", buf_fileenc."[".buf_ff."]")
+    let encoding = Hl("StatusLineFaded", buf_fileenc."[".buf_ff."]")
     let fileflags = fileflags." ".encoding
     " Drawing optional data only if g:lightline_optional is set
   endif
@@ -51,15 +51,15 @@ function! Lightline()
   let secOptional = []
 
   if get(g:, "lightline_show_visual", 1)
-    call add(secOptional, Hl("CursorLineNr", "%{GetVisSection()}"))
+    call add(secOptional, Hl("StatusLineFaded", "%{GetVisSection()}"))
   endif
 
   if get(g:, "lightline_show_trailing", 1) && !is_small
-    call add(secOptional, Hl("DiffChange", "%{GetTrailingSpaceSection()}"))
+    call add(secOptional, Hl("StatusLineOrange", "%{GetTrailingSpaceSection()}"))
   endif
 
   if exists('g:loaded_fugitive')
-    call add(secOptional, Hl("DiffAdd", "%{GetGitSection()}"))
+    call add(secOptional, Hl("StatusLineGreen", "%{GetGitSection()}"))
   endif
 
   if (is_small)
@@ -115,7 +115,7 @@ function! GetGitSection()
 endfunction
 
 function! Hl(group, text)
-  return "%#" . a:group . "#" . a:text . "%#Normal#"
+  return "%#" . a:group . "#" . a:text . "%#StatusLine#"
 endfunction
 
 function GetFilePath()
