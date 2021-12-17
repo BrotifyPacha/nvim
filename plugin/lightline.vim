@@ -14,7 +14,7 @@ function! Lightline()
     if isCurBuf
       let secModeHiglight = GetModeHighlight(mode)
     else
-      let secModeHiglight = "StatusLineNC"
+      let secModeHiglight = "StatusLineFaded"
     endif
   else
     let secModeHiglight = GetModeHighlight(mode)
@@ -34,7 +34,7 @@ function! Lightline()
   else
     let secRuler = Hl(
           \"StatusLineFaded", 
-          \" %(%2.5v | %2.5l/%1.150L".s:lines_icon." | %1.3p".s:percent_icon."%)")
+          \" %(%2.5v | %2.5l/%1.150L".s:lines_icon." | %1.3p".s:percent_icon."%) ")
   endif
 
   let filetail = "%{GetFilePath()}"
