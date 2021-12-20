@@ -82,6 +82,7 @@ vim.api.nvim_set_keymap('n', '<leader>dj', ':lua require("dap").step_over()<cr>'
 vim.api.nvim_set_keymap('n', '<leader>dl', ':lua require("dap").step_into()<cr>',         flags)
 vim.api.nvim_set_keymap('n', '<leader>dh', ':lua require("dap").step_out()<cr>',          flags)
 vim.api.nvim_set_keymap('',  '<leader>dd', ':lua require("dap").toggle_breakpoint()<cr>', flags)
+vim.api.nvim_set_keymap('n',  '<leader>df',':lua require("dap").toggle_breakpoint(vim.fn.input("Enter condition: "))<cr>', flags)
 vim.api.nvim_set_keymap('',  '<F11>',      ':lua require("dapui").toggle()<cr>',          flags)
 vim.api.nvim_set_keymap('',  '<leader>de', ':lua require("dapui").eval()<cr>',            flags)
 
