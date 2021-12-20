@@ -15,8 +15,8 @@ dap.adapters.php = {
 
 }
 
-vim.fn.sign_define('DapBreakpoint', { text='ﱣ', texthl='DiffAdd', linehl = '', numhl = 'DiffAdded' })
-vim.fn.sign_define('DapBreakpointCondition', { text='ﱣ', texthl='DiffAdd', linehl = '', numhl = 'DiffAdded' })
+vim.fn.sign_define('DapBreakpoint', { text='●', texthl='ErrorMsg', linehl = '', numhl = 'ErrorMsg' })
+vim.fn.sign_define('DapBreakpointCondition', { text='◆', texthl='ErrorMsg', linehl = '', numhl = 'ErrorMsg' })
 vim.fn.sign_define('DapStopped', { text='', texthl='Error', linehl = '', numhl = 'Error' })
 
 dap.configurations.php = {
