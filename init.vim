@@ -136,6 +136,10 @@ function MyTabLine()
     let s .= '%' . (i + 1) . 'T'
     " the label is made by MyTabLabel() and %(i+1)X 
     let s .= ' %{MyTabLabel(' . (i + 1) . ')} %' . (i + 1) . 'X窱'
+    " if next is not selected and not current and not last add divider
+    if i + 2 != tabpagenr() && i + 1 != tabpagenr() && i + 1 != tabpagenr('$')
+        let s .= '%#TabLineDivider#│'
+    endif
   endfor
   " after the last tab fill with TabLineFill and reset tab page nr
   let s .= '%#TabLineFill#%T'
