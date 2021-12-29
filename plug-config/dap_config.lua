@@ -27,8 +27,10 @@ dap.configurations.php = {
         stopOnEntry = true,
         pathMappings = {
             ['/var/www'] = '/home/brotifypacha/personal/projects/php-personal-home-page/app',
-            ['/home/pgusev/workspace/sms-platform-helper'] = '${workspaceFolder}',
-            ['/home/pgusev/workspace/retorr'] = '${workspaceFolder}',
+            ['/home/pgusev/workspace/${workspaceFolderBasename}'] = '/home/pgusev/workspace/servers/devel1/workspace/${workspaceFolderBasename}',
+            ['/home/pgusev/workspace/${workspaceFolderBasename}'] = '/home/pgusev/workspace/servers/devel2/workspace/${workspaceFolderBasename}',
+            ['/home/pgusev/workspace/${workspaceFolderBasename}'] = '/home/pgusev/workspace/servers/devel2/workspace/${workspaceFolderBasename}',
+            -- ['/home/pgusev/workspace/retorr'] = '${workspaceFolder}',
         },
         port = 9000
     }
