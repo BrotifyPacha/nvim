@@ -294,12 +294,10 @@ execute "source " . g:config_location ."/"."plug-config/goyo.vim"
 execute "source " . g:config_location ."/"."plug-config/ulti.vim"
 execute "source " . g:config_location ."/"."plug-config/dap_config.lua"
 
-if (has("nvim"))
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
 
-  set foldmethod=expr
-  set foldexpr=nvim_treesitter#foldexpr()
-
-  lua require 'helpers'
+lua require 'helpers'
 
 lua <<EOF
   require 'gitsigns'.setup()
@@ -388,5 +386,4 @@ lua <<EOF
     }
   }
 EOF
-endif
 
