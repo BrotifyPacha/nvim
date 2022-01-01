@@ -254,18 +254,6 @@ nnoremap gF :e <cfile><cr>
 inoremap <C-f> <C-x><C-f>
 inoremap <C-l> <C-x><C-l>
 
-nnoremap C :call ChangeTillSymbol()<cr>
-
-function! ChangeTillSymbol()
-  let line = getline('.')
-  if line =~ '[,;:]$'
-    let symbol = line[len(line)-1]
-    call feedkeys('ct' . symbol)
-  else
-    call feedkeys('c$')
-  endif
-endfunction
-
 " F key maps
 " Remove search highlighting / remove match groups
 nnoremap <silent> <F5> :nohl \| match<cr>
