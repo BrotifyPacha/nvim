@@ -6,6 +6,8 @@ lua require 'user.options'
 
 " }}}
 
+execute "source " . g:config_location ."/"."abbreviation.vim"
+
 "{{{ Foldings
 
 function! MyFoldText()
@@ -54,18 +56,6 @@ function! MyTabLabel(n)
   let cwd = substitute(cwd, '.*[/\\]', '', '')
   return cwd
 endfunction
-
-" Abbreviations {{{
-cnoreabbrev h vertical botright help
-cnoreabbrev vsf vert bel s
-cnoreabbrev vsp bel vs
-
-cnoreabbrev sp bel sp
-cnoreabbrev bw! bn \| bw! #
-cnoreabbrev cd tcd
-
-execute "source " . g:config_location ."/"."abbreviation.vim"
-" }}}
 
 " Mappings {{{
 nnoremap <leader><leader> :call search('<++>', 'cw')<cr>c4l
