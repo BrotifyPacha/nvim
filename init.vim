@@ -274,104 +274,17 @@ augroup END
 
 "{{{ Sourcing settings for plugins
 execute "source " . g:config_location ."/"."plug-config/coc-settings.vim"
-execute "source " . g:config_location . "/"."plug-config/which-key.vim"
+execute "source " . g:config_location ."/"."plug-config/which-key.vim"
 execute "source " . g:config_location ."/"."plug-config/welle-targets.vim"
 execute "source " . g:config_location ."/"."plug-config/delimitMate.vim"
 execute "source " . g:config_location ."/"."plug-config/telescope.vim"
 execute "source " . g:config_location ."/"."plug-config/goyo.vim"
 execute "source " . g:config_location ."/"."plug-config/ulti.vim"
-execute "source " . g:config_location ."/"."plug-config/dap_config.lua"
 
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
 
-lua require 'helpers'
+lua require 'user.helpers'
+lua require 'user.plugins'
 
-lua <<EOF
-  require 'gitsigns'.setup()
-  require 'colorizer'.setup {
-    '*'; -- Highlight all files, but customize some others.
-    css = { rgb_fn = true; }; -- Enable parsing rgb(...) functions in css.
-    html = { names = false; }; -- Disable parsing "names" like Blue or Gray
-    '!vim'
-  }
-  require 'nvim-treesitter.install'.compilers = { "gcc" }
-  require 'nvim-treesitter.configs'.setup {
-    query_linter = {
-      enable = true,
-      use_virtual_text = true,
-      lint_events = {"BufWrite", "CursorHold"},
-    },
-    highlight = {
-      enable = true,
-      use_languagetree = true, -- Use this to enable language injection
-    },
-    indent = {
-      enable = true,
-      -- disable = { "php" }
-    },
-    refactor = {
-        highlight_current_scope = {
-            enable = true,
-            disable = { "php" }
-        },
-        highlight_definitions = { enable = true },
-        smart_rename = {
-            enable = true,
-            keymaps = {
-                smart_rename = "<space>rr"
-            }
-        },
-        navigation = {
-            enable = true,
-            keymaps = {
-                list_definitions_toc = "gO"
-            }
-        }
-    },
-    textobjects = {
-        select = {
-            enable = true,
-            -- Automatically jump forward to textobj, similar to targets.vim 
-            lookahead = true,
-            keymaps = {
-                -- You can use the capture groups defined in textobjects.scm
-                ["af"] = "@function.outer",
-                ["if"] = "@function.inner",
-                ["ac"] = "@class.outer",
-                ["ic"] = "@class.inner",
-
-                -- Or you can define your own textobjects like this
-                ["ie"] = {
-                   php = "@expression.inner",
-                   lua = "@expression.inner"
-                --     python = "(function_definition) @function",
-                --     cpp = "(function_definition) @function",
-                --     c = "(function_definition) @function",
-                --     java = "(method_declaration) @function",
-                },
-            },
-        },
-    },
-    -- Use :TSPlaygroundToggle
-    playground = {
-      enable = true,
-      disable = {},
-      updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
-      persist_queries = false, -- Whether the query persists across vim sessions
-      keybindings = {
-        toggle_query_editor = 'o',
-        toggle_hl_groups = 'i',
-        toggle_injected_languages = 't',
-        toggle_anonymous_nodes = 'a',
-        toggle_language_display = 'I',
-        focus_language = 'f',
-        unfocus_language = 'F',
-        update = 'R',
-        goto_node = '<cr>',
-        show_help = '?',
-      }
-    }
-  }
-EOF
 
