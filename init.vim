@@ -1,64 +1,13 @@
 " Specify a directory for plugins
 let g:config_location = stdpath('config')
 
-
 "{{{ General settings
-set omnifunc=syntaxcomplete#Complete
+lua require 'user.options'
 
-set signcolumn=auto:1-2
-set number
-set colorcolumn=80
-set nowrap
-
-set linebreak
-set expandtab
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
-set scrolloff=4
-
-set t_Co=256
-set listchars=eol:$,tab:>-,trail:~,nbsp:+
-set showmatch
-
-set mouse=a
-set hidden
-set path+=**
-set smartcase
-set ignorecase
-set noswapfile
-set regexpengine=1
-set diffopt+=vertical
-set virtualedit=block
-
-set grepprg=grep\ -Rin\ $*\ --exclude-dir={.git,vendor,logs}\ /dev/null
-
-set wildmenu
-set wildoptions+=pum " Enable pop up menu 
-set inccommand=nosplit
-set termguicolors
-
-" Update time for gitsigns
-set updatetime=100
-
-try
-  let g:pencil_gutter_color = 1
-  set bg=dark "Or bg=light if you feeling moody
-  colo pencil
-catch
-endtry
-
-let g:PHP_vintage_case_default_indent = 1
 " }}}
 
 "{{{ Foldings
 
-set fillchars=fold:-
-
-set foldlevel=99
-set foldminlines=3
-set foldtext=MyFoldText()
-set foldopen=block,hor,insert,jump,mark,percent,quickfix,search,tag,undo
 function! MyFoldText()
   let n = v:foldend - v:foldstart + 1
   let line = getline(v:foldstart)
@@ -106,20 +55,6 @@ function! MyTabLabel(n)
   return cwd
 endfunction
 
-"{{{ Lang and Spell stuff
-
-set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯХЪЖБЮЁ;
-           \ABCDEFGHIJKLMNOPQRSTUVWXYZ{}:<>~,
-           \фисвуапршолдьтщзйкыегмцчняхъэюё;
-           \abcdefghijklmnopqrstuvwxyz[]'.`
-
-set langmap+=Э;\\"
-set langmap+=ж;\\;
-set langmap+=б;\\,
-set langmap+=№;#
-set spelllang=en,ru
-"}}}
-
 " Abbreviations {{{
 cnoreabbrev h vertical botright help
 cnoreabbrev vsf vert bel s
@@ -133,7 +68,6 @@ execute "source " . g:config_location ."/"."abbreviation.vim"
 " }}}
 
 " Mappings {{{
-let mapleader=' '
 nnoremap <leader><leader> :call search('<++>', 'cw')<cr>c4l
 
 " Useless bind to make which-key delay work
