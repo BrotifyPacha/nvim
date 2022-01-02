@@ -48,8 +48,6 @@ Plug 'iamcco/markdown-preview.nvim',
             \{ 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug'] }
 " Tools
 Plug 'qpkorr/vim-renamer', { 'on': 'Renamer' }
-Plug 'vim-scripts/ingo-library'
-Plug 'vim-scripts/AdvancedSorters'
 
 call plug#end() "}}}
 
