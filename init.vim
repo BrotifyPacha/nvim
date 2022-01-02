@@ -1,55 +1,6 @@
 " Specify a directory for plugins
 let g:config_location = stdpath('config')
 
-call plug#begin(g:config_location . '/plugged')
-"call plug#begin(stdpath('data').'/plugged')
-
-"Disable default plugins
-let g:loaded_matchit     = 1
-let g:loaded_tarPlugin   = 1
-let g:loaded_zipPlugin   = 1
-let g:loaded_netrwPlugin = 1
-
-" Utils
-Plug 'nvim-lua/popup.nvim'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
-Plug 'nvim-treesitter/nvim-treesitter'
-Plug 'nvim-treesitter/nvim-treesitter-refactor'
-Plug 'nvim-treesitter/nvim-treesitter-textobjects'
-Plug 'nvim-treesitter/playground', { 'on': 'TSPlaygroundToggle' }
-Plug 'SirVer/ultisnips'
-Plug 'liuchengxu/vim-which-key'
-Plug 'neoclide/coc.nvim'
-Plug 'mfussenegger/nvim-dap'
-Plug 'Pocco81/DAPInstall.nvim'
-Plug 'rcarriga/nvim-dap-ui'
-" General
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-unimpaired'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-repeat'
-Plug 'wellle/targets.vim'
-Plug 'Raimondi/delimitMate'
-Plug 'tommcdo/vim-exchange', { 'on': ['<Plug>(Exchange)', '<Plug>(ExchangeLine)'] }
-" Visual
-Plug 'lewis6991/gitsigns.nvim'
-Plug 'brotifypacha/vim-colors-pencil'
-Plug 'norcalli/nvim-colorizer.lua'
-Plug 'junegunn/vim-easy-align', { 'on': '<Plug>(EasyAlign)' }
-Plug 'brotifypacha/goyo.vim', { 'on': 'Goyo'}
-" Filetype specific
-Plug 'baskerville/vim-sxhkdrc'
-Plug 'StanAngeloff/php.vim', { 'for': ['php', 'html', 'blade.php'] }
-Plug 'nelsyeung/twig.vim'
-Plug 'jwalton512/vim-blade'
-Plug 'iamcco/markdown-preview.nvim',
-            \{ 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug'] }
-" Tools
-Plug 'qpkorr/vim-renamer', { 'on': 'Renamer' }
-
-call plug#end() "}}}
 
 "{{{ General settings
 set omnifunc=syntaxcomplete#Complete
@@ -271,6 +222,14 @@ augroup highlight_yank
 augroup END
 
 "{{{ Sourcing settings for plugins
+
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
+
+lua require 'user.helpers'
+lua require 'user.plugins'
+lua require 'user.plugins-config'
+
 execute "source " . g:config_location ."/"."plug-config/coc-settings.vim"
 execute "source " . g:config_location ."/"."plug-config/which-key.vim"
 execute "source " . g:config_location ."/"."plug-config/welle-targets.vim"
@@ -278,11 +237,3 @@ execute "source " . g:config_location ."/"."plug-config/delimitMate.vim"
 execute "source " . g:config_location ."/"."plug-config/telescope.vim"
 execute "source " . g:config_location ."/"."plug-config/goyo.vim"
 execute "source " . g:config_location ."/"."plug-config/ulti.vim"
-
-set foldmethod=expr
-set foldexpr=nvim_treesitter#foldexpr()
-
-lua require 'user.helpers'
-lua require 'user.plugins'
-
-
