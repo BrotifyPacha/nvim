@@ -1,14 +1,9 @@
 " Specify a directory for plugins
 let g:config_location = stdpath('config')
 
-"{{{ General settings
 lua require 'user.options'
 
-" }}}
-
 execute "source " . g:config_location ."/"."abbreviation.vim"
-
-"{{{ Foldings
 
 function! MyFoldText()
   let n = v:foldend - v:foldstart + 1
@@ -18,8 +13,6 @@ function! MyFoldText()
   let txt = substitute(txt, '{', '', 'g')
   return  spc . v:folddashes . " " . txt . " - " . n . " "
 endfunction
-"}}}
-"
 
 set tabline=%!MyTabLine()
 set showtabline=2
@@ -140,8 +133,6 @@ augroup highlight_yank
     autocmd!
     autocmd TextYankPost * lua require('vim.highlight').on_yank({higroup='PmenuSel', timeout=250})
 augroup END
-
-"{{{ Sourcing settings for plugins
 
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
