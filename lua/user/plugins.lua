@@ -48,6 +48,14 @@ return packer.startup(function(use)
     
     use 'brotifypacha/vim-colors-pencil'
 
+    -- File explorer
+    use {
+        'kyazdani42/nvim-tree.lua',
+        requires = {
+            'kyazdani42/nvim-web-devicons', -- optional, for file icon
+        }
+    }
+
     -- Utils
     use 'nvim-lua/popup.nvim'
     use 'nvim-lua/plenary.nvim'
