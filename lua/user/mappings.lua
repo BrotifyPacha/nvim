@@ -31,8 +31,8 @@ vim.api.nvim_set_keymap('n', 'csf', ':call formatting#change_surrounding_func(""
 -- Unimpared extension
 vim.api.nvim_set_keymap('n', '[t', ':tabprevious<cr>', { expr = false, noremap = true })
 vim.api.nvim_set_keymap('n', ']t', ':tabnext<cr>', { expr = false, noremap = true })
-vim.api.nvim_set_keymap('n', '[g', ':lua require"gitsigns".prev_hunk()<cr>zz', { expr = false, noremap = true })
-vim.api.nvim_set_keymap('n', ']g', ':lua require"gitsigns".next_hunk()<cr>zz', { expr = false, noremap = true })
+vim.api.nvim_set_keymap('n', '[g', ':lua require"gitsigns".prev_hunk()<cr>', { expr = false, noremap = true })
+vim.api.nvim_set_keymap('n', ']g', ':lua require"gitsigns".next_hunk()<cr>', { expr = false, noremap = true })
 vim.api.nvim_set_keymap('n', 'g]p', 'ddmm}P`m:call repeat#set("m]p")<cr>', { expr = false, noremap = true })
 vim.api.nvim_set_keymap('n', 'g[p', 'ddkmm{p`m:call repeat#set("m[p")<cr>', { expr = false, noremap = true })
 
