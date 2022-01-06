@@ -4,6 +4,7 @@ vim.g.mapleader = ' '
 vim.opt.signcolumn = 'auto:1-2'
 vim.opt.number = true
 vim.opt.colorcolumn = '80'
+vim.opt.wrap = false
 
 vim.opt.linebreak = true
 vim.opt.expandtab = true
