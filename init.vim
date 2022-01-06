@@ -2,6 +2,7 @@
 let g:config_location = stdpath('config')
 
 lua require 'user.options'
+lua require 'user.mappings'
 
 execute "source " . g:config_location ."/"."abbreviation.vim"
 
@@ -50,85 +51,6 @@ function! MyTabLabel(n)
   return cwd
 endfunction
 
-" Mappings {{{
-nnoremap <leader><leader> :call search('<++>', 'cw')<cr>c4l
-
-" Useless bind to make which-key delay work
-nnoremap <leader>+ <nop> 
-
-
-""" Plugin mappings
-" Easy align mappings
-nmap ga <Plug>(EasyAlign)
-xmap ga <Plug>(EasyAlign)
-" Exchange mappings
-nmap cx <Plug>(Exchange)
-nmap cxx <Plug>(ExchangeLine)
-
-
-" Shortening most used mappings
-" If you need cw - use ce
-nnoremap cw ciw
-nnoremap vv ^v$h
-nnoremap Y yg_
-
-nnoremap dsf :call formatting#delete_surrounding_func()<cr>
-nnoremap csf :call formatting#change_surrounding_func('')<cr>
-
-nnoremap Q @@
-
-nnoremap q? <nop>
-nnoremap q/ <nop>
-nnoremap q: <nop>
-
-nmap s <Plug>Ysurround
-nmap ss <Plug>Yssurround
-vmap s <Plug>VSurround
-nnoremap S s
-
-" declating Document text object
-onoremap id :lua require 'mytextobj'.documentTextObj()<cr>
-xnoremap id :lua require 'mytextobj'.documentTextObj()<cr>
-" declaring Expression text object
-onoremap ie :lua require 'mytextobj'.expressionTextObj()<cr>
-xnoremap ie :lua require 'mytextobj'.expressionTextObj()<cr>
-" declaring Indent text object
-onoremap ii :lua require 'mytextobj'.indentTextObj()<cr>
-xnoremap ii :lua require 'mytextobj'.indentTextObj()<cr>
-
-nnoremap cy "*y
-nnoremap cp :set paste \| normal! "*p:set nopaste<cr>
-
-nnoremap [t :tabprevious<cr>
-nnoremap ]t :tabnext<cr>
-
-nnoremap [g :lua require'gitsigns'.prev_hunk()<cr>zz
-nnoremap ]g :lua require'gitsigns'.next_hunk()<cr>zz
-
-nnoremap gmp ddmm}P`m:call repeat#set("gmp") \| echo ""<cr>
-nnoremap gmP ddkmm{p`m:call repeat#set("gmP") \| echo ""<cr>
-
-nnoremap n nzz
-nnoremap N Nzz
-
-nnoremap gF :e <cfile><cr>
-
-inoremap <C-f> <C-x><C-f>
-inoremap <C-l> <C-x><C-l>
-
-" F key maps
-" Remove search highlighting / remove match groups
-nnoremap <silent> <F5> :nohl \| match<cr>
-nnoremap <silent> <F6> :set list!<cr>
-nnoremap <silent> <F7> :set wrap!<cr>
-nnoremap <F8> :ColorizerToggle<cr>
-
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<Tab>"
-
-tnoremap <Esc> <C-\><C-n>
-
-" }}}
 augroup highlight_yank
     autocmd!
     autocmd TextYankPost * lua require('vim.highlight').on_yank({higroup='PmenuSel', timeout=250})
