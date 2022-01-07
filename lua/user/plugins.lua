@@ -45,7 +45,7 @@ return packer.startup(function(use)
 
     -- Let packer manage itself
     use 'wbthomason/packer.nvim'
-    
+
     use 'brotifypacha/vim-colors-pencil'
 
     -- Completion
@@ -56,9 +56,7 @@ return packer.startup(function(use)
     use 'saadparwaiz1/cmp_luasnip'
     use 'quangnguyen30192/cmp-nvim-ultisnips'
 
-
     -- Snippets
-    -- use 'SirVer/ultisnips'
     use {
         'SirVer/ultisnips',
         requires = {{'honza/vim-snippets', rtp = '.'}},
