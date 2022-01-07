@@ -48,6 +48,28 @@ return packer.startup(function(use)
     
     use 'brotifypacha/vim-colors-pencil'
 
+    -- Completion
+    use 'hrsh7th/nvim-cmp'
+    use 'hrsh7th/cmp-path'
+    use 'hrsh7th/cmp-buffer'
+    use 'hrsh7th/cmp-cmdline'
+    use 'saadparwaiz1/cmp_luasnip'
+    use 'quangnguyen30192/cmp-nvim-ultisnips'
+
+
+    -- Snippets
+    -- use 'SirVer/ultisnips'
+    use {
+        'SirVer/ultisnips',
+        requires = {{'honza/vim-snippets', rtp = '.'}},
+        config = function()      
+            vim.g.UltiSnipsExpandTrigger = '<Plug>(ultisnips_expand)'      
+            vim.g.UltiSnipsJumpForwardTrigger = '<Plug>(ultisnips_jump_forward)'
+            vim.g.UltiSnipsJumpBackwardTrigger = '<Plug>(ultisnips_jump_backward)'
+            vim.g.UltiSnipsListSnippets = '<c-x><c-s>'
+            vim.g.UltiSnipsRemoveSelectModeMappings = 0
+        end
+    }
     -- File explorer
     use {
         'kyazdani42/nvim-tree.lua',
@@ -62,7 +84,6 @@ return packer.startup(function(use)
     use 'nvim-treesitter/nvim-treesitter'
     use 'nvim-treesitter/nvim-treesitter-refactor'
     use 'nvim-treesitter/nvim-treesitter-textobjects'
-    use 'SirVer/ultisnips'
     use 'liuchengxu/vim-which-key'
     use { 'neoclide/coc.nvim', run = 'yarn install --frozen-lockfile' }
     use 'mfussenegger/nvim-dap'

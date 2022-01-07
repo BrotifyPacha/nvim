@@ -4,7 +4,7 @@ let g:delimitMate_expand_cr = 1
 
 au FileType html,twig,blade,jinja let b:delimitMate_matchpairs = "(:),[:],<:>"
 
-inoremap <expr> <CR> delimitMate#WithinEmptyPair() ?
-    \ "<C-r>=delimitMate#ExpandReturn()<cr>" :
-    \ "<C-r>=UltiSnips#ExpandSnippetOrJump()<cr>"
+" inoremap <expr> <CR> delimitMate#WithinEmptyPair() ?
+"     \ "<C-r>=delimitMate#ExpandReturn()<cr>" :
+"     \ "<C-r>=UltiSnips#ExpandSnippetOrJump()<cr>"
 
