@@ -76,6 +76,8 @@ return packer.startup(function(use)
         }
     }
 
+    use 'nvim-lualine/lualine.nvim'
+
     -- Utils
     use 'nvim-lua/popup.nvim'
     use 'nvim-lua/plenary.nvim'
