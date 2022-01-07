@@ -113,6 +113,8 @@ inoreabbrev yse yes
 
 inoreabbrev eb be
 
+inoreabbrev todo TODO
+
 " Ru
 inoreabbrev осуществояется осуществляется 
 inoreabbrev осуществялется осуществляется 
