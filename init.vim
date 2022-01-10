@@ -62,8 +62,8 @@ set foldexpr=nvim_treesitter#foldexpr()
 lua require 'user.helpers'
 lua require 'user.plugins'
 lua require 'user.plugins-config'
+lua require 'lsp'
 
-execute "source " . g:config_location ."/"."plug-config/coc-settings.vim"
 execute "source " . g:config_location ."/"."plug-config/which-key.vim"
 execute "source " . g:config_location ."/"."plug-config/welle-targets.vim"
 execute "source " . g:config_location ."/"."plug-config/delimitMate.vim"
