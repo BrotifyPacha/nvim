@@ -74,6 +74,7 @@ return packer.startup(function(use)
     -- Lsp stuff
     use 'neovim/nvim-lspconfig'
     use 'williamboman/nvim-lsp-installer'
+    use 'jose-elias-alvarez/null-ls.nvim'
 
     -- File explorer
     use {

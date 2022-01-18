@@ -35,13 +35,6 @@ local function on_attach(client, bufnr)
     -- vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>f", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
     vim.api.nvim_buf_set_keymap(bufnr, "n", "[d", '<cmd>lua vim.diagnostic.goto_prev({ border = "single" })<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, "n", "]d", '<cmd>lua vim.diagnostic.goto_next({ border = "single" })<CR>', opts)
-    vim.api.nvim_buf_set_keymap(
-        bufnr,
-        "n",
-        "gl",
-        '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({ border = "single" })<CR>',
-        opts
-    )
     -- vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>q", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
     vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
 
@@ -56,6 +49,15 @@ local function on_attach(client, bufnr)
         }
     }, bufnr)
 end
+
+-- Always on mappings
+local opts = { noremap = true, silent = true }
+vim.api.nvim_set_keymap(
+    "n",
+    "gl",
+    '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({ border = "single" })<CR>',
+    opts
+)
 
 local signs = {
     { name = "DiagnosticSignError", text = "" },
