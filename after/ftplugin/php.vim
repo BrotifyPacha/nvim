@@ -117,14 +117,16 @@ iabbrev <buffer> func function
 inoreabbrev <buffer> eol PHP_EOL
 
 
-" Creates php block with empty line as last
+" Creates php block
+" ---
 " <?php
 "
-"
+" declare(strict_types=1);
+" ---
 function! AddPhpBlock()
   normal! i<?php
   normal! 2o
-  normal! k
+  normal! ideclare(strict_types=1);
 endfunction
 
 if (line("$") == 1 && getline(1) == "")
