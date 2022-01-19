@@ -96,11 +96,17 @@ require 'lualine'.setup({
                     if next(clients) == nil then
                         return msg
                     end
+                    local lss = {}
                     for _, client in ipairs(clients) do
                         local filetypes = client.config.filetypes
                         if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
-                            return client.name
+                            if vim.tbl_contains(lss, client.name) == false then
+                                table.insert(lss, client.name)
+                            end
                         end
+                    end
+                    if vim.tbl_isempty(lss) ~= true then
+                        return table.concat(lss, ', ')
                     end
                     return msg
                 end,
