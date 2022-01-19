@@ -97,6 +97,7 @@ return packer.startup(function(use)
     use 'Pocco81/DAPInstall.nvim'
     use 'rcarriga/nvim-dap-ui'
     use { 'nvim-treesitter/playground', cmd = 'TSPlaygroundToggle' }
+    use 'editorconfig/editorconfig-vim'
     -- General
     use 'nvim-telescope/telescope.nvim'
     use 'lewis6991/gitsigns.nvim'
