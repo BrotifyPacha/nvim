@@ -4,6 +4,7 @@ local colors = {
     cyan     = '#20bbfc',
     darkblue = '#005f87',
     green    = '#10A778',
+    green_dark= '#08A046',
     orange   = '#FF8800',
     purple   = '#6855DE',
     blue     = '#008ec4',
@@ -73,8 +74,14 @@ require 'lualine'.setup({
             },
         },
         lualine_b = {
-            'filename',
-            'branch',
+            {
+                'filename',
+                path = 1
+            },
+            {
+                'branch',
+                color = { fg = colors.green_dark }
+            }
         },
         lualine_c = { 'fileformat' },
         lualine_x = {},
