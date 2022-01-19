@@ -4,7 +4,7 @@ local colors = {
     cyan     = '#20bbfc',
     darkblue = '#005f87',
     green    = '#10A778',
-    green_dark= '#08A046',
+    green_dark= '#047046',
     orange   = '#FF8800',
     purple   = '#6855DE',
     blue     = '#008ec4',
@@ -15,10 +15,10 @@ local colors = {
 local theme = {
     normal = {
         a = { fg = colors.blue, bg = colors.status_bg },
-        b = 'StatusLineInv',
-        c = 'StatusLineFaded',
-        x = 'StatusLineFaded',
-        y = 'StatusLineInv',
+        b = 'StatusLine',
+        c = 'StatusLineInv',
+        x = 'StatusLineInv',
+        y = 'StatusLine',
         z = 'StatusLine'
     },
     inactive = {
@@ -34,7 +34,7 @@ local theme = {
 require 'lualine'.setup({
     options = {
         theme = theme,
-        component_separators = '│',
+        component_separators = '|',
         section_separators = { left = '', right = '' },
     },
     sections = {
@@ -48,7 +48,8 @@ require 'lualine'.setup({
                         v = colors.red,
                         [''] = colors.red,
                         V = colors.red,
-                        c = require('lualine.utils.utils').extract_highlight_colors('StatusLine', 'fg'),
+                        c = '#000000',
+                        -- c = require('lualine.utils.utils').extract_highlight_colors('StatusLine', 'fg'),
                         no = colors.purple,
                         s = colors.red,
                         S = colors.red,
@@ -64,27 +65,44 @@ require 'lualine'.setup({
                         ['!'] = colors.blue,
                         t = require('lualine.utils.utils').extract_highlight_colors('StatusLine', 'fg'),
                     }
-                    status_bg = require('lualine.utils.utils').extract_highlight_colors('StatusLine', 'bg')
-                    vim.api.nvim_command('hi! LualineMode guifg=' .. mode_color[vim.fn.mode()] .. ' guibg=' .. status_bg)
-                    return ''
+                    local status_bg = require('lualine.utils.utils').extract_highlight_colors('StatusLine', 'bg')
+                    vim.api.nvim_command( 'hi! LualineMode guifg=' .. status_bg .. ' guibg=' .. mode_color[vim.fn.mode()] )
+                    vim.api.nvim_command( 'hi! LualineModeDivider guifg=' .. mode_color[vim.fn.mode()] .. ' guibg=' .. status_bg )
+                    return ' '
                 end,
                 color = 'LualineMode',
-                separator = { right = '' },
-                padding = { right = 1, left = 2 },
+                separator = { right = '' },
+                padding = { right = 0, left = 2 },
             },
+            {
+                function()
+                    return ''
+                end,
+                padding = { right = 0, left = 0 },
+                color = 'LualineModeDivider'
+            }
         },
         lualine_b = {
             {
                 'filename',
                 path = 1
             },
+            -- {
+            --     function() return '' end,
+            --     separator = '',
+            --     padding = { left = 1, right = 0 },
+            --     color = { fg = '#555' }
+            -- },
             {
                 'branch',
-                color = { fg = colors.green_dark }
-            }
+                color = { fg = colors.green_dark },
+                icon = '',
+                padding = { left = 1 }
+            },
         },
-        lualine_c = { 'fileformat' },
-        lualine_x = {},
+        lualine_c = {
+        },
+        lualine_x = { 'fileformat' },
         lualine_y = {
             'filetype',
             {
@@ -115,7 +133,7 @@ require 'lualine'.setup({
             'progress',
         },
         lualine_z = {
-            { 'location', color = 'StatusLine' },
+            { 'location' },
         },
     },
 })
