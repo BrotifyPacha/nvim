@@ -116,3 +116,14 @@ lsp_installer.on_server_ready(function(server)
     server:setup(opts)
 end)
 
+-- null_ls
+local null_ls = require 'null-ls'
+local sources = {
+    null_ls.builtins.diagnostics.phpcs.with({
+        extra_args = { '--standard=psr12' },
+        diagnostics_format = "#{m}"
+    })
+}
+
+require 'null-ls'.setup({ sources = sources })
+
