@@ -2,6 +2,37 @@ vim.g.nvim_tree_respect_buf_cwd = 1
 
 local tree_cb = require'nvim-tree.config'.nvim_tree_callback
 
+vim.cmd [[
+    let g:nvim_tree_icons = {
+      \ 'default':        '',
+      \ 'symlink':        '',
+      \ 'git': {
+      \   'unstaged':     "U",
+      \   'staged':       "S",
+      \   'unmerged':     "",
+      \   'renamed':      "➜",
+      \   'untracked':    "T",
+      \   'deleted':      "",
+      \  },
+      \ 'folder': {
+      \   'arrow_open':   "",
+      \   'arrow_closed': "",
+      \   'default':      "",
+      \   'open':         "",
+      \   'empty':        "",
+      \   'empty_open':   "",
+      \   'symlink':      "",
+      \   'symlink_open': "",
+      \  },
+      \  'lsp': {
+      \    'hint': "",
+      \    'info': "",
+      \    'warning': "",
+      \    'error': "",
+      \  }
+      \ }
+]]
+
 require'nvim-tree'.setup {
   disable_netrw       = true,
   hijack_netrw        = true,
@@ -12,14 +43,17 @@ require'nvim-tree'.setup {
   hijack_cursor       = false,
   update_cwd          = false,
   update_to_buf_dir   = {
-    enable = true,
-    auto_open = true,
+      enable = true,
+      auto_open = true,
+  },
+  diagnostics = {
+      enable = true,
+      show_on_dirs = true,
   },
   git = {
-      enable = false
+      enable = true
   },
   view = {
-    width = 30,
     height = 30,
     hide_root_folder = true,
     side = 'left',
