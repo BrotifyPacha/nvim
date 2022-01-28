@@ -1,7 +1,7 @@
 
 vim.g.mapleader = ' '
 
-vim.opt.signcolumn = 'auto:1-2'
+vim.opt.signcolumn = 'auto:2-3'
 vim.opt.number = true
 vim.opt.colorcolumn = '80'
 vim.opt.wrap = false
