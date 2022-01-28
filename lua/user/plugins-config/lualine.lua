@@ -63,7 +63,7 @@ require 'lualine'.setup({
                         rm = colors.cyan,
                         ['r?'] = colors.cyan,
                         ['!'] = colors.blue,
-                        t = require('lualine.utils.utils').extract_highlight_colors('StatusLine', 'fg'),
+                        t = '#000000'
                     }
                     local status_bg = require('lualine.utils.utils').extract_highlight_colors('StatusLine', 'bg')
                     vim.api.nvim_command( 'hi! LualineMode guifg=' .. status_bg .. ' guibg=' .. mode_color[vim.fn.mode()] )
