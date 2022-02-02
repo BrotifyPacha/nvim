@@ -38,7 +38,7 @@ require "telescope".setup{
             mirror = true,
             width = 0.6,
         },
-        winblend = 5,
+        winblend = -1,
         file_ignore_patterns = {
             'node_modules',
             'vendor',
