@@ -57,7 +57,9 @@ require "telescope".setup{
           '--line-number',
           '--column',
           '--smart-case',
-          '--hidden'
+          '--hidden',
+          '--glob',
+          '!{.git,node_modules,.svn}',
         }
     },
     pickers = {
@@ -71,7 +73,7 @@ require "telescope".setup{
                 'rg',
                 '--files',
                 '--glob',
-                '!{vendor,.git,node_modules,.svn}',
+                '!{.git,node_modules,.svn}',
                 '--hidden'
             }
         }
