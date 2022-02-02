@@ -78,6 +78,7 @@ endfunction
 
 let g:which_key_map.g = {
       \ 'name' : '+git' ,
+      \ 'L' : [':G push --force'       , 'push forcefully'],
       \ 'l' : [':G push'               , 'push'],
       \ 'h' : [':G pull'               , 'pull'],
       \ 'v' : [':bel vert G log --oneline --graph --decorate --branches', 'view log'],
