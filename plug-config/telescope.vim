@@ -60,6 +60,16 @@ require "telescope".setup{
           '--hidden',
           '--glob',
           '!{.git,node_modules,.svn}',
+        },
+        mappings = {
+            i = {
+                ["<C-t>"] = require('telescope.actions').toggle_selection + require('telescope.actions').move_selection_next,
+                ["<Tab>"] = require('telescope.actions').toggle_selection
+            },
+            n = {
+                ["<C-t>"] = require('telescope.actions').toggle_selection + require('telescope.actions').move_selection_next,
+                ["<Tab>"] = require('telescope.actions').toggle_selection
+            }
         }
     },
     pickers = {
