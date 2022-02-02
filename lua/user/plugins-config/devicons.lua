@@ -22,7 +22,7 @@ require 'nvim-web-devicons'.setup {
 
         md = markdown,
         mdx = markdown,
-        markdown = markdown
+        markdown = markdown,
 
         txt = {
             color = default,
