@@ -2,7 +2,7 @@
 -- Dap install
 local dap_install = require('dap-install')
 dap_install.setup({
-    installation_path = vim.fn.stdpath('config') .. '/debuggers',
+    installation_path = vim.fn.stdpath('config') .. '/debuggers/',
 })
 
 -- Dap core
@@ -11,14 +11,8 @@ dap.set_log_level('TRACE')
 dap.adapters.php = {
     type = 'executable',
     command = 'node',
-    args = { vim.fn.stdpath('config') .. '/debuggers/vscode-php-debug/out/phpDebug.js' }
-
+    args = { vim.fn.stdpath('config') .. '/debuggers/php/vscode-php-debug/out/phpDebug.js' }
 }
-
-vim.fn.sign_define('DapBreakpoint', { text='●', texthl='ErrorMsg', linehl = '', numhl = 'ErrorMsg' })
-vim.fn.sign_define('DapBreakpointCondition', { text='◆', texthl='ErrorMsg', linehl = '', numhl = 'ErrorMsg' })
-vim.fn.sign_define('DapStopped', { text='', texthl='Error', linehl = '', numhl = 'Error' })
-
 dap.configurations.php = {
     {
         type = 'php',
@@ -26,13 +20,17 @@ dap.configurations.php = {
         name = 'Listen for Xdebug',
         stopOnEntry = true,
         pathMappings = {
-            ['/var/www'] = '/home/brotifypacha/personal/projects/php-personal-home-page/app',
-            ['/home/pgusev/workspace/${workspaceFolderBasename}'] = '/home/brotifypacha/workspace/servers/devel2/workspace/${workspaceFolderBasename}',
+            ['/var/www'] = '/home/gusev/workspace/${workspaceFolderBasename}/app',
+            -- ['/home/pgusev/workspace/${workspaceFolderBasename}'] = '/home/brotifypacha/workspace/servers/devel2/workspace/${workspaceFolderBasename}',
             -- ['/home/pgusev/workspace/retorr'] = '${workspaceFolder}',
         },
-        port = 9000
+        port = 9009
     }
 }
+
+vim.fn.sign_define('DapBreakpoint', { text='●', texthl='ErrorMsg', linehl = '', numhl = 'ErrorMsg' })
+vim.fn.sign_define('DapBreakpointCondition', { text='◆', texthl='ErrorMsg', linehl = '', numhl = 'ErrorMsg' })
+vim.fn.sign_define('DapStopped', { text='', texthl='Error', linehl = '', numhl = 'Error' })
 
 -- Dap UI
 require("dapui").setup({
