@@ -7,16 +7,16 @@ vim.cmd [[
       \ 'default':        '',
       \ 'symlink':        '',
       \ 'git': {
-      \   'unstaged':     "U",
-      \   'staged':       "S",
+      \   'unstaged':     "",
+      \   'staged':       "",
       \   'unmerged':     "",
       \   'renamed':      "➜",
-      \   'untracked':    "T",
+      \   'untracked':    "",
       \   'deleted':      "",
       \  },
       \ 'folder': {
-      \   'arrow_open':   "",
-      \   'arrow_closed': "",
+      \   'arrow_open':   "",
+      \   'arrow_closed': "",
       \   'default':      "",
       \   'open':         "",
       \   'empty':        "",
@@ -33,6 +33,18 @@ vim.cmd [[
       \ }
 ]]
 
+vim.cmd [[
+    highlight! link NvimTreeGitDirty DiffChange
+    highlight! link NvimTreeGitStaged DiffAdd
+]]
+
+vim.cmd [[
+    augroup pacha_nvim_tree
+        autocmd!
+        autocmd BufEnter * if &l:ft == "NvimTree" | setlocal cursorline | endif
+    augroup end
+]]
+
 require'nvim-tree'.setup {
   disable_netrw       = true,
   hijack_netrw        = true,
@@ -47,7 +59,7 @@ require'nvim-tree'.setup {
       auto_open = true,
   },
   diagnostics = {
-      enable = true,
+      enable = false,
       show_on_dirs = true,
   },
   git = {
