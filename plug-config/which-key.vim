@@ -103,6 +103,22 @@ nnoremap <leader>gu :lua require'gitsigns'.reset_hunk()<cr>
 nnoremap <leader>gs :lua require'gitsigns'.stage_hunk()<cr>
 nnoremap <leader>gp :lua require'gitsigns'.preview_hunk()<cr>
 
+vnoremap <leader>gv :GBrowse<cr>
+
+function! CustomWrapper(opts)
+    let dict = substitute(string(a:opts), "'\\([A-z0-9]\\+\\)':", '\1 =', 'g')
+    let result_url = execute("lua print(require 'fugitivehandlers'.CustomGBrowseHandler(" . dict . "))")
+    return trim(result_url)
+endfunction
+
+let g:fugitive_browse_handlers = [ 'CustomWrapper' ]
+
+command! -nargs=1 Browse :call BrowseFunc(<q-args>)<cr>
+function! BrowseFunc(opts)
+    let opts = substitute(a:opts, '#', '\\#', 'g')
+    silent execute '!xdg-open ' . trim(opts)
+endfunction
+
 let g:which_key_map.r = {
       \ 'name' : '+refactor' ,
       \ 'r' : [':call RenameLocalVariable()'              , 'rename local'],
