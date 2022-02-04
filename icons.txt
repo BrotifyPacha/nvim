@@ -9,5 +9,8 @@ Box drawing
 Powerline
            
 
+Misc
+ 
+
 Cool icons
   
