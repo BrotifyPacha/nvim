@@ -27,6 +27,29 @@ local kind_icons = {
   TypeParameter = "",
 }
 
+vim.api.nvim_command [[
+
+    highlight link CmpItemKindFunction Identifier
+    highlight link CmpItemKindMethod CmpItemKindFunction
+    highlight link CmpItemKindProperty CmpItemKindFunction
+
+    highlight link CmpItemKindField Type
+    highlight link CmpItemKindVariable CmpItemKindField
+    highlight link CmpItemKindEnumMember CmpItemKindField
+    highlight link CmpItemKindEnum CmpItemKindField
+    highlight link CmpItemKindClass CmpItemKindField
+    highlight link CmpItemKindInterface CmpItemKindField
+
+    highlight link CmpItemKindConstant Constant
+    highlight link CmpItemKindKeyword CmpItemKindConstant
+
+    highlight link CmpItemKindText Comment
+    highlight link CmpItemKindSnippet Comment
+
+    highlight link CmpItemKindFolder Normal
+
+]]
+
 local t = function(str)
     return vim.api.nvim_replace_termcodes(str, true, true, true)
 end
@@ -76,7 +99,7 @@ cmp.setup({
         fields = { 'kind', 'abbr', 'menu' },
         format = function(entry, vim_item)
             -- Kind icons
-            vim_item.kind = string.format('%s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
+            vim_item.kind = string.format('%s ', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
             -- Source
             vim_item.menu = ({
                 buffer    = "[Buffer]",
