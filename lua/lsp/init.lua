@@ -5,6 +5,7 @@ local servers = {
     'cssls',
     'html',
     'dockerls',
+    'gopls',
     'phpactor',
     'pyright',
     'sumneko_lua',
