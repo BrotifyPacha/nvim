@@ -55,7 +55,7 @@ vim.api.nvim_set_keymap('n', 'q?', '<nop>', { expr = false, noremap = true })
 
 
 -- F key maps
-vim.api.nvim_set_keymap('n', '<F5>', ':nohl<cr>', { expr = false, noremap = true })
+vim.api.nvim_set_keymap('n', '<F5>', ':nohl<cr>:lua require"user.helpers".reload("colorizer")<cr>:ColorizerToggle<cr>', { expr = false, noremap = true })
 vim.api.nvim_set_keymap('n', '<F6>', ':set list!<cr>', { expr = false, noremap = true })
 vim.api.nvim_set_keymap('n', '<F7>', ':set wrap!<cr>', { expr = false, noremap = true })
 vim.api.nvim_set_keymap('n', '<F8>', ':ColorizerToggle<cr>', { expr = false, noremap = true })
