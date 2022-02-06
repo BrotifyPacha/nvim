@@ -111,7 +111,8 @@ function! CustomWrapper(opts)
     return trim(result_url)
 endfunction
 
-let g:fugitive_browse_handlers = [ 'CustomWrapper' ]
+let s:handlers = get(g:, 'fugitive_browse_handlers', [])
+let g:fugitive_browse_handlers = add(s:handlers, 'CustomWrapper')
 
 command! -nargs=1 Browse :call BrowseFunc(<q-args>)<cr>
 function! BrowseFunc(opts)

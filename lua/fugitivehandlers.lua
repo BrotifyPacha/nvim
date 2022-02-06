@@ -3,7 +3,7 @@ local M = {}
 
 local function handleGitlab(opts)
     local file_url = opts.remote .. '/-/blob/' .. opts.commit .. '/' .. opts.path
-    return file_url .. "#L" .. opts.line1 .. '-L' .. opts.line2
+    return file_url .. "#L" .. opts.line1 .. '-' .. opts.line2
 end
 
 local function handleGithub(opts)
