@@ -7,6 +7,10 @@ cnoreabbrev sp bel sp
 cnoreabbrev bw! bn \| bw! #
 cnoreabbrev cd tcd
 
+cnoreabbrev psuh push
+cnoreabbrev pshu push
+cnoreabbrev puhs push
+
 " Eng
 
 inoreabbrev argumetns arguments
