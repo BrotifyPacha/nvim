@@ -84,6 +84,7 @@ require "telescope".setup{
                 '--files',
                 '--glob',
                 '!{.git,node_modules,.svn}',
+                '--no-ignore',
                 '--hidden'
             }
         }
