@@ -15,4 +15,3 @@ endfunction
 
 setlocal foldexpr=MarkdownFoldExpr()
 setlocal foldmethod=expr
-setlocal foldlevel=1
