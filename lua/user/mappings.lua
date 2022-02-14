@@ -1,71 +1,104 @@
 
-vim.api.nvim_set_keymap('n', '<leader><leader>', ':call search("<++>", "cw")<cr>c4l', { expr = false, noremap = true })
+local function map(mode, from, to)
+    vim.api.nvim_set_keymap(mode, from, to, { expr = false, noremap = false })
+end
+local function noremap(mode, from, to)
+    vim.api.nvim_set_keymap(mode, from, to, { expr = false, noremap = true })
+end
+
+local function nnoremap(from, to)
+    noremap('n', from, to)
+end
+local function tnoremap(from, to)
+    noremap('t', from, to)
+end
+local function inoremap(from, to)
+    noremap('i', from, to)
+end
+local function onoremap(from, to)
+    noremap('o', from, to)
+end
+local function xnoremap(from, to)
+    noremap('x', from, to)
+end
+
+local function nmap(from, to)
+    map('n', from, to)
+end
+local function vmap(from, to)
+    map('v', from, to)
+end
+local function xmap(from, to)
+    map('x', from, to)
+end
+
+nnoremap('<leader><leader>', ':call search("<++>", "cw")<cr>c4l')
 
 -- Plugin mappings
 -- -- Easy align
-vim.api.nvim_set_keymap('n', 'ga', '<Plug>(EasyAlign)', { expr = false, noremap = false })
-vim.api.nvim_set_keymap('x', 'ga', '<Plug>(EasyAlign)', { expr = false, noremap = false })
+nmap('ga', '<Plug>(EasyAlign)')
+xmap('ga', '<Plug>(EasyAlign)')
 -- -- Exchange
-vim.api.nvim_set_keymap('n', 'cx', '<Plug>(Exchange)', { expr = false, noremap = false })
-vim.api.nvim_set_keymap('n', 'cxx', '<Plug>(ExchangeLine)', { expr = false, noremap = false })
+nmap('cx', '<Plug>(Exchange)')
+nmap('cxx', '<Plug>(ExchangeLine)')
 -- -- Surround
-vim.api.nvim_set_keymap('n', 's', '<Plug>Ysurround', { expr = false, noremap = false })
-vim.api.nvim_set_keymap('n', 'ss', '<Plug>Yssurround', { expr = false, noremap = false })
-vim.api.nvim_set_keymap('v', 's', '<Plug>VSurround', { expr = false, noremap = false })
-vim.api.nvim_set_keymap('n', 'S', 's', { expr = false, noremap = false })
+nmap('s', '<Plug>Ysurround')
+nmap('ss', '<Plug>Yssurround')
+vmap('s', '<Plug>VSurround')
+nmap('S', 's')
 
 
 -- Text objects
-vim.api.nvim_set_keymap('o', 'id', ":lua require 'mytextobj'.documentTextObj()<cr>", { expr = false, noremap = true })
-vim.api.nvim_set_keymap('x', 'id', ":lua require 'mytextobj'.documentTextObj()<cr>", { expr = false, noremap = true })
-vim.api.nvim_set_keymap('o', 'ie', ":lua require 'mytextobj'.expressionTextObj()<cr>", { expr = false, noremap = true })
-vim.api.nvim_set_keymap('x', 'ie', ":lua require 'mytextobj'.expressionTextObj()<cr>", { expr = false, noremap = true })
-vim.api.nvim_set_keymap('o', 'ii', ":lua require 'mytextobj'.indentTextObj()<cr>", { expr = false, noremap = true })
-vim.api.nvim_set_keymap('x', 'ii', ":lua require 'mytextobj'.indentTextObj()<cr>", { expr = false, noremap = true })
+onoremap('id', ":lua require 'mytextobj'.documentTextObj()<cr>")
+xnoremap('id', ":lua require 'mytextobj'.documentTextObj()<cr>")
+onoremap('ie', ":lua require 'mytextobj'.expressionTextObj()<cr>")
+xnoremap('ie', ":lua require 'mytextobj'.expressionTextObj()<cr>")
+onoremap('ii', ":lua require 'mytextobj'.indentTextObj()<cr>")
+xnoremap('ii', ":lua require 'mytextobj'.indentTextObj()<cr>")
 
 
 -- Surround extension
-vim.api.nvim_set_keymap('n', 'dsf', ':call formatting#delete_surrounding_func()<cr>', { expr = false, noremap = true })
-vim.api.nvim_set_keymap('n', 'csf', ':call formatting#change_surrounding_func("")<cr>', { expr = false, noremap = true })
+nnoremap('dsf', ':call formatting#delete_surrounding_func()<cr>')
+nnoremap('csf', ':call formatting#change_surrounding_func("")<cr>')
 
 -- Unimpared extension
-vim.api.nvim_set_keymap('n', '[t', ':tabprevious<cr>', { expr = false, noremap = true })
-vim.api.nvim_set_keymap('n', ']t', ':tabnext<cr>', { expr = false, noremap = true })
-vim.api.nvim_set_keymap('n', '[g', ':lua require"gitsigns".prev_hunk()<cr>', { expr = false, noremap = true })
-vim.api.nvim_set_keymap('n', ']g', ':lua require"gitsigns".next_hunk()<cr>', { expr = false, noremap = true })
-vim.api.nvim_set_keymap('n', 'g]p', 'ddmm}P`m:call repeat#set("m]p")<cr>', { expr = false, noremap = true })
-vim.api.nvim_set_keymap('n', 'g[p', 'ddkmm{p`m:call repeat#set("m[p")<cr>', { expr = false, noremap = true })
+nnoremap('[t', ':tabprevious<cr>')
+nnoremap(']t', ':tabnext<cr>')
+nnoremap('[g', ':lua require"gitsigns".prev_hunk()<cr>')
+nnoremap(']g', ':lua require"gitsigns".next_hunk()<cr>')
+nnoremap('g]p', 'ddmm}P`m:call repeat#set("m]p")<cr>')
+nnoremap('g[p', 'ddkmm{p`m:call repeat#set("m[p")<cr>')
 
 
 -- Misc key maps
-vim.api.nvim_set_keymap('n', 'n', 'nzz', { expr = false, noremap = true })
-vim.api.nvim_set_keymap('n', 'N', 'Nzz', { expr = false, noremap = true })
-vim.api.nvim_set_keymap('n', 'gF', ':e <cfile><cr>', { expr = false, noremap = true })
-vim.api.nvim_set_keymap('n', 'cy', '"*y', { expr = false, noremap = true })
-vim.api.nvim_set_keymap('n', 'cp', ':set paste | normal! "*p:set nopaste<cr>', { expr = false, noremap = true })
+nnoremap('n', 'nzz')
+nnoremap('N', 'Nzz')
+nnoremap('gF', ':e <cfile><cr>')
+nnoremap('cy', '"*y')
+nnoremap('cp', ':set paste | normal! "*p:set nopaste<cr>')
 
-vim.api.nvim_set_keymap('n', 'cw', 'ciw', { expr = false, noremap = true })
-vim.api.nvim_set_keymap('n', 'vv', '^v$h', { expr = false, noremap = true })
-vim.api.nvim_set_keymap('n', 'Y', 'yg_', { expr = false, noremap = true })
+nnoremap('cw', 'ciw')
+nnoremap('vv', '^v$h')
+nnoremap('Y', 'yg_')
 
-vim.api.nvim_set_keymap('n', 'Q', '@@', { expr = false, noremap = true })
-vim.api.nvim_set_keymap('n', 'q:', '<nop>', { expr = false, noremap = true })
-vim.api.nvim_set_keymap('n', 'q/', '<nop>', { expr = false, noremap = true })
-vim.api.nvim_set_keymap('n', 'q?', '<nop>', { expr = false, noremap = true })
+nnoremap('Q', '@@')
+nnoremap('q:', '<nop>')
+nnoremap('q/', '<nop>')
+nnoremap('q?', '<nop>')
 
 
 -- F key maps
-vim.api.nvim_set_keymap('n', '<F5>', ':nohl<cr>:lua require"user.helpers".reload("colorizer")<cr>:ColorizerToggle<cr>', { expr = false, noremap = true })
-vim.api.nvim_set_keymap('n', '<F6>', ':set list!<cr>', { expr = false, noremap = true })
-vim.api.nvim_set_keymap('n', '<F7>', ':set wrap!<cr>', { expr = false, noremap = true })
-vim.api.nvim_set_keymap('n', '<F8>', ':ColorizerToggle<cr>', { expr = false, noremap = true })
+nnoremap('<F5>', ':nohl<cr>:lua require"user.helpers".reload("colorizer")<cr>:ColorizerToggle<cr>')
+nnoremap('<F6>', ':set list!<cr>')
+nnoremap('<F7>', ':set wrap!<cr>')
+nnoremap('<F8>', ':ColorizerToggle<cr>')
 
 -- Terminal mode key maps
-vim.api.nvim_set_keymap('t', '<Esc>', '<C-\\><C-n>', { expr = false, noremap = true })
+tnoremap('<Esc>', '<C-\\><C-n>')
 
 -- Insert mode key maps
-vim.api.nvim_set_keymap('i', '<C-f>', '<C-x><C-f>', { expr = false, noremap = true })
-vim.api.nvim_set_keymap('i', '<C-l>', '<C-x><C-l>', { expr = false, noremap = true })
+inoremap('<C-f>', '<C-x><C-f>')
+inoremap('<C-l>', '<C-x><C-l>')
 
 -- Smart tab
 local function t(str)
@@ -78,7 +111,8 @@ function _G.smart_tab_backward()
     return vim.fn.pumvisible() == 1 and t'<C-p>' or t'<S-Tab>'
 end
 
-vim.api.nvim_set_keymap('i', '<Tab>', 'v:lua.smart_tab()', { expr = true, noremap = true })
-vim.api.nvim_set_keymap('i', '<S-Tab>', 'v:lua.smart_tab_backward()', { expr = true, noremap = true })
+inoremap('<Tab>', 'v:lua.smart_tab()')
+inoremap('<S-Tab>', 'v:lua.smart_tab_backward()')
 
+-- Leader mappings
 
