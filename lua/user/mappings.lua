@@ -1,71 +1,131 @@
 
-vim.api.nvim_set_keymap('n', '<leader><leader>', ':call search("<++>", "cw")<cr>c4l', { expr = false, noremap = true })
+local function map(mode, from, to)
+    vim.api.nvim_set_keymap(mode, from, to, { expr = false, noremap = false })
+end
+local function noremap(mode, from, to)
+    vim.api.nvim_set_keymap(mode, from, to, { expr = false, noremap = true })
+end
+
+local function nnoremap(from, to)
+    noremap('n', from, to)
+end
+local function inoremap(from, to)
+    noremap('i', from, to)
+end
+local function inoremapexpr(from, to)
+    vim.api.nvim_set_keymap('i', from, to, { expr = true, noremap = true })
+end
+local function vnoremap(from, to)
+    noremap('v', from, to)
+end
+local function tnoremap(from, to)
+    noremap('t', from, to)
+end
+local function onoremap(from, to)
+    noremap('o', from, to)
+end
+local function xnoremap(from, to)
+    noremap('x', from, to)
+end
+
+local function nmap(from, to)
+    map('n', from, to)
+end
+local function vmap(from, to)
+    map('v', from, to)
+end
+local function xmap(from, to)
+    map('x', from, to)
+end
+
+nnoremap('<leader><leader>', ':call search("<++>", "cw")<cr>c4l')
 
 -- Plugin mappings
 -- -- Easy align
-vim.api.nvim_set_keymap('n', 'ga', '<Plug>(EasyAlign)', { expr = false, noremap = false })
-vim.api.nvim_set_keymap('x', 'ga', '<Plug>(EasyAlign)', { expr = false, noremap = false })
+nmap('ga', '<Plug>(EasyAlign)')
+xmap('ga', '<Plug>(EasyAlign)')
 -- -- Exchange
-vim.api.nvim_set_keymap('n', 'cx', '<Plug>(Exchange)', { expr = false, noremap = false })
-vim.api.nvim_set_keymap('n', 'cxx', '<Plug>(ExchangeLine)', { expr = false, noremap = false })
+nmap('cx', '<Plug>(Exchange)')
+nmap('cxx', '<Plug>(ExchangeLine)')
 -- -- Surround
-vim.api.nvim_set_keymap('n', 's', '<Plug>Ysurround', { expr = false, noremap = false })
-vim.api.nvim_set_keymap('n', 'ss', '<Plug>Yssurround', { expr = false, noremap = false })
-vim.api.nvim_set_keymap('v', 's', '<Plug>VSurround', { expr = false, noremap = false })
-vim.api.nvim_set_keymap('n', 'S', 's', { expr = false, noremap = false })
+nmap('s', '<Plug>Ysurround')
+nmap('ss', '<Plug>Yssurround')
+vmap('s', '<Plug>VSurround')
+nmap('S', 's')
 
 
 -- Text objects
-vim.api.nvim_set_keymap('o', 'id', ":lua require 'mytextobj'.documentTextObj()<cr>", { expr = false, noremap = true })
-vim.api.nvim_set_keymap('x', 'id', ":lua require 'mytextobj'.documentTextObj()<cr>", { expr = false, noremap = true })
-vim.api.nvim_set_keymap('o', 'ie', ":lua require 'mytextobj'.expressionTextObj()<cr>", { expr = false, noremap = true })
-vim.api.nvim_set_keymap('x', 'ie', ":lua require 'mytextobj'.expressionTextObj()<cr>", { expr = false, noremap = true })
-vim.api.nvim_set_keymap('o', 'ii', ":lua require 'mytextobj'.indentTextObj()<cr>", { expr = false, noremap = true })
-vim.api.nvim_set_keymap('x', 'ii', ":lua require 'mytextobj'.indentTextObj()<cr>", { expr = false, noremap = true })
+onoremap('id', ":lua require 'mytextobj'.documentTextObj()<cr>")
+xnoremap('id', ":lua require 'mytextobj'.documentTextObj()<cr>")
+onoremap('ie', ":lua require 'mytextobj'.expressionTextObj()<cr>")
+xnoremap('ie', ":lua require 'mytextobj'.expressionTextObj()<cr>")
+onoremap('ii', ":lua require 'mytextobj'.indentTextObj()<cr>")
+xnoremap('ii', ":lua require 'mytextobj'.indentTextObj()<cr>")
 
 
 -- Surround extension
-vim.api.nvim_set_keymap('n', 'dsf', ':call formatting#delete_surrounding_func()<cr>', { expr = false, noremap = true })
-vim.api.nvim_set_keymap('n', 'csf', ':call formatting#change_surrounding_func("")<cr>', { expr = false, noremap = true })
+nnoremap('dsf', ':call formatting#delete_surrounding_func()<cr>')
+nnoremap('csf', ':call formatting#change_surrounding_func("")<cr>')
 
 -- Unimpared extension
-vim.api.nvim_set_keymap('n', '[t', ':tabprevious<cr>', { expr = false, noremap = true })
-vim.api.nvim_set_keymap('n', ']t', ':tabnext<cr>', { expr = false, noremap = true })
-vim.api.nvim_set_keymap('n', '[g', ':lua require"gitsigns".prev_hunk()<cr>', { expr = false, noremap = true })
-vim.api.nvim_set_keymap('n', ']g', ':lua require"gitsigns".next_hunk()<cr>', { expr = false, noremap = true })
-vim.api.nvim_set_keymap('n', 'g]p', 'ddmm}P`m:call repeat#set("m]p")<cr>', { expr = false, noremap = true })
-vim.api.nvim_set_keymap('n', 'g[p', 'ddkmm{p`m:call repeat#set("m[p")<cr>', { expr = false, noremap = true })
+nnoremap('[t', ':tabprevious<cr>')
+nnoremap(']t', ':tabnext<cr>')
+nnoremap('[g', ':lua require"gitsigns".prev_hunk()<cr>')
+nnoremap(']g', ':lua require"gitsigns".next_hunk()<cr>')
+nnoremap('g]p', 'ddmm}P`m:call repeat#set("m]p")<cr>')
+nnoremap('g[p', 'ddkmm{p`m:call repeat#set("m[p")<cr>')
 
 
 -- Misc key maps
-vim.api.nvim_set_keymap('n', 'n', 'nzz', { expr = false, noremap = true })
-vim.api.nvim_set_keymap('n', 'N', 'Nzz', { expr = false, noremap = true })
-vim.api.nvim_set_keymap('n', 'gF', ':e <cfile><cr>', { expr = false, noremap = true })
-vim.api.nvim_set_keymap('n', 'cy', '"*y', { expr = false, noremap = true })
-vim.api.nvim_set_keymap('n', 'cp', ':set paste | normal! "*p:set nopaste<cr>', { expr = false, noremap = true })
+nnoremap('n', 'nzz')
+nnoremap('N', 'Nzz')
+nnoremap('gF', ':e <cfile><cr>')
+nnoremap('cy', '"*y')
+nnoremap('cp', ':set paste | normal! "*p:set nopaste<cr>')
 
-vim.api.nvim_set_keymap('n', 'cw', 'ciw', { expr = false, noremap = true })
-vim.api.nvim_set_keymap('n', 'vv', '^v$h', { expr = false, noremap = true })
-vim.api.nvim_set_keymap('n', 'Y', 'yg_', { expr = false, noremap = true })
+nnoremap('cw', 'ciw')
+nnoremap('vv', '^v$h')
+nnoremap('Y', 'yg_')
 
-vim.api.nvim_set_keymap('n', 'Q', '@@', { expr = false, noremap = true })
-vim.api.nvim_set_keymap('n', 'q:', '<nop>', { expr = false, noremap = true })
-vim.api.nvim_set_keymap('n', 'q/', '<nop>', { expr = false, noremap = true })
-vim.api.nvim_set_keymap('n', 'q?', '<nop>', { expr = false, noremap = true })
+nnoremap('Q', '@@')
+nnoremap('q:', '<nop>')
+nnoremap('q/', '<nop>')
+nnoremap('q?', '<nop>')
 
 
 -- F key maps
-vim.api.nvim_set_keymap('n', '<F5>', ':nohl<cr>:lua require"user.helpers".reload("colorizer")<cr>:ColorizerToggle<cr>', { expr = false, noremap = true })
-vim.api.nvim_set_keymap('n', '<F6>', ':set list!<cr>', { expr = false, noremap = true })
-vim.api.nvim_set_keymap('n', '<F7>', ':set wrap!<cr>', { expr = false, noremap = true })
-vim.api.nvim_set_keymap('n', '<F8>', ':ColorizerToggle<cr>', { expr = false, noremap = true })
+nnoremap('<F2><F2>', ':set spell!<cr>')
+nnoremap('<F2>g',    'zg')
+nnoremap('<F2>b',    'zw')
+nnoremap('<F2>u',    ':spellundo')
+
+nnoremap('<F3>3',  ':set ff=dos<cr>')
+nnoremap('<F3>4',  ':set ff=unix<cr>')
+nnoremap('<F3>ee', ':edit!<cr>')
+nnoremap('<F3>ec', ':edit! ++enc=cp1251<cr>')
+nnoremap('<F3>eu', ':edit! ++enc=utf-8<cr>')
+nnoremap('<F3>el', ':edit! ++enc=latin1<cr>')
+nnoremap('<F3>cc', ':set fileencoding=cp1251 | w!<cr>')
+nnoremap('<F3>cu', ':set fileencoding=utf8 | w!<cr>')
+nnoremap('<F3>cl', ':set fileencoding=latin1 | w!<cr>')
+
+nnoremap('<F5>', ':nohl<cr>:lua require"user.helpers".reload("colorizer")<cr>:ColorizerToggle<cr>')
+nnoremap('<F6>', ':set list!<cr>')
+nnoremap('<F7>', ':set wrap!<cr>')
+nnoremap('<F8>', ':ColorizerToggle<cr>')
+
+nnoremap('<F9><F9>',  ':call ReopenTerminal()<cr>')
+nnoremap('<F9><F10>', ':call NewTerminal()<cr>')
+nnoremap('<F9>p',     ':call RunCommand("python", "")<cr>')
+nnoremap('<F9>q',     ':setlocal syntax=<cr>')
+nnoremap('<F9>l',     ':setlocal syntax=log<cr>')
 
 -- Terminal mode key maps
-vim.api.nvim_set_keymap('t', '<Esc>', '<C-\\><C-n>', { expr = false, noremap = true })
+tnoremap('<Esc>', '<C-\\><C-n>')
 
 -- Insert mode key maps
-vim.api.nvim_set_keymap('i', '<C-f>', '<C-x><C-f>', { expr = false, noremap = true })
-vim.api.nvim_set_keymap('i', '<C-l>', '<C-x><C-l>', { expr = false, noremap = true })
+inoremap('<C-f>', '<C-x><C-f>')
+inoremap('<C-l>', '<C-x><C-l>')
 
 -- Smart tab
 local function t(str)
@@ -78,7 +138,113 @@ function _G.smart_tab_backward()
     return vim.fn.pumvisible() == 1 and t'<C-p>' or t'<S-Tab>'
 end
 
-vim.api.nvim_set_keymap('i', '<Tab>', 'v:lua.smart_tab()', { expr = true, noremap = true })
-vim.api.nvim_set_keymap('i', '<S-Tab>', 'v:lua.smart_tab_backward()', { expr = true, noremap = true })
+inoremapexpr('<Tab>', 'v:lua.smart_tab()')
+inoremapexpr('<S-Tab>', 'v:lua.smart_tab_backward()')
 
+-- Leader mappings
+
+nnoremap('<leader><leader>', ':call search("<++>", "cw")<cr>c4l')
+nnoremap('<leader>e', ":NvimTreeToggle<cr>")
+nnoremap('<leader>l', "<C-w>l")
+nnoremap('<leader>h', "<C-w>h")
+nnoremap('<leader>j', "<C-w>j")
+nnoremap('<leader>k', "<C-w>k")
+nnoremap('<leader>H', ":vsplit<cr>")
+nnoremap('<leader>J', ":bel split<cr>")
+nnoremap('<leader>K', ":split<cr>")
+nnoremap('<leader>L', ":vert bel split<cr>")
+nnoremap('<leader>o', ":let g:goyo_preset=1 \\|Goyo<cr>")
+
+nnoremap('<leader>wq' , ':q<cr>')
+nnoremap('<leader>ww' , ':w<cr>')
+nnoremap('<leader>wd' , ':windo diffthis<cr>')
+nnoremap('<leader>wr' , '<C-w>r<cr>')
+nnoremap('<leader>w2' , ':lua vim.api.nvim_win_set_width(0, math.floor(vim.api.nvim_get_option("columns") / 2))<cr>')
+nnoremap('<leader>w3' , ':lua vim.api.nvim_win_set_width(0, math.floor(vim.api.nvim_get_option("columns") / 3))<cr>')
+nnoremap('<leader>w4' , ':lua vim.api.nvim_win_set_width(0, math.floor(vim.api.nvim_get_option("columns") / 4))<cr>')
+nnoremap('<leader>w5' , ':lua vim.api.nvim_win_set_width(0, math.floor(vim.api.nvim_get_option("columns") / 5))<cr>')
+
+nnoremap('<leader>gl', ":G push<cr>")
+nnoremap('<leader>gh', ":G pull<cr>")
+nnoremap('<leader>gv', ":bel vert G log --oneline --graph --decorate --branches<cr>")
+nnoremap('<leader>gg', ":bel vert G<cr>:wincmd L<cr>")
+nnoremap('<leader>gc', ":G commit<cr>")
+nnoremap('<leader>gd', ":Gdiffsplit<cr>")
+nnoremap('<leader>gb', ":lua require'gitsigns'.blame_line(true)<cr>")
+nnoremap('<leader>gu', ":lua require'gitsigns'.reset_hunk()<cr>")
+nnoremap('<leader>gs', ":lua require'gitsigns'.stage_hunk()<cr>")
+nnoremap('<leader>gp', ":lua require'gitsigns'.preview_hunk()<cr>")
+vnoremap('<leader>gv', ":GBrowse<cr>")
+
+-- function! CustomWrapper(opts)
+--     let dict = substitute(string(a:opts), "'\\([A-z0-9]\\+\\)':", '\1 =', 'g')
+--     let result_url = execute("lua print(require 'fugitivehandlers'.CustomGBrowseHandler(" . dict . "))")
+--     return trim(result_url)
+-- endfunction
+
+-- let s:handlers = get(g:, 'fugitive_browse_handlers', [])
+-- let g:fugitive_browse_handlers = add(s:handlers, 'CustomWrapper')
+
+-- command! -nargs=1 Browse :call BrowseFunc(<q-args>)<cr>
+-- function! BrowseFunc(opts)
+--     let opts = substitute(a:opts, '#', '\\#', 'g')
+--     silent execute '!xdg-open ' . trim(opts)
+-- endfunction
+
+nnoremap('<leader>rr', ':call RenameLocalVariable()<cr>')
+nnoremap('<leader>rt', ':call formatting#toggle_multiline_args()<cr>')
+nnoremap('<leader>rs', ':call formatting#go_snake_case(0)<cr>')
+nnoremap('<leader>rS', ':call formatting#go_snake_case(1)<cr>')
+nnoremap('<leader>rc', ':call formatting#go_camel_case(0)<cr>')
+nnoremap('<leader>rC', ':call formatting#go_camel_case(1)<cr>')
+nnoremap('<leader>rm', ':call formatting#squash_blank_lines()<cr>')
+nnoremap('<leader>rd', ':call AddDocString()<cr>')
+
+nnoremap('<leader><tab>', ':tabnext<cr>')
+nnoremap('<leader>td', ':tcd %:h<cr>')
+nnoremap('<leader>tt', ':tabnew<cr>')
+nnoremap('<leader>tc', ':tabclose<cr>')
+nnoremap('<leader>tl', ':tabmove +1<cr>')
+nnoremap('<leader>th', ':tabmove -1<cr>')
+
+nnoremap('<leader>bb', ':bw!<cr>')
+nnoremap('<leader>bl', ':buffers<cr>')
+nnoremap('<leader>bn', ':bnext<cr>')
+nnoremap('<leader>bp', ':bprevious<cr>')
+
+nnoremap('<leader>qc', ':cclose<cr>')
+
+-- " Filetype specific keymaps maps - starts via <leader>f
+-- let g:which_key_vim_map = {
+--       \ 'h'    : [':vert bo split $vimruntime\syntax\hitest.vim | so % | wincmd p | wincmd q' , 'open hitest'],
+--       \ 'g'    : [':call feedkeys(":call SynStack()\<cr>")' , 'show hi group'],
+--       \ 'r'    : [':source %'                               , 'source %'],
+--       \ 'v'    : [':source $MYVIMRC'                        , 'source vimrc'],
+--       \ 'c'    : {
+--           \ 'name' : 'change filetype',
+--           \ 'p' : [':set ft=php', 'php']
+--           \}
+--       \}
+
+-- let g:which_key_python_map = {
+--       \ 'i'    : [':call feedkeys("G?\\v^(import|from)\<cr>o")' , 'go to imports'],
+--       \ 'r'    : [':call RunCommand("python", expand("%"))' , 'run python script'],
+--       \}
+
+-- let g:which_key_markdown_map = {
+--       \ 'p'    : [':MarkdownPreviewToggle' , 'toggle preview'],
+--       \}
+
+-- let g:which_key_php_map = {
+--             \ 'a' : [':call ToggleArtisanServer()', 'toggle artisan serve']
+--             \}
+
+-- let g:which_key_project_map = {
+--             \ 'name' : 'project menu',
+--             \ 't': [ ':call ToggleLibAndProject()', 'toggle library and project' ],
+--             \ }
+
+-- function! ToggleArtisanServer()
+--     lua require('phpartisan').toggleArtisanServer()
+-- endfunction
 
