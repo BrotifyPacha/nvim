@@ -64,7 +64,6 @@ lua require 'user.plugins'
 lua require 'user.plugins-config'
 lua require 'lsp'
 
-execute "source " . g:config_location ."/"."plug-config/which-key.vim"
 execute "source " . g:config_location ."/"."plug-config/welle-targets.vim"
 execute "source " . g:config_location ."/"."plug-config/delimitMate.vim"
 execute "source " . g:config_location ."/"."plug-config/telescope.vim"

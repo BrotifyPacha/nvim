@@ -92,7 +92,7 @@ return packer.startup(function(use)
     use 'nvim-treesitter/nvim-treesitter'
     use 'nvim-treesitter/nvim-treesitter-refactor'
     use 'nvim-treesitter/nvim-treesitter-textobjects'
-    use 'liuchengxu/vim-which-key'
+    use 'folke/which-key.nvim'
     use 'mfussenegger/nvim-dap'
     use 'Pocco81/DAPInstall.nvim'
     use 'rcarriga/nvim-dap-ui'

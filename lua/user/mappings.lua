@@ -75,7 +75,6 @@ nnoremap(']g', ':lua require"gitsigns".next_hunk()<cr>')
 nnoremap('g]p', 'ddmm}P`m:call repeat#set("m]p")<cr>')
 nnoremap('g[p', 'ddkmm{p`m:call repeat#set("m[p")<cr>')
 
-
 -- Misc key maps
 nnoremap('n', 'nzz')
 nnoremap('N', 'Nzz')
