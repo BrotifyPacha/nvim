@@ -163,6 +163,7 @@ nnoremap('<leader>w3' , ':lua vim.api.nvim_win_set_width(0, math.floor(vim.api.n
 nnoremap('<leader>w4' , ':lua vim.api.nvim_win_set_width(0, math.floor(vim.api.nvim_get_option("columns") / 4))<cr>')
 nnoremap('<leader>w5' , ':lua vim.api.nvim_win_set_width(0, math.floor(vim.api.nvim_get_option("columns") / 5))<cr>')
 
+nnoremap('<leader>gL', ":G push --force<cr>")
 nnoremap('<leader>gl', ":G push<cr>")
 nnoremap('<leader>gh', ":G pull<cr>")
 nnoremap('<leader>gv', ":bel vert G log --oneline --graph --decorate --branches<cr>")
