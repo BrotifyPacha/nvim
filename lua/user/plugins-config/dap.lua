@@ -28,6 +28,28 @@ dap.configurations.php = {
     }
 }
 
+dap.adapters.go = {
+    type = 'executable',
+    command = 'node',
+    args = { vim.fn.stdpath('config') .. '/debuggers/go/vscode-go/dist/debugAdapter.js' }
+}
+dap.configurations.go = {
+    {
+        type = 'go',
+        request = 'launch',
+        name = 'Debug',
+        stopOnEntry = false,
+        showLog = false,
+        program = "main.go",
+        -- pathMappings = {
+        --     ['/var/www'] = '/home/gusev/workspace/${workspaceFolderBasename}/app',
+        --     -- ['/home/pgusev/workspace/${workspaceFolderBasename}'] = '/home/brotifypacha/workspace/servers/devel2/workspace/${workspaceFolderBasename}',
+        --     -- ['/home/pgusev/workspace/retorr'] = '${workspaceFolder}',
+        -- },
+        dlvToolPath = vim.fn.exepath('dlv')
+    }
+}
+
 vim.fn.sign_define('DapBreakpoint', { text='●', texthl='ErrorMsg', linehl = '', numhl = 'ErrorMsg' })
 vim.fn.sign_define('DapBreakpointCondition', { text='◆', texthl='ErrorMsg', linehl = '', numhl = 'ErrorMsg' })
 vim.fn.sign_define('DapStopped', { text='', texthl='Error', linehl = '', numhl = 'Error' })
