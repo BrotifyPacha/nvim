@@ -1,0 +1,2 @@
+setlocal formatprg=gofmt noexpandtab
+
