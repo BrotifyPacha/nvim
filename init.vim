@@ -72,13 +72,11 @@ execute "source " . g:config_location ."/"."plug-config/goyo.vim"
 let g:easy_align_delimiters = {
     \ '/': {
     \     'pattern':
-    \           '//\+ '  .'\|'.
-    \           '/\*\+' .'\|'.
-    \           ' \*/\?'.'\|'.
-    \           '\"',
+    \           '//\+\s\?'  . '\|'.
+    \           '/\*\+'  . '\|'.
+    \           ' \*/\?',
     \     'delimiter_align': 'l',
     \     'right_margin': -1,
-    \     'ignore_groups':   ['!Comment']
     \   },
     \ ' ': {
     \     'pattern':      '\s',
