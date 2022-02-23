@@ -2,10 +2,17 @@
 local function map(mode, from, to)
     vim.api.nvim_set_keymap(mode, from, to, { expr = false, noremap = false })
 end
-local function noremap(mode, from, to)
-    vim.api.nvim_set_keymap(mode, from, to, { expr = false, noremap = true })
+local function noremap(mode, from, to, bufonly)
+    if bufonly ~= nil then
+        vim.api.nvim_buf_set_keymap(0, mode, from, to, { expr = false, noremap = true })
+    else
+        vim.api.nvim_set_keymap(mode, from, to, { expr = false, noremap = true })
+    end
 end
 
+local function buf_nnoremap(from, to)
+    noremap('n', from, to, true)
+end
 local function nnoremap(from, to)
     noremap('n', from, to)
 end
@@ -213,6 +220,43 @@ nnoremap('<leader>bn', ':bnext<cr>')
 nnoremap('<leader>bp', ':bprevious<cr>')
 
 nnoremap('<leader>qc', ':cclose<cr>')
+
+vim.cmd
+[[
+augroup pacha_filetype_mappings
+    autocmd!
+    autocmd FileType * lua require'user.mappings'.set_filetype_specific_mappings()
+augroup end
+]]
+
+function M.set_filetype_specific_mappings()
+    local ft = vim.api.nvim_buf_get_option(0, 'ft')
+    local fprefix = '<leader>f'
+    -- General filetype mappings
+    buf_nnoremap(fprefix .. 'h', ':vert bo split $VIMRUNTIME/syntax/hitest.vim | so % | wincmd p | wincmd q<cr>')
+
+    -- Make commands
+    buf_nnoremap(fprefix .. 'mu', ':!make up<cr>')
+    buf_nnoremap(fprefix .. 'md', ':!make down<cr>')
+    wk_reg {
+        ["<leader>fm"] = {
+            name = "make cmds",
+        }
+    }
+    if ft == "vim" then
+        -- Vim
+        buf_nnoremap(fprefix .. 's', ':w | so %<cr>')
+    elseif ft == "lua" then
+        -- Lua
+        buf_nnoremap(fprefix .. '<++>', '<++>')
+        buf_nnoremap(fprefix .. '<++>', '<++>')
+    elseif ft == "markdown" then
+        -- Markdown
+        buf_nnoremap(fprefix .. 'p', ':MarkdownPreviewToggle<cr>')
+    end
+end
+
+return M
 
 -- " Filetype specific keymaps maps - starts via <leader>f
 -- let g:which_key_vim_map = {
