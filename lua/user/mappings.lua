@@ -1,3 +1,5 @@
+local M = {}
+local wk_reg = require 'which-key'.register
 
 local function map(mode, from, to)
     vim.api.nvim_set_keymap(mode, from, to, { expr = false, noremap = false })
@@ -159,7 +161,32 @@ nnoremap('<leader>H', ":vsplit<cr>")
 nnoremap('<leader>J', ":bel split<cr>")
 nnoremap('<leader>K', ":split<cr>")
 nnoremap('<leader>L', ":vert bel split<cr>")
-nnoremap('<leader>o', ":let g:goyo_preset=1 \\|Goyo<cr>")
+nnoremap('<leader>o', ":let g:goyo_preset=1 |Goyo<cr>")
+
+wk_reg {
+    ["<leader>"] = {
+        ["<space>"] = "Goto next <++>",
+        ["<Tab>"] = "next tab",
+        e = "File explorer",
+        h = "which_key_ignore",
+        j = "which_key_ignore",
+        k = "which_key_ignore",
+        l = "which_key_ignore",
+        H = "which_key_ignore",
+        J = "which_key_ignore",
+        K = "which_key_ignore",
+        L = "which_key_ignore",
+        o = "goyo",
+
+        d = { name = "debug" },
+        g = { name = "git" },
+        q = { name = "quickfix" },
+        r = { name = "refactor" },
+        t = { name = "tabs" },
+        w = { name = "windows" },
+        b = { name = "buffers" },
+    }
+}
 
 nnoremap('<leader>wq' , ':q<cr>')
 nnoremap('<leader>ww' , ':w<cr>')
@@ -169,6 +196,16 @@ nnoremap('<leader>w2' , ':lua vim.api.nvim_win_set_width(0, math.floor(vim.api.n
 nnoremap('<leader>w3' , ':lua vim.api.nvim_win_set_width(0, math.floor(vim.api.nvim_get_option("columns") / 3))<cr>')
 nnoremap('<leader>w4' , ':lua vim.api.nvim_win_set_width(0, math.floor(vim.api.nvim_get_option("columns") / 4))<cr>')
 nnoremap('<leader>w5' , ':lua vim.api.nvim_win_set_width(0, math.floor(vim.api.nvim_get_option("columns") / 5))<cr>')
+wk_reg {
+    ['<leader>wq'] = 'close window',
+    ['<leader>ww'] = 'save',
+    ['<leader>wd'] = 'diff windows',
+    ['<leader>wr'] = 'rotate',
+    ['<leader>w2'] = 'resize to 1/2',
+    ['<leader>w3'] = 'resize to 1/3',
+    ['<leader>w4'] = 'resize to 1/4',
+    ['<leader>w5'] = 'resize to 1/5',
+}
 
 nnoremap('<leader>gL', ":G push --force<cr>")
 nnoremap('<leader>gl', ":G push<cr>")
@@ -182,6 +219,19 @@ nnoremap('<leader>gu', ":lua require'gitsigns'.reset_hunk()<cr>")
 nnoremap('<leader>gs', ":lua require'gitsigns'.stage_hunk()<cr>")
 nnoremap('<leader>gp', ":lua require'gitsigns'.preview_hunk()<cr>")
 vnoremap('<leader>gv', ":GBrowse<cr>")
+wk_reg {
+    ['<leader>gL'] = 'push (force)',
+    ['<leader>gl'] = 'push',
+    ['<leader>gh'] = 'pull',
+    ['<leader>gv'] = 'view history',
+    ['<leader>gg'] = 'status',
+    ['<leader>gc'] = 'commit',
+    ['<leader>gd'] = 'diff split',
+    ['<leader>gb'] = 'blame',
+    ['<leader>gu'] = 'undo hunk',
+    ['<leader>gs'] = 'stage hunk',
+    ['<leader>gp'] = 'preview hunk',
+}
 
 -- function! CustomWrapper(opts)
 --     let dict = substitute(string(a:opts), "'\\([A-z0-9]\\+\\)':", '\1 =', 'g')
@@ -206,6 +256,16 @@ nnoremap('<leader>rc', ':call formatting#go_camel_case(0)<cr>')
 nnoremap('<leader>rC', ':call formatting#go_camel_case(1)<cr>')
 nnoremap('<leader>rm', ':call formatting#squash_blank_lines()<cr>')
 nnoremap('<leader>rd', ':call AddDocString()<cr>')
+wk_reg {
+    ['<leader>rr'] = 'rename local var',
+    ['<leader>rt'] = 'toggle multiline args',
+    ['<leader>rs'] = 'snake_case',
+    ['<leader>rS'] = 'SNAKE_CASE',
+    ['<leader>rc'] = 'camelCase',
+    ['<leader>rC'] = 'CamelCase',
+    ['<leader>rm'] = 'merge blanks',
+    ['<leader>rd'] = 'add doc string',
+}
 
 nnoremap('<leader><tab>', ':tabnext<cr>')
 nnoremap('<leader>td', ':tcd %:h<cr>')
@@ -213,13 +273,30 @@ nnoremap('<leader>tt', ':tabnew<cr>')
 nnoremap('<leader>tc', ':tabclose<cr>')
 nnoremap('<leader>tl', ':tabmove +1<cr>')
 nnoremap('<leader>th', ':tabmove -1<cr>')
+wk_reg {
+        ['<leader><tab>'] = '<++>',
+        ['<leader>td'] = '<++>',
+        ['<leader>tt'] = '<++>',
+        ['<leader>tc'] = '<++>',
+        ['<leader>tl'] = '<++>',
+        ['<leader>th'] = '<++>',
+}
 
 nnoremap('<leader>bb', ':bw!<cr>')
 nnoremap('<leader>bl', ':buffers<cr>')
 nnoremap('<leader>bn', ':bnext<cr>')
 nnoremap('<leader>bp', ':bprevious<cr>')
+wk_reg {
+        ['<leader>bb'] = '<++>',
+        ['<leader>bl'] = '<++>',
+        ['<leader>bn'] = '<++>',
+        ['<leader>bp'] = '<++>',
+}
 
 nnoremap('<leader>qc', ':cclose<cr>')
+wk_reg {
+        ['<leader>qc'] = 'close',
+}
 
 vim.cmd
 [[
@@ -229,27 +306,26 @@ augroup pacha_filetype_mappings
 augroup end
 ]]
 
+buf_nnoremap('<leader>fh', ':vert bo split $VIMRUNTIME/syntax/hitest.vim | so % | wincmd p | wincmd q<cr>')
+-- Make commands
+buf_nnoremap('<leader>fk', ':!make up<cr>')
+buf_nnoremap('<leader>fj', ':!make down<cr>')
+wk_reg {
+    ["<leader>f"] = {
+        name = "filetype specific",
+        h = "open hitest.vim",
+    }
+}
+
 function M.set_filetype_specific_mappings()
     local ft = vim.api.nvim_buf_get_option(0, 'ft')
     local fprefix = '<leader>f'
-    -- General filetype mappings
-    buf_nnoremap(fprefix .. 'h', ':vert bo split $VIMRUNTIME/syntax/hitest.vim | so % | wincmd p | wincmd q<cr>')
-
-    -- Make commands
-    buf_nnoremap(fprefix .. 'mu', ':!make up<cr>')
-    buf_nnoremap(fprefix .. 'md', ':!make down<cr>')
-    wk_reg {
-        ["<leader>fm"] = {
-            name = "make cmds",
-        }
-    }
     if ft == "vim" then
         -- Vim
         buf_nnoremap(fprefix .. 's', ':w | so %<cr>')
     elseif ft == "lua" then
         -- Lua
-        buf_nnoremap(fprefix .. '<++>', '<++>')
-        buf_nnoremap(fprefix .. '<++>', '<++>')
+        buf_nnoremap(fprefix .. 's', ':w | so %<cr>')
     elseif ft == "markdown" then
         -- Markdown
         buf_nnoremap(fprefix .. 'p', ':MarkdownPreviewToggle<cr>')

@@ -37,7 +37,7 @@ wk.setup {
         -- For example:
         -- ["<space>"] = "SPC",
         -- ["<cr>"] = "RET",
-        -- ["<tab>"] = "TAB",
+        ["<Tab>"] = "<tab>",
     },
     icons = {
         breadcrumb = "»", -- symbol used in the command line area that shows your active key combo
