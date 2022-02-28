@@ -308,8 +308,9 @@ augroup end
 
 buf_nnoremap('<leader>fh', ':vert bo split $VIMRUNTIME/syntax/hitest.vim | so % | wincmd p | wincmd q<cr>')
 -- Make commands
-buf_nnoremap('<leader>fk', ':!make up<cr>')
-buf_nnoremap('<leader>fj', ':!make down<cr>')
+nnoremap('<leader>fk', ':!make up<cr>')
+nnoremap('<leader>fj', ':!make down<cr>')
+nnoremap('<leader>fl', ':!make run<cr>')
 wk_reg {
     ["<leader>f"] = {
         name = "filetype specific",
@@ -328,7 +329,7 @@ function M.set_filetype_specific_mappings()
         buf_nnoremap(fprefix .. 's', ':w | so %<cr>')
     elseif ft == "markdown" then
         -- Markdown
-        buf_nnoremap(fprefix .. 'p', ':MarkdownPreviewToggle<cr>')
+        buf_nnoremap(fprefix .. 'l', ':MarkdownPreviewToggle<cr>')
     end
 end
 
