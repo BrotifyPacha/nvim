@@ -14,6 +14,7 @@ function! MyFoldText()
   let txt = substitute(txt, '{', '', 'g')
   return  spc . v:folddashes . " " . txt . " - " . n . " "
 endfunction
+set foldtext=MyFoldText()
 
 set tabline=%!MyTabLine()
 set showtabline=2

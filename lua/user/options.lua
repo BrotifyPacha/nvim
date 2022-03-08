@@ -47,7 +47,6 @@ vim.cmd [[ colo pencil ]]
 vim.opt.fillchars = { fold = '-' }
 vim.opt.foldlevel = 99
 vim.opt.foldminlines = 3
-vim.opt.foldtext = 'lua print("---")'
 -- vim.opt.foldopen = block,hor,insert,jump,mark,percent,quickfix,search,tag,undo
 
 vim.opt.spelllang = { 'en', 'ru' }
