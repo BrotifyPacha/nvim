@@ -1,0 +1,32 @@
+snippet ! "html skeleton" b
+	<!DOCTYPE html>
+	<html lang="ru_RU">
+		<head>
+
+			<meta charset="utf-8">
+			<title>${2:Title}</title>
+			<link rel="stylesheet" href="$3">
+
+		</head>
+		<body class="$4">
+			${0:${VISUAL}}
+		</body>
+	</html>
+snippet head "general head snippet" b
+	<head>
+		${0:${VISUAL}}
+	</head>
+snippet body "general head snippet" b
+	<body>
+		${0:${VISUAL}}
+	</body>
+snippet tag "general multiline tag snippet" b
+	<${1:div} class="$2">
+		${0:${VISUAL}}
+	</${1/(\w+).*/$1/}>
+snippet itag "general inline tag snippet" b
+	<${1:div} class="$2">${0:${VISUAL}}</${1/(\w+).*/$1/}>
+snippet a "link snippet" b
+	<a${1: class="$2" }href="$3">${0:${VISUAL}}</a>
+snippet link "general link snippet" b
+	<link rel="${1:stylesheet}" href="$2">

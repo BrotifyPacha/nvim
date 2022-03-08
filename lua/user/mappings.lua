@@ -146,6 +146,8 @@ function _G.smart_tab_backward()
     return vim.fn.pumvisible() == 1 and t'<C-p>' or t'<S-Tab>'
 end
 
+map('v', '<Tab>', '<Plug>(snippy-cut-text)')
+
 inoremapexpr('<Tab>', 'v:lua.smart_tab()')
 inoremapexpr('<S-Tab>', 'v:lua.smart_tab_backward()')
 

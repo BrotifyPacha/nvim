@@ -55,21 +55,10 @@ return packer.startup(function(use)
     use 'hrsh7th/cmp-cmdline'
     use 'hrsh7th/cmp-nvim-lsp'
     use 'ray-x/lsp_signature.nvim'
-    use 'saadparwaiz1/cmp_luasnip'
-    use 'quangnguyen30192/cmp-nvim-ultisnips'
 
     -- Snippets
-    use {
-        'SirVer/ultisnips',
-        requires = {{'honza/vim-snippets', rtp = '.'}},
-        config = function()
-            vim.g.UltiSnipsExpandTrigger = '<Plug>(ultisnips_expand)'
-            vim.g.UltiSnipsJumpForwardTrigger = '<Plug>(ultisnips_jump_forward)'
-            vim.g.UltiSnipsJumpBackwardTrigger = '<Plug>(ultisnips_jump_backward)'
-            vim.g.UltiSnipsListSnippets = '<c-x><c-s>'
-            vim.g.UltiSnipsRemoveSelectModeMappings = 0
-        end
-    }
+    use 'dcampos/nvim-snippy'
+    use 'dcampos/cmp-snippy'
 
     -- Lsp stuff
     use 'neovim/nvim-lspconfig'

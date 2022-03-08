@@ -61,8 +61,9 @@ local cmp = require 'cmp'
 cmp.setup({
     snippet = {
         expand = function(args)
-            vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+            -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
             -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+            require('snippy').expand_snippet(args.body)
         end,
     },
     mapping = {
@@ -77,8 +78,8 @@ cmp.setup({
         ['<Tab>'] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
-            elseif vim.fn["UltiSnips#CanJumpForwards"]() == 1 then
-                vim.api.nvim_feedkeys(t("<Plug>(ultisnips_jump_forward)"), 'm', true)
+            elseif vim.fn["snippy#can_expand_or_advance"]() then
+                vim.api.nvim_feedkeys(t("<Plug>(snippy-expand-or-advance)"), 'm', true)
             else
                 fallback()
             end
@@ -86,8 +87,8 @@ cmp.setup({
         ['<S-Tab>'] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_prev_item({ behavior = cmp.SelectBehavior.Insert })
-            elseif vim.fn["UltiSnips#CanJumpBackwards"]() == 1 then
-                vim.api.nvim_feedkeys(t("<Plug>(ultisnips_jump_backward)"), 'm', true)
+            elseif vim.fn["snippy#can_jump"](-1) then
+                vim.api.nvim_feedkeys(t("<Plug>(snippy-previous)"), 'm', true)
             else
                 fallback()
             end
@@ -114,8 +115,7 @@ cmp.setup({
     },
     sources = {
         { name = 'nvim_lsp' },
-        { name = 'ultisnips' },
-        -- { name = 'luasnip' },
+        { name = 'snippy' },
         { name = 'buffer' },
         { name = 'path' },
     },

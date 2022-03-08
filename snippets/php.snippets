@@ -1,0 +1,41 @@
+extends html
+
+snippet php "php root tag" bA
+	<?php
+	${0:${VISUAL}}
+	?>
+snippet techo "php echo tag" wA
+	<?= $0 ?>
+snippet tif "php if tag" b
+	<?php if ($1): ?>
+	${0:${VISUAL}}
+	<?php endif; ?>
+snippet tife "php if tag" b
+	<?php if ($1): ?>
+	${2:${VISUAL}}
+	<?php else: ?>
+	$0
+	<?php endif; ?>
+snippet if "if statement" b
+	if ($1) {
+		${0:${VISUAL}}
+	}
+snippet ife "if - else statement" bA
+	if ($1) {
+		${2:${VISUAL}}
+	} else {
+		${0}
+	}
+snippet for "for loop" b
+	for ($${1:i} = ${2:0}; $$1${3: < 10}; $$1${4:++}) {
+		${0:${VISUAL}}
+	}
+snippet foreach "foreach loop" bA
+	foreach ($${1:array} as $${2:${3:key} => ${4:$value}}) {
+		${0:${VISUAL}}
+	}
+snippet echo "echo" bA
+	echo ${0:${VISUAL}};
+snippet print_r "print_r" bA
+	print_r(${0:${VISUAL}});
+	
