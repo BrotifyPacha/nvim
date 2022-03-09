@@ -220,6 +220,7 @@ nnoremap('<leader>gb', ":lua require'gitsigns'.blame_line(true)<cr>")
 nnoremap('<leader>gu', ":lua require'gitsigns'.reset_hunk()<cr>")
 nnoremap('<leader>gs', ":lua require'gitsigns'.stage_hunk()<cr>")
 nnoremap('<leader>gp', ":lua require'gitsigns'.preview_hunk()<cr>")
+nnoremap('<leader>gt', ":Telescope git_branches<cr>")
 vnoremap('<leader>gv', ":GBrowse<cr>")
 wk_reg {
     ['<leader>gL'] = 'push (force)',
