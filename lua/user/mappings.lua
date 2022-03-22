@@ -236,21 +236,6 @@ wk_reg {
     ['<leader>gp'] = 'preview hunk',
 }
 
--- function! CustomWrapper(opts)
---     let dict = substitute(string(a:opts), "'\\([A-z0-9]\\+\\)':", '\1 =', 'g')
---     let result_url = execute("lua print(require 'fugitivehandlers'.CustomGBrowseHandler(" . dict . "))")
---     return trim(result_url)
--- endfunction
-
--- let s:handlers = get(g:, 'fugitive_browse_handlers', [])
--- let g:fugitive_browse_handlers = add(s:handlers, 'CustomWrapper')
-
--- command! -nargs=1 Browse :call BrowseFunc(<q-args>)<cr>
--- function! BrowseFunc(opts)
---     let opts = substitute(a:opts, '#', '\\#', 'g')
---     silent execute '!xdg-open ' . trim(opts)
--- endfunction
-
 nnoremap('<leader>rr', ':call RenameLocalVariable()<cr>')
 nnoremap('<leader>rt', ':call formatting#toggle_multiline_args()<cr>')
 nnoremap('<leader>rs', ':call formatting#go_snake_case(0)<cr>')

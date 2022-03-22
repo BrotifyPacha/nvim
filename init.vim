@@ -52,6 +52,19 @@ function! MyTabLabel(n)
   return cwd
 endfunction
 
+let g:fugitive_browse_handlers = ['CustomGBrowseHandler']
+function! CustomGBrowseHandler(args)
+    " Convert vim assoc array to lua table
+    let table = substitute(string(a:args), "'\\(\\w\\+\\)':", "\\1 =", "g")
+    return luaeval("require'fugitivehandlers'.CustomGBrowseHandler(" . table . ")")
+endfunction
+
+command! -nargs=1 Browse :call BrowseFunc(<q-args>)<cr>
+function! BrowseFunc(opts)
+    let opts = substitute(a:opts, '#', '\\#', 'g')
+    silent execute '!xdg-open ' . trim(opts)
+endfunction
+
 augroup highlight_yank
     autocmd!
     autocmd TextYankPost * lua require('vim.highlight').on_yank({higroup='PmenuSel', timeout=250})
