@@ -106,6 +106,7 @@ vim.api.nvim_set_keymap('n',  '<leader>df',':lua require("dap").toggle_breakpoin
 vim.api.nvim_set_keymap('',  '<F11>',      ':lua require("dapui").toggle()<cr>',          flags)
 vim.api.nvim_set_keymap('v',  '<leader>de', ':lua require("helpers").visualExec(\'require("dapui").eval()\')<cr>', flags)
 vim.api.nvim_set_keymap('n',  '<leader>de', ':lua require("dapui").eval()<cr>', flags)
+vim.api.nvim_set_keymap('n',  '<leader>dc', ':lua require("dapui").run_to_cursor()<cr>', flags)
 
 vim.api.nvim_set_keymap('n', '<S-up>',  ':lua require("dap").reverse_continue()<cr>',  flags)
 vim.api.nvim_set_keymap('n', '<S-down>',':lua require("dap").continue()<cr>',  flags)
@@ -113,4 +114,10 @@ vim.api.nvim_set_keymap('n', '<up>',    ':lua require("dap").step_back()<cr>', f
 vim.api.nvim_set_keymap('n', '<down>',  ':lua require("dap").step_over()<cr>', flags)
 vim.api.nvim_set_keymap('n', '<right>', ':lua require("dap").step_into()<cr>', flags)
 vim.api.nvim_set_keymap('n', '<left>',  ':lua require("dap").step_out()<cr>',  flags)
+vim.api.nvim_set_keymap('n', '<S-left>',':lua require("dap").terminate(nil, nil, killDebuggers)<cr>',  flags)
 
+function _G.killDebuggers()
+    vim.api.nvim_command [[
+        silent !kill -9 $(ps aux | grep nvim.debuggers | awk '{ print $2 }')
+    ]]
+end
