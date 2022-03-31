@@ -9,6 +9,7 @@ local colors = {
     purple   = '#6855DE',
     blue     = '#008ec4',
     red      = '#e32791',
+    status_fg = require('lualine.utils.utils').extract_highlight_colors('StatusLine', 'fg'),
     status_bg = require('lualine.utils.utils').extract_highlight_colors('StatusLine', 'bg'),
 }
 
@@ -31,6 +32,8 @@ local theme = {
     }
 }
 
+local dap, dap_err = require'dap'
+
 require 'lualine'.setup({
     options = {
         theme = theme,
@@ -49,7 +52,6 @@ require 'lualine'.setup({
                         [''] = colors.red,
                         V = colors.red,
                         c = '#000000',
-                        -- c = require('lualine.utils.utils').extract_highlight_colors('StatusLine', 'fg'),
                         no = colors.purple,
                         s = colors.red,
                         S = colors.red,
@@ -108,11 +110,10 @@ require 'lualine'.setup({
             {
                 -- Lsp server name .
                 function()
-                    local msg = 'None'
                     local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
                     local clients = vim.lsp.get_active_clients()
                     if next(clients) == nil then
-                        return msg
+                        return ''
                     end
                     local lss = {}
                     for _, client in ipairs(clients) do
@@ -124,11 +125,26 @@ require 'lualine'.setup({
                         end
                     end
                     if vim.tbl_isempty(lss) ~= true then
-                        return table.concat(lss, ', ')
+                        return '謹' .. table.concat(lss, ', ')
                     end
-                    return msg
+                    return ''
                 end,
-                icon = '謹LSP:',
+            },
+            {
+                -- Dap debugging status
+                function()
+                    if dap_err == nil then
+                        local dap_status = require('dap').status()
+                        if string.len(dap_status) > 0 then
+                            return '● ' ..  dap_status
+                        else
+                            return ''
+                        end
+                    else
+                        return ''
+                    end
+                end,
+                color = { fg = colors.red, bg = colors.status_bg }
             },
             'progress',
         },
