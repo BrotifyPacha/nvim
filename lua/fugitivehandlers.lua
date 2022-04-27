@@ -17,10 +17,10 @@ function M.CustomGBrowseHandler(opts)
         :gsub('^ssh.', '')
         :gsub(':', '/')
         :gsub('.git$', '')
-    if string.find(opts.remote, 'gitlab.', 0, true) then
+    if string.find(opts.remote, 'gitlab', 0, true) then
         return handleGitlab(opts)
     end
-    if string.find(opts.remote, 'github.', 0, true) then
+    if string.find(opts.remote, 'github', 0, true) then
         return handleGithub(opts)
     end
 end
