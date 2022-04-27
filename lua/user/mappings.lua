@@ -64,23 +64,23 @@ nmap('S', 's')
 
 
 -- Text objects
-onoremap('id', ":lua require 'mytextobj'.documentTextObj()<cr>")
-xnoremap('id', ":lua require 'mytextobj'.documentTextObj()<cr>")
-onoremap('ie', ":lua require 'mytextobj'.expressionTextObj()<cr>")
-xnoremap('ie', ":lua require 'mytextobj'.expressionTextObj()<cr>")
-onoremap('ii', ":lua require 'mytextobj'.indentTextObj()<cr>")
-xnoremap('ii', ":lua require 'mytextobj'.indentTextObj()<cr>")
+onoremap('id', "<cmd>lua require 'mytextobj'.documentTextObj()<cr>")
+xnoremap('id', "<cmd>lua require 'mytextobj'.documentTextObj()<cr>")
+onoremap('ie', "<cmd>lua require 'mytextobj'.expressionTextObj()<cr>")
+xnoremap('ie', "<cmd>lua require 'mytextobj'.expressionTextObj()<cr>")
+onoremap('ii', "<cmd>lua require 'mytextobj'.indentTextObj()<cr>")
+xnoremap('ii', "<cmd>lua require 'mytextobj'.indentTextObj()<cr>")
 
 
 -- Surround extension
-nnoremap('dsf', ':call formatting#delete_surrounding_func()<cr>')
-nnoremap('csf', ':call formatting#change_surrounding_func("")<cr>')
+nnoremap('dsf', '<cmd>call formatting#delete_surrounding_func()<cr>')
+nnoremap('csf', '<cmd>call formatting#change_surrounding_func("")<cr>')
 
 -- Unimpared extension
 nnoremap('[t', ':tabprevious<cr>')
 nnoremap(']t', ':tabnext<cr>')
-nnoremap('[g', ':lua require"gitsigns".prev_hunk()<cr>')
-nnoremap(']g', ':lua require"gitsigns".next_hunk()<cr>')
+nnoremap('[g', '<cmd>lua require"gitsigns".prev_hunk()<cr>')
+nnoremap(']g', '<cmd>lua require"gitsigns".next_hunk()<cr>')
 nnoremap('g]p', 'ddmm}P`m:call repeat#set("m]p")<cr>')
 nnoremap('g[p', 'ddkmm{p`m:call repeat#set("m[p")<cr>')
 
@@ -102,31 +102,31 @@ nnoremap('q?', '<nop>')
 
 
 -- F key maps
-nnoremap('<F2><F2>', ':set spell!<cr>')
+nnoremap('<F2><F2>', '<cmd>set spell!<cr>')
 nnoremap('<F2>g',    'zg')
 nnoremap('<F2>b',    'zw')
-nnoremap('<F2>u',    ':spellundo')
+nnoremap('<F2>u',    '<cmd>spellundo')
 
-nnoremap('<F3>3',  ':set ff=dos<cr>')
-nnoremap('<F3>4',  ':set ff=unix<cr>')
-nnoremap('<F3>ee', ':edit!<cr>')
-nnoremap('<F3>ec', ':edit! ++enc=cp1251<cr>')
-nnoremap('<F3>eu', ':edit! ++enc=utf-8<cr>')
-nnoremap('<F3>el', ':edit! ++enc=latin1<cr>')
-nnoremap('<F3>cc', ':set fileencoding=cp1251 | w!<cr>')
-nnoremap('<F3>cu', ':set fileencoding=utf8 | w!<cr>')
-nnoremap('<F3>cl', ':set fileencoding=latin1 | w!<cr>')
+nnoremap('<F3>3',  '<cmd>set ff=dos<cr>')
+nnoremap('<F3>4',  '<cmd>set ff=unix<cr>')
+nnoremap('<F3>ee', '<cmd>edit!<cr>')
+nnoremap('<F3>ec', '<cmd>edit! ++enc=cp1251<cr>')
+nnoremap('<F3>eu', '<cmd>edit! ++enc=utf-8<cr>')
+nnoremap('<F3>el', '<cmd>edit! ++enc=latin1<cr>')
+nnoremap('<F3>cc', '<cmd>set fileencoding=cp1251 | w!<cr>')
+nnoremap('<F3>cu', '<cmd>set fileencoding=utf8 | w!<cr>')
+nnoremap('<F3>cl', '<cmd>set fileencoding=latin1 | w!<cr>')
 
-nnoremap('<F5>', ':nohl<cr>:lua require"user.helpers".reload("colorizer")<cr>:ColorizerToggle<cr>')
-nnoremap('<F6>', ':set list!<cr>')
-nnoremap('<F7>', ':set wrap!<cr>')
-nnoremap('<F8>', ':ColorizerToggle<cr>')
+nnoremap('<F5>', '<cmd>nohl<cr>:lua require"user.helpers".reload("colorizer")<cr>:ColorizerToggle<cr>')
+nnoremap('<F6>', '<cmd>set list!<cr>')
+nnoremap('<F7>', '<cmd>set wrap!<cr>')
+nnoremap('<F8>', '<cmd>ColorizerToggle<cr>')
 
-nnoremap('<F9><F9>',  ':silent call ReopenTerminal()<cr>')
-nnoremap('<F9><F10>', ':silent call NewTerminal()<cr>')
-nnoremap('<F9>p',     ':call RunCommand("python", "")<cr>')
-nnoremap('<F9>q',     ':setlocal syntax=<cr>')
-nnoremap('<F9>l',     ':setlocal syntax=log<cr>')
+nnoremap('<F9><F9>',  '<cmd>silent call ReopenTerminal()<cr>')
+nnoremap('<F9><F10>', '<cmd>silent call NewTerminal()<cr>')
+nnoremap('<F9>p',     '<cmd>call RunCommand("python", "")<cr>')
+nnoremap('<F9>q',     '<cmd>setlocal syntax=<cr>')
+nnoremap('<F9>l',     '<cmd>setlocal syntax=log<cr>')
 
 -- Terminal mode key maps
 tnoremap('<Esc>', '<C-\\><C-n>')
@@ -154,16 +154,16 @@ inoremapexpr('<S-Tab>', 'v:lua.smart_tab_backward()')
 -- Leader mappings
 
 nnoremap('<leader><leader>', ':call search("<++>", "cw")<cr>c4l')
-nnoremap('<leader>e', ":NvimTreeToggle<cr>")
+nnoremap('<leader>e', "<cmd>NvimTreeToggle<cr>")
 nnoremap('<leader>l', "<C-w>l")
 nnoremap('<leader>h', "<C-w>h")
 nnoremap('<leader>j', "<C-w>j")
 nnoremap('<leader>k', "<C-w>k")
-nnoremap('<leader>H', ":vsplit<cr>")
-nnoremap('<leader>J', ":bel split<cr>")
-nnoremap('<leader>K', ":split<cr>")
-nnoremap('<leader>L', ":vert bel split<cr>")
-nnoremap('<leader>o', ":let g:goyo_preset=1 |Goyo<cr>")
+nnoremap('<leader>H', "<cmd>vsplit<cr>")
+nnoremap('<leader>J', "<cmd>bel split<cr>")
+nnoremap('<leader>K', "<cmd>split<cr>")
+nnoremap('<leader>L', "<cmd>vert bel split<cr>")
+nnoremap('<leader>o', "<cmd>let g:goyo_preset=1 |Goyo<cr>")
 
 wk_reg {
     ["<leader>"] = {
@@ -190,14 +190,14 @@ wk_reg {
     }
 }
 
-nnoremap('<leader>wq' , ':q<cr>')
-nnoremap('<leader>ww' , ':w<cr>')
-nnoremap('<leader>wd' , ':windo diffthis<cr>')
+nnoremap('<leader>wq' , '<cmd>q<cr>')
+nnoremap('<leader>ww' , '<cmd>w<cr>')
+nnoremap('<leader>wd' , '<cmd>windo diffthis<cr>')
 nnoremap('<leader>wr' , '<C-w>r<cr>')
-nnoremap('<leader>w2' , ':lua vim.api.nvim_win_set_width(0, math.floor(vim.api.nvim_get_option("columns") / 2))<cr>')
-nnoremap('<leader>w3' , ':lua vim.api.nvim_win_set_width(0, math.floor(vim.api.nvim_get_option("columns") / 3))<cr>')
-nnoremap('<leader>w4' , ':lua vim.api.nvim_win_set_width(0, math.floor(vim.api.nvim_get_option("columns") / 4))<cr>')
-nnoremap('<leader>w5' , ':lua vim.api.nvim_win_set_width(0, math.floor(vim.api.nvim_get_option("columns") / 5))<cr>')
+nnoremap('<leader>w2' , '<cmd>lua vim.api.nvim_win_set_width(0, math.floor(vim.api.nvim_get_option("columns") / 2))<cr>')
+nnoremap('<leader>w3' , '<cmd>lua vim.api.nvim_win_set_width(0, math.floor(vim.api.nvim_get_option("columns") / 3))<cr>')
+nnoremap('<leader>w4' , '<cmd>lua vim.api.nvim_win_set_width(0, math.floor(vim.api.nvim_get_option("columns") / 4))<cr>')
+nnoremap('<leader>w5' , '<cmd>lua vim.api.nvim_win_set_width(0, math.floor(vim.api.nvim_get_option("columns") / 5))<cr>')
 wk_reg {
     ['<leader>wq'] = 'close window',
     ['<leader>ww'] = 'save',
@@ -209,19 +209,19 @@ wk_reg {
     ['<leader>w5'] = 'resize to 1/5',
 }
 
-nnoremap('<leader>gL', ":G push --force<cr>")
-nnoremap('<leader>gl', ":G push<cr>")
-nnoremap('<leader>gh', ":G pull<cr>")
-nnoremap('<leader>gv', ":bel vert G log --oneline --graph --decorate --branches<cr>")
-nnoremap('<leader>gg', ":bel vert G<cr>:wincmd L<cr>")
-nnoremap('<leader>gc', ":G commit<cr>")
-nnoremap('<leader>gd', ":Gdiffsplit<cr>")
-nnoremap('<leader>gb', ":lua require'gitsigns'.blame_line(true)<cr>")
-nnoremap('<leader>gu', ":lua require'gitsigns'.reset_hunk()<cr>")
-nnoremap('<leader>gs', ":lua require'gitsigns'.stage_hunk()<cr>")
-nnoremap('<leader>gp', ":lua require'gitsigns'.preview_hunk()<cr>")
-nnoremap('<leader>gt', ":Telescope git_branches<cr>")
-vnoremap('<leader>gv', ":GBrowse<cr>")
+nnoremap('<leader>gL', "<cmd>G push --force<cr>")
+nnoremap('<leader>gl', "<cmd>G push<cr>")
+nnoremap('<leader>gh', "<cmd>G pull<cr>")
+nnoremap('<leader>gv', "<cmd>bel vert G log --oneline --graph --decorate --branches<cr>")
+nnoremap('<leader>gg', "<cmd>bel vert G<cr>:wincmd L<cr>")
+nnoremap('<leader>gc', "<cmd>G commit<cr>")
+nnoremap('<leader>gd', "<cmd>Gdiffsplit<cr>")
+nnoremap('<leader>gb', "<cmd>lua require'gitsigns'.blame_line(true)<cr>")
+nnoremap('<leader>gu', "<cmd>lua require'gitsigns'.reset_hunk()<cr>")
+nnoremap('<leader>gs', "<cmd>lua require'gitsigns'.stage_hunk()<cr>")
+nnoremap('<leader>gp', "<cmd>lua require'gitsigns'.preview_hunk()<cr>")
+nnoremap('<leader>gt', "<cmd>Telescope git_branches<cr>")
+vnoremap('<leader>gv', "<cmd>GBrowse<cr>")
 nnoremap('<leader>grr', '<cmd>lua require("user/helpers").xdgOpen(require("user/helpers").getRemoteLink())<cr>')
 nnoremap('<leader>grp', '<cmd>lua require("user/helpers").xdgOpen( require("user/helpers").getRemoteLink() .. "/-/pipelines")<cr>')
 
@@ -302,11 +302,11 @@ augroup pacha_filetype_mappings
 augroup end
 ]]
 
-buf_nnoremap('<leader>fh', ':vert bo split $VIMRUNTIME/syntax/hitest.vim | so % | wincmd p | wincmd q<cr>')
+buf_nnoremap('<leader>fh', '<cmd>vert bo split $VIMRUNTIME/syntax/hitest.vim | so % | wincmd p | wincmd q<cr>')
 -- Make commands
-nnoremap('<leader>fk', ':!make up<cr>')
-nnoremap('<leader>fj', ':!make down<cr>')
-nnoremap('<leader>fl', ':!make run<cr>')
+nnoremap('<leader>fk', '<cmd>!make up<cr>')
+nnoremap('<leader>fj', '<cmd>!make down<cr>')
+nnoremap('<leader>fl', '<cmd>!make run<cr>')
 wk_reg {
     ["<leader>f"] = {
         name = "filetype specific",
@@ -330,38 +330,4 @@ function M.set_filetype_specific_mappings()
 end
 
 return M
-
--- " Filetype specific keymaps maps - starts via <leader>f
--- let g:which_key_vim_map = {
---       \ 'h'    : [':vert bo split $vimruntime\syntax\hitest.vim | so % | wincmd p | wincmd q' , 'open hitest'],
---       \ 'g'    : [':call feedkeys(":call SynStack()\<cr>")' , 'show hi group'],
---       \ 'r'    : [':source %'                               , 'source %'],
---       \ 'v'    : [':source $MYVIMRC'                        , 'source vimrc'],
---       \ 'c'    : {
---           \ 'name' : 'change filetype',
---           \ 'p' : [':set ft=php', 'php']
---           \}
---       \}
-
--- let g:which_key_python_map = {
---       \ 'i'    : [':call feedkeys("G?\\v^(import|from)\<cr>o")' , 'go to imports'],
---       \ 'r'    : [':call RunCommand("python", expand("%"))' , 'run python script'],
---       \}
-
--- let g:which_key_markdown_map = {
---       \ 'p'    : [':MarkdownPreviewToggle' , 'toggle preview'],
---       \}
-
--- let g:which_key_php_map = {
---             \ 'a' : [':call ToggleArtisanServer()', 'toggle artisan serve']
---             \}
-
--- let g:which_key_project_map = {
---             \ 'name' : 'project menu',
---             \ 't': [ ':call ToggleLibAndProject()', 'toggle library and project' ],
---             \ }
-
--- function! ToggleArtisanServer()
---     lua require('phpartisan').toggleArtisanServer()
--- endfunction
 
