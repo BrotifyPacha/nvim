@@ -57,7 +57,7 @@ local opts = { noremap = true, silent = true }
 vim.api.nvim_set_keymap(
     "n",
     "gl",
-    '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({ border = "single" })<CR>',
+    '<cmd>lua vim.diagnostic.open_float()<cr>',
     opts
 )
 
