@@ -222,6 +222,9 @@ nnoremap('<leader>gs', ":lua require'gitsigns'.stage_hunk()<cr>")
 nnoremap('<leader>gp', ":lua require'gitsigns'.preview_hunk()<cr>")
 nnoremap('<leader>gt', ":Telescope git_branches<cr>")
 vnoremap('<leader>gv', ":GBrowse<cr>")
+nnoremap('<leader>grr', '<cmd>lua require("user/helpers").xdgOpen(require("user/helpers").getRemoteLink())<cr>')
+nnoremap('<leader>grp', '<cmd>lua require("user/helpers").xdgOpen( require("user/helpers").getRemoteLink() .. "/-/pipelines")<cr>')
+
 wk_reg {
     ['<leader>gL'] = 'push (force)',
     ['<leader>gl'] = 'push',
@@ -234,6 +237,11 @@ wk_reg {
     ['<leader>gu'] = 'undo hunk',
     ['<leader>gs'] = 'stage hunk',
     ['<leader>gp'] = 'preview hunk',
+    ['<leader>gr'] = {
+        name = 'remote actions',
+        r = 'view repo',
+        p = 'view pipelines',
+    }
 }
 
 nnoremap('<leader>rr', ':call RenameLocalVariable()<cr>')
