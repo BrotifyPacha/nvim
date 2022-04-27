@@ -116,20 +116,24 @@ cmp.setup({
     sources = {
         { name = 'nvim_lsp' },
         { name = 'snippy' },
-        { name = 'buffer' },
+        { name = 'buffer', option = { get_bufnrs = function() return vim.api.nvim_list_bufs() end } },
         { name = 'path' },
     },
-    documentation = {
-        border = { "┌", "─", "┐", "│", "┘", "─", "└", "│" },
+    window = {
+        documentation = {
+            border = 'single',
+            max_width = 120,
+            max_height = 90,
+        },
     },
     experimental = {
-        native_menu = false,
         ghost_text = false,
     }
 })
 
 -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline('/', {
+    mapping = cmp.mapping.preset.cmdline(),
     sources = {
         { name = 'buffer' }
     }
@@ -137,8 +141,9 @@ cmp.setup.cmdline('/', {
 
 -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline(':', {
+    mapping = cmp.mapping.preset.cmdline(),
     sources = {
-        { name = 'path' },
+        { name = 'buffer' },
         { name = 'cmdline' }
     }
 })
