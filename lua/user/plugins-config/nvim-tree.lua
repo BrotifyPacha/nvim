@@ -3,16 +3,18 @@ vim.g.nvim_tree_respect_buf_cwd = 1
 local tree_cb = require'nvim-tree.config'.nvim_tree_callback
 
 vim.cmd [[
+    let g:nvim_tree_git_hl = 1
     let g:nvim_tree_icons = {
       \ 'default':        '',
       \ 'symlink':        '',
       \ 'git': {
-      \   'unstaged':     "",
-      \   'staged':       "",
-      \   'unmerged':     "",
-      \   'renamed':      "➜",
-      \   'untracked':    "",
-      \   'deleted':      "",
+      \   'unstaged':     "",
+      \   'staged':       "",
+      \   'unmerged':     "",
+      \   'renamed':      "",
+      \   'untracked':    "",
+      \   'deleted':      "",
+      \   'ignored':      "",
       \  },
       \ 'folder': {
       \   'arrow_open':   "",
@@ -50,26 +52,21 @@ require'nvim-tree'.setup {
   hijack_netrw        = true,
   open_on_setup       = false,
   ignore_ft_on_setup  = {},
-  auto_close          = false,
   open_on_tab         = false,
   hijack_cursor       = false,
   update_cwd          = false,
-  update_to_buf_dir   = {
-      enable = true,
-      auto_open = true,
-  },
   diagnostics = {
       enable = false,
       show_on_dirs = true,
   },
   git = {
-      enable = true
+      enable = true,
+      ignore = false
   },
   view = {
     height = 30,
     hide_root_folder = true,
     side = 'left',
-    auto_resize = true,
     mappings = {
       custom_only = false,
       list = {
