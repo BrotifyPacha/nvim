@@ -83,8 +83,11 @@ return packer.startup(function(use)
     use 'nvim-treesitter/nvim-treesitter-textobjects'
     use 'folke/which-key.nvim'
     use 'mfussenegger/nvim-dap'
-    use 'Pocco81/DAPInstall.nvim'
     use 'rcarriga/nvim-dap-ui'
+    use {
+        'Pocco81/DAPInstall.nvim',
+        branch = 'dev',
+    }
     use { 'nvim-treesitter/playground', cmd = 'TSPlaygroundToggle' }
     use 'editorconfig/editorconfig-vim'
     -- General
