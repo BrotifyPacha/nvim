@@ -28,25 +28,67 @@ dap.configurations.php = {
     }
 }
 
-dap.adapters.go = {
-    type = 'executable',
-    command = 'node',
-    args = { vim.fn.stdpath('config') .. '/debuggers/go/vscode-go/dist/debugAdapter.js' }
-}
+dap.adapters.go = function(callback, config)
+    local stdout = vim.loop.new_pipe(false)
+    local handle
+    local pid_or_err
+    local port = 38697
+    local opts = {
+        stdio = {nil, stdout},
+        args = {"dap", "-l", "127.0.0.1:" .. port},
+        detached = true
+    }
+    handle, pid_or_err = vim.loop.spawn("dlv", opts, function(code)
+        stdout:close()
+        handle:close()
+        if code ~= 0 then
+            print('dlv exited with code', code)
+        end
+    end)
+    assert(handle, 'Error running dlv: ' .. tostring(pid_or_err))
+    stdout:read_start(function(err, chunk)
+        assert(not err, err)
+        if chunk then
+            vim.schedule(function()
+                require('dap.repl').append(chunk)
+            end)
+        end
+    end)
+    -- Wait for delve to start
+    vim.defer_fn(
+    function()
+        callback({type = "server", host = "127.0.0.1", port = port})
+    end,
+    100)
+end
+-- https://github.com/go-delve/delve/blob/master/Documentation/usage/dlv_dap.md
 dap.configurations.go = {
     {
-        type = 'go',
-        request = 'launch',
-        name = 'Debug',
-        stopOnEntry = false,
-        showLog = false,
-        program = "main.go",
-        -- pathMappings = {
-        --     ['/var/www'] = '/home/gusev/workspace/${workspaceFolderBasename}/app',
-        --     -- ['/home/pgusev/workspace/${workspaceFolderBasename}'] = '/home/brotifypacha/workspace/servers/devel2/workspace/${workspaceFolderBasename}',
-        --     -- ['/home/pgusev/workspace/retorr'] = '${workspaceFolder}',
-        -- },
-        dlvToolPath = vim.fn.exepath('dlv')
+        type = "go",
+        name = "Debug file",
+        request = "launch",
+        program = "${file}"
+    },
+    {
+        type = "go",
+        name = "Debug project",
+        request = "launch",
+        program = "${workspaceFolder}"
+    },
+    {
+        type = "go",
+        name = "Debug test",
+        request = "launch",
+        mode = "test",
+        program = "${file}"
+    },
+    -- works with go.mod packages and sub packages
+    {
+        type = "go",
+        name = "Debug test (go.mod)",
+        request = "launch",
+        mode = "test",
+        program = "./${relativeFileDirname}"
     }
 }
 
