@@ -221,7 +221,7 @@ nnoremap('<leader>gu', "<cmd>lua require'gitsigns'.reset_hunk()<cr>")
 nnoremap('<leader>gs', "<cmd>lua require'gitsigns'.stage_hunk()<cr>")
 nnoremap('<leader>gp', "<cmd>lua require'gitsigns'.preview_hunk()<cr>")
 nnoremap('<leader>gt', "<cmd>Telescope git_branches<cr>")
-vnoremap('<leader>gv', "<cmd>GBrowse<cr>")
+vnoremap('<leader>gv', ":GBrowse<cr>")
 nnoremap('<leader>grr', '<cmd>lua require("user/helpers").xdgOpen(require("user/helpers").getRemoteLink())<cr>')
 nnoremap('<leader>grp', '<cmd>lua require("user/helpers").xdgOpen( require("user/helpers").getRemoteLink() .. "/-/pipelines")<cr>')
 
