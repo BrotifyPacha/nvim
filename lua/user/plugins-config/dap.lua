@@ -77,6 +77,13 @@ dap.configurations.go = {
     },
     {
         type = "go",
+        name = "Debug cli",
+        request = "launch",
+        program = "${file}",
+        args = { "-dry-run", "-kv-path=kv-public", "-env=rc" }
+    },
+    {
+        type = "go",
         name = "Debug test",
         request = "launch",
         mode = "test",
