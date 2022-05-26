@@ -149,7 +149,7 @@ vim.api.nvim_set_keymap('n',  '<leader>df',':lua require("dap").toggle_breakpoin
 vim.api.nvim_set_keymap('',  '<F11>',      ':lua require("dapui").toggle()<cr>',          flags)
 vim.api.nvim_set_keymap('v',  '<leader>de', ':lua require("helpers").visualExec(\'require("dapui").eval()\')<cr>', flags)
 vim.api.nvim_set_keymap('n',  '<leader>de', ':lua require("dapui").eval()<cr>', flags)
-vim.api.nvim_set_keymap('n',  '<leader>dc', ':lua require("dapui").run_to_cursor()<cr>', flags)
+vim.api.nvim_set_keymap('n',  '<leader>dc', ':lua require("dap").run_to_cursor()<cr>', flags)
 
 vim.api.nvim_set_keymap('n', '<S-up>',  ':lua require("dap").reverse_continue()<cr>',  flags)
 vim.api.nvim_set_keymap('n', '<S-down>',':lua require("dap").continue()<cr>',  flags)
