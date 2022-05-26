@@ -67,20 +67,15 @@ dap.configurations.go = {
         type = "go",
         name = "Debug file",
         request = "launch",
-        program = "${file}"
+        program = "${file}",
+        args = {},
     },
     {
         type = "go",
         name = "Debug project",
         request = "launch",
-        program = "${workspaceFolder}"
-    },
-    {
-        type = "go",
-        name = "Debug cli",
-        request = "launch",
-        program = "${file}",
-        args = { "-dry-run", "-kv-path=kv-public", "-env=rc" }
+        program = "${workspaceFolder}",
+        args = {},
     },
     {
         type = "go",
@@ -147,9 +142,8 @@ require("dapui").setup({
 local flags = { noremap = true, silent = true }
 
 vim.api.nvim_set_keymap('n', '<leader>ds', ':lua require("dap").continue()<cr>',          flags)
-vim.api.nvim_set_keymap('n', '<leader>dj', ':lua require("dap").step_over()<cr>',         flags)
-vim.api.nvim_set_keymap('n', '<leader>dl', ':lua require("dap").step_into()<cr>',         flags)
-vim.api.nvim_set_keymap('n', '<leader>dh', ':lua require("dap").step_out()<cr>',          flags)
+vim.api.nvim_set_keymap('n', '<leader>da', ':lua dapRunConfigWithArgs()<cr>',          flags)
+vim.api.nvim_set_keymap('n', '<leader>dp', ':lua require("dap").run_last()<cr>',          flags)
 vim.api.nvim_set_keymap('',  '<leader>dd', ':lua require("dap").toggle_breakpoint()<cr>', flags)
 vim.api.nvim_set_keymap('n',  '<leader>df',':lua require("dap").toggle_breakpoint(vim.fn.input("Enter condition: "))<cr>', flags)
 vim.api.nvim_set_keymap('',  '<F11>',      ':lua require("dapui").toggle()<cr>',          flags)
@@ -169,4 +163,48 @@ function _G.killDebuggers()
     vim.api.nvim_command [[
         silent !kill -9 $(ps aux | grep nvim.debuggers | awk '{ print $2 }')
     ]]
+end
+
+function _G.dapRunConfigWithArgs()
+    local dap = require('dap')
+    local ft = vim.bo.filetype
+    if ft == "" then
+        print("Filetype option is required to determine which dap configs are available")
+        return
+    end
+    local configs = dap.configurations[ft]
+    if configs == nil then
+        print("Filetype \"" .. ft .. "\" has no dap configs")
+        return
+    end
+    local mConfig = nil
+    vim.ui.select(
+        configs,
+        {
+            prompt = "Select config to run: ",
+            format_item = function(config)
+                return config.name
+            end
+        },
+        function(config)
+            mConfig = config
+        end
+    )
+    vim.api.nvim_command("redraw")
+    if mConfig == nil then
+        return
+    end
+    vim.ui.input(
+        {
+            prompt = mConfig.name .." - with args: ",
+        },
+        function(input)
+            if input == nil then
+                return
+            end
+            local args = vim.split(input, ' ', true)
+            mConfig.args = args
+            dap.run(mConfig)
+        end
+    )
 end
