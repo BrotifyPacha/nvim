@@ -1,38 +1,5 @@
-vim.g.nvim_tree_respect_buf_cwd = 1
-
 local tree_cb = require'nvim-tree.config'.nvim_tree_callback
 
-vim.cmd [[
-    let g:nvim_tree_icons = {
-      \ 'default':        '',
-      \ 'symlink':        '',
-      \ 'git': {
-      \   'unstaged':     "",
-      \   'staged':       "",
-      \   'unmerged':     "",
-      \   'renamed':      "",
-      \   'untracked':    "",
-      \   'deleted':      "",
-      \   'ignored':      "",
-      \  },
-      \ 'folder': {
-      \   'arrow_open':   "",
-      \   'arrow_closed': "",
-      \   'default':      "",
-      \   'open':         "",
-      \   'empty':        "",
-      \   'empty_open':   "",
-      \   'symlink':      "",
-      \   'symlink_open': "",
-      \  },
-      \  'lsp': {
-      \    'hint': "",
-      \    'info': "",
-      \    'warning': "",
-      \    'error': "",
-      \  }
-      \ }
-]]
 
 vim.cmd [[
     highlight! link NvimTreeGitDirty DiagnosticWarn
@@ -54,6 +21,7 @@ require'nvim-tree'.setup {
   open_on_tab         = false,
   hijack_cursor       = false,
   update_cwd          = false,
+  respect_buf_cwd     = true,
   diagnostics = {
       enable = false,
       show_on_dirs = true,
@@ -64,8 +32,37 @@ require'nvim-tree'.setup {
   },
   renderer = {
       highlight_git = true,
+      icons = {
+          show = {
+              git = false,
+          },
+          glyphs = {
+              default =        '',
+              symlink =        '',
+              git = {
+                  unstaged =     "",
+                  staged =       "",
+                  unmerged =     "",
+                  renamed =      "",
+                  untracked =    "",
+                  deleted =      "",
+                  ignored =      "",
+              },
+              folder = {
+                  arrow_open =   "",
+                  arrow_closed = "",
+                  default =      "",
+                  open =         "",
+                  empty =        "",
+                  empty_open =   "",
+                  symlink =      "",
+                  symlink_open = "",
+              },
+          },
+      },
   },
   view = {
+    adaptive_size = true,
     height = 30,
     hide_root_folder = true,
     side = 'left',
