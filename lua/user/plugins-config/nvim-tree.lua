@@ -3,7 +3,6 @@ vim.g.nvim_tree_respect_buf_cwd = 1
 local tree_cb = require'nvim-tree.config'.nvim_tree_callback
 
 vim.cmd [[
-    let g:nvim_tree_git_hl = 1
     let g:nvim_tree_icons = {
       \ 'default':        '',
       \ 'symlink':        '',
@@ -62,6 +61,9 @@ require'nvim-tree'.setup {
   git = {
       enable = true,
       ignore = false
+  },
+  renderer = {
+      highlight_git = true,
   },
   view = {
     height = 30,
