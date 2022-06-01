@@ -36,8 +36,8 @@ vim.cmd [[
 ]]
 
 vim.cmd [[
-    highlight! link NvimTreeGitDirty DiffChange
-    highlight! link NvimTreeGitStaged DiffAdd
+    highlight! link NvimTreeGitDirty DiagnosticWarn
+    highlight! link NvimTreeGitStaged Statement
 ]]
 
 vim.cmd [[
