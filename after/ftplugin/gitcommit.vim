@@ -1,5 +1,5 @@
 lua << EOF
-local branch = vim.fn['fugitive#head']()
+local branch = vim.fn['FugitiveHead']()
 if string.match(branch, '%u+%-%d+') then
     local lines = vim.api.nvim_buf_get_lines(0, 0, 99999, false)
     local branch_line = branch .. ': '
