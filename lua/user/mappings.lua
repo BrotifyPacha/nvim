@@ -213,6 +213,7 @@ nnoremap('<leader>gL', "<cmd>G push --force<cr>")
 nnoremap('<leader>gl', "<cmd>G push<cr>")
 nnoremap('<leader>gh', "<cmd>G pull<cr>")
 nnoremap('<leader>gv', "<cmd>bel vert G log --oneline --graph --decorate --branches<cr>")
+nnoremap('<leader>gV', "<cmd>Telescope git_bcommits<cr>")
 nnoremap('<leader>gg', "<cmd>bel vert G<cr>:wincmd L<cr>")
 nnoremap('<leader>gcc', "<cmd>G commit<cr>")
 nnoremap('<leader>gca', "<cmd>G commit --amend<cr>")
@@ -235,6 +236,7 @@ wk_reg {
     ['<leader>gl'] = 'push',
     ['<leader>gh'] = 'pull',
     ['<leader>gv'] = 'view history',
+    ['<leader>gV'] = 'view file history',
     ['<leader>gg'] = 'status',
     ['<leader>gc'] = {
         name = 'commit',
