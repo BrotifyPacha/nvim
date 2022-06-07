@@ -214,7 +214,9 @@ nnoremap('<leader>gl', "<cmd>G push<cr>")
 nnoremap('<leader>gh', "<cmd>G pull<cr>")
 nnoremap('<leader>gv', "<cmd>bel vert G log --oneline --graph --decorate --branches<cr>")
 nnoremap('<leader>gg', "<cmd>bel vert G<cr>:wincmd L<cr>")
-nnoremap('<leader>gc', "<cmd>G commit<cr>")
+nnoremap('<leader>gcc', "<cmd>G commit<cr>")
+nnoremap('<leader>gca', "<cmd>G commit --amend<cr>")
+nnoremap('<leader>gce', "<cmd>G commit --amend --no-edit<cr>")
 nnoremap('<leader>gd', "<cmd>Gdiffsplit<cr>")
 nnoremap('<leader>gb', "<cmd>lua require'gitsigns'.blame_line({full=true})<cr>")
 nnoremap('<leader>gB', "<cmd>lua require'gitsigns'.blame_line({enter=true})<cr>")
@@ -234,7 +236,13 @@ wk_reg {
     ['<leader>gh'] = 'pull',
     ['<leader>gv'] = 'view history',
     ['<leader>gg'] = 'status',
-    ['<leader>gc'] = 'commit',
+    ['<leader>gc'] = {
+        name = 'commit',
+        c = 'commit',
+        a = 'amend',
+        e = 'amend (no-edit)',
+        r = 'amend (no-edit, reset-author)',
+    },
     ['<leader>gd'] = 'diff split',
     ['<leader>gb'] = 'blame',
     ['<leader>gB'] = 'blame short',
