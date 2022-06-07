@@ -221,6 +221,8 @@ nnoremap('<leader>gB', "<cmd>lua require'gitsigns'.blame_line({full=true})<cr>")
 nnoremap('<leader>gu', "<cmd>lua require'gitsigns'.reset_hunk()<cr>")
 nnoremap('<leader>gs', "<cmd>lua require'gitsigns'.stage_hunk()<cr>")
 nnoremap('<leader>gp', "<cmd>lua require'gitsigns'.preview_hunk()<cr>")
+nnoremap('<leader>gf', "<cmd>G fetch --all<cr>")
+nnoremap('<leader>gF', "<cmd>G fetch --all --prune<cr>")
 nnoremap('<leader>gt', "<cmd>Telescope git_branches<cr>")
 vnoremap('<leader>gv', ":GBrowse<cr>")
 nnoremap('<leader>grr', '<cmd>lua require("user/helpers").xdgOpen(require("user/helpers").getRemoteLink())<cr>')
@@ -235,9 +237,12 @@ wk_reg {
     ['<leader>gc'] = 'commit',
     ['<leader>gd'] = 'diff split',
     ['<leader>gb'] = 'blame',
+    ['<leader>gB'] = 'blame full',
     ['<leader>gu'] = 'undo hunk',
     ['<leader>gs'] = 'stage hunk',
     ['<leader>gp'] = 'preview hunk',
+    ['<leader>gf'] = 'fetch all',
+    ['<leader>gF'] = 'fetch all (prune)',
     ['<leader>gr'] = {
         name = 'remote actions',
         r = 'view repo',
