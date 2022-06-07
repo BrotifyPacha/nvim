@@ -216,8 +216,8 @@ nnoremap('<leader>gv', "<cmd>bel vert G log --oneline --graph --decorate --branc
 nnoremap('<leader>gg', "<cmd>bel vert G<cr>:wincmd L<cr>")
 nnoremap('<leader>gc', "<cmd>G commit<cr>")
 nnoremap('<leader>gd', "<cmd>Gdiffsplit<cr>")
-nnoremap('<leader>gb', "<cmd>lua require'gitsigns'.blame_line({enter=true})<cr>")
-nnoremap('<leader>gB', "<cmd>lua require'gitsigns'.blame_line({full=true})<cr>")
+nnoremap('<leader>gb', "<cmd>lua require'gitsigns'.blame_line({full=true})<cr>")
+nnoremap('<leader>gB', "<cmd>lua require'gitsigns'.blame_line({enter=true})<cr>")
 nnoremap('<leader>gu', "<cmd>lua require'gitsigns'.reset_hunk()<cr>")
 nnoremap('<leader>gs', "<cmd>lua require'gitsigns'.stage_hunk()<cr>")
 nnoremap('<leader>gp', "<cmd>lua require'gitsigns'.preview_hunk()<cr>")
@@ -237,7 +237,7 @@ wk_reg {
     ['<leader>gc'] = 'commit',
     ['<leader>gd'] = 'diff split',
     ['<leader>gb'] = 'blame',
-    ['<leader>gB'] = 'blame full',
+    ['<leader>gB'] = 'blame short',
     ['<leader>gu'] = 'undo hunk',
     ['<leader>gs'] = 'stage hunk',
     ['<leader>gp'] = 'preview hunk',
