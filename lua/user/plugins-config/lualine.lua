@@ -87,7 +87,8 @@ require 'lualine'.setup({
         lualine_b = {
             {
                 'filename',
-                path = 1
+                path = 1,
+                shorting_target = 0,
             },
             -- {
             --     function() return '' end,
