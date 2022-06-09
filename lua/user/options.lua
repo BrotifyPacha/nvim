@@ -44,7 +44,16 @@ vim.opt.updatetime = 100
 vim.opt.bg = 'dark'
 vim.cmd [[ colo pencil ]]
 
-vim.opt.fillchars = { fold = '-' }
+vim.opt.fillchars = {
+    fold  = '-',
+    vert  = ' ',
+	vertleft = ' ',
+	vertright = ' ',
+	verthoriz = ' ',
+    horizup = ' ',
+    horizdown = '▀',
+    horiz = '▀',
+}
 vim.opt.foldlevel = 99
 vim.opt.foldminlines = 3
 -- vim.opt.foldopen = block,hor,insert,jump,mark,percent,quickfix,search,tag,undo
