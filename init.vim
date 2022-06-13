@@ -1,6 +1,7 @@
 " Specify a directory for plugins
 let g:config_location = stdpath('config')
 
+lua require 'user.autocmds'
 lua require 'user.options'
 lua require 'user.mappings'
 
@@ -64,11 +65,6 @@ function! BrowseFunc(opts)
     let opts = substitute(a:opts, '#', '\\#', 'g')
     silent execute '!xdg-open ' . trim(opts)
 endfunction
-
-augroup highlight_yank
-    autocmd!
-    autocmd TextYankPost * lua require('vim.highlight').on_yank({higroup='PmenuSel', timeout=250})
-augroup END
 
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
