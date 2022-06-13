@@ -33,4 +33,38 @@ function M.xdgOpen(arg)
     os.execute('xdg-open "' .. arg .. '"')
 end
 
+function M.winOpenFloat(buf_id)
+    local options = {
+        relative='editor',
+        row=(vim.go.lines/3),
+        col=(vim.go.columns/3),
+        width=math.floor(vim.go.columns/3),
+        height=math.floor(vim.go.lines/3),
+        border='single',
+    }
+    vim.api.nvim_win_set_config(buf_id, options)
+end
+
+function M.winMoveFloat(delta_row, delta_col)
+    local win_id = 0
+    local current = vim.api.nvim_win_get_config(win_id)
+    if current.relative == '' then
+        return
+    end
+    local options = {
+        row = current.row[false] + delta_row,
+        col = current.col[false] + delta_col,
+    }
+    vim.api.nvim_win_set_config(win_id, vim.tbl_extend('force', current, options))
+end
+
+function M.winSelectFloat()
+    print(1000000)
+    for _, win_id in pairs(vim.api.nvim_list_wins()) do
+        if vim.api.nvim_win_get_config(win_id).relative ~= '' then
+            vim.api.nvim_set_current_win(win_id)
+        end
+    end
+end
+
 return M
