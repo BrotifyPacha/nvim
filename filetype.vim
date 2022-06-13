@@ -21,11 +21,6 @@ augroup pacha_coc_no_statusline
   autocmd BufEnter * if &l:ft == "coc-explorer" | setlocal statusline=~ | endif
 augroup end
 
-augroup pacha_help_filetype
-  autocmd!
-  autocmd BufRead,WinEnter * if &l:buftype ==# 'help' | vert resize 80 | endif
-augroup end
-
 augroup pacha_vim_filetype
   autocmd!
   autocmd BufWinEnter *.vim let b:surround_{char2nr('f')} = "\"{{{\r\"}}}"
