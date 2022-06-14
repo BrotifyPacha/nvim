@@ -96,7 +96,7 @@ dap.configurations.go = {
 
 vim.fn.sign_define('DapBreakpoint', { text='●', texthl='ErrorMsg', linehl = '', numhl = 'ErrorMsg' })
 vim.fn.sign_define('DapBreakpointCondition', { text='◆', texthl='ErrorMsg', linehl = '', numhl = 'ErrorMsg' })
-vim.fn.sign_define('DapStopped', { text='', texthl='Error', linehl = '', numhl = 'Error' })
+vim.fn.sign_define('DapStopped', { text='', texthl='', linehl = '', numhl = 'Error' })
 
 -- Dap UI
 require("dapui").setup({
