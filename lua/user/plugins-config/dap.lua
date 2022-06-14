@@ -19,12 +19,17 @@ dap.configurations.php = {
         request = 'launch',
         name = 'Listen for Xdebug',
         stopOnEntry = true,
-        pathMappings = {
-            ['/var/www'] = '/home/gusev/workspace/${workspaceFolderBasename}/app',
-            -- ['/home/pgusev/workspace/${workspaceFolderBasename}'] = '/home/brotifypacha/workspace/servers/devel2/workspace/${workspaceFolderBasename}',
-            -- ['/home/pgusev/workspace/retorr'] = '${workspaceFolder}',
-        },
-        port = 9009
+        pathMappings = function ()
+            local username = vim.env.USER
+            local path = '/home/' .. username .. '/workspace/${workspaceFolderBasename}/app'
+            if os.execute('cd ~/workspace/action/') == 0 then
+                path = '/home/' .. username .. '/workspace/action/${workspaceFolderBasename}/app'
+            end
+            return {
+                ['/var/www'] = path
+            }
+        end,
+        port = 9000
     }
 }
 
