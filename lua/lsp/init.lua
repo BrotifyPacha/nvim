@@ -130,11 +130,8 @@ local function set_signs(bufnr)
         end
     end
     local filtered_diagnostics = {}
-    print(vim.inspect(one_sign_per_severity_per_line))
     for _, v in pairs(one_sign_per_severity_per_line) do
-        print(v)
         for _, j in pairs(v) do
-            print(j)
             table.insert(filtered_diagnostics, j)
         end
     end
