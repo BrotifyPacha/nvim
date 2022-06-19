@@ -99,8 +99,9 @@ dap.configurations.go = {
     }
 }
 
-vim.fn.sign_define('DapBreakpoint', { text='●', texthl='ErrorMsg', linehl = '', numhl = 'ErrorMsg' })
-vim.fn.sign_define('DapBreakpointCondition', { text='◆', texthl='ErrorMsg', linehl = '', numhl = 'ErrorMsg' })
+vim.fn.sign_define('DapBreakpoint',          { text='', texthl='ErrorMsg', linehl = '', numhl = 'ErrorMsg' })
+vim.fn.sign_define('DapBreakpointCondition', { text='卑', texthl='ErrorMsg', linehl = '', numhl = 'ErrorMsg' })
+vim.fn.sign_define('DapBreakpointRejected',  { text='', texthl='ErrorMsg', linehl = '', numhl = 'ErrorMsg' })
 vim.fn.sign_define('DapStopped', { text='', texthl='', linehl = '', numhl = 'Error' })
 
 -- Dap UI
@@ -114,24 +115,25 @@ require("dapui").setup({
         edit = 'e',
         repl = 'r',
     },
-    sidebar = {
-        -- You can change the order of elements in the sidebar
-        elements = {
-            -- Provide as ID strings or tables with 'id' and 'size' keys
-            { id = 'breakpoints', size = 0.15 },
-            { id = 'scopes', size = 0.50 },
-            { id = 'watches', size = 0.35 },
+    layouts = {
+        {
+            elements = {
+                'breakpoints',
+                -- 'stacks',
+                'watches',
+            },
+            size = 40,
+            position = 'left',
         },
-        size = 60,
-        position = 'left', -- Can be 'left', 'right', 'top', 'bottom'
-    },
-    tray = {
-        elements = {
-            'repl',
-            'stacks',
+        {
+            elements = {
+                -- 'repl',
+                'console',
+                'scopes',
+            },
+            size = 10,
+            position = 'bottom',
         },
-        size = 10,
-        position = 'bottom', -- Can be 'left', 'right', 'top', 'bottom'
     },
     floating = {
         max_height = nil, -- These can be integers or a float between 0 and 1.
