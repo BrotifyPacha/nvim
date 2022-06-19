@@ -14,5 +14,12 @@ Misc
    
    
 
+Primitives
+
+卑nf-mdi-triangle 
+ nf-mdi-hexagon
+ nf-fae-hexagon
+ﯾ nf-mdi-pentagon
+
 Cool icons
   
