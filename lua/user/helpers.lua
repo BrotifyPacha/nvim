@@ -88,7 +88,7 @@ function M.getMyWinbar()
     local gps = require'nvim-gps'
     local gps_data = gps.get_data()
     local output = { icon .. ' ' .. fname }
-    if gps ~= nil and gps.is_available() then
+    if gps ~= nil and gps_data ~= nil and gps.is_available() then
         for _, item in pairs(gps_data) do
             local highlight = nil
             if item.type == 'class-name' then
@@ -104,7 +104,7 @@ function M.getMyWinbar()
             end
             table.insert(
                 output,
-                highlight .. item.icon .. '%*' .. item.text .. '%*'
+                highlight .. item.icon .. '%*' .. '%#Folded#' .. item.text .. '%*'
             )
         end
     end
