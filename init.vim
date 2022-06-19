@@ -17,6 +17,7 @@ function! MyFoldText()
 endfunction
 set foldtext=MyFoldText()
 
+set winbar=%{%v:lua.require('user.helpers').getMyWinbar()%}
 set tabline=%!MyTabLine()
 set showtabline=2
 function MyTabLine()

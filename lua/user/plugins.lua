@@ -81,6 +81,7 @@ return packer.startup(function(use)
     use 'nvim-treesitter/nvim-treesitter'
     use 'nvim-treesitter/nvim-treesitter-refactor'
     use 'nvim-treesitter/nvim-treesitter-textobjects'
+    use 'SmiteshP/nvim-gps'
     use 'folke/which-key.nvim'
     use 'mfussenegger/nvim-dap'
     use 'rcarriga/nvim-dap-ui'

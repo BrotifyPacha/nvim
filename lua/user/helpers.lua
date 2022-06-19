@@ -66,4 +66,49 @@ function M.winSelectFloat()
     end
 end
 
+function M.getMyWinbar()
+    local fname = vim.fn.expand('%:t')
+    if fname == '' then
+        fname = '%#Comment#-No-name-%*'
+    end
+    local devicons, err = require'nvim-web-devicons'
+    local icon = nil
+    local highlight = nil
+    if err == nil then
+        icon, highlight = devicons.get_icon_by_filetype(vim.bo.ft)
+        icon = '%#' .. highlight .. '#' .. icon .. '%*'
+    end
+
+    local sep = ' %#Comment#%*%< '
+    local class_highlight     = '%#Type#'
+    local container_highlight = '%#Type#'
+    local method_highlight    = '%#Function#'
+    local function_highlight  = '%#Special#'
+
+    local gps = require'nvim-gps'
+    local gps_data = gps.get_data()
+    local output = { icon .. ' ' .. fname }
+    if gps ~= nil and gps.is_available() then
+        for _, item in pairs(gps_data) do
+            local highlight = nil
+            if item.type == 'class-name' then
+                highlight = class_highlight
+            elseif item.type == 'container-name' then
+                highlight = container_highlight
+            elseif item.type == 'method-name' then
+                highlight = method_highlight
+            elseif item.type == 'function-name' then
+                highlight = function_highlight
+            else
+                highlight = '%#Normal#'
+            end
+            table.insert(
+                output,
+                highlight .. item.icon .. '%*' .. item.text .. '%*'
+            )
+        end
+    end
+    return "  " .. table.concat(output, sep)
+end
+
 return M

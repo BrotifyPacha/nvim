@@ -10,3 +10,4 @@ require 'user.plugins-config.snippy'
 require 'user.plugins-config.cmp'
 require 'user.plugins-config.lualine'
 require 'user.plugins-config.which-key'
+require 'nvim-gps'.setup()
