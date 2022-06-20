@@ -10,12 +10,12 @@ Powerline
            
 
 Misc
- 
+  綠雷
    
    
 
 Primitives
-
+雷nf-mdi-record
 卑nf-mdi-triangle 
  nf-mdi-hexagon
  nf-fae-hexagon
