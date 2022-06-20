@@ -27,3 +27,19 @@ vim.api.nvim_create_autocmd({'BufRead', 'WinEnter'}, {
         vim.api.nvim_win_set_width(0, 80 + vim.o.numberwidth)
     end
 })
+
+vim.api.nvim_create_augroup('pacha_recording_status', { clear = true })
+vim.api.nvim_create_autocmd({'RecordingEnter'}, {
+    group = 'pacha_recording_status',
+    pattern = '*',
+    callback = function ()
+        vim.g.recording = true
+    end
+})
+vim.api.nvim_create_autocmd({'RecordingLeave'}, {
+    group = 'pacha_recording_status',
+    pattern = '*',
+    callback = function ()
+        vim.g.recording = false
+    end
+})

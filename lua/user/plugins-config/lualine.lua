@@ -9,6 +9,7 @@ local colors = {
     purple   = '#6855DE',
     blue     = '#008ec4',
     red      = '#e32791',
+    bright_red = '#ff2761',
     status_fg = require('lualine.utils.utils').extract_highlight_colors('StatusLine', 'fg'),
     status_bg = require('lualine.utils.utils').extract_highlight_colors('StatusLine', 'bg'),
 }
@@ -45,7 +46,9 @@ require 'lualine'.setup({
             {
                 -- mode component
                 function()
+                    local mode = vim.fn.mode()
                     local mode_color = {
+                        ['recording'] = colors.bright_red,
                         n = colors.cyan,
                         i = colors.purple,
                         v = colors.red,
@@ -67,10 +70,15 @@ require 'lualine'.setup({
                         ['!'] = colors.blue,
                         t = '#000000'
                     }
+                    local result = ' '
+                    if vim.g.recording then
+                        mode = 'recording'
+                        result = '雷'
+                    end
                     local status_bg = require('lualine.utils.utils').extract_highlight_colors('StatusLine', 'bg')
-                    vim.api.nvim_command( 'hi! LualineMode guifg=' .. status_bg .. ' guibg=' .. mode_color[vim.fn.mode()] )
-                    vim.api.nvim_command( 'hi! LualineModeDivider guifg=' .. mode_color[vim.fn.mode()] .. ' guibg=' .. status_bg )
-                    return ' '
+                    vim.api.nvim_command( 'hi! LualineMode guifg=' .. status_bg .. ' guibg=' .. mode_color[mode] )
+                    vim.api.nvim_command( 'hi! LualineModeDivider guifg=' .. mode_color[mode] .. ' guibg=' .. status_bg )
+                    return result
                 end,
                 color = 'LualineMode',
                 separator = { right = '' },
