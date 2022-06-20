@@ -70,6 +70,7 @@ vim.opt.langmap = {
 }
 
 vim.opt.laststatus = 3
+vim.opt.showmode = false
 
 -- Plugin specific options
 vim.g.PHP_vintage_case_default_indent = true
