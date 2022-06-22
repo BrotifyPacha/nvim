@@ -17,7 +17,7 @@ require 'nvim-treesitter.configs'.setup {
     },
     indent = {
         enable = true,
-        disable = { "php", "go" }
+        disable = { "go" }
     },
     refactor = {
         highlight_current_scope = {
