@@ -90,7 +90,8 @@ function M.getMyWinbar()
     local stiring_highlight   = '%#String#'
 
     local gps = require'nvim-gps'
-    local gps_data = gps.get_data()
+    local gps_data_func = gps.get_data
+    local _, gps_data = pcall(gps_data_func)
     local output = { icon .. ' ' .. fname }
     if gps ~= nil and gps_data ~= nil and gps.is_available() then
         for _, item in pairs(gps_data) do
