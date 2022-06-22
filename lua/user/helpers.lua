@@ -81,9 +81,13 @@ function M.getMyWinbar()
 
     local sep = ' %#Comment#%*%< '
     local class_highlight     = '%#Type#'
-    local container_highlight = '%#Type#'
+    local container_highlight = class_highlight
     local method_highlight    = '%#Function#'
     local function_highlight  = '%#Special#'
+
+    local sequence_highlight  = class_highlight
+    local mapping_highlight   = function_highlight
+    local stiring_highlight   = '%#String#'
 
     local gps = require'nvim-gps'
     local gps_data = gps.get_data()
@@ -99,6 +103,12 @@ function M.getMyWinbar()
                 highlight = method_highlight
             elseif item.type == 'function-name' then
                 highlight = function_highlight
+            elseif item.type == 'sequence-name' then
+                highlight = sequence_highlight
+            elseif item.type == 'mapping-name' then
+                highlight = mapping_highlight
+            elseif item.type == 'string-name' then
+                highlight = stiring_highlight
             else
                 highlight = '%#Normal#'
             end
