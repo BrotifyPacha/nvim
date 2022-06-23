@@ -18,7 +18,7 @@ dap.configurations.php = {
         type = 'php',
         request = 'launch',
         name = 'Listen for Xdebug',
-        stopOnEntry = true,
+        stopOnEntry = false,
         pathMappings = function ()
             local username = vim.env.USER
             local path = '/home/' .. username .. '/workspace/${workspaceFolderBasename}/app'
@@ -118,18 +118,16 @@ require("dapui").setup({
     layouts = {
         {
             elements = {
-                'breakpoints',
-                -- 'stacks',
-                'watches',
+                { id='breakpoints', size=0.30 },
+                { id='scopes',      size=0.45 },
+                { id='watches',     size=0.25 },
             },
             size = 40,
             position = 'left',
         },
         {
             elements = {
-                -- 'repl',
-                'console',
-                'scopes',
+                'repl',
             },
             size = 10,
             position = 'bottom',
