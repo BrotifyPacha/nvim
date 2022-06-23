@@ -122,14 +122,14 @@ require("dapui").setup({
                 { id='scopes',      size=0.45 },
                 { id='watches',     size=0.25 },
             },
-            size = 40,
+            size = 0.30,
             position = 'left',
         },
         {
             elements = {
                 'repl',
             },
-            size = 10,
+            size = 0.30,
             position = 'bottom',
         },
     },
