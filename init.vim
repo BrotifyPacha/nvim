@@ -23,20 +23,28 @@ set showtabline=2
 function MyTabLine()
   let s = ''
   for i in range(tabpagenr('$'))
+    let i = i + 1
     " select the highlighting
-    if i + 1 == tabpagenr()
-        let s .= '%#TabLineSel#'
+    if i == tabpagenr()
+        let tab_highlight = '%#TabLineSel#'
     else
-        let s .= '%#TabLine#'
+        let tab_highlight = '%#TabLine#'
     endif
-    " set the tab page number (for mouse clicks)
-    let s .= '%' . (i + 1) . 'T'
-    " the label is made by MyTabLabel() and %(i+1)X 
-    let s .= ' %{MyTabLabel(' . (i + 1) . ')} %' . (i + 1) . 'X窱'
-    " if next is not selected and not current and not last add divider
-    if i + 2 != tabpagenr() && i + 1 != tabpagenr() && i + 1 != tabpagenr('$')
-        let s .= '%#TabLineDivider#│'
-    endif
+    let tab_name = '%'.i.'T %{MyTabLabel(' . i . ')} %' . i . 'X窱'
+
+    let sep_highlight = '%#TabLineDivider#'
+    let sep = '│'
+    if i + 1 == tabpagenr()
+        let sep_highlight = '%#TabLineDividerSelected#'
+        let sep = '▐'
+    elseif i == tabpagenr()
+        let sep_highlight = '%#TabLineDividerSelected#'
+        " let sep = '▌'
+        let sep = '▌'
+    elseif i == tabpagenr('$')
+        let sep = ''
+    end
+    let s .= tab_highlight . tab_name . sep_highlight . sep
   endfor
   " after the last tab fill with TabLineFill and reset tab page nr
   let s .= '%#TabLineFill#%T'
