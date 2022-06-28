@@ -122,4 +122,57 @@ function M.getMyWinbar()
     return "  " .. table.concat(output, sep)
 end
 
+function M.PickWorkingDir(cmd, path)
+    local actions = require "telescope.actions"
+    local actions_state = require "telescope.actions.state"
+    local pickers = require "telescope.pickers"
+    local finders = require "telescope.finders"
+    local sorters = require "telescope.sorters"
+    local dropdown = require "telescope.themes".get_dropdown()
+
+    function enter(prompt_bufnr)
+        actions.close(prompt_bufnr)
+        local selected = actions_state.get_selected_entry()
+        local full_path = path .. '/' .. selected[1]
+
+        if cmd == 'tcd' then
+            local api = vim.api
+            local win_list = api.nvim_tabpage_list_wins(0)
+            local buftype = api.nvim_buf_get_option(api.nvim_win_get_buf(win_list[1]), 'buftype')
+            if #win_list > 1 and buftype ~= nil then
+                cmd = 'tabnew | tcd'
+            end
+        end
+        vim.cmd(cmd .. ' ' .. full_path)
+    end
+
+    local i, t, popen = 0, {}, io.popen
+    local pfile = popen('ls -A "'..path..'"')
+    for filename in pfile:lines() do
+        i = i + 1
+        t[i] = filename
+    end
+    pfile:close()
+    print(vim.inspect(t))
+
+    local dirs = t
+
+    local opts = {
+
+        finder = finders.new_table(dirs),
+        sorter = sorters.get_generic_fuzzy_sorter({}),
+
+        attach_mappings = function(prompt_bufnr, map)
+            map("n", "<CR>", enter)
+            map("i", "<CR>", enter)
+            return true
+        end,
+
+    }
+
+    local dir_picker = pickers.new(dropdown, opts)
+
+    dir_picker:find()
+end
+
 return M

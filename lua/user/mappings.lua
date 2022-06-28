@@ -102,6 +102,21 @@ nnoremap('q?', '<nop>')
 
 
 -- F key maps
+nnoremap('<F1>', '<cmd>WhichKey F1<cr>')
+local username = vim.env.USER
+local workspace = '/home/' .. username .. '/workspace/'
+if require'os'.execute('cd ~/workspace/action') == 0 then
+    local workspace = '/home/' .. username .. '/workspace/action/'
+else
+end
+wk_reg {
+    ["F1"] = {
+        name = "Pick working directory",
+        ["<F1>"] = { '<cmd>:lua require"user.helpers".PickWorkingDir("tcd", "' .. workspace .. '")<cr>', "change current tab directory", },
+        ["l"] = { '<cmd>:lua require"user.helpers".PickWorkingDir("lcd ", "' .. workspace .. '")<cr>', "change window directory", },
+    },
+}
+
 nnoremap('<F2><F2>', '<cmd>set spell!<cr>')
 nnoremap('<F2>g',    'zg')
 nnoremap('<F2>b',    'zw')
