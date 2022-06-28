@@ -8,27 +8,16 @@ nnoremap <C-g> :Telescope live_grep<cr>
 nnoremap <C-h> :Telescope git_status<cr>
 nnoremap - :Telescope current_buffer_fuzzy_find<cr>
 
-autocmd User TelescopeFindPre call s:TelescopeHighlight()
+autocmd User TelescopeFindPre call TelescopeHighlight()
 
 
-function! s:TelescopeHighlight()
-    highlight TelescopeSelection      guifg=#F1F1F1
-    highlight TelescopeSelectionCaret guifg=#F1F1F1
-	highlight TelescopeMultiSelection guifg=#F1F1F1 guibg=#2C81FB
-	highlight TelescopeNormal         guifg=#8E8E8E guibg=none
-
-	" Border highlight groups
-    highlight TelescopeBorder         guifg=#FFFFFF
-    highlight TelescopePromptBorder   guifg=#FFFFFF gui=bold
-    highlight TelescopeResultsBorder  guifg=#8E8E8E
-    highlight TelescopePreviewBorder  guifg=#8E8E8E
-
-	" Highlight characters your input matches
-    highlight TelescopeMatching       guifg=#20BBFC
-
-	" Color the prompt prefix
-	highlight TelescopePromptPrefix   guifg=#8E8E8E
-endfunction
+highlight TelescopeSelection           guifg=#F1F1F1
+highlight link TelescopeSelectionCaret String
+highlight link TelescopeMultiSelection Title
+highlight TelescopeNormal              guifg=#8E8E8E guibg=none
+highlight TelescopeBorder              guifg=#FFFFFF
+highlight link TelescopeMatching       Question
+highlight link TelescopePromptPrefix   String
 
 lua << EOF
 require "telescope".setup{
@@ -46,9 +35,10 @@ require "telescope".setup{
             '\\.spl$',
             '\\.sug$',
         },
-        selection_caret = ' > ',
-        entry_prefix = '   ',
-        prompt_prefix = ' > ',
+        multi_icon = '   ',
+        selection_caret = '   ',
+        entry_prefix = '    ',
+        prompt_prefix = '   ',
         vimgrep_arguments = {
           'rg',
           '--color=never',
