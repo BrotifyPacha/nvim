@@ -4,7 +4,6 @@ local colors = {
     cyan     = '#20bbfc',
     darkblue = '#005f87',
     green    = '#10A778',
-    green_dark= '#047046',
     orange   = '#FF8800',
     purple   = '#6855DE',
     blue     = '#008ec4',
@@ -106,7 +105,7 @@ require 'lualine'.setup({
             -- },
             {
                 'branch',
-                color = { fg = colors.green_dark },
+                color = { fg = colors.green },
                 icon = '',
                 padding = { left = 1 }
             },
