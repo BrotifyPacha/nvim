@@ -46,8 +46,22 @@ function MyTabLine()
     let s .= tab_highlight . tab_name . sep_highlight . sep
   endfor
   " after the last tab fill with TabLineFill and reset tab page nr
-  let s .= '%#TabLineFill#%T'
+  if &background == 'light'
+      let toggle_bg_indicator = ''
+  else
+      let toggle_bg_indicator = ''
+  end
+  let s .= '%#TabLineFill#%=  %@ToggleBG@| ' . toggle_bg_indicator . ' %X'
   return s
+endfunction
+
+function ToggleBG(a, b, c, d)
+    let bgOption = &background
+    if bgOption == 'light'
+        set bg=dark
+    else
+        set bg=light
+    end
 endfunction
 
 function! MyTabLabel(n)
