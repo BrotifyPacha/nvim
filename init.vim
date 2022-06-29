@@ -37,9 +37,8 @@ function MyTabLine()
     if i + 1 == tabpagenr()
         let sep_highlight = '%#TabLineDividerSelected#'
         let sep = '▐'
-    elseif i == tabpagenr()
+    elseif i == tabpagenr() && i != tabpagenr('$')
         let sep_highlight = '%#TabLineDividerSelected#'
-        " let sep = '▌'
         let sep = '▌'
     elseif i == tabpagenr('$')
         let sep = ''

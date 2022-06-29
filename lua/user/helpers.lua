@@ -136,10 +136,9 @@ function M.PickWorkingDir(cmd, path)
         local full_path = path .. '/' .. selected[1]
 
         if cmd == 'tcd' then
-            local api = vim.api
-            local win_list = api.nvim_tabpage_list_wins(0)
-            local buftype = api.nvim_buf_get_option(api.nvim_win_get_buf(win_list[1]), 'buftype')
-            if #win_list > 1 and buftype ~= nil then
+            local win_list = vim.api.nvim_tabpage_list_wins(0)
+            local bufname = vim.fn.bufname(vim.fn.bufnr())
+            if #win_list > 1 or bufname ~= '' then
                 cmd = 'tabnew | tcd'
             end
         end
@@ -153,7 +152,6 @@ function M.PickWorkingDir(cmd, path)
         t[i] = filename
     end
     pfile:close()
-    print(vim.inspect(t))
 
     local dirs = t
 
