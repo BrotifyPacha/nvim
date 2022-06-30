@@ -22,8 +22,6 @@ vim.api.nvim_create_autocmd({'BufRead', 'WinEnter'}, {
     group = 'pacha_help_filetype',
     pattern = '*\\/doc\\/*.txt',
     callback = function ()
-        local fname = vim.api.nvim_buf_get_name(0)
-        print('fname = ' .. fname .. ', match = ')
         vim.api.nvim_win_set_width(0, 80 + vim.o.numberwidth)
     end
 })
