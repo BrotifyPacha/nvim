@@ -47,8 +47,6 @@ local function xmap(from, to)
     map('x', from, to)
 end
 
-nnoremap('<leader><leader>', ':call search("<++>", "cw")<cr>c4l')
-
 -- Plugin mappings
 -- -- Easy align
 nmap('ga', '<Plug>(EasyAlign)')
@@ -109,9 +107,9 @@ wk_reg {
         ["<F1>"] = { '<cmd>lua require"user.helpers".PickWorkingDir("tcd", "$HOME/workspace/")<cr>', "workspace directory", },
         ["l"] = { '<cmd>lua require"user.helpers".PickWorkingDir("lcd", "$HOME/workspace/")<cr>', "workspace directory (local)", },
         ["p"] = { '<cmd>lua require"user.helpers".PickWorkingDir("tcd", "$HOME/.local/share/nvim/site/pack/packer/start/")<cr>', "plugins directory", },
-        ["P"] = { '<cmd>lua require"user.helpers".PickWorkingDir("lcd", "$HOME/.local/share/nvim/site/pack/packer/start/")<cr>', "plugins directory", },
-        ["k"] = { '<cmd>lua require"user.helpers".PickWorkingDir("tcd", "/tmp/k8s-repository-migrator-git/")<cr>', "plugins directory", },
-        ["K"] = { '<cmd>lua require"user.helpers".PickWorkingDir("lcd", "/tmp/k8s-repository-migrator-git/")<cr>', "plugins directory", },
+        ["P"] = { '<cmd>lua require"user.helpers".PickWorkingDir("lcd", "$HOME/.local/share/nvim/site/pack/packer/start/")<cr>', "plugins directory (local)", },
+        ["k"] = { '<cmd>lua require"user.helpers".PickWorkingDir("tcd", "/tmp/k8s-repository-migrator-git/")<cr>', "k8s migration", },
+        ["K"] = { '<cmd>lua require"user.helpers".PickWorkingDir("lcd", "/tmp/k8s-repository-migrator-git/")<cr>', "k8s migration (local)", },
     },
 }
 
@@ -167,6 +165,7 @@ inoremapexpr('<S-Tab>', 'v:lua.smart_tab_backward()')
 -- Leader mappings
 
 nnoremap('<leader><leader>', ':call search("<++>", "cw")<cr>c4l')
+nnoremap('<leader><tab>', ':tabnext<cr>')
 nnoremap('<leader>e', "<cmd>NvimTreeToggle<cr>")
 nnoremap('<leader>l', "<C-w>l")
 nnoremap('<leader>h', "<C-w>h")
@@ -181,7 +180,7 @@ nnoremap('<leader>o', "<cmd>let g:goyo_preset=1 |Goyo<cr>")
 wk_reg {
     ["<leader>"] = {
         ["<space>"] = "Goto next <++>",
-        ["<Tab>"] = "next tab",
+        ["<tab>"] = "next tab",
         e = "File explorer",
         h = "which_key_ignore",
         j = "which_key_ignore",
@@ -298,14 +297,12 @@ wk_reg {
     ['<leader>rd'] = 'add doc string',
 }
 
-nnoremap('<leader><tab>', ':tabnext<cr>')
 nnoremap('<leader>td', ':tcd %:h<cr>')
 nnoremap('<leader>tt', ':tabnew<cr>')
 nnoremap('<leader>tc', ':tabclose<cr>')
 nnoremap('<leader>tl', ':tabmove +1<cr>')
 nnoremap('<leader>th', ':tabmove -1<cr>')
 wk_reg {
-        ['<leader><tab>'] = '<++>',
         ['<leader>td'] = '<++>',
         ['<leader>tt'] = '<++>',
         ['<leader>tc'] = '<++>',
