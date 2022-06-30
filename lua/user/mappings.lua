@@ -110,6 +110,8 @@ wk_reg {
         ["l"] = { '<cmd>lua require"user.helpers".PickWorkingDir("lcd", "$HOME/workspace/")<cr>', "workspace directory (local)", },
         ["p"] = { '<cmd>lua require"user.helpers".PickWorkingDir("tcd", "$HOME/.local/share/nvim/site/pack/packer/start/")<cr>', "plugins directory", },
         ["P"] = { '<cmd>lua require"user.helpers".PickWorkingDir("lcd", "$HOME/.local/share/nvim/site/pack/packer/start/")<cr>', "plugins directory", },
+        ["k"] = { '<cmd>lua require"user.helpers".PickWorkingDir("tcd", "/tmp/k8s-repository-migrator-git/")<cr>', "plugins directory", },
+        ["K"] = { '<cmd>lua require"user.helpers".PickWorkingDir("lcd", "/tmp/k8s-repository-migrator-git/")<cr>', "plugins directory", },
     },
 }
 
