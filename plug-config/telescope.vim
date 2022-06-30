@@ -8,16 +8,15 @@ nnoremap <C-g> :Telescope live_grep<cr>
 nnoremap <C-h> :Telescope git_status<cr>
 nnoremap - :Telescope current_buffer_fuzzy_find<cr>
 
-autocmd User TelescopeFindPre call TelescopeHighlight()
+" autocmd User TelescopeFindPre call TelescopeHighlight()
 
 
-highlight TelescopeSelection           guifg=#F1F1F1
-highlight link TelescopeSelectionCaret String
-highlight link TelescopeMultiSelection Title
-highlight TelescopeNormal              guifg=#8E8E8E guibg=none
-highlight TelescopeBorder              guifg=#FFFFFF
-highlight link TelescopeMatching       Question
-highlight link TelescopePromptPrefix   String
+highlight! link TelescopeSelection      WinBar
+highlight! link TelescopeSelectionCaret String
+highlight! link TelescopeMultiSelection Title
+highlight! link TelescopeNormal         Normal
+highlight! link TelescopeMatching       Question
+highlight! link TelescopePromptPrefix   String
 
 lua << EOF
 require "telescope".setup{
