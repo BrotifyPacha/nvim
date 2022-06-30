@@ -8,12 +8,13 @@ end
 
 local function updateVisualSelection(buf, startPos, endPos, linewise)
     linewise = linewise or false
-    vim.api.nvim_win_set_cursor(buf, startPos)
     if linewise then
         vim.api.nvim_exec("normal! V", false)
     else
         vim.api.nvim_exec("normal! v", false)
     end
+    vim.api.nvim_win_set_cursor(buf, startPos)
+    vim.api.nvim_exec("normal! o", false)
     vim.api.nvim_win_set_cursor(buf, endPos)
 end
 
