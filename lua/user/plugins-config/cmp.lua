@@ -75,6 +75,8 @@ cmp.setup({
             i = cmp.mapping.abort(),
             c = cmp.mapping.close(),
         }),
+        ['<Up>']   = cmp.mapping.select_prev_item({ behavior=cmp.SelectBehavior.Insert  }),
+        ['<Down>'] = cmp.mapping.select_next_item({ behavior=cmp.SelectBehavior.Insert  }),
         ['<Tab>'] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
