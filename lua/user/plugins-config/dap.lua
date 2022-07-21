@@ -84,7 +84,7 @@ dap.configurations.go = {
     },
     {
         type = "go",
-        name = "Debug test",
+        name = "Debug test (File)",
         request = "launch",
         mode = "test",
         program = "${file}"
@@ -92,7 +92,7 @@ dap.configurations.go = {
     -- works with go.mod packages and sub packages
     {
         type = "go",
-        name = "Debug test (go.mod)",
+        name = "Debug test (Project)",
         request = "launch",
         mode = "test",
         program = "./${relativeFileDirname}"
