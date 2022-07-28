@@ -95,7 +95,7 @@ cmp.setup({
                 fallback()
             end
         end, { 'i', 's' }),
-        ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+        ['<CR>'] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
     },
 
     formatting = {
@@ -130,7 +130,12 @@ cmp.setup({
     },
     experimental = {
         ghost_text = false,
-    }
+    },
+	completion = {
+		-- autocomplete = true,
+		keyword_length = 1,
+		keyword_pattern = [[\%(-\?\d\+\%(\.\d\+\)\?\|\h\w*\%(-\w*\)*\)\|\$]]
+	}
 })
 
 -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
@@ -145,8 +150,8 @@ cmp.setup.cmdline('/', {
 cmp.setup.cmdline(':', {
     mapping = cmp.mapping.preset.cmdline(),
     sources = {
-        { name = 'buffer' },
-        { name = 'cmdline' }
+        { name = 'cmdline' },
+        { name = 'buffer' }
     }
 })
 
