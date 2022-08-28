@@ -122,7 +122,7 @@ function M.getMyWinbar()
     return "  " .. table.concat(output, sep)
 end
 
-function M.PickWorkingDir(cmd, path)
+function M.PickWorkingDir(cmd, dirs)
     local actions = require "telescope.actions"
     local actions_state = require "telescope.actions.state"
     local pickers = require "telescope.pickers"
@@ -133,8 +133,7 @@ function M.PickWorkingDir(cmd, path)
     function enter(prompt_bufnr)
         actions.close(prompt_bufnr)
         local selected = actions_state.get_selected_entry()
-        local full_path = path .. '/' .. selected[1]
-
+        local fullpath = selected.value
         if cmd == 'tcd' then
             local win_list = vim.api.nvim_tabpage_list_wins(0)
             local bufname = vim.fn.bufname(vim.fn.bufnr())
@@ -142,22 +141,45 @@ function M.PickWorkingDir(cmd, path)
                 cmd = 'tabnew | tcd'
             end
         end
-        vim.cmd(cmd .. ' ' .. full_path)
+        vim.cmd(cmd .. ' ' .. fullpath)
     end
 
-    local i, t, popen = 0, {}, io.popen
-    local pfile = popen('ls -A "'..path..'"')
-    for filename in pfile:lines() do
-        i = i + 1
-        t[i] = filename
+    local resultList = {}
+    for path_i, dir in ipairs(dirs) do
+        local i, t, popen = 0, {}, io.popen
+        local path = dir.path
+        local pfile = popen('ls -A "'..path..'"')
+        for filename in pfile:lines() do
+            i = i + 1
+            local category = ""
+            if #dirs > 1 then
+                category = dir.category
+            end
+            t[i] = {
+                fullpath = path .. filename,
+                dirname = filename,
+                ordinal = path .. filename,
+                category = category
+            }
+        end
+        pfile:close()
+        dirs = vim.list_extend(resultList, t)
     end
-    pfile:close()
-
-    local dirs = t
 
     local opts = {
-
-        finder = finders.new_table(dirs),
+        finder = finders.new_table({ results = resultList, entry_maker = function(item)
+            local displayText = ""
+            if (item.category ~= "") then
+                displayText = '(' .. item.category .. ') ' .. item.dirname
+            else
+                displayText = item.dirname
+            end
+            return {
+                value = item.fullpath,
+                ordinal = item.ordinal,
+                display = displayText
+            }
+        end }),
         sorter = sorters.get_generic_fuzzy_sorter({}),
 
         attach_mappings = function(prompt_bufnr, map)

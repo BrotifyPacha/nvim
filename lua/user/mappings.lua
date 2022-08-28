@@ -99,17 +99,22 @@ nnoremap('q/', '<nop>')
 nnoremap('q?', '<nop>')
 
 
+local workspaceDir = '{ path="$HOME/workspace/", category="workspace" }'
+local pluginsDir = '{ path="$HOME/.local/share/nvim/site/pack/packer/start/", category="plugin" }'
+local k8sMigratorDir = '{ path="/tmp/k8s-repository-migrator-git/", category="k8s-migrator" }'
+local configsDir = '{ path="$HOME/.config/", category="configs" }'
+local dirs = '{'.. workspaceDir ..', '.. pluginsDir ..'}'
 -- F key maps
 nnoremap('<F1>', '<cmd>WhichKey F1<cr>')
 wk_reg {
     ["F1"] = {
         name = "Change working directory",
-        ["<F1>"] = { '<cmd>lua require"user.helpers".PickWorkingDir("tcd", "$HOME/workspace/")<cr>', "workspace directory", },
-        ["l"] = { '<cmd>lua require"user.helpers".PickWorkingDir("lcd", "$HOME/workspace/")<cr>', "workspace directory (local)", },
-        ["p"] = { '<cmd>lua require"user.helpers".PickWorkingDir("tcd", "$HOME/.local/share/nvim/site/pack/packer/start/")<cr>', "plugins directory", },
-        ["P"] = { '<cmd>lua require"user.helpers".PickWorkingDir("lcd", "$HOME/.local/share/nvim/site/pack/packer/start/")<cr>', "plugins directory (local)", },
-        ["k"] = { '<cmd>lua require"user.helpers".PickWorkingDir("tcd", "/tmp/k8s-repository-migrator-git/")<cr>', "k8s migration", },
-        ["K"] = { '<cmd>lua require"user.helpers".PickWorkingDir("lcd", "/tmp/k8s-repository-migrator-git/")<cr>', "k8s migration (local)", },
+        ["<F1>"] = { '<cmd>lua require"user.helpers".PickWorkingDir("tcd", '.. dirs ..')<cr>', "workspace/plugins", },
+        ["l"] = { '<cmd>lua require"user.helpers".PickWorkingDir("lcd", '.. dirs ..')<cr>', "workspace/plugins (local)", },
+        ["K"] = { '<cmd>lua require"user.helpers".PickWorkingDir("tcd", {'.. k8sMigratorDir ..'})<cr>', "k8s-migrator", },
+        ["k"] = { '<cmd>lua require"user.helpers".PickWorkingDir("lcd", {'.. k8sMigratorDir ..'})<cr>', "k8s-migrator (local)", },
+        ["C"] = { '<cmd>lua require"user.helpers".PickWorkingDir("tcd", {'.. configsDir ..'})<cr>', "configs", },
+        ["c"] = { '<cmd>lua require"user.helpers".PickWorkingDir("lcd", {'.. configsDir ..'})<cr>', "configs (local)", },
     },
 }
 
