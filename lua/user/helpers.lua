@@ -195,4 +195,22 @@ function M.PickWorkingDir(cmd, dirs)
     dir_picker:find()
 end
 
+function M.generateLorem(wordCount)
+	if wordCount == nil then
+		return ""
+	end
+	local lorem = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
+	local loremTbl = vim.split(lorem, ' ', { plain = true, trimempty = true })
+	local result = ""
+	for i = 0, wordCount - 1, 1 do
+		local word = loremTbl[i % (#loremTbl) + 1]
+		if i > wordCount - 5 then
+			word = string.gsub(word, '[,.]', '')
+		end
+		result = result .. " " .. word
+	end
+	result = result .. "."
+	return vim.trim(result)
+end
+
 return M

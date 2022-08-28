@@ -1,3 +1,7 @@
 snippet = "Auto assignment" b
 	${1:variable} = "$1"
 	${0}
+
+snippet lorem "Lorem generator"
+	${1:5}
+	${1/\d*/\=v:lua.require("user.helpers").generateLorem(submatch(0))/g}
