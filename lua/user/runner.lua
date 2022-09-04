@@ -37,6 +37,34 @@ function M.runTests(cmd, failPattern)
 
     -- print(vim.inspect(testLocations))
     vim.fn.setqflist({}, 'r', {title = "Test failures", items=testLocations})
+
+    errorLocations = {}
+    vim.tbl_filter(
+        function (item)
+            if item.valid == 1 then
+                local filename = string.gsub(vim.fs.normalize(vim.api.nvim_buf_get_name(item.bufnr)), ".+/", "")
+                local searchPath = vim.fn.getcwd(0)
+                local filepath = vim.fs.find(filename, { path = searchPath, type = 'file' })
+                if filepath == nil then
+                    return false
+                end
+                errorLocations[#errorLocations+1] = {
+                    filename = filepath[1],
+                    lnum = item.lnum,
+                    text = item.text
+                }
+                return true
+            else
+                return false
+            end
+            -- vim.fs.find({item.})
+            -- return item.valid == 1
+        end,
+        vim.fn.getqflist({lines = testRunLines}).items
+    )
+    vim.fn.setqflist({}, 'a', {title = 'Test failures', items=errorLocations})
+
+    testsFailed = #vim.fn.getqflist() ~= 0
     if testsFailed then
         vim.cmd "copen | .cc"
     else

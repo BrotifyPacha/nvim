@@ -230,7 +230,7 @@ end
 
 function M.getCmdOutputLines(cmd)
     local i, t, popen = 0, {}, io.popen
-    local pfile = popen(cmd)
+    local pfile = popen(cmd .. ' 2>&1')
     local lines = {}
     for filename in pfile:lines() do
         i = i + 1
