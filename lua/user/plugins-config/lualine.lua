@@ -110,41 +110,77 @@ require 'lualine'.setup({
                 padding = { left = 1 }
             },
         },
-        lualine_c = {
+        lualine_c = {},
+        lualine_x = {
+            -- 'fileformat'
         },
-        lualine_x = { 'fileformat' },
         lualine_y = {
-            'filetype',
+            -- {
+            --     -- Lsp server name .
+            --     function()
+            --         local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
+            --         local clients = vim.lsp.get_active_clients()
+            --         if next(clients) == nil then
+            --             return ''
+            --         end
+            --         local lss = {}
+            --         for _, client in ipairs(clients) do
+            --             local filetypes = client.config.filetypes
+            --             if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
+            --                 if vim.tbl_contains(lss, client.name) == false then
+            --                     table.insert(lss, client.name)
+            --                 end
+            --             end
+            --         end
+            --         if vim.tbl_isempty(lss) ~= true then
+            --             return '謹' .. table.concat(lss, ', ')
+            --         end
+            --         return ''
+            --     end,
+            -- },
+        },
+        lualine_z = {
             {
-                -- Lsp server name .
-                function()
-                    local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
-                    local clients = vim.lsp.get_active_clients()
-                    if next(clients) == nil then
+                -- Tests indicator
+                function ()
+                    if vim.t.latest_test_run_failed == nil then
                         return ''
                     end
-                    local lss = {}
-                    for _, client in ipairs(clients) do
-                        local filetypes = client.config.filetypes
-                        if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
-                            if vim.tbl_contains(lss, client.name) == false then
-                                table.insert(lss, client.name)
-                            end
-                        end
+                    local icon = ''
+                    local color = ''
+                    local text = ''
+                    local status_bg = require('lualine.utils.utils').extract_highlight_colors('StatusLine', 'bg')
+                    if vim.t.latest_test_run_failed then
+                        color = colors.red
+                        text = '(Fail)'
+                    else
+                        color = colors.green
+                        text = '(Success)'
                     end
-                    if vim.tbl_isempty(lss) ~= true then
-                        return '謹' .. table.concat(lss, ', ')
-                    end
-                    return ''
+                    vim.api.nvim_command( 'hi! LualineTestsIndicator guifg=' .. color .. ' guibg=' .. status_bg )
+                    return icon
                 end,
+                color = 'LualineTestsIndicator',
             },
+            {
+                function ()
+                    if vim.t.latest_test_run_failed == nil then
+                        return ''
+                    else
+                        return '|'
+                    end
+                end,
+                padding = 0,
+                separator = ''
+            },
+            'filetype',
             {
                 -- Dap debugging status
                 function()
                     if dap_err == nil then
                         local dap_status = require('dap').status()
                         if string.len(dap_status) > 0 then
-                            return '● ' ..  dap_status
+                            return ' ● ' ..  dap_status .. ' '
                         else
                             return ''
                         end
@@ -152,12 +188,11 @@ require 'lualine'.setup({
                         return ''
                     end
                 end,
-                color = { fg = colors.red, bg = colors.status_bg }
+                color = { fg = colors.red, bg = colors.status_bg },
+                padding = '',
             },
+            -- 'location',
             'progress',
-        },
-        lualine_z = {
-            { 'location' },
         },
     },
 })
