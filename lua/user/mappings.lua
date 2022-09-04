@@ -210,8 +210,6 @@ wk_reg {
     }
 }
 
-nnoremap('<leader>st', '<cmd>lua require"user.runner".runTests("go test ./...", "--- FAIL: %testName% (")<cr>')
--- nnoremap('<leader>sb', '<cmd>cexpr system("go build " . )<cr>')
 wk_reg {
     ['<leader>dt'] = {
         name = "run tests",
@@ -395,7 +393,10 @@ function M.set_filetype_specific_mappings()
         buf_nnoremap(fprefix .. 's', ':w | so %<cr>')
     elseif ft == "markdown" then
         -- Markdown
-        buf_nnoremap(fprefix .. 'l', ':MarkdownPreviewToggle<cr>')
+        buf_nnoremap(fprefix .. 'p', ':MarkdownPreviewToggle<cr>')
+    elseif ft == 'go' then
+        buf_nnoremap(fprefix .. 't', '<cmd>lua require"user.runner".runTests("go test ./...", "--- FAIL: %testName% (")<cr>')
+        -- nnoremap('<leader>sb', '<cmd>cexpr system("go build " . )<cr>')
     end
 end
 
