@@ -199,19 +199,14 @@ wk_reg {
 
         d = {
             name = "debug",
-            a = { name = "with args"},
-            c = { name = "run to cursor"},
-            d = { name = "toggle breakpoint"},
-            f = { name = "toggle If breakpoint"},
-            e = { name = "eval under cursor"},
-            p = { name = "run previous setup"},
-            s = { name = "start/continue"},
+            a = "start with args",
+            s = "start/continue",
+            p = "repeat previous run",
+            c = "run to cursor",
+            d = "toggle breakpoint",
+            f = "toggle If breakpoint",
+            e = "eval under cursor",
         },
-        g = { name = "git" },
-        q = { name = "quickfix" },
-        r = { name = "refactor" },
-        t = { name = "tabs" },
-        w = { name = "windows" },
     }
 }
 
@@ -230,20 +225,23 @@ nnoremap('<leader>w3' , '<cmd>lua vim.api.nvim_win_set_width(0, math.floor(vim.a
 nnoremap('<leader>w4' , '<cmd>lua vim.api.nvim_win_set_width(0, math.floor(vim.api.nvim_get_option("columns") / 4))<cr>')
 nnoremap('<leader>w5' , '<cmd>lua vim.api.nvim_win_set_width(0, math.floor(vim.api.nvim_get_option("columns") / 5))<cr>')
 wk_reg {
-    ['<leader>wq'] = 'close window',
-    ['<leader>ww'] = 'save',
-    ['<leader>wd'] = 'diff windows',
-    ['<leader>wr'] = 'rotate',
-    ['<leader>w2'] = 'resize to 1/2',
-    ['<leader>w3'] = 'resize to 1/3',
-    ['<leader>w4'] = 'resize to 1/4',
-    ['<leader>w5'] = 'resize to 1/5',
-    ['<leader>wF'] = 'make window Floating',
-    ['<leader>wf'] = 'select Floating',
-    ['<leader>wh'] = 'move float left',
-    ['<leader>wj'] = 'move float down',
-    ['<leader>wk'] = 'move float top',
-    ['<leader>wl'] = 'move float right',
+    ['<leader>w'] = {
+        name = "windows",
+        q = 'close window',
+        w = 'save',
+        d = 'diff windows',
+        r = 'rotate',
+        ['2'] = 'resize to 1/2',
+        ['3'] = 'resize to 1/3',
+        ['4'] = 'resize to 1/4',
+        ['5'] = 'resize to 1/5',
+        F = 'make window Floating',
+        f = 'select Floating',
+        h = 'move float left',
+        j = 'move float down',
+        k = 'move float top',
+        l = 'move float right',
+    }
 }
 
 nnoremap('<leader>gL', "<cmd>G push --force<cr>")
@@ -269,32 +267,35 @@ nnoremap('<leader>grr', '<cmd>lua require("user/helpers").xdgOpen(require("user/
 nnoremap('<leader>grp', '<cmd>lua require("user/helpers").xdgOpen( require("user/helpers").getRemoteLink() .. "/-/pipelines")<cr>')
 
 wk_reg {
-    ['<leader>gL'] = 'push (force)',
-    ['<leader>gl'] = 'push',
-    ['<leader>gh'] = 'pull',
-    ['<leader>gv'] = 'view history',
-    ['<leader>gV'] = 'view file history',
-    ['<leader>gg'] = 'status',
-    ['<leader>gc'] = {
-        name = 'commit',
-        c = 'commit',
-        a = 'amend',
-        e = 'amend (no-edit)',
-        r = 'amend (no-edit, reset-author)',
+    ['<leader>g'] = {
+        name = 'git',
+        L = 'push (force)',
+        l = 'push',
+        h = 'pull',
+        v = 'view history',
+        V = 'view file history',
+        g = 'status',
+        c = {
+            name = 'commit',
+            c = 'commit',
+            a = 'amend',
+            e = 'amend (no-edit)',
+            r = 'amend (no-edit, reset-author)',
+        },
+        d = 'diff split',
+        b = 'blame',
+        B = 'blame short',
+        u = 'undo hunk',
+        s = 'stage hunk',
+        p = 'preview hunk',
+        f = 'fetch all',
+        F = 'fetch all (prune)',
+        r = {
+            name = 'remote actions',
+            r = 'view repo',
+            p = 'view pipelines',
+        }
     },
-    ['<leader>gd'] = 'diff split',
-    ['<leader>gb'] = 'blame',
-    ['<leader>gB'] = 'blame short',
-    ['<leader>gu'] = 'undo hunk',
-    ['<leader>gs'] = 'stage hunk',
-    ['<leader>gp'] = 'preview hunk',
-    ['<leader>gf'] = 'fetch all',
-    ['<leader>gF'] = 'fetch all (prune)',
-    ['<leader>gr'] = {
-        name = 'remote actions',
-        r = 'view repo',
-        p = 'view pipelines',
-    }
 }
 
 nnoremap('<leader>rr', ':call RenameLocalVariable()<cr>')
@@ -306,14 +307,17 @@ nnoremap('<leader>rC', ':call formatting#go_camel_case(1)<cr>')
 nnoremap('<leader>rm', ':call formatting#squash_blank_lines()<cr>')
 nnoremap('<leader>rd', ':call AddDocString()<cr>')
 wk_reg {
-    ['<leader>rr'] = 'rename local var',
-    ['<leader>rt'] = 'toggle multiline args',
-    ['<leader>rs'] = 'snake_case',
-    ['<leader>rS'] = 'SNAKE_CASE',
-    ['<leader>rc'] = 'camelCase',
-    ['<leader>rC'] = 'CamelCase',
-    ['<leader>rm'] = 'merge blanks',
-    ['<leader>rd'] = 'add doc string',
+    ['<leader>r'] = {
+        name = 'refactor',
+        r = 'rename local var',
+        t = 'toggle multiline args',
+        s = 'snake_case',
+        S = 'SNAKE_CASE',
+        c = 'camelCase',
+        C = 'CamelCase',
+        m = 'merge blanks',
+        d = 'add doc string',
+    }
 }
 
 nnoremap('<leader>td', '<cmd>tcd %:h<cr>')
@@ -322,11 +326,14 @@ nnoremap('<leader>tc', '<cmd>tabclose<cr>')
 nnoremap('<leader>tl', '<cmd>tabmove +1<cr><cmd>call repeat#set("<leader>tl")<cr>')
 nnoremap('<leader>th', '<cmd>tabmove -1<cr><cmd>call repeat#set("<leader>th")<cr>')
 wk_reg {
-        ['<leader>td'] = 'switch tab working dir',
-        ['<leader>tt'] = 'open tab',
-        ['<leader>tc'] = 'close tab',
-        ['<leader>tl'] = 'move tab right',
-        ['<leader>th'] = 'move tab left',
+    ['<leader>t'] = {
+        name = 'tabs',
+        d = 'switch tab working dir',
+        t = 'open tab',
+        c = 'close tab',
+        l = 'move tab right',
+        h = 'move tab left',
+    }
 }
 
 -- nnoremap('<leader>bb', ':bw!<cr>')
@@ -342,7 +349,10 @@ wk_reg {
 
 nnoremap('<leader>qc', ':cclose<cr>')
 wk_reg {
-        ['<leader>qc'] = 'close',
+    ['<leader>q'] = {
+        name = 'quickfix',
+        c = 'close',
+    }
 }
 
 vim.cmd
