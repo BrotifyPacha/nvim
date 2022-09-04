@@ -67,16 +67,30 @@ function M.winSelectFloat()
 end
 
 function M.getMyWinbar()
-    local fname = vim.fn.expand('%:t')
-    if fname == '' then
-        fname = '%#Comment#-No-name-%*'
-    end
     local devicons, err = require'nvim-web-devicons'
     local icon = nil
     local highlight = nil
     if err == nil then
-        icon, highlight = devicons.get_icon_by_filetype(vim.bo.ft)
-        icon = '%#' .. highlight .. '#' .. icon .. '%*'
+        icon, icon_highlight = devicons.get_icon_by_filetype(vim.bo.ft)
+    end
+
+    local fname = vim.fn.expand('%:t')
+    if fname == '' then
+        local buftype = vim.bo.buftype
+        if buftype ~= '' and buftype == 'quickfix' then
+            title = vim.fn.getqflist({title = 1}).title
+            icon = ''
+            if string.match(title, '.+fail.+') then
+                icon_highlight = 'ErrorMsg'
+                title_highlight = '%#ErrorMsg#'
+            else
+                icon_highlight = 'Normal'
+                title_highlight = '%#Normal#'
+            end
+            fname = title_highlight .. title .. '%*%#Comment# - Quickfix%*'
+        else
+            fname = '%#Comment#-No-name-%*'
+        end
     end
 
     local sep = ' %#Comment#%*%< '
@@ -92,6 +106,7 @@ function M.getMyWinbar()
     local gps = require'nvim-gps'
     local gps_data_func = gps.get_data
     local _, gps_data = pcall(gps_data_func)
+    icon = '%#' .. icon_highlight .. '#' .. icon .. '%*'
     local output = { icon .. ' ' .. fname }
     if gps ~= nil and gps_data ~= nil and gps.is_available() then
         for _, item in pairs(gps_data) do
