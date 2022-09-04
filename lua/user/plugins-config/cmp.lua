@@ -131,11 +131,11 @@ cmp.setup({
     experimental = {
         ghost_text = false,
     },
-	completion = {
-		-- autocomplete = true,
-		keyword_length = 1,
-		keyword_pattern = [[\%(-\?\d\+\%(\.\d\+\)\?\|\h\w*\%(-\w*\)*\)\|\$]]
-	}
+	-- completion = {
+	-- 	-- autocomplete = true,
+	-- 	-- keyword_length = 1,
+	-- 	-- keyword_pattern = [[\%(-\?\d\+\%(\.\d\+\)\?\|\h\w*\%(-\w*\)*\)\|\$]]
+	-- }
 })
 
 -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
