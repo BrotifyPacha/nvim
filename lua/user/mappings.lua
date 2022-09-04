@@ -210,6 +210,15 @@ wk_reg {
     }
 }
 
+nnoremap('<leader>st', '<cmd>lua require"user.runner".runTests("go test ./...", "--- FAIL: %testName% (")<cr>')
+-- nnoremap('<leader>sb', '<cmd>cexpr system("go build " . )<cr>')
+wk_reg {
+    ['<leader>dt'] = {
+        name = "run tests",
+        t = {}
+    }
+}
+
 nnoremap('<leader>wq' , '<cmd>q<cr>')
 nnoremap('<leader>ww' , '<cmd>w<cr>')
 nnoremap('<leader>wd' , '<cmd>windo diffthis<cr>')

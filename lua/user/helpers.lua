@@ -213,4 +213,15 @@ function M.generateLorem(wordCount)
 	return vim.trim(result)
 end
 
+function M.getCmdOutputLines(cmd)
+    local i, t, popen = 0, {}, io.popen
+    local pfile = popen(cmd)
+    local lines = {}
+    for filename in pfile:lines() do
+        i = i + 1
+        lines[i] = filename
+    end
+    pfile:close()
+    return lines
+end
 return M
