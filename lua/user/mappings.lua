@@ -197,13 +197,21 @@ wk_reg {
         L = "which_key_ignore",
         o = "goyo",
 
-        d = { name = "debug" },
+        d = {
+            name = "debug",
+            a = { name = "with args"},
+            c = { name = "run to cursor"},
+            d = { name = "toggle breakpoint"},
+            f = { name = "toggle If breakpoint"},
+            e = { name = "eval under cursor"},
+            p = { name = "run previous setup"},
+            s = { name = "start/continue"},
+        },
         g = { name = "git" },
         q = { name = "quickfix" },
         r = { name = "refactor" },
         t = { name = "tabs" },
         w = { name = "windows" },
-        b = { name = "buffers" },
     }
 }
 
@@ -230,6 +238,12 @@ wk_reg {
     ['<leader>w3'] = 'resize to 1/3',
     ['<leader>w4'] = 'resize to 1/4',
     ['<leader>w5'] = 'resize to 1/5',
+    ['<leader>wF'] = 'make window Floating',
+    ['<leader>wf'] = 'select Floating',
+    ['<leader>wh'] = 'move float left',
+    ['<leader>wj'] = 'move float down',
+    ['<leader>wk'] = 'move float top',
+    ['<leader>wl'] = 'move float right',
 }
 
 nnoremap('<leader>gL', "<cmd>G push --force<cr>")
@@ -302,29 +316,29 @@ wk_reg {
     ['<leader>rd'] = 'add doc string',
 }
 
-nnoremap('<leader>td', ':tcd %:h<cr>')
-nnoremap('<leader>tt', ':tabnew<cr>')
-nnoremap('<leader>tc', ':tabclose<cr>')
-nnoremap('<leader>tl', ':tabmove +1<cr>')
-nnoremap('<leader>th', ':tabmove -1<cr>')
+nnoremap('<leader>td', '<cmd>tcd %:h<cr>')
+nnoremap('<leader>tt', '<cmd>tabnew<cr>')
+nnoremap('<leader>tc', '<cmd>tabclose<cr>')
+nnoremap('<leader>tl', '<cmd>tabmove +1<cr><cmd>call repeat#set("<leader>tl")<cr>')
+nnoremap('<leader>th', '<cmd>tabmove -1<cr><cmd>call repeat#set("<leader>th")<cr>')
 wk_reg {
-        ['<leader>td'] = '<++>',
-        ['<leader>tt'] = '<++>',
-        ['<leader>tc'] = '<++>',
-        ['<leader>tl'] = '<++>',
-        ['<leader>th'] = '<++>',
+        ['<leader>td'] = 'switch tab working dir',
+        ['<leader>tt'] = 'open tab',
+        ['<leader>tc'] = 'close tab',
+        ['<leader>tl'] = 'move tab right',
+        ['<leader>th'] = 'move tab left',
 }
 
-nnoremap('<leader>bb', ':bw!<cr>')
-nnoremap('<leader>bl', ':buffers<cr>')
-nnoremap('<leader>bn', ':bnext<cr>')
-nnoremap('<leader>bp', ':bprevious<cr>')
-wk_reg {
-        ['<leader>bb'] = '<++>',
-        ['<leader>bl'] = '<++>',
-        ['<leader>bn'] = '<++>',
-        ['<leader>bp'] = '<++>',
-}
+-- nnoremap('<leader>bb', ':bw!<cr>')
+-- nnoremap('<leader>bl', ':buffers<cr>')
+-- nnoremap('<leader>bn', ':bnext<cr>')
+-- nnoremap('<leader>bp', ':bprevious<cr>')
+-- wk_reg {
+--         ['<leader>bb'] = 'wipeout buffer',
+--         ['<leader>bl'] = 'list buffers',
+--         ['<leader>bn'] = 'next buffer',
+--         ['<leader>bp'] = 'previous buffer',
+-- }
 
 nnoremap('<leader>qc', ':cclose<cr>')
 wk_reg {
