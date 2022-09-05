@@ -239,4 +239,16 @@ function M.getCmdOutputLines(cmd)
     pfile:close()
     return lines
 end
+
+function CheckFileExists(filepath)
+    local file, err = io.open(filepath, 'r')
+    if file ~= nil then
+        file:close()
+    end
+    if err ~= nil then
+        return false
+    end
+    return true
+end
+
 return M
