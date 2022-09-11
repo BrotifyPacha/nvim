@@ -400,5 +400,26 @@ function M.set_filetype_specific_mappings()
     end
 end
 
+function CustomCtrlAHandler()
+    local line = vim.api.nvim_get_current_line()
+    local cursor = vim.api.nvim_win_get_cursor(0)
+    local word = vim.fn.expand("<cword>")
+    while string.sub(line, cursor[2]+1, cursor[2]+1) == " " do
+        cursor[2] = cursor[2] + 1
+        vim.cmd('normal! l')
+    end
+    if word == "true" or word == "false" then
+        if word == 'true' then
+            vim.cmd("normal! ciwfalse")
+        end
+        if word == 'false' then
+            vim.cmd("normal! ciwtrue")
+        end
+        return
+    end
+    vim.cmd("normal! ")
+end
+nnoremap("<C-a>", "<cmd>lua CustomCtrlAHandler()<cr>")
+
 return M
 
