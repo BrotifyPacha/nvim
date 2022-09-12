@@ -343,17 +343,6 @@ wk_reg {
     }
 }
 
--- nnoremap('<leader>bb', ':bw!<cr>')
--- nnoremap('<leader>bl', ':buffers<cr>')
--- nnoremap('<leader>bn', ':bnext<cr>')
--- nnoremap('<leader>bp', ':bprevious<cr>')
--- wk_reg {
---         ['<leader>bb'] = 'wipeout buffer',
---         ['<leader>bl'] = 'list buffers',
---         ['<leader>bn'] = 'next buffer',
---         ['<leader>bp'] = 'previous buffer',
--- }
-
 nnoremap('<leader>qc', ':cclose<cr>')
 wk_reg {
     ['<leader>q'] = {
