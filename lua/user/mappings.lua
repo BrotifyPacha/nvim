@@ -395,7 +395,7 @@ function M.set_filetype_specific_mappings()
         -- Markdown
         buf_nnoremap(fprefix .. 'p', ':MarkdownPreviewToggle<cr>')
     elseif ft == 'go' then
-        buf_nnoremap(fprefix .. 't', '<cmd>lua require"user.runner".runTests("go test ./...", "--- FAIL: %testName% (")<cr>')
+        buf_nnoremap(fprefix .. 't', '<cmd>lua require"user.runner".runTests("go test ./...", require"user.runner".golangEfm)<cr>')
         -- nnoremap('<leader>sb', '<cmd>cexpr system("go build " . )<cr>')
     end
 end

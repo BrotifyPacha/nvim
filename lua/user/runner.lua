@@ -3,45 +3,34 @@ local helpers = require"user.helpers"
 
 local M = {}
 
-local testNamePlaceholder = "%%testName%%"
-local testNameLuaRegex = "([%%w-_]+)"
+M.golangEfm = "%A %.%#Error Trace: %#%f:%l,%C %.%#Error: %m,%Z %.%#Test: %#%o,%f:%l:%c:%m,\\ %#%f:%l: %m,--- FAIL: %m %.%#"
 
-function M.runTests(cmd, failPattern)
+function M.runTests(cmd, efmString)
     local testsFailed = false
     local testRunLines = require"user.helpers".getCmdOutputLines(cmd)
-    -- local re = vim.regex(failPattern)
-    failPattern = failPattern:gsub('%(', '%%(')
-    failPattern = failPattern:gsub('%)', '%%)')
-    failPattern = failPattern:gsub(testNamePlaceholder, testNameLuaRegex)
 
-    local testNames = {}
-    for _, line in pairs(testRunLines) do
-        local match = string.match(line, failPattern)
-        if match ~= nil then
-            testsFailed = true
-            testNames[#testNames+1] = match
-        end
-    end
-
-    local testLocations = {}
-    -- print(vim.inspect(testNames))
-    for _, test in pairs(testNames) do
-        local grepTestName = helpers.getCmdOutputLines("grep -Rin " .. test)
-        for _, filename in pairs(grepTestName) do
-            testLocations[#testLocations+1] = {
-                filename = filename:gsub(':%d+.+', ''),
-                pattern = test,
-            }
-        end
-    end
-
-    -- print(vim.inspect(testLocations))
-    vim.fn.setqflist({}, 'r', {title = "Test failures", items=testLocations})
-
-    errorLocations = {}
+    local errorLocations = {}
     vim.tbl_filter(
         function (item)
             if item.valid == 1 then
+                --- If item is empty we grep matched text ourselves
+                if item.bufnr == 0 and item.col == 0 and item.lnum == 0 then
+                    local messageMatch = {}
+                    local grepTestName = helpers.getCmdOutputLines("grep -Rin '" .. item.text .. "'")
+                    for _, match in pairs(grepTestName) do
+                        messageMatch[#messageMatch+1] = match
+                    end
+                    if #messageMatch > 1 then
+                        print("grep: multiple matches found")
+                    else
+                        local foundItems = vim.fn.getqflist({lines = messageMatch}).items
+                        if #foundItems ~= 0 then
+                            foundItems[1].text = item.text
+                            item = foundItems[1]
+                        end
+                    end
+                end
+                --- Check that matched file exists
                 local filepath = vim.fs.normalize(vim.api.nvim_buf_get_name(item.bufnr))
                 if not CheckFileExists(filepath) then
                     local filename = string.gsub(filepath, ".+/", "")
@@ -62,9 +51,12 @@ function M.runTests(cmd, failPattern)
                 return false
             end
         end,
-        vim.fn.getqflist({lines = testRunLines}).items
+        vim.fn.getqflist({
+            efm = efmString,
+            lines = testRunLines
+        }).items
     )
-    vim.fn.setqflist({}, 'a', {title = 'Test failures', items=errorLocations})
+    vim.fn.setqflist({}, 'r', {title = 'Test failures', items=errorLocations})
 
     testsFailed = #vim.fn.getqflist() ~= 0
     if testsFailed then
