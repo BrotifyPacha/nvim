@@ -3,7 +3,7 @@ local helpers = require"user.helpers"
 
 local M = {}
 
-M.golangEfm = "%A %.%#Error Trace: %#%f:%l,%C %.%#Error: %m,%Z %.%#Test: %#%o,%f:%l:%c:%m,\\ %#%f:%l: %m,--- FAIL: %m %.%#"
+M.golangEfm = "%A %.%#Error Trace: %#%f:%l,%C %.%#Error: %m,%Z %.%#Messages: %#%m,%f:%l:%c:%m, %#%f:%l: %m,--- FAIL: %m %.%#,%C%s"
 
 function M.runTests(cmd, efmString)
     local testsFailed = false
