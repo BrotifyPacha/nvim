@@ -1,5 +1,3 @@
-" TODO: Make quickfix parcer for go build/go test error messages
-
 " Specify a directory for plugins
 let g:config_location = stdpath('config')
 
