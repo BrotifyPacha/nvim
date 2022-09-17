@@ -36,6 +36,9 @@ end
 local function xnoremap(from, to)
     noremap('x', from, to)
 end
+local function cnoremap(from, to)
+    noremap('c', from, to)
+end
 
 local function nmap(from, to)
     map('n', from, to)
@@ -98,6 +101,7 @@ nnoremap('q:', '<nop>')
 nnoremap('q/', '<nop>')
 nnoremap('q?', '<nop>')
 
+cnoremap('<C-f>', '<C-f>F/l')
 
 local workspaceDir = '{ path="$HOME/workspace/", category="workspace" }'
 local pluginsDir = '{ path="$HOME/.local/share/nvim/site/pack/packer/start/", category="plugin" }'
