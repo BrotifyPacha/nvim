@@ -221,6 +221,28 @@ wk_reg {
     }
 }
 
+function moveWindowPreservingNvimTree(wincmd)
+    local nvimTreeOpen = false
+    local wins = vim.api.nvim_tabpage_list_wins(0)
+    for _, winId in pairs(wins) do
+        local bufId = vim.api.nvim_win_get_buf(winId)
+        local ft = vim.api.nvim_buf_get_option(bufId, 'ft')
+        if ft == 'NvimTree' then
+            nvimTreeOpen = true
+        end
+    end
+    if not nvimTreeOpen then
+        vim.cmd("wincmd " .. wincmd)
+        return
+    end
+    vim.cmd("NvimTreeClose")
+    vim.cmd("wincmd " .. wincmd)
+    vim.cmd("NvimTreeOpen")
+    vim.cmd("wincmd p")
+end
+
+nnoremap('<C-w>J', '<cmd>lua moveWindowPreservingNvimTree("J")<cr>')
+nnoremap('<C-w>K', '<cmd>lua moveWindowPreservingNvimTree("K")<cr>')
 nnoremap('<leader>wq' , '<cmd>q<cr>')
 nnoremap('<leader>ww' , '<cmd>w<cr>')
 nnoremap('<leader>wd' , '<cmd>windo diffthis<cr>')
