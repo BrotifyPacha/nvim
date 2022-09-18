@@ -67,8 +67,6 @@ nmap('S', 's')
 -- Text objects
 onoremap('id', "<cmd>lua require 'mytextobj'.documentTextObj()<cr>")
 xnoremap('id', "<cmd>lua require 'mytextobj'.documentTextObj()<cr>")
-onoremap('ie', "<cmd>lua require 'mytextobj'.expressionTextObj()<cr>")
-xnoremap('ie', "<cmd>lua require 'mytextobj'.expressionTextObj()<cr>")
 onoremap('ii', "<cmd>lua require 'mytextobj'.indentTextObj()<cr>")
 xnoremap('ii', "<cmd>lua require 'mytextobj'.indentTextObj()<cr>")
 

@@ -38,29 +38,20 @@ require 'nvim-treesitter.configs'.setup {
             }
         }
     },
-    -- textobjects = {
-    --     select = {
-    --         enable = true,
-    --         -- Automatically jump forward to textobj, similar to targets.vim 
-    --         lookahead = true,
-    --         keymaps = {
-    --             -- You can use the capture groups defined in textobjects.scm
-    --             ["af"] = "@function.outer",
-    --             ["if"] = "@function.inner",
-    --             ["ac"] = "@class.outer",
-    --             ["ic"] = "@class.inner",
-
-    --             -- Or you can define your own textobjects like this
-    --             ["ie"] = {
-    --                 --     php = "(assignment_expression) @right",
-    --                 --     python = "(function_definition) @function",
-    --                 --     cpp = "(function_definition) @function",
-    --                 --     c = "(function_definition) @function",
-    --                 --     java = "(method_declaration) @function",
-    --             },
-    --         },
-    --     },
-    -- },
+    textobjects = {
+        select = {
+            enable = true,
+            -- Automatically jump forward to textobj, similar to targets.vim 
+            lookahead = true,
+            keymaps = {
+                ["af"] = "@function.outer",
+                ["if"] = "@function.inner",
+                ["ac"] = "@class.outer",
+                ["ic"] = "@class.inner",
+                ["ie"] = "@expression.inner",
+            },
+        },
+    },
     -- Use :TSPlaygroundToggle
     playground = {
         enable = true,
