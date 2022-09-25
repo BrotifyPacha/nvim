@@ -153,6 +153,11 @@ tnoremap('<Esc>', '<C-\\><C-n>')
 inoremap('<C-f>', '<C-x><C-f>')
 inoremap('<C-l>', '<C-x><C-l>')
 
+inoremap('<C-r>c', '<C-r>=trim(v:lua.require(\'user.helpers\').getStdoutOf(\'kcolorchooser --print 2>/dev/null\')[0])<cr>')
+inoremap('<C-r>f', '<C-r>=expand(\'%\')<cr>')
+inoremap('<C-r>t', '<C-r>=expand(\'%:t\')<cr>')
+inoremap('<C-r>r', '<C-r>=expand(\'%:t:r\')<cr>')
+
 -- Smart tab
 local function t(str)
     return vim.api.nvim_replace_termcodes(str, true, true, true)

@@ -229,8 +229,12 @@ function M.generateLorem(wordCount)
 end
 
 function M.getCmdOutputLines(cmd)
+    return M.getStdoutOf(cmd .. " 2>&1")
+end
+
+function M.getStdoutOf(cmd)
     local i, t, popen = 0, {}, io.popen
-    local pfile = popen(cmd .. ' 2>&1')
+    local pfile = popen(cmd)
     local lines = {}
     for filename in pfile:lines() do
         i = i + 1
