@@ -244,11 +244,39 @@ function moveWindowPreservingNvimTree(wincmd)
     vim.cmd("wincmd p")
 end
 
+function toggleDiff()
+    local wins = vim.api.nvim_tabpage_list_wins(0)
+    local isDiffOn = false
+    for _, winId in pairs(wins) do
+        local bufId = vim.api.nvim_win_get_buf(winId)
+        isDiffOn = vim.api.nvim_win_get_option(winId, 'diff')
+        if isDiffOn then
+            break
+        end
+    end
+    if isDiffOn then
+        vim.cmd "diffoff!"
+    else
+        local wins = vim.api.nvim_tabpage_list_wins(0)
+        local curWin = vim.api.nvim_get_current_win()
+        for _, winId in pairs(wins) do
+            local bufId = vim.api.nvim_win_get_buf(winId)
+            local ft = vim.api.nvim_buf_get_option(bufId, 'ft')
+            if ft ~= 'NvimTree' then
+                vim.api.nvim_set_current_win(winId)
+                vim.cmd "diffthis"
+                -- vim.api.nvim_win_set_option(winId, 'diff', true)
+            end
+        end
+        vim.api.nvim_set_current_win(curWin)
+    end
+end
+
 nnoremap('<C-w>J', '<cmd>lua moveWindowPreservingNvimTree("J")<cr>')
 nnoremap('<C-w>K', '<cmd>lua moveWindowPreservingNvimTree("K")<cr>')
 nnoremap('<leader>wq' , '<cmd>q<cr>')
 nnoremap('<leader>ww' , '<cmd>w<cr>')
-nnoremap('<leader>wd' , '<cmd>windo diffthis<cr>')
+nnoremap('<leader>wd' , '<cmd>lua toggleDiff()<cr>')
 nnoremap('<leader>wr' , '<C-w>r<cr>')
 nnoremap('<leader>wF' , '<cmd>lua require("user.helpers").winOpenFloat(0)<cr>')
 nnoremap('<leader>wf' , '<cmd>lua require("user.helpers").winSelectFloat()<cr><cmd>call repeat#set("<leader>wf")<cr>')
