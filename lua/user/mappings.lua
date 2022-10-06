@@ -93,6 +93,7 @@ nnoremap('cp', ':set paste | normal! "*p:set nopaste<cr>')
 nnoremap('cw', 'ciw')
 nnoremap('vv', '^v$h')
 nnoremap('Y', 'yg_')
+vnoremap('*', "y/\\V<C-r>=escape(@\", '\\/')<cr><cr>")
 
 nnoremap('Q', '@@')
 nnoremap('q:', '<nop>')
