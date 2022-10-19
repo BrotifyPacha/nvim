@@ -6,6 +6,18 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     end,
 })
 
+vim.api.nvim_create_autocmd('TextYankPost', {
+    pattern = '*',
+    callback = function (event)
+        if vim.v.event.regname == "*" then
+            vim.fn.setreg("+", vim.fn.getreg("*"))
+        end
+        if vim.v.event.regname == "+" then
+            vim.fn.setreg("*", vim.fn.getreg("+"))
+        end
+    end,
+})
+
 local refresh_fugitive_callback = 'fugitive#ReloadStatus'
 vim.api.nvim_create_autocmd('BufWritePost', {
     pattern = '*',
