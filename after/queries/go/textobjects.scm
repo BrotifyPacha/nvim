@@ -1,3 +1,5 @@
+; extends
+
 (short_var_declaration 
   right: (_) @expression.inner)
 

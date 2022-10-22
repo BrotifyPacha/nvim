@@ -1,2 +1,3 @@
+; extends
 
 ("=" (_) @expression.inner)
