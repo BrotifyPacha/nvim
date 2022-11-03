@@ -1,14 +1,5 @@
 local wk = require'which-key'
 
-vim.api.nvim_set_keymap('n', '<F9>', ':WhichKey F9<cr>', { expr = false, noremap = true })
-wk.register {
-    ["F9"] = {
-        name = "terminal",
-        ["<F9>"] = { ':call ReopenTerminal()<cr>', "re/open terminal", },
-        ["<F10>"] = { ':call NewTerminal()<cr>', "open new terminal", },
-    },
-}
-
 wk.setup {
     plugins = {
         marks = false, -- shows a list of your marks on ' and `

@@ -1,9 +1,9 @@
 
 local M = {}
 
-function M.reload(m)
+function reload(m)
     package.loaded[m] = nil
-    require(m)
+    return require(m)
 end
 
 function M.visualExec(func)

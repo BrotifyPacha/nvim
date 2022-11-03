@@ -141,11 +141,16 @@ nnoremap('<F6>', '<cmd>set list!<cr>')
 nnoremap('<F7>', '<cmd>set wrap!<cr>')
 nnoremap('<F8>', '<cmd>ColorizerToggle<cr>')
 
-nnoremap('<F9><F9>',  '<cmd>silent call ReopenTerminal()<cr>')
-nnoremap('<F9><F10>', '<cmd>silent call NewTerminal()<cr>')
-nnoremap('<F9>p',     '<cmd>call RunCommand("python", "")<cr>')
-nnoremap('<F9>q',     '<cmd>setlocal syntax=<cr>')
-nnoremap('<F9>l',     '<cmd>setlocal syntax=log<cr>')
+nnoremap('<F9><F9>',  '<cmd>lua require"terminal".open_terminal()<cr>')
+nnoremap('<F9><F10>',  '<cmd>lua require"terminal".open_new_terminal()<cr>')
+vim.api.nvim_set_keymap('n', '<F9>', ':WhichKey F9<cr>', { expr = false, noremap = true })
+wk_reg {
+    ["F9"] = {
+        name = "terminal",
+        ["<F9>"] = { '<cmd>lua require"terminal".open_terminal()<cr>', "open/next terminal", },
+        ["<F10>"] = { '<cmd>lua require"terminal".open_new_terminal()<cr>', "open new terminal", },
+    },
+}
 
 -- Terminal mode key maps
 tnoremap('<Esc>', '<C-\\><C-n>')
