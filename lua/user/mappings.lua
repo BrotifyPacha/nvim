@@ -278,6 +278,16 @@ function toggleDiff()
     end
 end
 
+nnoremap('<leader>ss' , '<cmd>Scratch<cr>')
+nnoremap('<leader>so' , '<cmd>ScratchOpen<cr>')
+wk_reg {
+    ['<leader>s'] = {
+        name = "Scratch buffers",
+        ["s"] = "Create new",
+        ["o"] = "Open existing",
+    },
+}
+
 nnoremap('<C-w>J', '<cmd>lua moveWindowPreservingNvimTree("J")<cr>')
 nnoremap('<C-w>K', '<cmd>lua moveWindowPreservingNvimTree("K")<cr>')
 nnoremap('<leader>wq' , '<cmd>q<cr>')
@@ -449,6 +459,8 @@ function M.set_filetype_specific_mappings()
     elseif ft == 'go' then
         buf_nnoremap(fprefix .. 't', '<cmd>lua require"user.runner".runTests("go test ./...", require"user.runner".golangEfm)<cr>')
         buf_nnoremap(fprefix .. 'b', '<cmd>lua require"user.runner".runTests("go build ./...", require"user.runner".golangEfm)<cr>')
+    elseif ft == 'qf' then
+        buf_nnoremap('dd', '<cmd>call setqflist(filter(getqflist(), {idx -> idx != line(".") - 1}), "r")<cr>')
     end
 end
 

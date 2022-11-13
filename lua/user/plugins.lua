@@ -104,6 +104,8 @@ return packer.startup(function(use)
     use 'tpope/vim-fugitive'
     use 'tpope/vim-repeat'
     use 'tommcdo/vim-exchange'
+    use 'LintaoAmons/scratch.nvim'
+    use { 'michaelb/sniprun', run='bash ./install.sh'}
     -- Visual
     use 'brotifypacha/goyo.vim'
     -- Filetype specific
