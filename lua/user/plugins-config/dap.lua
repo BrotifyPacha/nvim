@@ -115,20 +115,6 @@ require("dapui").setup({
         edit = 'e',
         repl = 'r',
     },
-    controls = {
-        enabled = vim.fn.exists("+winbar") == 1,
-        element = "repl",
-        icons = {
-            pause = "",
-            play = "",
-            step_into = "",
-            step_over = "",
-            step_out = "",
-            step_back = "",
-            run_last = "",
-            terminate = "",
-        },
-    },
     layouts = {
         {
             elements = {
