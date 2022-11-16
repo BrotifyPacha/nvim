@@ -67,12 +67,26 @@ dap.adapters.go = function(callback, config)
     100)
 end
 -- https://github.com/go-delve/delve/blob/master/Documentation/usage/dlv_dap.md
+function runLast()
+    vim.t.customDapRunLast = true
+    dap.run_last()
+    vim.t.customDapRunLast = nil
+end
+function runNewOrRunLast(default)
+    return function ()
+        if vim.t.customDapRunLast ~= nil then
+            return vim.t.customDapRunLastFile
+        end
+        vim.t.customDapRunLastFile = vim.fn.expand('%:p')
+        return default
+    end
+end
 dap.configurations.go = {
     {
         type = "go",
         name = "Debug file",
         request = "launch",
-        program = "${file}",
+        program = runNewOrRunLast("${file}"),
         args = {},
     },
     {
@@ -87,7 +101,7 @@ dap.configurations.go = {
         name = "Debug test (File)",
         request = "launch",
         mode = "test",
-        program = "${file}"
+        program = runNewOrRunLast("${file}")
     },
     -- works with go.mod packages and sub packages
     {
@@ -148,7 +162,7 @@ local flags = { noremap = true, silent = true }
 
 vim.api.nvim_set_keymap('n', '<leader>ds', ':lua require("dap").continue()<cr>',          flags)
 vim.api.nvim_set_keymap('n', '<leader>da', ':lua dapRunConfigWithArgs()<cr>',          flags)
-vim.api.nvim_set_keymap('n', '<leader>dp', ':lua require("dap").run_last()<cr>',          flags)
+vim.api.nvim_set_keymap('n', '<leader>dp', ':lua runLast()<cr>',          flags)
 vim.api.nvim_set_keymap('',  '<leader>dd', ':lua require("dap").toggle_breakpoint()<cr>', flags)
 vim.api.nvim_set_keymap('n',  '<leader>df',':lua require("dap").toggle_breakpoint(vim.fn.input("Enter condition: "))<cr>', flags)
 vim.api.nvim_set_keymap('',  '<F11>',      ':lua require("dapui").toggle()<cr>',          flags)
