@@ -35,7 +35,7 @@ require 'nvim-web-devicons'.setup {
             name = "customDocker"
         },
         go = {
-            icon = "ﳑ",
+            icon = "",
             color = "#519aba",
             name = "customGo"
         },
