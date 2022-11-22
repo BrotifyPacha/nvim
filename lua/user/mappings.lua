@@ -464,7 +464,7 @@ function M.set_filetype_specific_mappings()
     end
 end
 
-function CustomCtrlAHandler()
+function CustomCtrlAHandler(direction)
     local line = vim.api.nvim_get_current_line()
     local cursor = vim.api.nvim_win_get_cursor(0)
     local word = vim.fn.expand("<cword>")
@@ -472,18 +472,32 @@ function CustomCtrlAHandler()
         cursor[2] = cursor[2] + 1
         vim.cmd('normal! l')
     end
-    if word == "true" or word == "false" then
-        if word == 'true' then
-            vim.cmd("normal! ciwfalse")
+    local togglable = {
+        { "yes", "no" },
+        { "Yes", "No" },
+        { "true", "false" },
+        { "True", "False" },
+        { "enable", "disable" },
+        { "Enable", "Disable" },
+    }
+    for _, pair in pairs(togglable) do
+        if word == pair[1] then
+            vim.cmd("normal! ciw" .. pair[2])
+            return
+        elseif word == pair[2] then
+            vim.cmd("normal! ciw" .. pair[1])
+            return
         end
-        if word == 'false' then
-            vim.cmd("normal! ciwtrue")
-        end
-        return
     end
-    vim.cmd("normal! ")
+
+    if direction == 1 then
+        vim.cmd("normal! ")
+    else
+        vim.cmd("normal! ")
+    end
 end
-nnoremap("<C-a>", "<cmd>lua CustomCtrlAHandler()<cr>")
+nnoremap("<C-a>", "<cmd>lua CustomCtrlAHandler(1)<cr>")
+nnoremap("<C-x>", "<cmd>lua CustomCtrlAHandler(-1)<cr>")
 
 return M
 
