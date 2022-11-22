@@ -3,6 +3,8 @@ vim.api.nvim_command [[
     highlight! link TSCurrentScope PmenuBg
     highlight! link TSDefinition PmenuBg
     highlight! link TSDefinitionUsage Underlined
+    highlight! link @variable @text
+    highlight! link @namespace @text
 ]]
 
 require 'nvim-treesitter.configs'.setup {
