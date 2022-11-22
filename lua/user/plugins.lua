@@ -89,7 +89,7 @@ return packer.startup(function(use)
         'Pocco81/DAPInstall.nvim',
         branch = 'dev',
     }
-    use { 'nvim-treesitter/playground', cmd = 'TSPlaygroundToggle' }
+    use 'nvim-treesitter/playground'
     use 'editorconfig/editorconfig-vim'
     -- General
     use 'nvim-telescope/telescope.nvim'

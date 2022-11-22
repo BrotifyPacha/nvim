@@ -432,15 +432,15 @@ augroup pacha_filetype_mappings
 augroup end
 ]]
 
-buf_nnoremap('<leader>fh', '<cmd>vert bo split $VIMRUNTIME/syntax/hitest.vim | so % | wincmd p | wincmd q<cr>')
 -- Make commands
-nnoremap('<leader>fk', '<cmd>!make up<cr>')
-nnoremap('<leader>fj', '<cmd>!make down<cr>')
-nnoremap('<leader>fl', '<cmd>!make run<cr>')
+-- nnoremap('<leader>fk', '<cmd>!make up<cr>')
+-- nnoremap('<leader>fj', '<cmd>!make down<cr>')
+-- nnoremap('<leader>fl', '<cmd>!make run<cr>')
+nnoremap('<leader>fh', '<cmd>lua require("nvim-treesitter-playground.hl-info").show_hl_captures()<cr>')
 wk_reg {
     ["<leader>f"] = {
         name = "filetype specific",
-        h = "open hitest.vim",
+        h = "print highlight under cursor",
     }
 }
 
