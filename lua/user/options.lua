@@ -53,6 +53,7 @@ vim.opt.fillchars = {
     horizup = ' ',
     horizdown = '▀',
     horiz = '▀',
+    diff = '╱',
 }
 vim.opt.foldlevel = 99
 vim.opt.foldminlines = 3
