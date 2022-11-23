@@ -479,6 +479,8 @@ function CustomCtrlAHandler(direction)
         { "True", "False" },
         { "enable", "disable" },
         { "Enable", "Disable" },
+        { "and", "or" },
+        { "&&", "||" },
     }
     for _, pair in pairs(togglable) do
         if word == pair[1] then
