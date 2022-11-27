@@ -9,11 +9,14 @@ execute "source " . g:config_location ."/"."abbreviation.vim"
 
 function! MyFoldText()
   let n = v:foldend - v:foldstart + 1
-  let line = getline(v:foldstart)
-  let spc = substitute(line, '^\s*\zs.*', '', '')
-  let txt = substitute(line, '^\s*', '', 'g')
-  let txt = substitute(txt, '{', '', 'g')
-  return  spc . v:folddashes . " " . txt . " - " . n . " "
+  let startLine = getline(v:foldstart)
+  if &expandtab == 0
+    let unindented = substitute(startLine, '^\s\+', '', '')
+    let indent = repeat(' ', indent(v:foldstart))
+    let startLine = indent . unindented
+  end
+  let endLine = substitute(getline(v:foldend), '^[\s\t]*', '', '')
+  return startLine . " .." . n . ".. " . endLine
 endfunction
 set foldtext=MyFoldText()
 
