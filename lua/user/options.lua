@@ -14,6 +14,7 @@ vim.opt.shiftwidth = 4
 vim.opt.scrolloff = 4
 
 vim.opt.listchars = {
+    space = '.',
     eol   = '$',
     tab   = '>-',
     trail = '~',
