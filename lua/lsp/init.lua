@@ -194,7 +194,10 @@ local null_ls = require 'null-ls'
 local sources = {
     null_ls.builtins.diagnostics.phpcs.with({
         extra_args = { '--standard=psr12' },
-        diagnostics_format = "#{m}"
+        diagnostics_format = "#{m}",
+        diagnostics_postprocess = function (diagnostic)
+            diagnostic.severity = vim.diagnostic.severity.WARN
+        end
     })
 }
 
