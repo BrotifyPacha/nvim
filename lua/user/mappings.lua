@@ -103,7 +103,7 @@ nnoremap('q?', '<nop>')
 
 cnoremap('<C-f>', '<C-f>F/l')
 
-local workspaceDir = '{ path="$HOME/workspace/", category="workspace" }'
+local workspaceDir = '{ path="$HOME/workspace/", category="workspace", maxdepth=2 }'
 local pluginsDir = '{ path="$HOME/.local/share/nvim/site/pack/packer/start/", category="plugin" }'
 local k8sMigratorDir = '{ path="/tmp/k8s-repository-migrator-git/", category="k8s-migrator" }'
 local configsDir = '{ path="$HOME/.config/", category="configs" }'

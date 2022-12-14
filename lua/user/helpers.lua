@@ -162,10 +162,16 @@ function M.PickWorkingDir(cmd, dirs)
     local resultList = {}
     for path_i, dir in ipairs(dirs) do
         local i, t, popen = 0, {}, io.popen
-        local path = dir.path
-        local pfile = popen('ls -A "'..path..'"')
+        local path = popen('echo '..dir.path):read("*l")
+        local maxdepth = 1
+        if dir.maxdepth ~= nil then
+            maxdepth = dir.maxdepth
+        end
+        local pfile = popen('find "'..path..'" -maxdepth '..maxdepth)
         for filename in pfile:lines() do
             i = i + 1
+            filename = filename:gsub(path, '')
+            if filename == '' then goto continue end
             local category = ""
             if #dirs > 1 then
                 category = dir.category
@@ -176,6 +182,7 @@ function M.PickWorkingDir(cmd, dirs)
                 ordinal = path .. filename,
                 category = category
             }
+            ::continue::
         end
         pfile:close()
         dirs = vim.list_extend(resultList, t)
