@@ -476,6 +476,8 @@ function CustomCtrlAHandler(direction)
     local togglable = {
         { "yes", "no" },
         { "Yes", "No" },
+        { "up", "down" },
+        { "Up", "Down" },
         { "true", "false" },
         { "True", "False" },
         { "enable", "disable" },
