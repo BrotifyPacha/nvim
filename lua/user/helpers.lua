@@ -171,7 +171,7 @@ function M.PickWorkingDir(cmd, dirs)
         for filename in pfile:lines() do
             i = i + 1
             filename = filename:gsub(path, '')
-            if filename == '' then goto continue end
+            if filename == '' or (maxdepth > 1 and #vim.split(filename, '/') == 1 ) then goto continue end
             local category = ""
             if #dirs > 1 then
                 category = dir.category
