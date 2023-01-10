@@ -138,6 +138,7 @@ function M.getMyWinbar()
 end
 
 function M.PickWorkingDir(cmd, dirs)
+    print(vim.inspect(dirs))
     local actions = require "telescope.actions"
     local actions_state = require "telescope.actions.state"
     local pickers = require "telescope.pickers"
@@ -163,6 +164,7 @@ function M.PickWorkingDir(cmd, dirs)
     for path_i, dir in ipairs(dirs) do
         local i, t, popen = 0, {}, io.popen
         local path = popen('echo '..dir.path):read("*l")
+        -- print(path)
         local maxdepth = 1
         if dir.maxdepth ~= nil then
             maxdepth = dir.maxdepth
@@ -171,22 +173,29 @@ function M.PickWorkingDir(cmd, dirs)
         for filename in pfile:lines() do
             i = i + 1
             filename = filename:gsub(path, '')
-            if filename == '' or (maxdepth > 1 and #vim.split(filename, '/') == 1 ) then goto continue end
+            -- print(filename)
+            if filename == '' or (maxdepth > 1 and #vim.split(filename, '/') == 1 ) then
+                -- print(filename, 'continue')
+                goto continue
+            end
             local category = ""
             if #dirs > 1 then
                 category = dir.category
             end
-            t[i] = {
+            t[#t+1] = {
                 fullpath = path .. filename,
                 dirname = filename,
                 ordinal = path .. filename,
                 category = category
             }
+            -- print(i, vim.inspect(t[i]))
             ::continue::
         end
+        -- print(vim.inspect(t))
+        resultList = vim.list_extend(resultList, t)
         pfile:close()
-        dirs = vim.list_extend(resultList, t)
     end
+    -- print(vim.inspect(resultList))
 
     local opts = {
         finder = finders.new_table({ results = resultList, entry_maker = function(item)
