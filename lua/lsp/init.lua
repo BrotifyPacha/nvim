@@ -9,7 +9,7 @@ local servers = {
     'phpactor',
     'pyright',
     'sumneko_lua',
-    -- 'tailwindcss',
+    'tailwindcss',
     'vimls',
 }
 for _, name in pairs(servers) do
