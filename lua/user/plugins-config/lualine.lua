@@ -191,7 +191,7 @@ require 'lualine'.setup({
                 color = { fg = colors.red, bg = colors.status_bg },
                 padding = '',
             },
-            -- 'location',
+            'location',
             'progress',
         },
     },
