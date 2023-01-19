@@ -48,6 +48,8 @@ function MyTabLine()
     end
     let s .= tab_highlight . tab_name . sep_highlight . sep
   endfor
+  let s .= '%#TabLineFill#'
+  let s .= '%@UI_AddTab@  %X'
   " after the last tab fill with TabLineFill and reset tab page nr
   if &background == 'light'
       let toggle_bg_indicator = ''
@@ -56,6 +58,10 @@ function MyTabLine()
   end
   let s .= '%#TabLineFill#%=  %@ToggleBG@| ' . toggle_bg_indicator . ' %X'
   return s
+endfunction
+
+function UI_AddTab(a, b, c, d)
+    tabnew
 endfunction
 
 function ToggleBG(a, b, c, d)
