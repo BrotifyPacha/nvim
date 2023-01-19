@@ -53,3 +53,16 @@ vim.api.nvim_create_autocmd({'RecordingLeave'}, {
         vim.g.recording = false
     end
 })
+vim.api.nvim_create_augroup('gitlog_ui_change', { clear = true })
+vim.api.nvim_create_autocmd({'BufEnter'}, {
+    group = 'pacha_recording_status',
+    pattern = '*',
+    callback = function ()
+        if vim.bo.ft == 'git' then
+            vim.bo.modifiable = true
+            vim.cmd(":silent %s/\\*/●/")
+            vim.cmd(":silent %s/|/│/g")
+            vim.bo.modifiable = false
+        end
+    end
+})

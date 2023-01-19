@@ -14,11 +14,11 @@ syn match  gitPointerDelimiters /\v(\-\>|\:|\/|\(|\)|,)/ contained containedin=g
 syn match  gitPointer /\v\S+(( \-\> |\/|: )\S+)?(, )?/   contained containedin=gitPointers contains=gitType,gitVersion,gitPointerDelimiters
 syn region gitPointers start=/(/ end=/)/                 contained containedin=gitOnelineLog oneline contains=gitPointer keepend
 
-syn match  gitGraphDot /\*/ contained containedin=gitGraph
-syn match  gitGraphLine /\v(\||\\|\/)/ contained containedin=gitGraph
-syn match  gitGraph /\v^(\*|\s|\||\\|\/)*\s/ contains=gitGraphDot,gitGraphLine
+syn match  gitGraphDot /\v(\*|\●)/ contained containedin=gitGraph
+syn match  gitGraphLine /\v(\||│|\\|\/)/ contained containedin=gitGraph
+syn match  gitGraph /\v^(\●|\*|\s|\||│|\\|\/)*\s/ contains=gitGraphDot,gitGraphLine
 
-syn match  gitOnelineLog /^\(|\|\*\| \)*\<\x\{4,40\}\>.*$/ contains=gitGraph,gitHashAbbrev,gitPointers
+syn match  gitOnelineLog /^\(|\|\●\|*\|│\| \)*\<\x\{4,40\}\>.*$/ contains=gitGraph,gitHashAbbrev,gitPointers
 
 
 hi def link gitGraphLine         diffAdded
