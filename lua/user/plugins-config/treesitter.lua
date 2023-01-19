@@ -8,6 +8,11 @@ vim.api.nvim_command [[
 ]]
 
 require 'nvim-treesitter.configs'.setup {
+    ensure_installed = {
+        'lua',
+        'go',
+        'vim',
+    },
     query_linter = {
         enable = true,
         use_virtual_text = true,
