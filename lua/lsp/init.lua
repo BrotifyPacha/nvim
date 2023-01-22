@@ -172,6 +172,9 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.s
 
 local enhance_server_opts = {
     ["sumneko_lua"] = require('lsp.settings.sumneko_lua'),
+    ["phpactor"] = {
+        root_pattern = { "./app/composer.json", "composer.json", ".git" }
+    }
 }
 
 local capabilities = require'cmp_nvim_lsp'.default_capabilities(vim.lsp.protocol.make_client_capabilities())
