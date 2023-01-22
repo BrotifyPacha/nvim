@@ -272,4 +272,8 @@ function M.CheckFileExists(filepath)
     return true
 end
 
+function M.ExpandEnvs(string)
+    return io.popen('echo '..string):read("*l")
+end
+
 return M
