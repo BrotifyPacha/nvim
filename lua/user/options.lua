@@ -74,6 +74,19 @@ vim.opt.langmap = {
 vim.opt.laststatus = 3
 vim.opt.showmode = false
 
+vim.opt.sessionoptions = {
+    'blank',
+    'buffers',
+    'curdir',
+    'help',
+    -- 'globals',
+    -- 'localoptions',
+    -- 'options',
+    -- 'resize',
+    'winsize',
+    'tabpages',
+}
+
 -- Plugin specific options
 vim.g.PHP_vintage_case_default_indent = true
 

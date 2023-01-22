@@ -66,3 +66,34 @@ vim.api.nvim_create_autocmd({'BufEnter'}, {
         end
     end
 })
+vim.api.nvim_create_augroup('custom_session', { clear = true })
+local helpers = require "user.helpers"
+local session = helpers.ExpandEnvs('$HOME/.config/nvim/session')
+local mksession = ':mksession! ' .. session
+vim.api.nvim_create_autocmd({'VimLeavePre'}, {
+    group = 'custom_session',
+    pattern = '*',
+    callback = function ()
+        vim.cmd(mksession)
+    end
+})
+vim.api.nvim_create_autocmd({'VimEnter'}, {
+    group = 'custom_session',
+    pattern = '*',
+    callback = function ()
+        if helpers.CheckFileExists(session) then
+            vim.cmd(':source ' .. session)
+        end
+    end
+})
+vim.api.nvim_create_autocmd({'SessionLoadPost'}, {
+    group = 'custom_session',
+    pattern = '*',
+    callback = function ()
+        if helpers.CheckFileExists(session) then
+            os.remove(session)
+            vim.fn.feedkeys([[:bufdo filetype detect]])
+        end
+    end
+})
+vim.cmd('command! SaveSession execute "' .. mksession .. '"' )
