@@ -260,7 +260,8 @@ function M.getStdoutOf(cmd)
     return lines
 end
 
-function CheckFileExists(filepath)
+function M.CheckFileExists(filepath)
+    local filepath = M.ExpandEnvs(filepath)
     local file, err = io.open(filepath, 'r')
     if file ~= nil then
         file:close()
