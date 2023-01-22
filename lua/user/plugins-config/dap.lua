@@ -18,10 +18,10 @@ dap.configurations.php = {
         type = 'php',
         request = 'launch',
         name = 'Listen for Xdebug',
-        stopOnEntry = false,
+        stopOnEntry = true,
         pathMappings = function ()
             return {
-                ['/var/www'] = vim.env.PWD
+                ['/var/www'] = vim.env.PWD .. '/app'
             }
         end,
         port = 9000
@@ -137,6 +137,7 @@ require("dapui").setup({
         {
             elements = {
                 'repl',
+                'stacks'
             },
             size = 0.30,
             position = 'bottom',
