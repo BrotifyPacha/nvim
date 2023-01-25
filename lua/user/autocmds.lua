@@ -60,9 +60,10 @@ vim.api.nvim_create_autocmd({'BufEnter'}, {
     callback = function ()
         if vim.bo.ft == 'git' then
             vim.bo.modifiable = true
-            vim.cmd(":silent %s/\\*/●/")
-            vim.cmd(":silent %s/|/│/g")
+            vim.cmd(":silent %s/\\*/●/e")
+            vim.cmd(":silent %s/|/│/ge")
             vim.bo.modifiable = false
+            vim.cmd(":normal! gg")
         end
     end
 })
