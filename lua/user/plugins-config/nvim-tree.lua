@@ -35,6 +35,7 @@ require'nvim-tree'.setup {
       icons = {
           show = {
               git = false,
+              folder_arrow = false,
           },
           glyphs = {
               default =        '',
