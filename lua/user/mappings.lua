@@ -458,8 +458,10 @@ function M.set_filetype_specific_mappings()
         -- Markdown
         buf_nnoremap(fprefix .. 'p', ':MarkdownPreviewToggle<cr>')
     elseif ft == 'go' then
-        buf_nnoremap(fprefix .. 't', '<cmd>lua require"user.runner".runTests("go test ./...", require"user.runner".golangEfm)<cr>')
-        buf_nnoremap(fprefix .. 'b', '<cmd>lua require"user.runner".runTests("go build ./...", require"user.runner".golangEfm)<cr>')
+        buf_nnoremap(fprefix .. 'T', '<cmd>GoTest<cr>')
+        buf_nnoremap(fprefix .. 't', '<cmd>GoTestFile<cr>')
+        buf_nnoremap(fprefix .. 'b', '<cmd>GoBuild<cr>')
+        buf_nnoremap(fprefix .. 'c', '<cmd>GoCoverageToggle<cr>')
     elseif ft == 'qf' then
         buf_nnoremap('dd', '<cmd>call setqflist(filter(getqflist(), {idx -> idx != line(".") - 1}), "r")<cr>')
     end
