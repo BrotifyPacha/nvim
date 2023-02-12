@@ -1,7 +1,7 @@
 
 local M = {}
 
-function reload(m)
+function M.reload(m)
     package.loaded[m] = nil
     return require(m)
 end
