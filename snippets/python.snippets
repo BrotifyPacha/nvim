@@ -1,18 +1,18 @@
-snippet 'if\s' "If block" bA
+snippet 'if\s' "If block" b
 	if ${1}:
 		${0:${VISUAL}}
-snippet ife "If else block" bA
+snippet ife "If else block" b
 	if ${1}:
 		${2:${VISUAL}}
 	else:
 		$0
-snippet def "Function declaration" bA
+snippet def "Function declaration" b
 	def ${1}(${2:self, $3}):
 		${0:${VISUAL}}
-snippet for "For loop construct" bA
+snippet for "For loop construct" b
 	for $1 in $2:
 		${0:${VISUAL}}
-snippet '(with|while)' "with/while constructs" bA
+snippet '(with|while)' "with/while constructs" b
 	`!p snip.rv = match.group(1)` $1:
 		${0:${VISUAL}}
 snippet try "Try except block" b
@@ -20,10 +20,10 @@ snippet try "Try except block" b
 		${0:${VISUAL}}
 	except ${1:KeyboardInterrupt}:
 		print("$1")
-snippet main "if name == main block" bA
+snippet main "if name == main block" b
 	def main():
 		${1:pass}
 	if __name__ == '__main__':
 		main()
-snippet todo "Todo comment" bA
+snippet todo "Todo comment" b
 	# TODO $1
