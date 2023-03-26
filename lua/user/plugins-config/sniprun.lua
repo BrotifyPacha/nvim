@@ -1,6 +1,6 @@
 local scratchFileDir = vim.fn.stdpath("cache") .. "/scratch.nvim"
 
-local scratch = require("scratch")
+-- local scratch = require("scratch")
 local sniprun = require("sniprun")
 
 vim.api.nvim_create_augroup('pacha_scratch_buffers', { clear = true })
@@ -19,8 +19,8 @@ sniprun.setup{
     live_display = { "Terminal" },
 }
 
-scratch.setup {
-	scratch_file_dir = scratchFileDir,  -- Where the scratch files will be saved
-	filetypes = { "json", "xml", "go", "lua", "js", "py", "sh" },   -- filetypes to select from
-}
+-- scratch.setup {
+-- 	scratch_file_dir = scratchFileDir,  -- Where the scratch files will be saved
+-- 	filetypes = { "json", "xml", "go", "lua", "js", "py", "sh" },   -- filetypes to select from
+-- }
 

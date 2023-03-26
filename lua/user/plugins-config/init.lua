@@ -12,9 +12,3 @@ require 'user.plugins-config.lualine'
 require 'user.plugins-config.which-key'
 require 'nvim-gps'.setup()
 require 'user.plugins-config.sniprun'
-
-require("scratch").setup {
-	scratch_file_dir = vim.fn.stdpath("cache") .. "/scratch.nvim",  -- Where the scratch files will be saved
-	filetypes = { "json", "xml", "go", "lua", "js", "py", "sh" },   -- filetypes to select from
-}
-
