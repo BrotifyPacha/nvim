@@ -53,20 +53,6 @@ vim.api.nvim_create_autocmd({'RecordingLeave'}, {
         vim.g.recording = false
     end
 })
-vim.api.nvim_create_augroup('gitlog_ui_change', { clear = true })
-vim.api.nvim_create_autocmd({'BufEnter'}, {
-    group = 'pacha_recording_status',
-    pattern = '*',
-    callback = function ()
-        if vim.bo.ft == 'git' then
-            vim.bo.modifiable = true
-            vim.cmd(":silent %s/\\*/●/e")
-            vim.cmd(":silent %s/|/│/ge")
-            vim.bo.modifiable = false
-            vim.cmd(":normal! gg")
-        end
-    end
-})
 vim.api.nvim_create_augroup('custom_session', { clear = true })
 local helpers = require "user.helpers"
 local session = helpers.ExpandEnvs('$HOME/.config/nvim/session')
