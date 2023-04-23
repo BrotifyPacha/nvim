@@ -19,5 +19,5 @@ endfunction
 
 function CustomGoBuild() abort
     let dir = getcwd()
-    execute "GoBuild " .. dir
+    execute "GoBuild " .. dir .. "/..."
 endfunction
