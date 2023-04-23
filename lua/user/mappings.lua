@@ -186,7 +186,7 @@ inoremapexpr('<S-Tab>', 'v:lua.smart_tab_backward()')
 
 -- Leader mappings
 
-nnoremap('<leader><leader>', ':call search("<++>", "cw")<cr>c4l')
+nnoremap('<leader><leader>', ':call search("<-->", "cw")<cr>c4l')
 nnoremap('<leader><tab>', ':tabnext<cr>')
 nnoremap('<leader>e', "<cmd>NvimTreeToggle<cr>")
 nnoremap('<leader>l', "<C-w>l")
@@ -201,7 +201,7 @@ nnoremap('<leader>o', "<cmd>let g:goyo_preset=1 |Goyo<cr>")
 
 wk_reg {
     ["<leader>"] = {
-        ["<space>"] = "Goto next <++>",
+        ["<space>"] = "Goto next <-->",
         ["<tab>"] = "next tab",
         e = "File explorer",
         h = "which_key_ignore",
