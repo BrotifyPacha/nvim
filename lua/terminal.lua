@@ -21,11 +21,11 @@ end
 local function set_default_settings(terminal_buf_id)
     local win_id = vim.fn.bufwinid(terminal_buf_id)
 
-    local set_buf_option = vim.api.nvim_buf_set_option
     local set_win_option = vim.api.nvim_win_set_option
 
     set_win_option(win_id, "number", false)
     set_win_option(win_id, "numberwidth", 4)
+    set_win_option(win_id, "signcolumn", 'no')
 end
 
 function m.open_terminal()
