@@ -1,6 +1,6 @@
 local scratchFileDir = vim.fn.stdpath("cache") .. "/scratch.nvim"
 
--- local scratch = require("scratch")
+local scratch = require("scratch")
 local sniprun = require("sniprun")
 
 vim.api.nvim_create_augroup('pacha_scratch_buffers', { clear = true })
