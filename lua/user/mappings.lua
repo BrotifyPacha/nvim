@@ -160,6 +160,9 @@ tnoremap('<Esc>', '<C-\\><C-n>')
 inoremap('<C-f>', '<C-x><C-f>')
 inoremap('<C-l>', '<C-x><C-l>')
 
+inoremap('<down>', '<-')
+inoremap('<up>', '->')
+
 inoremap('<C-r>c', '<C-r>=trim(v:lua.require(\'user.helpers\').getStdoutOf(\'kcolorchooser --print 2>/dev/null\')[0])<cr>')
 inoremap('<C-r>f', '<C-r>=expand(\'%\')<cr>')
 inoremap('<C-r>t', '<C-r>=expand(\'%:t\')<cr>')
