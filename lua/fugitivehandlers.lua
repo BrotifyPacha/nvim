@@ -1,12 +1,20 @@
 local M = {}
 
 local function handleGitlab(opts)
-    local file_url = opts.remote .. '/-/blob/' .. opts.commit .. '/' .. opts.path
+    local head = vim.fn['fugitive#Head']()
+    if head == "" then
+        head = opts.commit
+    end
+    local file_url = opts.remote .. '/-/blob/' .. head .. '/' .. opts.path
     return file_url .. "#L" .. opts.line1 .. '-' .. opts.line2
 end
 
 local function handleGithub(opts)
-    local file_url = opts.remote .. '/blob/' .. opts.commit .. '/' .. opts.path
+    local head = vim.fn['fugitive#Head']()
+    if head == "" then
+        head = opts.commit
+    end
+    local file_url = opts.remote .. '/blob/' .. head .. '/' .. opts.path
     return file_url .. "#L" .. opts.line1 .. '-L' .. opts.line2
 end
 
