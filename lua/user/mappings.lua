@@ -328,6 +328,10 @@ wk_reg {
     }
 }
 
+vim.keymap.set('n', '<leader>gK', function ()
+    local branch = vim.fn['fugitive#Head']()
+    vim.cmd ( 'G push --set-upstream origin ' .. branch )
+end)
 nnoremap('<leader>gL', "<cmd>G push --force<cr>")
 nnoremap('<leader>gl', "<cmd>G push<cr>")
 nnoremap('<leader>gh', "<cmd>G pull<cr>")
