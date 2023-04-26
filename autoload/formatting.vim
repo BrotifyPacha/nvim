@@ -46,31 +46,6 @@ function! formatting#toggle_multiline_args()
   call repeat#set(":call formatting#toggle_multiline_args()\<cr>", 0)
 endfunction
 
-function! formatting#go_snake_case(screaming)
-  normal! mm
-  normal! yiw
-  let str = getreg('"')
-  let str = substitute(str, "\\C[a-z]\\zs\\([A-Z]\\)", "_\\1", "g")
-  execute "normal! ciw\<c-r>=str\<cr>\<esc>guiw"
-  if a:screaming
-    normal gUiw
-  endif
-  normal! `m
-endfunction
-
-function! formatting#go_camel_case(start_upper)
-  normal! mm
-  normal! yiw
-  let str = tolower(getreg('"'))
-  let str = substitute(str, "\\([^a-z][a-z]\\)", "\\U\\1", "g")
-  let str = substitute(str, "_", "", "g")
-  if a:start_upper
-    let str = substitute(str, "^\\([a-z]\\)", '\U\1', '')
-  endif
-  execute "normal! ciw\<c-r>=str\<cr>\<esc>"
-  normal! `m
-endfunction
-
 function! formatting#squash_blank_lines()
   normal! dipO
   normal! cc

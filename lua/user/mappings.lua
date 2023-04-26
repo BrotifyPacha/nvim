@@ -388,10 +388,12 @@ wk_reg {
 
 nnoremap('<leader>rr', ':call RenameLocalVariable()<cr>')
 nnoremap('<leader>rt', ':call formatting#toggle_multiline_args()<cr>')
-nnoremap('<leader>rs', ':call formatting#go_snake_case(0)<cr>')
-nnoremap('<leader>rS', ':call formatting#go_snake_case(1)<cr>')
-nnoremap('<leader>rc', ':call formatting#go_camel_case(0)<cr>')
-nnoremap('<leader>rC', ':call formatting#go_camel_case(1)<cr>')
+nnoremap('<leader>rs', ':lua require"caseswitcher".swapCaseOfWordUnderCursor("snake")<cr>')
+nnoremap('<leader>rS', ':lua require"caseswitcher".swapCaseOfWordUnderCursor("snake-screaming")<cr>')
+nnoremap('<leader>rc', ':lua require"caseswitcher".swapCaseOfWordUnderCursor("camel")<cr>')
+nnoremap('<leader>rp', ':lua require"caseswitcher".swapCaseOfWordUnderCursor("pascal")<cr>')
+nnoremap('<leader>rk', ':lua require"caseswitcher".swapCaseOfWordUnderCursor("kebab")<cr>')
+nnoremap('<leader>rK', ':lua require"caseswitcher".swapCaseOfWordUnderCursor("kebab-screaming")<cr>')
 nnoremap('<leader>rm', ':call formatting#squash_blank_lines()<cr>')
 nnoremap('<leader>rd', ':call AddDocString()<cr>')
 wk_reg {
