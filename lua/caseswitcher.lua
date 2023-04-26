@@ -217,4 +217,16 @@ function M.swapCaseOfWordUnderCursor(style)
     return swapped
 end
 
+function M.swapCaseOfVisualSelection(style)
+    local helpers = require'user.helpers'
+    local start_line, start_col, end_line, end_col, lines = helpers.GetVisual()
+    for i, _ in ipairs(lines) do
+        local parts = M.splitParts(lines[i])
+        local swapped = M.combineParts(style, parts)
+        lines[i] = swapped
+    end
+    vim.api.nvim_buf_set_text(0, start_line, start_col, end_line, end_col, lines)
+    return ""
+end
+
 return M

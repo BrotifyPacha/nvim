@@ -276,4 +276,26 @@ function M.ExpandEnvs(string)
     return io.popen('echo '..string):read("*l")
 end
 
+-- The range of ts nodes start with 0 and the ending range is exclusive.
+function M.VisualSelectionRange()
+  local _, csrow, cscol, _ = unpack(vim.fn.getpos("'<"))
+  local _, cerow, cecol, _ = unpack(vim.fn.getpos("'>"))
+  if csrow < cerow or (csrow == cerow and cscol <= cecol) then
+    return csrow - 1, cscol - 1, cerow - 1, cecol
+  else
+    return cerow - 1, cecol - 1, csrow - 1, cscol
+  end
+end
+
+function M.GetVisual()
+    local start_line, start_col, end_line, end_col = M.VisualSelectionRange()
+    if start_col == 2147483647 then
+        start_col = -1
+    end
+    if end_col == 2147483647 then
+        end_col = -1
+    end
+    return start_line, start_col, end_line, end_col, vim.api.nvim_buf_get_text(0, start_line, start_col, end_line, end_col, {})
+end
+
 return M
