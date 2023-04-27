@@ -69,7 +69,7 @@ end
 function M.getMyWinbar()
     local devicons, err = require'nvim-web-devicons'
     local icon = nil
-    local highlight = nil
+    local icon_highlight = nil
 
     local win_id = vim.api.nvim_get_current_win()
 
@@ -77,7 +77,7 @@ function M.getMyWinbar()
         icon, icon_highlight = devicons.get_icon_by_filetype(vim.bo.ft)
     end
 
-    local fname = vim.fn.expand('%:t')
+    local fname = vim.fn.expand('%')
     if fname == '' then
         local buftype = vim.bo.buftype
         if buftype ~= '' and buftype == 'quickfix' then
@@ -96,7 +96,19 @@ function M.getMyWinbar()
         end
     end
 
-    local sep = ' %#Comment#%*%< '
+    local icon = '%#' .. icon_highlight .. '#' .. icon .. '%*'
+
+    local output = {
+        ' ',
+        '['.. win_id .. '] ',
+        icon,
+        fname
+    }
+
+    return table.concat(output, ' ')
+end
+
+function M.GetGPS()
     local class_highlight     = '%#Type#'
     local container_highlight = class_highlight
     local method_highlight    = '%#Function#'
@@ -109,11 +121,9 @@ function M.getMyWinbar()
     local gps = require'nvim-gps'
     local gps_data_func = gps.get_data
     local _, gps_data = pcall(gps_data_func)
-    icon = '%#' .. icon_highlight .. '#' .. icon .. '%*'
-
-    local output = { '['.. win_id .. '] ' .. icon .. ' ' .. fname }
 
     if gps ~= nil and gps_data ~= nil and gps.is_available() then
+        local output = {}
         for _, item in pairs(gps_data) do
             local highlight = nil
             if item.type == 'class-name' then
@@ -135,11 +145,16 @@ function M.getMyWinbar()
             end
             table.insert(
                 output,
-                highlight .. item.icon .. '%*' .. '%#Folded#' .. item.text .. '%*'
+                {
+                    preformatted = highlight .. item.icon .. '%*' .. '%#Folded#' .. item.text .. '%*',
+                    icon = item.icon,
+                    text = item.text
+                }
             )
         end
+        return output
     end
-    return "  " .. table.concat(output, sep)
+    return {}
 end
 
 function M.PickWorkingDir(cmd, dirs)

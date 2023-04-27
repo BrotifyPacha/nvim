@@ -94,20 +94,26 @@ require 'lualine'.setup({
         lualine_b = {
             {
                 'filename',
-                path = 1,
+                path = 0,
                 shorting_target = 0,
             },
-            -- {
-            --     function() return '' end,
-            --     separator = '',
-            --     padding = { left = 1, right = 0 },
-            --     color = { fg = '#555' }
-            -- },
             {
                 'branch',
                 color = { fg = colors.green },
                 icon = '',
-                padding = { left = 1 }
+                padding = { left = 1, right = 1 }
+            },
+            {
+                function()
+                    local sep = '  '
+                    local items = require('user.helpers').GetGPS()
+                    local titems = {}
+                    for _, item in ipairs(items) do
+                        table.insert(titems, item.icon .. item.text)
+                    end
+                    return table.concat(titems, sep)
+                end,
+                padding = { left = 1, right = 0 },
             },
         },
         lualine_c = {},
