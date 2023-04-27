@@ -21,6 +21,7 @@ require'nvim-tree'.setup {
   open_on_tab         = false,
   hijack_cursor       = false,
   update_cwd          = false,
+  reload_on_bufenter = true,
   respect_buf_cwd     = true,
   diagnostics = {
       enable = false,
@@ -73,7 +74,7 @@ require'nvim-tree'.setup {
           { key = 'l', cb = tree_cb('open') },
           { key = 'L', cb = tree_cb('vsplit') },
           { key = 'h', cb = tree_cb('close_node') },
-          { key = 'H', cb = tree_cb('parent_node') },
+          { key = 'H', cb = tree_cb('collapse_all') },
           { key = '<cr>', cb = tree_cb('cd') },
           { key = '-', cb = tree_cb('dir_up') },
           -- { key = '<++>', cb = tree_cb('<++>') },

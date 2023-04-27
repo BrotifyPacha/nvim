@@ -17,6 +17,14 @@ vim.api.nvim_create_autocmd('TextYankPost', {
         end
     end,
 })
+vim.api.nvim_create_autocmd('TabEnter', {
+    pattern = '*',
+    callback = function ()
+        local api = require("nvim-tree.api")
+        wd = vim.fn.getcwd()
+        api.tree.change_root(wd)
+    end,
+})
 
 local refresh_fugitive_callback = 'fugitive#ReloadStatus'
 vim.api.nvim_create_autocmd('BufWritePost', {
