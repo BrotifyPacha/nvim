@@ -70,6 +70,9 @@ function M.getMyWinbar()
     local devicons, err = require'nvim-web-devicons'
     local icon = nil
     local highlight = nil
+
+    local win_id = vim.api.nvim_get_current_win()
+
     if err == nil then
         icon, icon_highlight = devicons.get_icon_by_filetype(vim.bo.ft)
     end
@@ -107,7 +110,9 @@ function M.getMyWinbar()
     local gps_data_func = gps.get_data
     local _, gps_data = pcall(gps_data_func)
     icon = '%#' .. icon_highlight .. '#' .. icon .. '%*'
-    local output = { icon .. ' ' .. fname }
+
+    local output = { '['.. win_id .. '] ' .. icon .. ' ' .. fname }
+
     if gps ~= nil and gps_data ~= nil and gps.is_available() then
         for _, item in pairs(gps_data) do
             local highlight = nil

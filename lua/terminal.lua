@@ -1,5 +1,20 @@
 local m = {}
 
+vim.api.nvim_create_autocmd('BufWinEnter', {
+    pattern = '*',
+    callback = function ()
+        local terminals = m.get_terminals()
+        local curr_buf_id = vim.api.nvim_get_current_buf()
+        if not vim.tbl_contains(terminals, curr_buf_id) then
+            local win_id = vim.fn.bufwinid(curr_buf_id)
+            local set_win_option = vim.api.nvim_win_set_option
+            set_win_option(win_id, "number", true)
+            set_win_option(win_id, "numberwidth", 4)
+            set_win_option(win_id, "signcolumn", 'auto:2-9')
+        end
+    end,
+})
+
 function m.set_terminals(terminals)
     vim.g.terminal_buf_ids = terminals
 end
@@ -25,7 +40,7 @@ local function set_default_settings(terminal_buf_id)
 
     set_win_option(win_id, "number", false)
     set_win_option(win_id, "numberwidth", 4)
-    set_win_option(win_id, "signcolumn", 'no')
+    set_win_option(win_id, "signcolumn", 'yes:1')
 end
 
 function m.open_terminal()
