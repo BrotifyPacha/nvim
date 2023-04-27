@@ -136,6 +136,7 @@ cmp.setup({
 	-- 	-- keyword_length = 1,
 	-- 	-- keyword_pattern = [[\%(-\?\d\+\%(\.\d\+\)\?\|\h\w*\%(-\w*\)*\)\|\$]]
 	-- }
+    preselect = cmp.PreselectMode.None,
 })
 
 -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
