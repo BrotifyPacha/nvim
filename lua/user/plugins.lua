@@ -103,6 +103,7 @@ return packer.startup(function(use)
     use 'tpope/vim-surround'
     use 'tpope/vim-fugitive'
     use 'tpope/vim-repeat'
+    use 'easymotion/vim-easymotion'
     use 'tommcdo/vim-exchange'
     use 'LintaoAmons/scratch.nvim'
     use { 'michaelb/sniprun', run='bash ./install.sh'}

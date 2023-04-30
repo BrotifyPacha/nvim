@@ -63,6 +63,11 @@ nmap('ss', '<Plug>Yssurround')
 vmap('s', '<Plug>VSurround')
 nmap('S', 's')
 
+vim.g['EasyMotion_do_mapping'] = 0
+nmap('<leader>s', '<Plug>(easymotion-prefix)')
+
+onoremap('z', '<Plug>(easymotion-prefix)')
+
 
 -- Text objects
 onoremap('id', "<cmd>lua require 'mytextobj'.documentTextObj()<cr>")
@@ -282,15 +287,15 @@ function toggleDiff()
     end
 end
 
-nnoremap('<leader>ss' , '<cmd>Scratch<cr>')
-nnoremap('<leader>so' , '<cmd>ScratchOpen<cr>')
-wk_reg {
-    ['<leader>s'] = {
-        name = "Scratch buffers",
-        ["s"] = "Create new",
-        ["o"] = "Open existing",
-    },
-}
+-- nnoremap('<leader>ss' , '<cmd>Scratch<cr>')
+-- nnoremap('<leader>so' , '<cmd>ScratchOpen<cr>')
+-- wk_reg {
+--     ['<leader>s'] = {
+--         name = "Scratch buffers",
+--         ["s"] = "Create new",
+--         ["o"] = "Open existing",
+--     },
+-- }
 
 nnoremap('<C-w>J', '<cmd>lua moveWindowPreservingNvimTree("J")<cr>')
 nnoremap('<C-w>K', '<cmd>lua moveWindowPreservingNvimTree("K")<cr>')
