@@ -118,8 +118,10 @@ return packer.startup(function(use)
     }
     use 'nelsyeung/twig.vim'
     use 'jwalton512/vim-blade'
+    use 'towolf/vim-helm'
     use { 'iamcco/markdown-preview.nvim', run = 'cd app && yarn install' }
     use { 'fatih/vim-go' }
+    use { 'olexsmir/gopher.nvim' }
     -- Tools
     use { 'qpkorr/vim-renamer', cmd = 'Renamer' }
 
