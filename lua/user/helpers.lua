@@ -78,8 +78,8 @@ function M.getMyWinbar()
     end
 
     local fname = vim.fn.expand('%')
+    local buftype = vim.bo.buftype
     if fname == '' then
-        local buftype = vim.bo.buftype
         if buftype ~= '' and buftype == 'quickfix' then
             title = vim.fn.getqflist({title = 1}).title
             icon = ''
@@ -94,6 +94,9 @@ function M.getMyWinbar()
         else
             fname = '%#Comment#-No-name-%*'
         end
+    elseif buftype == 'terminal' then
+        icon = ''
+        fname = vim.fn.getcwd()
     end
 
     local icon = '%#' .. icon_highlight .. '#' .. icon .. '%*'

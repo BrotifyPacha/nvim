@@ -28,7 +28,13 @@ function m.get_terminals()
 end
 
 local function new_terminal()
-    vim.cmd "terminal"
+    local wd = vim.fn.getcwd()
+    wd = wd:gsub("/", "---")
+    -- vim.print(wd)
+    local history_file = vim.fn.stdpath("config") .. "/zsh-hist/" .. wd
+    vim.cmd("!touch " .. history_file)
+    vim.cmd("terminal HISTFILE=" .. history_file .. " zsh")
+    -- vim.cmd("terminal")
     vim.fn.feedkeys("a")
     return vim.api.nvim_get_current_buf()
 end
