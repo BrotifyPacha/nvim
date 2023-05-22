@@ -192,7 +192,6 @@ inoremapexpr('<S-Tab>', 'v:lua.smart_tab_backward()')
 -- Leader mappings
 
 nnoremap('<leader><leader>', ':call search("<-->", "cw")<cr>c4l')
-nnoremap('<leader><tab>', ':tabnext<cr>')
 nnoremap('<leader>e', "<cmd>NvimTreeToggle<cr>")
 nnoremap('<leader>l', "<C-w>l")
 nnoremap('<leader>h', "<C-w>h")
@@ -207,7 +206,6 @@ nnoremap('<leader>o', "<cmd>let g:goyo_preset=1 |Goyo<cr>")
 wk_reg {
     ["<leader>"] = {
         ["<space>"] = "Goto next <-->",
-        ["<tab>"] = "next tab",
         e = "File explorer",
         h = "which_key_ignore",
         j = "which_key_ignore",
@@ -427,8 +425,10 @@ wk_reg {
 nnoremap('<leader>td', '<cmd>tcd %:h<cr>')
 nnoremap('<leader>tt', '<cmd>tabnew<cr>')
 nnoremap('<leader>tc', '<cmd>tabclose<cr>')
-nnoremap('<leader>tl', '<cmd>tabmove +1<cr><cmd>call repeat#set("<leader>tl")<cr>')
-nnoremap('<leader>th', '<cmd>tabmove -1<cr><cmd>call repeat#set("<leader>th")<cr>')
+nnoremap('<leader>tk', '<cmd>tabmove +1<cr><cmd>call repeat#set("<leader>tl")<cr>')
+nnoremap('<leader>tj', '<cmd>tabmove -1<cr><cmd>call repeat#set("<leader>th")<cr>')
+nnoremap('<leader>tl', '<cmd>tabnext<cr>')
+nnoremap('<leader>th', '<cmd>tabprevious<cr>')
 wk_reg {
     ['<leader>t'] = {
         name = 'tabs',
