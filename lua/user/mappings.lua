@@ -404,7 +404,7 @@ vnoremap('<leader>rS', ':lua require"caseswitcher".swapCaseOfVisualSelection("sn
 vnoremap('<leader>rc', ':lua require"caseswitcher".swapCaseOfVisualSelection("camel")<cr>')
 vnoremap('<leader>rp', ':lua require"caseswitcher".swapCaseOfVisualSelection("pascal")<cr>')
 vnoremap('<leader>rk', ':lua require"caseswitcher".swapCaseOfVisualSelection("kebab")<cr>')
-vnoremap('<leader>rk', ':lua require"caseswitcher".swapCaseOfVisualSelection("kebab-screaming")<cr>')
+vnoremap('<leader>rK', ':lua require"caseswitcher".swapCaseOfVisualSelection("kebab-screaming")<cr>')
 
 nnoremap('<leader>rm', ':call formatting#squash_blank_lines()<cr>')
 nnoremap('<leader>rd', ':call AddDocString()<cr>')

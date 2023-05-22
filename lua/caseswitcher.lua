@@ -6,8 +6,17 @@ local function splitCamelCase(word)
     local singleWord = ""
     for i = 1, #word do
         local c = word:sub(i,i)
+        local c_next = word:sub(i+1,i+1)
 
-        if c:lower() ~= c and singleWord ~= "" then
+        if i == #word then
+            singleWord = singleWord .. c:lower()
+            break
+        end
+
+        local current_is_upper = c:upper() == c
+        local next_is_lower = c_next:lower() == c_next
+
+        if current_is_upper and next_is_lower and singleWord ~= "" then
             parts[#parts+1] = singleWord
             singleWord = ""
         end
@@ -24,7 +33,7 @@ local function splitByStr(word, str)
 
     for part in vim.gsplit(word, str, { plain=true }) do
         if part ~= "" then
-            parts[#parts+1] = part:lower()
+            parts[#parts+1] = part
         end
     end
 
@@ -41,16 +50,16 @@ end
 
 local splitters = {
     {
-        name = "camel",
-        split = splitCamelCase,
-    },
-    {
         name = "snake",
         split = splitSnakeCase,
     },
     {
         name = "kebab",
         split = splitKebabCase,
+    },
+    {
+        name = "camel",
+        split = splitCamelCase,
     },
 }
 
@@ -74,17 +83,17 @@ local function test_split_funcs()
         {
             splitter = "snake",
             word = "HeLlo_WoRld",
-            want = { "hello", "world" }
+            want = { "HeLlo", "WoRld" }
         },
         {
             splitter = "kebab",
             word = "Hello-WorlD",
-            want = { "hello", "world" }
+            want = { "Hello", "WorlD" }
         },
         {
             splitter = "kebab",
             word = "hello-World-",
-            want = { "hello", "world" }
+            want = { "hello", "World" }
         },
     }
     for i = 1, #tests do
@@ -135,7 +144,7 @@ local combiners = {
         func = function (list)
             local result = ""
             for _, item in ipairs(list) do
-                result = result .. item:sub(1,1):upper() .. item:sub(2,#item)
+                result = result .. item:sub(1,1):upper() .. item:sub(2,#item):lower()
             end
             return result
         end
@@ -148,7 +157,7 @@ local combiners = {
                 if i == 1 then
                     result = item
                 else
-                    result = result .. item:sub(1,1):upper() .. item:sub(2,#item)
+                    result = result .. item:sub(1,1):upper() .. item:sub(2,#item):lower()
                 end
             end
             return result
@@ -169,7 +178,7 @@ local combiners = {
     {
         name = "kebab", -- hello-world
         func = function (list)
-            return tbl_join(list, "-")
+            return tbl_join(list, "-"):lower()
         end
     },
     {
@@ -195,6 +204,11 @@ local function test_integrated()
             combiner = "camel",
             word = "Hello_world",
             want = "helloWorld",
+        },
+        {
+            combiner = "kebab",
+            word = "FIND_FOLDER_BY_UID",
+            want = "find-folder-by-uid",
         }
     }
 
