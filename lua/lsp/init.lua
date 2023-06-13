@@ -170,32 +170,70 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.s
 })
 
 
-local enhance_server_opts = {
-    ["sumneko_lua"] = require('lsp.settings.sumneko_lua'),
-    ["phpactor"] = {
-        root_pattern = { "./app/composer.json", "composer.json", ".git" }
+local capabilities = require'cmp_nvim_lsp'.default_capabilities(vim.lsp.protocol.make_client_capabilities())
+local lspconfig = require('lspconfig')
+local util = require('lspconfig/util')
+
+lspconfig.pyright.setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+    settings = {
+        python = {
+            venvPath = '.'
+        }
     }
 }
 
-local capabilities = require'cmp_nvim_lsp'.default_capabilities(vim.lsp.protocol.make_client_capabilities())
-lsp_installer.on_server_ready(function(server)
-    -- Specify the default options which we'll use to setup all servers
-    local opts = {
-        on_attach = on_attach,
-        capabilities = capabilities,
+lspconfig.gopls.setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+    cmd = {"gopls", "serve"},
+    filetypes = {"go", "gomod"},
+    root_dir = util.root_pattern("go.work", "go.mod", ".git"),
+    settings = {
+        gopls = {
+            usePlaceholders = true,
+            staticcheck = true,
+            hints = {
+                compositeLiteralFields = true,
+                constantValues = true,
+                parameterNames = true,
+            },
+            codelenses = {
+                generate = true,
+            }
+        },
+    },
+}
+
+local runtime_path = vim.split(package.path, ';')
+table.insert(runtime_path, "lua/?.lua")
+table.insert(runtime_path, "lua/?/init.lua")
+lspconfig.lua_ls.setup{
+    on_attach = on_attach,
+    capabilities = capabilities,
+    settings = {
+        Lua = {
+            runtime ={
+                version = 'LuaJIT',
+                path = runtime_path,
+            },
+            diagnostics = {
+                globals = { 'vim' },
+            },
+            workspace = {
+                library = {
+                    vim.api.nvim_get_runtime_file("", true),
+                    -- [ vim.fn.expand("$VIMRUNTIME/lua") ] = true,
+                    -- [ vim.fn.stdpath("config") .. '/lua' ] = true,
+                }
+            }
+        }
     }
+}
 
-    if enhance_server_opts[server.name] then
-        opts = vim.tbl_deep_extend('force', enhance_server_opts[server.name], opts)
-    end
 
-    if server.name == "sumneko_lua" then
-        server.name = "lua_ls"
-    end
-    server:setup(opts)
-end)
 
--- null_ls
 local null_ls = require 'null-ls'
 local sources = {
     null_ls.builtins.diagnostics.phpcs.with({
