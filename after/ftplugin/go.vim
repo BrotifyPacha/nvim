@@ -6,3 +6,7 @@ iabbrev flaot float
 iabbrev cahn chan
 iabbrev stuct struct
 iabbrev structg struct
+
+iabbrev ragne range
+
+iabbrev fucn func
