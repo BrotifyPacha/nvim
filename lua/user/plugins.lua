@@ -122,6 +122,7 @@ return packer.startup(function(use)
     use { 'iamcco/markdown-preview.nvim', run = 'cd app && yarn install' }
     use { 'fatih/vim-go' }
     use { 'olexsmir/gopher.nvim' }
+    use { 'mfussenegger/nvim-dap-python' }
     -- Tools
     use { 'qpkorr/vim-renamer', cmd = 'Renamer' }
 
