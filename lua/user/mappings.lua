@@ -391,7 +391,7 @@ wk_reg {
     },
 }
 
-nnoremap('<leader>rr', ':call RenameLocalVariable()<cr>')
+-- nnoremap('<leader>rr', ':call RenameLocalVariable()<cr>')
 nnoremap('<leader>rt', ':call formatting#toggle_multiline_args()<cr>')
 
 nnoremap('<leader>rs', ':lua require"caseswitcher".swapCaseOfWordUnderCursor("snake")<cr>')

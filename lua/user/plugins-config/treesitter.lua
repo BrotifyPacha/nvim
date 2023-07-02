@@ -35,7 +35,7 @@ require 'nvim-treesitter.configs'.setup {
         smart_rename = {
             enable = true,
             keymaps = {
-                smart_rename = "<space>rr"
+                smart_rename = "<space>rR"
             }
         },
         navigation = {
