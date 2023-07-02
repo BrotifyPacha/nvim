@@ -331,16 +331,19 @@ wk_reg {
     }
 }
 
+nnoremap('<leader>gg', "<cmd>bel vert G<cr>:wincmd L<cr>")
 vim.keymap.set('n', '<leader>gK', function ()
     local branch = vim.fn['fugitive#Head']()
     vim.cmd ( 'G push --set-upstream origin ' .. branch )
 end)
+nnoremap('<leader>gj', "<cmd>G fetch --all<cr>")
+nnoremap('<leader>gJ', "<cmd>G fetch --all --prune<cr>")
 nnoremap('<leader>gL', "<cmd>G push --force<cr>")
 nnoremap('<leader>gl', "<cmd>G push<cr>")
 nnoremap('<leader>gh', "<cmd>G pull<cr>")
+
 nnoremap('<leader>gv', "<cmd>bel vert G log --oneline --graph --decorate --branches<cr>")
 nnoremap('<leader>gV', "<cmd>Telescope git_bcommits<cr>")
-nnoremap('<leader>gg', "<cmd>bel vert G<cr>:wincmd L<cr>")
 nnoremap('<leader>gcc', "<cmd>G commit<cr>")
 nnoremap('<leader>gca', "<cmd>G commit --amend<cr>")
 nnoremap('<leader>gce', "<cmd>G commit --amend --no-edit<cr>")
@@ -350,9 +353,8 @@ nnoremap('<leader>gB', "<cmd>lua require'gitsigns'.blame_line({enter=true})<cr>"
 nnoremap('<leader>gu', "<cmd>lua require'gitsigns'.reset_hunk()<cr>:do User PachaHunkStatusChanged<cr>")
 nnoremap('<leader>gs', "<cmd>lua require'gitsigns'.stage_hunk()<cr>:do User PachaHunkStatusChanged<cr>")
 nnoremap('<leader>gp', "<cmd>lua require'gitsigns'.preview_hunk()<cr>")
-nnoremap('<leader>gf', "<cmd>G fetch --all<cr>")
-nnoremap('<leader>gF', "<cmd>G fetch --all --prune<cr>")
 nnoremap('<leader>gt', "<cmd>Telescope git_branches<cr>")
+nnoremap('<leader>gf', "<cmd>Telescope git_status<cr>")
 vnoremap('<leader>gv', ":GBrowse<cr>")
 nnoremap('<leader>grr', '<cmd>lua require("user/helpers").xdgOpen(require("user/helpers").getRemoteLink())<cr>')
 nnoremap('<leader>grp', '<cmd>lua require("user/helpers").xdgOpen( require("user/helpers").getRemoteLink() .. "/-/pipelines")<cr>')
