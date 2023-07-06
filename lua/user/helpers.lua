@@ -72,6 +72,7 @@ function M.getMyWinbar()
     local icon_highlight = nil
 
     local win_id = vim.api.nvim_get_current_win()
+	local buf_id = vim.api.nvim_win_get_buf(win_id)
 
     if err == nil then
         icon, icon_highlight = devicons.get_icon_by_filetype(vim.bo.ft)
@@ -103,7 +104,7 @@ function M.getMyWinbar()
 
     local output = {
         ' ',
-        '['.. win_id .. '] ',
+        '['.. win_id .. ', '.. buf_id ..'] ',
         icon,
         fname
     }
