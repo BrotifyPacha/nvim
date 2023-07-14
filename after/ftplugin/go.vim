@@ -10,3 +10,5 @@ iabbrev structg struct
 iabbrev ragne range
 
 iabbrev fucn func
+
+iabbrev retrun return
