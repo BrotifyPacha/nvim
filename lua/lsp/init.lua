@@ -22,6 +22,12 @@ for _, name in pairs(servers) do
     end
 end
 
+require("lsp-inlayhints").setup({
+    inlay_hints = {
+        highlight = "FoldColumn",
+    }
+})
+
 local function on_attach(client, bufnr)
     -- Set up buffer-local keymaps (vim.api.nvim_buf_set_keymap()), etc.
     local opts = { noremap = true, silent = true }
@@ -50,6 +56,7 @@ local function on_attach(client, bufnr)
             border = 'single'
         }
     }, bufnr)
+    require 'lsp-inlayhints'.on_attach(client, bufnr)
 end
 
 -- Always on mappings
@@ -192,12 +199,15 @@ lspconfig.gopls.setup {
     root_dir = util.root_pattern("go.work", "go.mod", ".git"),
     settings = {
         gopls = {
-            usePlaceholders = true,
             staticcheck = true,
             hints = {
+                assignVariableTypes = true,
                 compositeLiteralFields = true,
+                compositeLiteralTypes = true,
                 constantValues = true,
+                functionTypeParameters = true,
                 parameterNames = true,
+                rangeVariableTypes = true,
             },
             codelenses = {
                 generate = true,
