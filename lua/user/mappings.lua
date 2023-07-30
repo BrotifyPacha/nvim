@@ -345,7 +345,11 @@ nnoremap('<leader>gh', "<cmd>G pull<cr>")
 nnoremap('<leader>gv', "<cmd>bel vert G log --oneline --graph --decorate --branches<cr>")
 nnoremap('<leader>gV', "<cmd>Telescope git_bcommits<cr>")
 
+nnoremap('<leader>gri', ":G rebase -i master")
+nnoremap('<leader>gra', ":G rebase -i --autosquash master")
+
 nnoremap('<leader>gcc', "<cmd>G commit<cr>")
+nnoremap('<leader>gcf', ':G commit --fixup <c-r>"')
 nnoremap('<leader>gca', "<cmd>G commit --amend<cr>")
 nnoremap('<leader>gce', "<cmd>G commit --amend --no-edit<cr>")
 
@@ -374,6 +378,11 @@ wk_reg {
         v = 'view history',
         V = 'view file history',
         g = 'status',
+        r = {
+            name = 'rebase',
+            i = 'interactive',
+            a = 'interactive --autosquash',
+        },
         c = {
             name = 'commit',
             c = 'commit',
