@@ -344,20 +344,26 @@ nnoremap('<leader>gh', "<cmd>G pull<cr>")
 
 nnoremap('<leader>gv', "<cmd>bel vert G log --oneline --graph --decorate --branches<cr>")
 nnoremap('<leader>gV', "<cmd>Telescope git_bcommits<cr>")
+
 nnoremap('<leader>gcc', "<cmd>G commit<cr>")
 nnoremap('<leader>gca', "<cmd>G commit --amend<cr>")
 nnoremap('<leader>gce', "<cmd>G commit --amend --no-edit<cr>")
+
 nnoremap('<leader>gd', "<cmd>Gdiffsplit<cr>")
+
 nnoremap('<leader>gb', "<cmd>lua require'gitsigns'.blame_line({full=true})<cr>")
 nnoremap('<leader>gB', "<cmd>lua require'gitsigns'.blame_line({enter=true})<cr>")
 nnoremap('<leader>gu', "<cmd>lua require'gitsigns'.reset_hunk()<cr>:do User PachaHunkStatusChanged<cr>")
 nnoremap('<leader>gs', "<cmd>lua require'gitsigns'.stage_hunk()<cr>:do User PachaHunkStatusChanged<cr>")
 nnoremap('<leader>gp', "<cmd>lua require'gitsigns'.preview_hunk()<cr>")
+
 nnoremap('<leader>gt', "<cmd>Telescope git_branches<cr>")
 nnoremap('<leader>gf', "<cmd>Telescope git_status<cr>")
-vnoremap('<leader>gv', ":GBrowse<cr>")
-nnoremap('<leader>grr', '<cmd>lua require("user/helpers").xdgOpen(require("user/helpers").getRemoteLink())<cr>')
-nnoremap('<leader>grp', '<cmd>lua require("user/helpers").xdgOpen( require("user/helpers").getRemoteLink() .. "/-/pipelines")<cr>')
+
+vnoremap('<leader>gof', ":GBrowse<cr>")
+nnoremap('<leader>gor', ':lua require("user/helpers").xdgOpen(require("user/helpers").getRemoteLink())<cr>')
+nnoremap('<leader>gop', ':lua require("user/helpers").xdgOpen(require("user/helpers").getRemoteLink() .. "/-/pipelines")<cr>')
+nnoremap('<leader>gom', ':lua require("user/helpers").xdgOpen(require("user/helpers").getRemoteLink() .. "/-/merge_requests")<cr>')
 
 wk_reg {
     ['<leader>g'] = {
@@ -383,10 +389,12 @@ wk_reg {
         p = 'preview hunk',
         f = 'fetch all',
         F = 'fetch all (prune)',
-        r = {
-            name = 'remote actions',
-            r = 'view repo',
-            p = 'view pipelines',
+        o = {
+            name = 'open remote',
+            f = 'file',
+            r = 'repo',
+            p = 'pipelines',
+            m = 'merge requests',
         }
     },
 }
