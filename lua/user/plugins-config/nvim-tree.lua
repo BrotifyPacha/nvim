@@ -38,8 +38,6 @@ require'nvim-tree'.setup {
   on_attach = my_on_attach,
   disable_netrw       = false,
   hijack_netrw        = true,
-  open_on_setup       = false,
-  ignore_ft_on_setup  = {},
   open_on_tab         = false,
   hijack_cursor       = false,
   update_cwd          = false,
@@ -54,6 +52,7 @@ require'nvim-tree'.setup {
       ignore = false
   },
   renderer = {
+      root_folder_label = false,
       highlight_git = true,
       icons = {
           show = {
@@ -87,7 +86,6 @@ require'nvim-tree'.setup {
   },
   view = {
     adaptive_size = true,
-    hide_root_folder = true,
     side = 'left',
     number = false,
     relativenumber = false,
