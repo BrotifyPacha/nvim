@@ -1,6 +1,3 @@
-local tree_cb = require'nvim-tree.config'.nvim_tree_callback
-
-
 vim.cmd [[
     highlight! link NvimTreeGitDirty DiagnosticWarn
     highlight! link NvimTreeGitStaged Statement
@@ -13,7 +10,32 @@ vim.cmd [[
     augroup end
 ]]
 
+local function my_on_attach(bufnr)
+    local api = require('nvim-tree.api')
+
+    local function opts(desc)
+        return { desc = 'nvim-tree: ' .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+    end
+
+    -- use all default mappings
+    api.config.mappings.default_on_attach(bufnr)
+
+    -- delete some default mappings
+    vim.keymap.del('n', '<C-x>', { buffer = bufnr })
+    vim.keymap.del('n', '<C-e>', { buffer = bufnr })
+
+    -- override a default
+    vim.keymap.set('n', '<C-h>', api.node.open.horizontal, opts('Open: Horizontal Split'))
+    vim.keymap.set('n', 'l', api.node.open.edit, opts('edit'))
+    vim.keymap.set('n', 'l', api.node.open.edit, opts('edit'))
+
+    -- add your mappings
+    vim.keymap.set('n', '?', api.tree.toggle_help, opts('Help'))
+    ---
+end
+
 require'nvim-tree'.setup {
+  on_attach = my_on_attach,
   disable_netrw       = false,
   hijack_netrw        = true,
   open_on_setup       = false,
@@ -67,19 +89,6 @@ require'nvim-tree'.setup {
     adaptive_size = true,
     hide_root_folder = true,
     side = 'left',
-    mappings = {
-      custom_only = false,
-      list = {
-          { key = 'l', cb = tree_cb('edit') },
-          { key = 'l', cb = tree_cb('open') },
-          { key = 'L', cb = tree_cb('vsplit') },
-          { key = 'h', cb = tree_cb('close_node') },
-          { key = 'H', cb = tree_cb('collapse_all') },
-          { key = '<cr>', cb = tree_cb('cd') },
-          { key = '-', cb = tree_cb('dir_up') },
-          -- { key = '<++>', cb = tree_cb('<++>') },
-      }
-    },
     number = false,
     relativenumber = false,
     signcolumn = "yes"
