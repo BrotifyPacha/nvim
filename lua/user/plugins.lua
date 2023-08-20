@@ -110,14 +110,6 @@ return packer.startup(function(use)
     use { 'michaelb/sniprun', run='bash ./install.sh'}
     -- Visual
     use 'brotifypacha/goyo.vim'
-    use {
-        'edluffy/hologram.nvim',
-        config = function()
-            require 'hologram'.setup {
-                auto_display = true,
-            }
-        end
-    }
     -- Filetype specific
     use 'baskerville/vim-sxhkdrc'
     use {
