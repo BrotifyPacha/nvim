@@ -8,3 +8,9 @@ snippet main "main function" b
 	func main() {
 		${0}
 	}
+
+snippet jfield "Json struct field" b
+	${1:Field} ${2:string} \`json:"${1/.*/\l\0/g}"\`
+
+snippet yfield "Yaml struct field" b
+	${1:Field} ${2:string} \`yaml:"${1/.*/\l\0/g}"\`
