@@ -1,6 +1,4 @@
-local lsp_installer = require 'nvim-lsp-installer'
 
--- Insatlling servers
 local servers = {
     'cssls',
     'html',
@@ -8,19 +6,16 @@ local servers = {
     'gopls',
     'phpactor',
     'pyright',
-    'sumneko_lua',
+    'lua_ls',
     'tailwindcss',
     'vimls',
+    'jsonls'
 }
-for _, name in pairs(servers) do
-    local server_is_found, server = lsp_installer.get_server(name)
-    if server_is_found then
-        if not server:is_installed() then
-            print("Installing " .. name)
-            server:install()
-        end
-    end
-end
+
+require'mason'.setup()
+require'mason-lspconfig'.setup {
+    ensure_installed = servers
+}
 
 require("lsp-inlayhints").setup({
     inlay_hints = {
@@ -44,7 +39,7 @@ local function on_attach(client, bufnr)
     vim.api.nvim_buf_set_keymap(bufnr, "n", "[d", '<cmd>lua vim.diagnostic.goto_prev({ border = "single" })<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, "n", "]d", '<cmd>lua vim.diagnostic.goto_next({ border = "single" })<CR>', opts)
     -- vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>q", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
-    vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
+    vim.cmd [[ command! Format execute 'lua vim.lsp.buf.format(nil)' ]]
 
     require 'lsp_signature'.on_attach({
         bind = true,
@@ -169,6 +164,15 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.s
 local capabilities = require'cmp_nvim_lsp'.default_capabilities(vim.lsp.protocol.make_client_capabilities())
 local lspconfig = require('lspconfig')
 local util = require('lspconfig/util')
+
+for _, server in ipairs(servers) do
+    server = vim.tbl_get(lspconfig, server)
+
+    server.setup{
+        on_attach = on_attach,
+        capabilities = capabilities
+    }
+end
 
 lspconfig.pyright.setup {
     on_attach = on_attach,
