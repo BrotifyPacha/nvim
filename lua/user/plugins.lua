@@ -27,12 +27,6 @@ if not status_ok then
     return
 end
 
--- require('user.plugin-config.treesitter')
--- require('user.plugin-config.dap')
--- require('user.plugin-config.colorizer')
---
--- require 'gitsigns'.setup()
---
 packer.init {
     display = {
         open_fn = function()

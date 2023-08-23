@@ -91,17 +91,6 @@ vim.diagnostic.config({
         border = "single",
         source = "always",
         header = "Diagnostics:",
-        -- prefix = function (d, i, win_total)
-        --     local highlight = 'DiagnosticSignHint'
-        --     if d.severity == 1 then
-        --         highlight = 'DiagnosticSignError'
-        --     elseif d.severity == 2 then
-        --         highlight = 'DiagnosticSignWarn'
-        --     elseif d.severity == 3 then
-        --         highlight = 'DiagnosticSignInfo'
-        --     end
-        --     return i .. '. ', highlight
-        -- end,
     }
 })
 
