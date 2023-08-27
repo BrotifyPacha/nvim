@@ -21,13 +21,17 @@ local function my_on_attach(bufnr)
     api.config.mappings.default_on_attach(bufnr)
 
     -- delete some default mappings
+    vim.keymap.del('n', '>', { buffer = bufnr })
+    vim.keymap.del('n', '<', { buffer = bufnr })
+    vim.keymap.del('n', '<bs>', { buffer = bufnr })
     vim.keymap.del('n', '<C-x>', { buffer = bufnr })
     vim.keymap.del('n', '<C-e>', { buffer = bufnr })
+    vim.keymap.del('n', '<C-v>', { buffer = bufnr })
 
     -- override a default
-    vim.keymap.set('n', '<C-h>', api.node.open.horizontal, opts('Open: Horizontal Split'))
-    vim.keymap.set('n', 'l', api.node.open.edit, opts('edit'))
-    vim.keymap.set('n', 'l', api.node.open.edit, opts('edit'))
+    vim.keymap.set('n', 'L', api.node.open.vertical, opts('Open: Vertical Split'))
+    vim.keymap.set('n', 'l', api.node.open.edit, opts('Open'))
+    vim.keymap.set('n', 'h',  api.node.navigate.parent_close,        opts('Close Directory'))
 
     -- add your mappings
     vim.keymap.set('n', '?', api.tree.toggle_help, opts('Help'))
