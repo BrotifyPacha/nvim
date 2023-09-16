@@ -14,11 +14,11 @@ vim.opt.shiftwidth = 4
 vim.opt.scrolloff = 4
 
 vim.opt.listchars = {
-    space = '.',
-    eol   = '$',
-    tab   = '>-',
-    trail = '~',
-    nbsp  = '+'
+  space = '.',
+  eol   = '$',
+  tab   = '>-',
+  trail = '~',
+  nbsp  = '+'
 }
 vim.opt.showmatch = true
 
@@ -46,15 +46,15 @@ vim.opt.bg = 'dark'
 vim.cmd [[ colo pencil ]]
 
 vim.opt.fillchars = {
-    fold  = '-',
-    vert  = ' ',
-	vertleft = ' ',
-	vertright = ' ',
-	verthoriz = ' ',
-    horizup = ' ',
-    horizdown = '▀',
-    horiz = '▀',
-    diff = '╱',
+  fold  = '-',
+  vert  = ' ',
+  vertleft = ' ',
+  vertright = ' ',
+  verthoriz = ' ',
+  horizup = ' ',
+  horizdown = '▀',
+  horiz = '▀',
+  diff = '╱',
 }
 vim.opt.foldlevel = 99
 vim.opt.foldminlines = 3
@@ -63,28 +63,28 @@ vim.opt.foldminlines = 3
 vim.opt.spelllang = { 'en', 'ru' }
 
 vim.opt.langmap = {
-    'ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯХЪЖБЮЁ;ABCDEFGHIJKLMNOPQRSTUVWXYZ{}:<>~,',
-    "фисвуапршолдьтщзйкыегмцчняхъэюё;abcdefghijklmnopqrstuvwxyz[]'.`",
-    'Э;\\"',
-    'ж;\\;',
-    'б;\\,',
-    '№;#'
+  'ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯХЪЖБЮЁ;ABCDEFGHIJKLMNOPQRSTUVWXYZ{}:<>~,',
+  "фисвуапршолдьтщзйкыегмцчняхъэюё;abcdefghijklmnopqrstuvwxyz[]'.`",
+  'Э;\\"',
+  'ж;\\;',
+  'б;\\,',
+  '№;#'
 }
 
 vim.opt.laststatus = 3
 vim.opt.showmode = false
 
 vim.opt.sessionoptions = {
-    'blank',
-    'buffers',
-    'curdir',
-    'help',
-    -- 'globals',
-    -- 'localoptions',
-    -- 'options',
-    -- 'resize',
-    'winsize',
-    'tabpages',
+  'blank',
+  'buffers',
+  'curdir',
+  'help',
+  -- 'globals',
+  -- 'localoptions',
+  -- 'options',
+  -- 'resize',
+  'winsize',
+  'tabpages',
 }
 
 -- Plugin specific options

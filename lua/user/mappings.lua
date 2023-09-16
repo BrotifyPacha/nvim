@@ -2,52 +2,52 @@ local M = {}
 local wk_reg = require 'which-key'.register
 
 local function map(mode, from, to)
-    vim.api.nvim_set_keymap(mode, from, to, { expr = false, noremap = false })
+  vim.api.nvim_set_keymap(mode, from, to, { expr = false, noremap = false })
 end
 local function noremap(mode, from, to, bufonly)
-    if bufonly ~= nil then
-        vim.api.nvim_buf_set_keymap(0, mode, from, to, { expr = false, noremap = true })
-    else
-        vim.api.nvim_set_keymap(mode, from, to, { expr = false, noremap = true })
-    end
+  if bufonly ~= nil then
+    vim.api.nvim_buf_set_keymap(0, mode, from, to, { expr = false, noremap = true })
+  else
+    vim.api.nvim_set_keymap(mode, from, to, { expr = false, noremap = true })
+  end
 end
 
 local function buf_nnoremap(from, to)
-    noremap('n', from, to, true)
+  noremap('n', from, to, true)
 end
 local function nnoremap(from, to)
-    noremap('n', from, to)
+  noremap('n', from, to)
 end
 local function inoremap(from, to)
-    noremap('i', from, to)
+  noremap('i', from, to)
 end
 local function inoremapexpr(from, to)
-    vim.api.nvim_set_keymap('i', from, to, { expr = true, noremap = true })
+  vim.api.nvim_set_keymap('i', from, to, { expr = true, noremap = true })
 end
 local function vnoremap(from, to)
-    noremap('v', from, to)
+  noremap('v', from, to)
 end
 local function tnoremap(from, to)
-    noremap('t', from, to)
+  noremap('t', from, to)
 end
 local function onoremap(from, to)
-    noremap('o', from, to)
+  noremap('o', from, to)
 end
 local function xnoremap(from, to)
-    noremap('x', from, to)
+  noremap('x', from, to)
 end
 local function cnoremap(from, to)
-    noremap('c', from, to)
+  noremap('c', from, to)
 end
 
 local function nmap(from, to)
-    map('n', from, to)
+  map('n', from, to)
 end
 local function vmap(from, to)
-    map('v', from, to)
+  map('v', from, to)
 end
 local function xmap(from, to)
-    map('x', from, to)
+  map('x', from, to)
 end
 
 -- Plugin mappings
@@ -116,16 +116,16 @@ local dirs = '{'.. workspaceDir ..', '.. pluginsDir ..'}'
 -- F key maps
 nnoremap('<F1>', '<cmd>WhichKey F1<cr>')
 wk_reg {
-    ["F1"] = {
-        name = "Change working directory",
-        ["<F1>"] = { '<cmd>lua require"user.helpers".PickWorkingDir("tcd", '.. dirs ..')<cr>', "workspace/plugins", },
-        ["n"] = { ':tcd ~/.config/nvim | e $MYVIMRC <cr>', "neovim config"},
-        ["l"] = { '<cmd>lua require"user.helpers".PickWorkingDir("lcd", '.. dirs ..')<cr>', "workspace/plugins (local)", },
-        ["K"] = { '<cmd>lua require"user.helpers".PickWorkingDir("tcd", {'.. k8sMigratorDir ..'})<cr>', "k8s-migrator", },
-        ["k"] = { '<cmd>lua require"user.helpers".PickWorkingDir("lcd", {'.. k8sMigratorDir ..'})<cr>', "k8s-migrator (local)", },
-        ["C"] = { '<cmd>lua require"user.helpers".PickWorkingDir("tcd", {'.. configsDir ..'})<cr>', "configs", },
-        ["c"] = { '<cmd>lua require"user.helpers".PickWorkingDir("lcd", {'.. configsDir ..'})<cr>', "configs (local)", },
-    },
+  ["F1"] = {
+    name = "Change working directory",
+    ["<F1>"] = { '<cmd>lua require"user.helpers".PickWorkingDir("tcd", '.. dirs ..')<cr>', "workspace/plugins", },
+    ["n"] = { ':tcd ~/.config/nvim | e $MYVIMRC <cr>', "neovim config"},
+    ["l"] = { '<cmd>lua require"user.helpers".PickWorkingDir("lcd", '.. dirs ..')<cr>', "workspace/plugins (local)", },
+    ["K"] = { '<cmd>lua require"user.helpers".PickWorkingDir("tcd", {'.. k8sMigratorDir ..'})<cr>', "k8s-migrator", },
+    ["k"] = { '<cmd>lua require"user.helpers".PickWorkingDir("lcd", {'.. k8sMigratorDir ..'})<cr>', "k8s-migrator (local)", },
+    ["C"] = { '<cmd>lua require"user.helpers".PickWorkingDir("tcd", {'.. configsDir ..'})<cr>', "configs", },
+    ["c"] = { '<cmd>lua require"user.helpers".PickWorkingDir("lcd", {'.. configsDir ..'})<cr>', "configs (local)", },
+  },
 }
 
 nnoremap('<F2><F2>', '<cmd>set spell!<cr>')
@@ -152,11 +152,11 @@ nnoremap('<F9><F9>',  '<cmd>lua require"terminal".open_terminal()<cr>')
 nnoremap('<F9><F10>',  '<cmd>lua require"terminal".open_new_terminal()<cr>')
 vim.api.nvim_set_keymap('n', '<F9>', ':WhichKey F9<cr>', { expr = false, noremap = true })
 wk_reg {
-    ["F9"] = {
-        name = "terminal",
-        ["<F9>"] = { '<cmd>lua require"terminal".open_terminal()<cr>', "open/next terminal", },
-        ["<F10>"] = { '<cmd>lua require"terminal".open_new_terminal()<cr>', "open new terminal", },
-    },
+  ["F9"] = {
+    name = "terminal",
+    ["<F9>"] = { '<cmd>lua require"terminal".open_terminal()<cr>', "open/next terminal", },
+    ["<F10>"] = { '<cmd>lua require"terminal".open_new_terminal()<cr>', "open new terminal", },
+  },
 }
 
 -- Terminal mode key maps
@@ -176,13 +176,13 @@ inoremap('<C-r>r', '<C-r>=expand(\'%:t:r\')<cr>')
 
 -- Smart tab
 local function t(str)
-    return vim.api.nvim_replace_termcodes(str, true, true, true)
+  return vim.api.nvim_replace_termcodes(str, true, true, true)
 end
 function _G.smart_tab()
-    return vim.fn.pumvisible() == 1 and t'<C-n>' or t'<Tab>'
+  return vim.fn.pumvisible() == 1 and t'<C-n>' or t'<Tab>'
 end
 function _G.smart_tab_backward()
-    return vim.fn.pumvisible() == 1 and t'<C-p>' or t'<S-Tab>'
+  return vim.fn.pumvisible() == 1 and t'<C-p>' or t'<S-Tab>'
 end
 
 map('v', '<Tab>', '<Plug>(snippy-cut-text)')
@@ -205,85 +205,85 @@ nnoremap('<leader>L', "<cmd>vert bel split<cr>")
 nnoremap('<leader>o', "<cmd>let g:goyo_preset=1 |Goyo<cr>")
 
 wk_reg {
-    ["<leader>"] = {
-        ["<space>"] = "Goto next <-->",
-        e = "File explorer",
-        h = "which_key_ignore",
-        j = "which_key_ignore",
-        k = "which_key_ignore",
-        l = "which_key_ignore",
-        H = "which_key_ignore",
-        J = "which_key_ignore",
-        K = "which_key_ignore",
-        L = "which_key_ignore",
-        o = "goyo",
+  ["<leader>"] = {
+    ["<space>"] = "Goto next <-->",
+    e = "File explorer",
+    h = "which_key_ignore",
+    j = "which_key_ignore",
+    k = "which_key_ignore",
+    l = "which_key_ignore",
+    H = "which_key_ignore",
+    J = "which_key_ignore",
+    K = "which_key_ignore",
+    L = "which_key_ignore",
+    o = "goyo",
 
-        d = {
-            name = "debug",
-            a = "start with args",
-            s = "start/continue",
-            p = "repeat previous run",
-            c = "run to cursor",
-            d = "toggle breakpoint",
-            f = "toggle If breakpoint",
-            e = "eval under cursor",
-        },
-    }
+    d = {
+      name = "debug",
+      a = "start with args",
+      s = "start/continue",
+      p = "repeat previous run",
+      c = "run to cursor",
+      d = "toggle breakpoint",
+      f = "toggle If breakpoint",
+      e = "eval under cursor",
+    },
+  }
 }
 
 wk_reg {
-    ['<leader>dt'] = {
-        name = "run tests",
-        t = {}
-    }
+  ['<leader>dt'] = {
+    name = "run tests",
+    t = {}
+  }
 }
 
 function moveWindowPreservingNvimTree(wincmd)
-    local nvimTreeOpen = false
-    local wins = vim.api.nvim_tabpage_list_wins(0)
-    for _, winId in pairs(wins) do
-        local bufId = vim.api.nvim_win_get_buf(winId)
-        local ft = vim.api.nvim_buf_get_option(bufId, 'ft')
-        if ft == 'NvimTree' then
-            nvimTreeOpen = true
-        end
+  local nvimTreeOpen = false
+  local wins = vim.api.nvim_tabpage_list_wins(0)
+  for _, winId in pairs(wins) do
+    local bufId = vim.api.nvim_win_get_buf(winId)
+    local ft = vim.api.nvim_buf_get_option(bufId, 'ft')
+    if ft == 'NvimTree' then
+      nvimTreeOpen = true
     end
-    if not nvimTreeOpen then
-        vim.cmd("wincmd " .. wincmd)
-        return
-    end
-    vim.cmd("NvimTreeClose")
+  end
+  if not nvimTreeOpen then
     vim.cmd("wincmd " .. wincmd)
-    vim.cmd("NvimTreeOpen")
-    vim.cmd("wincmd p")
+    return
+  end
+  vim.cmd("NvimTreeClose")
+  vim.cmd("wincmd " .. wincmd)
+  vim.cmd("NvimTreeOpen")
+  vim.cmd("wincmd p")
 end
 
 function toggleDiff()
-    local wins = vim.api.nvim_tabpage_list_wins(0)
-    local isDiffOn = false
-    for _, winId in pairs(wins) do
-        local bufId = vim.api.nvim_win_get_buf(winId)
-        isDiffOn = vim.api.nvim_win_get_option(winId, 'diff')
-        if isDiffOn then
-            break
-        end
-    end
+  local wins = vim.api.nvim_tabpage_list_wins(0)
+  local isDiffOn = false
+  for _, winId in pairs(wins) do
+    local bufId = vim.api.nvim_win_get_buf(winId)
+    isDiffOn = vim.api.nvim_win_get_option(winId, 'diff')
     if isDiffOn then
-        vim.cmd "diffoff!"
-    else
-        local wins = vim.api.nvim_tabpage_list_wins(0)
-        local curWin = vim.api.nvim_get_current_win()
-        for _, winId in pairs(wins) do
-            local bufId = vim.api.nvim_win_get_buf(winId)
-            local ft = vim.api.nvim_buf_get_option(bufId, 'ft')
-            if ft ~= 'NvimTree' then
-                vim.api.nvim_set_current_win(winId)
-                vim.cmd "diffthis"
-                -- vim.api.nvim_win_set_option(winId, 'diff', true)
-            end
-        end
-        vim.api.nvim_set_current_win(curWin)
+      break
     end
+  end
+  if isDiffOn then
+    vim.cmd "diffoff!"
+  else
+    local wins = vim.api.nvim_tabpage_list_wins(0)
+    local curWin = vim.api.nvim_get_current_win()
+    for _, winId in pairs(wins) do
+      local bufId = vim.api.nvim_win_get_buf(winId)
+      local ft = vim.api.nvim_buf_get_option(bufId, 'ft')
+      if ft ~= 'NvimTree' then
+        vim.api.nvim_set_current_win(winId)
+        vim.cmd "diffthis"
+        -- vim.api.nvim_win_set_option(winId, 'diff', true)
+      end
+    end
+    vim.api.nvim_set_current_win(curWin)
+  end
 end
 
 -- nnoremap('<leader>ss' , '<cmd>Scratch<cr>')
@@ -313,29 +313,29 @@ nnoremap('<leader>w3' , '<cmd>lua vim.api.nvim_win_set_width(0, math.floor(vim.a
 nnoremap('<leader>w4' , '<cmd>lua vim.api.nvim_win_set_width(0, math.floor(vim.api.nvim_get_option("columns") / 4))<cr>')
 nnoremap('<leader>w5' , '<cmd>lua vim.api.nvim_win_set_width(0, math.floor(vim.api.nvim_get_option("columns") / 5))<cr>')
 wk_reg {
-    ['<leader>w'] = {
-        name = "windows",
-        q = 'close window',
-        w = 'save',
-        d = 'diff windows',
-        r = 'rotate',
-        ['2'] = 'resize to 1/2',
-        ['3'] = 'resize to 1/3',
-        ['4'] = 'resize to 1/4',
-        ['5'] = 'resize to 1/5',
-        F = 'make window Floating',
-        f = 'select Floating',
-        h = 'move float left',
-        j = 'move float down',
-        k = 'move float top',
-        l = 'move float right',
-    }
+  ['<leader>w'] = {
+    name = "windows",
+    q = 'close window',
+    w = 'save',
+    d = 'diff windows',
+    r = 'rotate',
+    ['2'] = 'resize to 1/2',
+    ['3'] = 'resize to 1/3',
+    ['4'] = 'resize to 1/4',
+    ['5'] = 'resize to 1/5',
+    F = 'make window Floating',
+    f = 'select Floating',
+    h = 'move float left',
+    j = 'move float down',
+    k = 'move float top',
+    l = 'move float right',
+  }
 }
 
 nnoremap('<leader>gg', "<cmd>bel vert G<cr>:wincmd L<cr>")
 vim.keymap.set('n', '<leader>gK', function ()
-    local branch = vim.fn['fugitive#Head']()
-    vim.cmd ( 'G push --set-upstream origin ' .. branch )
+  local branch = vim.fn['fugitive#Head']()
+  vim.cmd ( 'G push --set-upstream origin ' .. branch )
 end)
 nnoremap('<leader>gj', "<cmd>G fetch --all<cr>")
 nnoremap('<leader>gJ', "<cmd>G fetch --all --prune<cr>")
@@ -371,42 +371,42 @@ nnoremap('<leader>gop', ':lua require("user/helpers").xdgOpen(require("user/help
 nnoremap('<leader>gom', ':lua require("user/helpers").xdgOpen(require("user/helpers").getRemoteLink() .. "/-/merge_requests")<cr>')
 
 wk_reg {
-    ['<leader>g'] = {
-        name = 'git',
-        L = 'push (force)',
-        l = 'push',
-        h = 'pull',
-        v = 'view history',
-        V = 'view file history',
-        g = 'status',
-        r = {
-            name = 'rebase',
-            i = 'interactive',
-            a = 'interactive --autosquash',
-        },
-        c = {
-            name = 'commit',
-            c = 'commit',
-            a = 'amend',
-            e = 'amend (no-edit)',
-            r = 'amend (no-edit, reset-author)',
-        },
-        d = 'diff split',
-        b = 'blame',
-        B = 'blame short',
-        u = 'undo hunk',
-        s = 'stage hunk',
-        p = 'preview hunk',
-        f = 'fetch all',
-        F = 'fetch all (prune)',
-        o = {
-            name = 'open remote',
-            f = 'file',
-            r = 'repo',
-            p = 'pipelines',
-            m = 'merge requests',
-        }
+  ['<leader>g'] = {
+    name = 'git',
+    L = 'push (force)',
+    l = 'push',
+    h = 'pull',
+    v = 'view history',
+    V = 'view file history',
+    g = 'status',
+    r = {
+      name = 'rebase',
+      i = 'interactive',
+      a = 'interactive --autosquash',
     },
+    c = {
+      name = 'commit',
+      c = 'commit',
+      a = 'amend',
+      e = 'amend (no-edit)',
+      r = 'amend (no-edit, reset-author)',
+    },
+    d = 'diff split',
+    b = 'blame',
+    B = 'blame short',
+    u = 'undo hunk',
+    s = 'stage hunk',
+    p = 'preview hunk',
+    f = 'fetch all',
+    F = 'fetch all (prune)',
+    o = {
+      name = 'open remote',
+      f = 'file',
+      r = 'repo',
+      p = 'pipelines',
+      m = 'merge requests',
+    }
+  },
 }
 
 -- nnoremap('<leader>rr', ':call RenameLocalVariable()<cr>')
@@ -429,17 +429,17 @@ vnoremap('<leader>rK', ':lua require"caseswitcher".swapCaseOfVisualSelection("ke
 nnoremap('<leader>rm', ':call formatting#squash_blank_lines()<cr>')
 nnoremap('<leader>rd', ':call AddDocString()<cr>')
 wk_reg {
-    ['<leader>r'] = {
-        name = 'refactor',
-        r = 'rename local var',
-        t = 'toggle multiline args',
-        s = 'snake_case',
-        S = 'SNAKE_CASE',
-        c = 'camelCase',
-        C = 'CamelCase',
-        m = 'merge blanks',
-        d = 'add doc string',
-    }
+  ['<leader>r'] = {
+    name = 'refactor',
+    r = 'rename local var',
+    t = 'toggle multiline args',
+    s = 'snake_case',
+    S = 'SNAKE_CASE',
+    c = 'camelCase',
+    C = 'CamelCase',
+    m = 'merge blanks',
+    d = 'add doc string',
+  }
 }
 
 nnoremap('<leader>td', '<cmd>tcd %:h<cr>')
@@ -450,29 +450,29 @@ nnoremap('<leader>tj', '<cmd>tabmove -1<cr><cmd>call repeat#set("<leader>th")<cr
 nnoremap('<leader>tl', '<cmd>tabnext<cr>')
 nnoremap('<leader>th', '<cmd>tabprevious<cr>')
 wk_reg {
-    ['<leader>t'] = {
-        name = 'tabs',
-        d = 'switch tab working dir',
-        t = 'open tab',
-        c = 'close tab',
-        l = 'move tab right',
-        h = 'move tab left',
-    }
+  ['<leader>t'] = {
+    name = 'tabs',
+    d = 'switch tab working dir',
+    t = 'open tab',
+    c = 'close tab',
+    l = 'move tab right',
+    h = 'move tab left',
+  }
 }
 
 nnoremap('<leader>qc', ':cclose<cr>')
 wk_reg {
-    ['<leader>q'] = {
-        name = 'quickfix',
-        c = 'close',
-    }
+  ['<leader>q'] = {
+    name = 'quickfix',
+    c = 'close',
+  }
 }
 
 vim.cmd
 [[
 augroup pacha_filetype_mappings
-    autocmd!
-    autocmd FileType * lua require'user.mappings'.set_filetype_specific_mappings()
+autocmd!
+autocmd FileType * lua require'user.mappings'.set_filetype_specific_mappings()
 augroup end
 ]]
 
@@ -482,72 +482,72 @@ augroup end
 -- nnoremap('<leader>fl', '<cmd>!make run<cr>')
 nnoremap('<leader>fh', '<cmd>lua require("nvim-treesitter-playground.hl-info").show_hl_captures()<cr>')
 wk_reg {
-    ["<leader>f"] = {
-        name = "filetype specific",
-        h = "print highlight under cursor",
-    }
+  ["<leader>f"] = {
+    name = "filetype specific",
+    h = "print highlight under cursor",
+  }
 }
 
 function M.set_filetype_specific_mappings()
-    local ft = vim.api.nvim_buf_get_option(0, 'ft')
-    local fprefix = '<leader>f'
-    if ft == "vim" then
-        -- Vim
-        buf_nnoremap(fprefix .. 's', ':w | so %<cr>')
-    elseif ft == "lua" then
-        -- Lua
-        buf_nnoremap(fprefix .. 's', ':w | so %<cr>')
-    elseif ft == "markdown" then
-        -- Markdown
-        buf_nnoremap(fprefix .. 'p', ':MarkdownPreviewToggle<cr>')
-    elseif ft == 'go' then
-        buf_nnoremap(fprefix .. 'T', '<cmd>GoTest<cr>')
-        buf_nnoremap(fprefix .. 't', '<cmd>GoTestFile<cr>')
-        buf_nnoremap(fprefix .. 'b', '<cmd>GoBuild<cr>')
-        buf_nnoremap(fprefix .. 'B', '<cmd>call CustomGoBuild()<cr>')
-        buf_nnoremap(fprefix .. 'f', '<cmd>GoFillStruct<cr>')
-        buf_nnoremap(fprefix .. 'i', ':GoImpl <c-r><c-w><c-f>bldeguiw<c-c><c-e> *<c-r><c-f> ')
-        buf_nnoremap(fprefix .. 'c', '<cmd>GoCoverageToggle<cr>')
-    elseif ft == 'qf' then
-        buf_nnoremap('dd', '<cmd>call setqflist(filter(getqflist(), {idx -> idx != line(".") - 1}), "r")<cr>')
-    end
+  local ft = vim.api.nvim_buf_get_option(0, 'ft')
+  local fprefix = '<leader>f'
+  if ft == "vim" then
+    -- Vim
+    buf_nnoremap(fprefix .. 's', ':w | so %<cr>')
+  elseif ft == "lua" then
+    -- Lua
+    buf_nnoremap(fprefix .. 's', ':w | so %<cr>')
+  elseif ft == "markdown" then
+    -- Markdown
+    buf_nnoremap(fprefix .. 'p', ':MarkdownPreviewToggle<cr>')
+  elseif ft == 'go' then
+    buf_nnoremap(fprefix .. 'T', '<cmd>GoTest<cr>')
+    buf_nnoremap(fprefix .. 't', '<cmd>GoTestFile<cr>')
+    buf_nnoremap(fprefix .. 'b', '<cmd>GoBuild<cr>')
+    buf_nnoremap(fprefix .. 'B', '<cmd>call CustomGoBuild()<cr>')
+    buf_nnoremap(fprefix .. 'f', '<cmd>GoFillStruct<cr>')
+    buf_nnoremap(fprefix .. 'i', ':GoImpl <c-r><c-w><c-f>bldeguiw<c-c><c-e> *<c-r><c-f> ')
+    buf_nnoremap(fprefix .. 'c', '<cmd>GoCoverageToggle<cr>')
+  elseif ft == 'qf' then
+    buf_nnoremap('dd', '<cmd>call setqflist(filter(getqflist(), {idx -> idx != line(".") - 1}), "r")<cr>')
+  end
 end
 
 function CustomCtrlAHandler(direction)
-    local line = vim.api.nvim_get_current_line()
-    local cursor = vim.api.nvim_win_get_cursor(0)
-    local word = vim.fn.expand("<cword>")
-    while string.sub(line, cursor[2]+1, cursor[2]+1) == " " do
-        cursor[2] = cursor[2] + 1
-        vim.cmd('normal! l')
+  local line = vim.api.nvim_get_current_line()
+  local cursor = vim.api.nvim_win_get_cursor(0)
+  local word = vim.fn.expand("<cword>")
+  while string.sub(line, cursor[2]+1, cursor[2]+1) == " " do
+    cursor[2] = cursor[2] + 1
+    vim.cmd('normal! l')
+  end
+  local togglable = {
+    { "yes", "no" },
+    { "Yes", "No" },
+    { "up", "down" },
+    { "Up", "Down" },
+    { "true", "false" },
+    { "True", "False" },
+    { "enable", "disable" },
+    { "Enable", "Disable" },
+    { "and", "or" },
+    { "&&", "||" },
+  }
+  for _, pair in pairs(togglable) do
+    if word == pair[1] then
+      vim.cmd("normal! ciw" .. pair[2])
+      return
+    elseif word == pair[2] then
+      vim.cmd("normal! ciw" .. pair[1])
+      return
     end
-    local togglable = {
-        { "yes", "no" },
-        { "Yes", "No" },
-        { "up", "down" },
-        { "Up", "Down" },
-        { "true", "false" },
-        { "True", "False" },
-        { "enable", "disable" },
-        { "Enable", "Disable" },
-        { "and", "or" },
-        { "&&", "||" },
-    }
-    for _, pair in pairs(togglable) do
-        if word == pair[1] then
-            vim.cmd("normal! ciw" .. pair[2])
-            return
-        elseif word == pair[2] then
-            vim.cmd("normal! ciw" .. pair[1])
-            return
-        end
-    end
+  end
 
-    if direction == 1 then
-        vim.cmd("normal! ")
-    else
-        vim.cmd("normal! ")
-    end
+  if direction == 1 then
+    vim.cmd("normal! ")
+  else
+    vim.cmd("normal! ")
+  end
 end
 nnoremap("<C-a>", "<cmd>lua CustomCtrlAHandler(1)<cr>")
 nnoremap("<C-x>", "<cmd>lua CustomCtrlAHandler(-1)<cr>")
