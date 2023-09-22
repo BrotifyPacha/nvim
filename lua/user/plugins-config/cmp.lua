@@ -118,7 +118,13 @@ cmp.setup({
   sources = {
     { name = 'nvim_lsp' },
     { name = 'snippy' },
-    { name = 'buffer', option = { get_bufnrs = function() return vim.api.nvim_list_bufs() end } },
+    {
+      name = 'buffer',
+      option = {
+        get_bufnrs = function() return vim.api.nvim_list_bufs() end,
+        max_indexed_line_length = 150,
+      }
+    },
     { name = 'path' },
   },
   window = {
