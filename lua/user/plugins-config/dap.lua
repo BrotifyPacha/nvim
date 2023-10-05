@@ -92,6 +92,13 @@ dap.configurations.go = {
         args = {},
     },
     {
+      type = "go",
+      name = "Debug pre-compiled binary",
+      request = "launch",
+      mode = "exec",
+      program = "./_debug_bin",
+    },
+    {
         type = "go",
         name = "Debug test (File)",
         request = "launch",
