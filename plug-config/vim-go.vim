@@ -7,7 +7,7 @@ let g:go_gopls_enabled = 0
 
 let g:pacha_go_format = 1
 
-function ToggleGoFmtOnSave() abort
+function GoFmtOnSaveToggle() abort
     let val = !get(g:, 'pacha_go_format')
 
     let g:pacha_go_format = val
