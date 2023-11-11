@@ -21,68 +21,8 @@ endfunction
 set foldtext=MyFoldText()
 
 set winbar=%{%v:lua.require('user.helpers').getMyWinbar()%}
-set tabline=%!MyTabLine()
+set tabline=%{%v:lua.require('tabline').myTabline()%}
 set showtabline=2
-function MyTabLine()
-  let s = ''
-  for i in range(tabpagenr('$'))
-    let i = i + 1
-    " select the highlighting
-    if i == tabpagenr()
-        let tab_highlight = '%#TabLineSel#'
-    else
-        let tab_highlight = '%#TabLine#'
-    endif
-    let tab_name = '%'.i.'T %{MyTabLabel(' . i . ')} %' . i . 'X窱'
-
-    let sep_highlight = '%#TabLineDivider#'
-    let sep = '│'
-    if i + 1 == tabpagenr()
-        let sep_highlight = '%#TabLineDividerSelected#'
-        let sep = '▐'
-    elseif i == tabpagenr() && i != tabpagenr('$')
-        let sep_highlight = '%#TabLineDividerSelected#'
-        let sep = '▌'
-    elseif i == tabpagenr('$')
-        let sep = ''
-    end
-    let s .= tab_highlight . tab_name . sep_highlight . sep
-  endfor
-  let s .= '%#TabLineFill#'
-  let s .= '%@UI_AddTab@  %X'
-  " after the last tab fill with TabLineFill and reset tab page nr
-  if &background == 'light'
-      let toggle_bg_indicator = ''
-  else
-      let toggle_bg_indicator = ''
-  end
-  let s .= '%#TabLineFill#%=  %@ToggleBG@| ' . toggle_bg_indicator . ' %X'
-  return s
-endfunction
-
-function UI_AddTab(a, b, c, d)
-    tabnew
-endfunction
-
-function ToggleBG(a, b, c, d)
-    let bgOption = &background
-    if bgOption == 'light'
-        set bg=dark
-    else
-        set bg=light
-    end
-endfunction
-
-function! MyTabLabel(n)
-  let winnr = tabpagewinnr(a:n)
-  let cwd = getcwd(winnr, a:n)
-  if cwd =~ 'trunk'
-      let cwd = substitute(cwd, '[/\\]trunk.*', '', '')
-      return matchstr(cwd, '[^/]\+/[^/]\+$')
-  endif
-  let cwd = substitute(cwd, '.*[/\\]', '', '')
-  return cwd
-endfunction
 
 let g:fugitive_browse_handlers = ['CustomGBrowseHandler']
 function! CustomGBrowseHandler(args)
