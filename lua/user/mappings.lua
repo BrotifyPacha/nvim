@@ -91,6 +91,7 @@ nnoremap('g[p', 'ddkmm{p`m:call repeat#set("m[p")<cr>')
 -- Misc key maps
 nnoremap('n', 'nzz')
 nnoremap('N', 'Nzz')
+nnoremap('gf', 'gF')
 nnoremap('gF', ':e <cfile><cr>')
 nnoremap('cy', '"*y')
 nnoremap('p', "mpp=']`p")
@@ -286,22 +287,8 @@ function toggleDiff()
   end
 end
 
--- nnoremap('<leader>ss' , '<cmd>Scratch<cr>')
--- nnoremap('<leader>so' , '<cmd>ScratchOpen<cr>')
--- wk_reg {
---     ['<leader>s'] = {
---         name = "Scratch buffers",
---         ["s"] = "Create new",
---         ["o"] = "Open existing",
---     },
--- }
-
 nnoremap('<C-w>J', '<cmd>lua moveWindowPreservingNvimTree("J")<cr>')
 nnoremap('<C-w>K', '<cmd>lua moveWindowPreservingNvimTree("K")<cr>')
-nnoremap('<leader>wq' , '<cmd>q<cr>')
-nnoremap('<leader>ww' , '<cmd>w<cr>')
-nnoremap('<leader>wd' , '<cmd>lua toggleDiff()<cr>')
-nnoremap('<leader>wr' , '<C-w>r<cr>')
 nnoremap('<leader>wF' , '<cmd>lua require("user.helpers").winOpenFloat(0)<cr>')
 nnoremap('<leader>wf' , '<cmd>lua require("user.helpers").winSelectFloat()<cr><cmd>call repeat#set("<leader>wf")<cr>')
 nnoremap('<leader>wh' , '<cmd>lua require("user.helpers").winMoveFloat(0, -1)<cr><cmd>call repeat#set("<leader>wh")<cr>')
@@ -315,14 +302,15 @@ nnoremap('<leader>w5' , '<cmd>lua vim.api.nvim_win_set_width(0, math.floor(vim.a
 wk_reg {
   ['<leader>w'] = {
     name = "windows",
-    q = 'close window',
-    w = 'save',
-    d = 'diff windows',
-    r = 'rotate',
+    q = { '<cmd>q<cr>', 'close window' },
+    w = { '<cmd>w<cr>', 'save' },
+    d = { '<cmd>lua toggleDiff()<cr>', 'diff windows' },
+    r = { '<cmd>r<cr>', 'rotate' },
     ['2'] = 'resize to 1/2',
     ['3'] = 'resize to 1/3',
     ['4'] = 'resize to 1/4',
     ['5'] = 'resize to 1/5',
+
     F = 'make window Floating',
     f = 'select Floating',
     h = 'move float left',
@@ -332,39 +320,10 @@ wk_reg {
   }
 }
 
-nnoremap('<leader>gg', "<cmd>bel vert G<cr>:wincmd L<cr>")
 vim.keymap.set('n', '<leader>gK', function ()
   local branch = vim.fn['fugitive#Head']()
   vim.cmd ( 'G push --set-upstream origin ' .. branch )
 end)
-nnoremap('<leader>gj', "<cmd>G fetch --all<cr>")
-nnoremap('<leader>gJ', "<cmd>G fetch --all --prune<cr>")
-nnoremap('<leader>gL', "<cmd>G push --force<cr>")
-nnoremap('<leader>gl', "<cmd>G push<cr>")
-nnoremap('<leader>gh', "<cmd>G pull<cr>")
-
-nnoremap('<leader>gv', "<cmd>bel vert G log --oneline --graph --decorate --branches<cr>")
-nnoremap('<leader>gV', "<cmd>Telescope git_bcommits<cr>")
-
-nnoremap('<leader>gri', ":G rebase -i master")
-nnoremap('<leader>gra', ":G rebase -i --autosquash master")
-
-nnoremap('<leader>gcc', "<cmd>G commit<cr>")
-nnoremap('<leader>gcf', ':G commit --fixup <c-r>"')
-nnoremap('<leader>gca', "<cmd>G commit --amend<cr>")
-nnoremap('<leader>gce', "<cmd>G commit --amend --no-edit<cr>")
-
-nnoremap('<leader>gd', "<cmd>Gdiffsplit<cr>")
-
-nnoremap('<leader>gb', "<cmd>lua require'gitsigns'.blame_line({full=true})<cr>")
-nnoremap('<leader>gB', "<cmd>lua require'gitsigns'.blame_line({enter=true})<cr>")
-nnoremap('<leader>gu', "<cmd>lua require'gitsigns'.reset_hunk()<cr>:do User PachaHunkStatusChanged<cr>")
-nnoremap('<leader>gs', "<cmd>lua require'gitsigns'.stage_hunk()<cr>:do User PachaHunkStatusChanged<cr>")
-nnoremap('<leader>gp', "<cmd>lua require'gitsigns'.preview_hunk()<cr>")
-
-nnoremap('<leader>gt', "<cmd>Telescope git_branches<cr>")
-nnoremap('<leader>gf', "<cmd>Telescope git_status<cr>")
-
 vnoremap('<leader>gof', ":GBrowse<cr>")
 nnoremap('<leader>gor', ':lua require("user/helpers").xdgOpen(require("user/helpers").getRemoteLink())<cr>')
 nnoremap('<leader>gop', ':lua require("user/helpers").xdgOpen(require("user/helpers").getRemoteLink() .. "/-/pipelines")<cr>')
@@ -373,51 +332,48 @@ nnoremap('<leader>gom', ':lua require("user/helpers").xdgOpen(require("user/help
 wk_reg {
   ['<leader>g'] = {
     name = 'git',
-    L = 'push (force)',
-    l = 'push',
-    h = 'pull',
-    v = 'view history',
-    V = 'view file history',
-    g = 'status',
+    t = { '<cmd>Telescope git_branches<cr>',   'branches' },
+    g = { '<cmd>vert G | wincmd L<cr>',    'status' },
+    f = { '<cmd>Telescope git_status<cr>', 'status - telescope' },
+    d = { '<cmd>Gdiffsplit<cr>',           'diff split' },
+
+    b = { '<cmd>lua require"gitsigns".blame_line({full=true})<cr>',  'blame' },
+    B = { '<cmd>lua require"gitsigns".blame_line({enter=true})<cr>', 'blame short' },
+    p = { '<cmd>lua require"gitsigns".preview_hunk()<cr>',           'preview hunk' },
+    u = { '<cmd>lua require"gitsigns".reset_hunk()<cr>:do User PachaHunkStatusChanged<cr>', 'undo hunk' },
+    s = { '<cmd>lua require"gitsigns".stage_hunk()<cr>:do User PachaHunkStatusChanged<cr>', 'stage hunk' },
+    v = { '<cmd>bel vert G log --oneline --graph --decorate --branches<cr>',                'commits' },
+    V = { '<cmd>Telescope git_bcommits<cr>',                                                'commits - telescope' },
+
+    h = { '<cmd>G pull<cr>',                'pull' },
+    j = { '<cmd>G fetch --all<cr>',         'fetch' },
+    J = { '<cmd>G fetch --all --prune<cr>', 'fetch prune' },
+    K = 'push (set-upstream)',
+    L = { '<cmd>G push --force<cr>',        'push (force)' },
+    l = { '<cmd>G push<cr>',                'push' },
+
     r = {
       name = 'rebase',
-      i = 'interactive',
-      a = 'interactive --autosquash',
+      i = { '<cmd>G rebase -i master<cr>',              'interactive' },
+      a = { '<cmd>G rebase -i --autosquash master<cr>', 'interactive --autosquash' },
     },
     c = {
       name = 'commit',
-      c = 'commit',
-      a = 'amend',
-      e = 'amend (no-edit)',
-      r = 'amend (no-edit, reset-author)',
+      c = { '<cmd>G commit<cr>',                                  'commit' },
+      f = { ':G commit --fixup <c-r>"<cr>'    ,                   'fixup' },
+      a = { '<cmd>G commit --amend<cr>',                          'amend' },
+      e = { '<cmd>G commit --amend --no-edit<cr>',                'amend (no-edit)' },
+      r = { '<cmd>G commit --amend --no-edit --reset-author<cr>', 'amend (no-edit, reset-author)'},
     },
-    d = 'diff split',
-    b = 'blame',
-    B = 'blame short',
-    u = 'undo hunk',
-    s = 'stage hunk',
-    p = 'preview hunk',
-    f = 'fetch all',
-    F = 'fetch all (prune)',
     o = {
       name = 'open remote',
       f = 'file',
       r = 'repo',
       p = 'pipelines',
       m = 'merge requests',
-    }
+    },
   },
 }
-
--- nnoremap('<leader>rr', ':call RenameLocalVariable()<cr>')
-nnoremap('<leader>rt', ':call formatting#toggle_multiline_args()<cr>')
-
-nnoremap('<leader>rs', ':lua require"caseswitcher".swapCaseOfWordUnderCursor("snake")<cr>')
-nnoremap('<leader>rS', ':lua require"caseswitcher".swapCaseOfWordUnderCursor("snake-screaming")<cr>')
-nnoremap('<leader>rc', ':lua require"caseswitcher".swapCaseOfWordUnderCursor("camel")<cr>')
-nnoremap('<leader>rp', ':lua require"caseswitcher".swapCaseOfWordUnderCursor("pascal")<cr>')
-nnoremap('<leader>rk', ':lua require"caseswitcher".swapCaseOfWordUnderCursor("kebab")<cr>')
-nnoremap('<leader>rK', ':lua require"caseswitcher".swapCaseOfWordUnderCursor("kebab-screaming")<cr>')
 
 vnoremap('<leader>rs', ':lua require"caseswitcher".swapCaseOfVisualSelection("snake")<cr>')
 vnoremap('<leader>rS', ':lua require"caseswitcher".swapCaseOfVisualSelection("snake-screaming")<cr>')
@@ -426,37 +382,30 @@ vnoremap('<leader>rp', ':lua require"caseswitcher".swapCaseOfVisualSelection("pa
 vnoremap('<leader>rk', ':lua require"caseswitcher".swapCaseOfVisualSelection("kebab")<cr>')
 vnoremap('<leader>rK', ':lua require"caseswitcher".swapCaseOfVisualSelection("kebab-screaming")<cr>')
 
-nnoremap('<leader>rm', ':call formatting#squash_blank_lines()<cr>')
-nnoremap('<leader>rd', ':call AddDocString()<cr>')
 wk_reg {
   ['<leader>r'] = {
     name = 'refactor',
-    r = 'rename local var',
-    t = 'toggle multiline args',
-    s = 'snake_case',
-    S = 'SNAKE_CASE',
-    c = 'camelCase',
-    C = 'CamelCase',
-    m = 'merge blanks',
-    d = 'add doc string',
+    r = 'rename variable',
+    t = { '<cmd>call formatting#toggle_multiline_args()<cr>', 'toggle multiline args' },
+    s = { '<cmd>lua require"caseswitcher".swapCaseOfWordUnderCursor("snake")<cr>', 'turn snake_case' },
+    S = { '<cmd>lua require"caseswitcher".swapCaseOfWordUnderCursor("snake-screaming")<cr>', 'turn SNAKE_CASE' },
+    c = { '<cmd>lua require"caseswitcher".swapCaseOfWordUnderCursor("camel")<cr>', 'turn camelCase' },
+    C = { '<cmd>lua require"caseswitcher".swapCaseOfWordUnderCursor("pascal")<cr>', 'turn CamelCase' },
+    k = { '<cmd>lua require"caseswitcher".swapCaseOfWordUnderCursor("kebab")<cr>', 'turn camel-case' },
+    K = { '<cmd>lua require"caseswitcher".swapCaseOfWordUnderCursor("kebab-screaming")<cr>', 'turn PASCAL-CASE' },
   }
 }
 
-nnoremap('<leader>td', '<cmd>tcd %:h<cr>')
-nnoremap('<leader>tt', '<cmd>tabnew<cr>')
-nnoremap('<leader>tc', '<cmd>tabclose<cr>')
-nnoremap('<leader>tk', '<cmd>tabmove +1<cr><cmd>call repeat#set("<leader>tl")<cr>')
-nnoremap('<leader>tj', '<cmd>tabmove -1<cr><cmd>call repeat#set("<leader>th")<cr>')
-nnoremap('<leader>tl', '<cmd>tabnext<cr>')
-nnoremap('<leader>th', '<cmd>tabprevious<cr>')
 wk_reg {
   ['<leader>t'] = {
     name = 'tabs',
-    d = 'switch tab working dir',
-    t = 'open tab',
-    c = 'close tab',
-    l = 'move tab right',
-    h = 'move tab left',
+    d = { '<cmd>tcd %:h<cr>', 'switch tab working dir' },
+    t = { '<cmd>tabnew<cr>', 'open tab' },
+    c = { '<cmd>tabclose<cr>', 'close tab' },
+    h = { '<cmd>tabprevious<cr><cmd>call repeat#set("<leader>th")<cr>', 'previous tab' },
+    l = { '<cmd>tabnext<cr><cmd>call repeat#set("<leader>tl")<cr>', 'next tab' },
+    k = { '<cmd>tabmove +1<cr><cmd>call repeat#set("<leader>tk")<cr>', 'move tab right' },
+    j = { '<cmd>tabmove -1<cr><cmd>call repeat#set("<leader>tj")<cr>', 'move tab left' },
   }
 }
 
