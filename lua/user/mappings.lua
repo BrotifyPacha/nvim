@@ -387,12 +387,12 @@ wk_reg {
     name = 'refactor',
     r = 'rename variable',
     t = { '<cmd>call formatting#toggle_multiline_args()<cr>', 'toggle multiline args' },
-    s = { '<cmd>lua require"caseswitcher".swapCaseOfWordUnderCursor("snake")<cr>', 'turn snake_case' },
-    S = { '<cmd>lua require"caseswitcher".swapCaseOfWordUnderCursor("snake-screaming")<cr>', 'turn SNAKE_CASE' },
-    c = { '<cmd>lua require"caseswitcher".swapCaseOfWordUnderCursor("camel")<cr>', 'turn camelCase' },
-    C = { '<cmd>lua require"caseswitcher".swapCaseOfWordUnderCursor("pascal")<cr>', 'turn CamelCase' },
-    k = { '<cmd>lua require"caseswitcher".swapCaseOfWordUnderCursor("kebab")<cr>', 'turn camel-case' },
-    K = { '<cmd>lua require"caseswitcher".swapCaseOfWordUnderCursor("kebab-screaming")<cr>', 'turn PASCAL-CASE' },
+    s = { '<cmd>lua require"caseswitcher".swapCaseOfWordUnderCursor("snake")<cr><cmd>call repeat#set("<leader>rs")<cr>', 'turn snake_case' },
+    S = { '<cmd>lua require"caseswitcher".swapCaseOfWordUnderCursor("snake-screaming")<cr><cmd>call repeat#set("<leader>rS")<cr>', 'turn SNAKE_CASE' },
+    c = { '<cmd>lua require"caseswitcher".swapCaseOfWordUnderCursor("camel")<cr><cmd>call repeat#set("<leader>rc")<cr>', 'turn camelCase' },
+    C = { '<cmd>lua require"caseswitcher".swapCaseOfWordUnderCursor("pascal")<cr><cmd>call repeat#set("<leader>rC")<cr>', 'turn CamelCase' },
+    k = { '<cmd>lua require"caseswitcher".swapCaseOfWordUnderCursor("kebab")<cr><cmd>call repeat#set("<leader>rk")<cr>', 'turn kebab-case' },
+    K = { '<cmd>lua require"caseswitcher".swapCaseOfWordUnderCursor("kebab-screaming")<cr><cmd>call repeat#set("<leader>rK")<cr>', 'turn KEBAB-CASE' },
   }
 }
 
