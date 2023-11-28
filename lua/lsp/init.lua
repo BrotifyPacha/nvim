@@ -51,7 +51,7 @@ local function on_attach(client, bufnr)
       border = 'single'
     }
   }, bufnr)
-  require 'lsp-inlayhints'.on_attach(client, bufnr)
+  -- require 'lsp-inlayhints'.on_attach(client, bufnr)
 end
 
 -- Always on mappings
@@ -190,6 +190,18 @@ lspconfig.pyright.setup {
   }
 }
 
+lspconfig.jsonls.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+}
+
+lspconfig.phpactor.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  cmd = { 'phpactor', 'language-server' },
+  root_dir = util.root_pattern("composer.json")
+}
+
 lspconfig.gopls.setup {
   on_attach = on_attach,
   capabilities = capabilities,
@@ -199,18 +211,18 @@ lspconfig.gopls.setup {
   settings = {
     gopls = {
       staticcheck = true,
-      hints = {
-        assignVariableTypes = true,
-        compositeLiteralFields = true,
-        compositeLiteralTypes = true,
-        constantValues = true,
-        functionTypeParameters = true,
-        parameterNames = true,
-        rangeVariableTypes = true,
-      },
-      codelenses = {
-        generate = true,
-      }
+      -- hints = {
+      --   assignVariableTypes = true,
+      --   compositeLiteralFields = true,
+      --   compositeLiteralTypes = true,
+      --   constantValues = true,
+      --   functionTypeParameters = true,
+      --   parameterNames = true,
+      --   rangeVariableTypes = true,
+      -- },
+      -- codelenses = {
+      --   generate = true,
+      -- }
     },
   },
 }
@@ -268,7 +280,14 @@ lspconfig.lua_ls.setup{
   }
 }
 
-
+lspconfig.csharp_ls.setup{
+  cmd = { 'csharp-ls' },
+  root_dir = util.root_pattern('*.sln', '*.csproj', '*.fsproj', '.git'),
+  filetypes = { 'cs' },
+  init_options = {
+    AutomaticWorkspaceInit = true,
+  },
+}
 
 
 local null_ls = require 'null-ls'
