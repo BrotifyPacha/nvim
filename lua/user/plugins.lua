@@ -118,7 +118,17 @@ return packer.startup(function(use)
     use 'towolf/vim-helm'
     use { 'iamcco/markdown-preview.nvim', run = 'cd app && yarn install' }
     use { 'fatih/vim-go' }
-    use { 'olexsmir/gopher.nvim' }
+    use { 'olexsmir/gopher.nvim', branch="develop", config = function ()
+    require("gopher").setup {
+      gotests = {
+        -- path to a directory containing custom test code templates
+        template_dir = "/home/brotifypacha/.config/nvim/go-templates",
+        -- switch table tests from using slice to map (with test name for the key)
+        -- works only with gotests installed from develop branch
+        named = false,
+      },
+    }
+    end }
     use { 'mfussenegger/nvim-dap-python' }
     -- Tools
     use { 'qpkorr/vim-renamer', cmd = 'Renamer' }
