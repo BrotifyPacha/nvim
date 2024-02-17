@@ -67,6 +67,7 @@ function runLast()
     dap.run_last()
     vim.t.customDapRunLast = nil
 end
+
 function runNewOrRunLast(default)
     return function ()
         if vim.t.customDapRunLast ~= nil then
@@ -76,6 +77,28 @@ function runNewOrRunLast(default)
         return default
     end
 end
+
+function runSpecificTest()
+  return function ()
+    if vim.t.customDapRunLast ~= nil then
+      return { '-test.run', vim.t.customDapRunLastFunc }
+    end
+    local func = vim.fn.expand('<cword>')
+
+    vim.ui.input(
+      {
+        prompt = 'Enter name of function to test: ',
+        default = func,
+      },
+      function (input)
+        func = input
+        vim.t.customDapRunLastFunc = func
+      end
+    )
+    return { '-test.run', func }
+  end
+end
+
 dap.configurations.go = {
     {
         type = "go",
@@ -104,6 +127,14 @@ dap.configurations.go = {
         request = "launch",
         mode = "test",
         program = runNewOrRunLast("${file}")
+    },
+    {
+      type = "go",
+      name = "Debug test (Func)",
+      request = "launch",
+      mode = "test",
+      program = "./${relativeFileDirname}",
+      args = runSpecificTest(),
     },
     -- works with go.mod packages and sub packages
     {
