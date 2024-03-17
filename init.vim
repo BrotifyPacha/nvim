@@ -44,6 +44,7 @@ lua require 'user.helpers'
 lua require 'user.plugins'
 lua require 'user.plugins-config'
 lua require 'lsp'
+lua require 'lsp.null-ls'
 
 execute "source " . g:config_location ."/"."plug-config/welle-targets.vim"
 execute "source " . g:config_location ."/"."plug-config/delimitMate.vim"
