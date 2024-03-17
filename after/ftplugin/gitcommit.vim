@@ -10,7 +10,9 @@ if string.match(branch, 'GOHW%-%d+') then
     prefix = '[' .. branch .. ']: '
 end
 
-local lines = vim.api.nvim_buf_get_lines(0, 0, 99999, false)
-vim.api.nvim_set_current_line(prefix)
-vim.api.nvim_win_set_cursor(0, { 1, string.len(prefix) - 1 })
-vim.api.nvim_command [[ startinsert! ]]
+if string.len(prefix) ~= 0 then
+    local lines = vim.api.nvim_buf_get_lines(0, 0, 99999, false)
+    vim.api.nvim_set_current_line(prefix)
+    vim.api.nvim_win_set_cursor(0, { 1, string.len(prefix) - 1 })
+    vim.api.nvim_command [[ startinsert! ]]
+end
