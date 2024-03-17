@@ -208,23 +208,6 @@ lspconfig.gopls.setup {
   cmd = {"gopls", "serve"},
   filetypes = {"go", "gomod"},
   root_dir = util.root_pattern("go.work", "go.mod", ".git"),
-  settings = {
-    gopls = {
-      staticcheck = true,
-      -- hints = {
-      --   assignVariableTypes = true,
-      --   compositeLiteralFields = true,
-      --   compositeLiteralTypes = true,
-      --   constantValues = true,
-      --   functionTypeParameters = true,
-      --   parameterNames = true,
-      --   rangeVariableTypes = true,
-      -- },
-      -- codelenses = {
-      --   generate = true,
-      -- }
-    },
-  },
 }
 
 require("neodev").setup({
