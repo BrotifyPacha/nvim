@@ -459,6 +459,7 @@ function M.set_filetype_specific_mappings()
     buf_nnoremap(fprefix .. 'c', '<cmd>GoCoverageToggle<cr>')
     buf_nnoremap(fprefix .. 'l', '<cmd>GoMetaLinter --sort-results<cr>')
     buf_nnoremap(fprefix .. 'L', '<cmd>GoMetaLinter! --sort-results ./...<cr>')
+    buf_nnoremap(fprefix .. 'a', '<cmd>GoAlternate<cr>')
   elseif ft == 'qf' then
     buf_nnoremap('dd', '<cmd>call setqflist(filter(getqflist(), {idx -> idx != line(".") - 1}), "r")<cr>')
   elseif ft == 'json' then
