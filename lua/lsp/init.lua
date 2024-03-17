@@ -9,7 +9,8 @@ local servers = {
   'lua_ls',
   'tailwindcss',
   'vimls',
-  'jsonls'
+  'jsonls',
+  'omnisharp',
 }
 
 require'mason'.setup()
@@ -167,7 +168,6 @@ local util = require('lspconfig/util')
 
 for _, server in ipairs(servers) do
   server = vim.tbl_get(lspconfig, server)
-
   server.setup{
     on_attach = on_attach,
     capabilities = capabilities
@@ -176,7 +176,10 @@ end
 
 require('mason-lspconfig').setup_handlers({
   function(server)
-    lspconfig[server].setup({})
+    lspconfig[server].setup({
+      on_attach = on_attach,
+      capabilities = capabilities
+    })
   end,
 })
 
@@ -263,13 +266,9 @@ lspconfig.lua_ls.setup{
   }
 }
 
-lspconfig.csharp_ls.setup{
-  cmd = { 'csharp-ls' },
-  root_dir = util.root_pattern('*.sln', '*.csproj', '*.fsproj', '.git'),
-  filetypes = { 'cs' },
-  init_options = {
-    AutomaticWorkspaceInit = true,
-  },
+require'lspconfig'.omnisharp.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
 }
 
 local h = require("null-ls.helpers")
