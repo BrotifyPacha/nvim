@@ -74,6 +74,11 @@ xnoremap('id', "<cmd>lua require 'mytextobj'.documentTextObj()<cr>")
 onoremap('ii', "<cmd>lua require 'mytextobj'.indentTextObj()<cr>")
 xnoremap('ii', "<cmd>lua require 'mytextobj'.indentTextObj()<cr>")
 
+-- camelCaseWordTestingArt3Times
+vim.api.nvim_set_keymap('n', '<C-W>', ':call search("[A-Z]")<cr>', { expr = false, noremap = true, nowait = true, silent = true })
+vim.api.nvim_set_keymap('n', '<C-B>', ':call search("[A-Z]", "b")<cr>', { expr = false, noremap = true, nowait = true, silent = true })
+onoremap('ic', ':call search("[A-Z]")<cr>')
+
 
 -- Surround extension
 nnoremap('dsf', '<cmd>call formatting#delete_surrounding_func()<cr>')

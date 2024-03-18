@@ -3,7 +3,6 @@
 nnoremap <C-t> :Telescope 
 
 nnoremap <C-p> :Telescope find_files<cr>
-nnoremap <C-b> :Telescope buffers<cr>
 nnoremap <C-g> :Telescope live_grep<cr>
 nnoremap <C-h> :Telescope git_status<cr>
 nnoremap - :Telescope current_buffer_fuzzy_find<cr>
