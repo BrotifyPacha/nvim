@@ -59,12 +59,11 @@ nmap('cx', '<Plug>(Exchange)')
 nmap('cxx', '<Plug>(ExchangeLine)')
 -- -- Surround
 nmap('s', '<Plug>Ysurround')
-nmap('ss', '<Plug>Yssurround')
 vmap('s', '<Plug>VSurround')
 nmap('S', 's')
 
 vim.g['EasyMotion_do_mapping'] = 1
-nmap('<leader>s', '<Plug>(easymotion-prefix)')
+nmap('ss', '<Plug>(easymotion-prefix)')
 
 onoremap('z', '<Plug>(easymotion-prefix)')
 
