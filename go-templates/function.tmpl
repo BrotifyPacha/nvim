@@ -35,7 +35,7 @@ func {{.TestName}}(t *testing.T) {
 			{{Want .}} {{.Type}}
 		{{- end}}
 		{{- if .ReturnsError}}
-			wantErr booll
+			wantErr error
 		{{- end}}
 	}{
 		// TODO: Add test cases.
