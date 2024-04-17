@@ -18,7 +18,7 @@ dap.configurations.php = {
         type = 'php',
         request = 'launch',
         name = 'Listen for Xdebug',
-        stopOnEntry = true,
+        -- stopOnEntry = true,
         pathMappings = function ()
             return {
                 ['/var/www'] = vim.fn.getcwd() .. '/app'
