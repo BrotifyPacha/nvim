@@ -21,7 +21,7 @@ dap.configurations.php = {
         stopOnEntry = true,
         pathMappings = function ()
             return {
-                ['/var/www'] = vim.env.PWD .. '/app'
+                ['/var/www'] = vim.fn.getcwd() .. '/app'
             }
         end,
         port = 9000
