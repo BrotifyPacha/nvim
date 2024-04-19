@@ -74,12 +74,12 @@ end
 function runLast()
     vim.t.customDapRunLast = true
     dap.run_last()
-    vim.t.customDapRunLast = nil
 end
 
 function runNewOrRunLast(default)
     return function ()
         if vim.t.customDapRunLast ~= nil then
+            vim.t.customDapRunLast = nil
             return vim.t.customDapRunLastFile
         end
         vim.t.customDapRunLastFile = vim.fn.expand('%:p')
