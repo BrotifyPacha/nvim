@@ -30,30 +30,39 @@ dap.configurations.php = {
 
 dap.adapters.go = function(callback, config)
     local stdout = vim.loop.new_pipe(false)
+    local stderr = vim.loop.new_pipe(false)
     local handle
     local pid_or_err
     local port = 38697
     local opts = {
-        stdio = {nil, stdout},
+        stdio = {nil, stdout, stderr},
         args = {"dap", "-l", "127.0.0.1:" .. port},
         detached = true
     }
     handle, pid_or_err = vim.loop.spawn("dlv", opts, function(code)
         stdout:close()
+        stderr:close()
         handle:close()
         if code ~= 0 then
             print('dlv exited with code', code)
         end
     end)
     assert(handle, 'Error running dlv: ' .. tostring(pid_or_err))
-    stdout:read_start(function(err, chunk)
-        assert(not err, err)
-        if chunk then
-            vim.schedule(function()
-                require('dap.repl').append(chunk)
-            end)
+
+    local read_output = function(stream, pipe)
+        return function(err, chunk)
+            assert(not err, err)
+            if chunk then
+                vim.schedule(function()
+                    require('dap.repl').append('[' .. stream .. '] ' .. chunk)
+                end)
+            end
         end
-    end)
+    end
+
+    stdout:read_start(read_output('stdout', stdout))
+    stderr:read_start(read_output('stderr', stderr))
+
     -- Wait for delve to start
     vim.defer_fn(
     function()
