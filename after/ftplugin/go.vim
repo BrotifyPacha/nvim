@@ -1,22 +1,23 @@
 setlocal formatprg=gofmt noexpandtab shiftwidth=4
 
-iabbrev strign string
-iabbrev flaot float
+iabbrev <buffer> sring string
+iabbrev <buffer> strign string
+iabbrev <buffer> flaot float
 
-iabbrev cahn chan
-iabbrev stuct struct
-iabbrev structg struct
+iabbrev <buffer> cahn chan
+iabbrev <buffer> stuct struct
+iabbrev <buffer> structg struct
 
-iabbrev ragne range
+iabbrev <buffer> ragne range
 
-iabbrev fucn func
-iabbrev function func
+iabbrev <buffer> fucn func
+iabbrev <buffer> function func
 
-iabbrev retrun return
-iabbrev reutnr return
+iabbrev <buffer> retrun return
+iabbrev <buffer> reutnr return
 
-iabbrev ;= :=
+iabbrev <buffer> ;= :=
 
-iabbrev =! !=
+iabbrev <buffer> =! !=
 
 let @e = "siW)%i, error"
