@@ -81,7 +81,12 @@ return packer.startup(function(use)
     use 'SmiteshP/nvim-gps'
     use 'folke/which-key.nvim'
     use 'mfussenegger/nvim-dap'
-    use 'rcarriga/nvim-dap-ui'
+    use {
+        'rcarriga/nvim-dap-ui',
+        requires = {
+          'nvim-neotest/nvim-nio',
+        }
+    }
     use {
         'Pocco81/DAPInstall.nvim',
         branch = 'dev',
