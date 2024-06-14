@@ -122,7 +122,7 @@ return packer.startup(function(use)
     require("gopher").setup {
       gotests = {
         -- path to a directory containing custom test code templates
-        template_dir = "/home/brotifypacha/.config/nvim/go-templates",
+        template_dir = "/home/" .. vim.env.USER .. "/.config/nvim/go-templates",
         -- switch table tests from using slice to map (with test name for the key)
         -- works only with gotests installed from develop branch
         named = false,
