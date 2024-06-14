@@ -339,7 +339,6 @@ wk_reg {
     t = { '<cmd>Telescope git_branches<cr>',   'branches' },
     g = { '<cmd>vert G | wincmd L<cr>',    'status' },
     f = { '<cmd>Telescope git_status<cr>', 'status - telescope' },
-    d = { '<cmd>Gdiffsplit<cr>',           'diff split' },
 
     b = { '<cmd>lua require"gitsigns".blame_line({full=true})<cr>',  'blame' },
     B = { '<cmd>lua require"gitsigns".blame_line({enter=true})<cr>', 'blame short' },
@@ -350,7 +349,7 @@ wk_reg {
     V = { '<cmd>Telescope git_bcommits<cr>',                                                'commits - telescope' },
 
     h = { '<cmd>G pull<cr>',                'pull' },
-    j = { '<cmd>G fetch --all<cr>',         'fetch' },
+    j = { '<cmd>G fetch --all --tags<cr>',         'fetch' },
     J = { '<cmd>G fetch --all --prune<cr>', 'fetch prune' },
     K = 'push (set-upstream)',
     L = { '<cmd>G push --force<cr>',        'push (force)' },
@@ -376,6 +375,7 @@ wk_reg {
       p = 'pipelines',
       m = 'merge requests',
     },
+    m = { '<cmd>G mergetool |Gvdiffsplit!<cr>', '3-way mergetool' },
   },
 }
 
