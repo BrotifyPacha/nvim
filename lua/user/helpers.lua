@@ -160,6 +160,30 @@ function M.GetGPS()
   return {}
 end
 
+function M.PickGoMainFile()
+  local results = io.popen("rg '^\\s*func main()' --glob '*.go' --vimgrep")
+  local items = {}
+
+  for filename in results:lines() do
+    local item = vim.split(filename, ':')
+    local fullpath = item[1]
+    items[#items+1] = fullpath
+  end
+
+  if #items == 1 then
+    return items[1]
+  end
+
+  local selected = nil
+  vim.ui.select(items, {
+    prompt = 'Select go file:'
+  }, function (choice)
+      selected = choice
+  end)
+  vim.api.nvim_command('redraw!')
+  return selected
+end
+
 function M.PickWorkingDir(cmd, dirs)
   print(vim.inspect(dirs))
   local actions = require "telescope.actions"

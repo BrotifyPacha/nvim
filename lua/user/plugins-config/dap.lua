@@ -1,3 +1,4 @@
+local helpers = require('user.helpers')
 
 -- Dap install
 local dap_install = require('dap-install')
@@ -82,8 +83,15 @@ function runNewOrRunLast(default)
             vim.t.customDapRunLast = nil
             return vim.t.customDapRunLastFile
         end
-        vim.t.customDapRunLastFile = vim.fn.expand('%:p')
-        return default
+        print('runNewOrRunLast arg = ', default)
+        local expanded = ''
+        if default == '${file}' then
+            expanded = vim.fn.expand('%:p')
+        elseif default == 'go_entry_point' then
+            expanded = helpers.PickGoMainFile() or ''
+        end
+        vim.t.customDapRunLastFile = expanded
+        return expanded
     end
 end
 
@@ -111,16 +119,9 @@ end
 dap.configurations.go = {
     {
         type = "go",
-        name = "Debug file",
+        name = "Debug go entrypoint",
         request = "launch",
-        program = runNewOrRunLast("${file}"),
-        args = {},
-    },
-    {
-        type = "go",
-        name = "Debug project",
-        request = "launch",
-        program = "${workspaceFolder}",
+        program = runNewOrRunLast("go_entry_point"),
         args = {},
     },
     {
