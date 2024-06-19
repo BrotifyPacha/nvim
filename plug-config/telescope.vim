@@ -75,6 +75,31 @@ require "telescope".setup{
                 '--no-ignore',
                 '--hidden'
             }
+        },
+        git_branches = {
+            mappings = {
+                i = {
+                    ["<C-f>"] = function(bufnr) 
+                        local action_state = require "telescope.actions.state"
+                        local current_picker = action_state.get_current_picker(bufnr)
+
+                        local current = action_state.get_current_line()
+
+                        local looplist = {
+                        }
+
+                        local idx = require("user.helpers").contains(looplist, current)
+                        print("len = ", #looplist, "found = ", idx)
+                        if idx == nil or idx == #looplist then
+                            current_picker:set_prompt(looplist[1])
+                            return
+                        end
+
+                        current_picker:set_prompt(looplist[(idx + 1)])
+
+                    end,
+                }
+            }
         }
     }
 }

@@ -345,4 +345,14 @@ function M.GetVisual()
   return start_line, start_col, end_line, end_col, vim.api.nvim_buf_get_text(0, start_line, start_col, end_line, end_col, {})
 end
 
+function M.contains(table, value)
+  for idx, v in ipairs(table) do
+    if v == value then
+      return idx
+    end
+  end
+  return nil
+end
+
+
 return M
