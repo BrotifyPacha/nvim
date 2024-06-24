@@ -1,10 +1,19 @@
+local api = vim.api
+
+api.nvim_set_hl(0, "GitSignsAdd",          {link = 'DiffAdd'   })
+api.nvim_set_hl(0, "GitSignsChange",       {link = 'DiffChange'})
+api.nvim_set_hl(0, "GitSignsChangedelete", {link = 'DiffDelete'})
+api.nvim_set_hl(0, "GitSignsDelete",       {link = 'DiffDelete'})
+api.nvim_set_hl(0, "GitSignsTopdelete",    {link = 'DiffDelete'})
+
 require('gitsigns').setup {
   signs = {
-    add          = {hl = 'DiffAdd'   , text = '│', numhl='GitSignsAddNr'   , linehl='GitSignsAddLn'},
-    change       = {hl = 'DiffChange', text = '│', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
-    delete       = {hl = 'DiffDelete', text = '_', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
-    topdelete    = {hl = 'DiffDelete', text = '‾', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
-    changedelete = {hl = 'DiffChange', text = '~', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
+    add          = { text = '│' },
+    change       = { text = '│' },
+    delete       = { text = '_' },
+    topdelete    = { text = '‾' },
+    changedelete = { text = '~' },
+    untracked    = { text = '┆' },
   },
   signcolumn = true,  -- Toggle with `:Gitsigns toggle_signs`
   numhl      = false, -- Toggle with `:Gitsigns toggle_numhl`
@@ -55,15 +64,11 @@ require('gitsigns').setup {
     follow_files = true
   },
   attach_to_untracked = true,
-  current_line_blame = false, -- Toggle with `:Gitsigns toggle_current_line_blame`
   current_line_blame_opts = {
     virt_text = true,
     virt_text_pos = 'eol', -- 'eol' | 'overlay' | 'right_align'
     delay = 1000,
     ignore_whitespace = false,
-  },
-  current_line_blame_formatter_opts = {
-    relative_time = false
   },
   sign_priority = 1,
   update_debounce = 100,
@@ -76,8 +81,5 @@ require('gitsigns').setup {
     relative = 'cursor',
     row = 0,
     col = 1
-  },
-  yadm = {
-    enable = false
   },
 }
