@@ -60,7 +60,7 @@ nmap('cxx', '<Plug>(ExchangeLine)')
 -- -- Surround
 nmap('s', '<Plug>Ysurround')
 vmap('s', '<Plug>VSurround')
-nmap('S', 's')
+nmap('S', '<Plug>YSurround')
 
 vim.g['EasyMotion_do_mapping'] = 1
 nmap('ss', '<Plug>(easymotion-prefix)')
