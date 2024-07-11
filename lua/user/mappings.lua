@@ -199,6 +199,7 @@ inoremapexpr('<S-Tab>', 'v:lua.smart_tab_backward()')
 
 nnoremap('<leader><leader>', ':call search("<-->", "cw")<cr>c4l')
 nnoremap('<leader>e', "<cmd>NvimTreeToggle<cr>")
+nnoremap('<leader>E', "<cmd>NvimTreeFindFileToggle<cr>")
 nnoremap('<leader>l', "<C-w>l")
 nnoremap('<leader>h', "<C-w>h")
 nnoremap('<leader>j', "<C-w>j")
@@ -213,6 +214,7 @@ wk_reg {
   ["<leader>"] = {
     ["<space>"] = "Goto next <-->",
     e = "File explorer",
+    E = "Find file in explorer",
     h = "which_key_ignore",
     j = "which_key_ignore",
     k = "which_key_ignore",
