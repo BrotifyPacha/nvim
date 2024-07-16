@@ -53,11 +53,15 @@ dap.adapters.go = function(callback, config)
     local read_output = function(stream, pipe)
         return function(err, chunk)
             assert(not err, err)
-            if chunk then
-                vim.schedule(function()
-                    require('dap.repl').append('[' .. stream .. '] ' .. chunk)
-                end)
+            if not chunk then
+                return
             end
+            vim.schedule(function()
+                chunk = vim.fn.substitute(chunk, "\n$", "", "")
+                for _, line in ipairs(vim.split(chunk, "\n")) do
+                    require('dap.repl').append('[' .. stream .. '] ' .. line)
+                end
+            end)
         end
     end
 
