@@ -167,6 +167,11 @@ function M.PickGoMainFile()
   for filename in results:lines() do
     local item = vim.split(filename, ':')
     local fullpath = item[1]
+
+    if fullpath == "main.go" then
+      fullpath = "."
+    end
+
     items[#items+1] = fullpath
   end
 
