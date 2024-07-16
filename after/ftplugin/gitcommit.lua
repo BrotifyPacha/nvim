@@ -1,13 +1,14 @@
-lua << EOF
 local branch = vim.fn['FugitiveHead']()
-local prefix = ''
-if string.match(branch, '%u+%-%d+') then
-    prefix = branch .. ': '
-end
 
-if string.match(branch, 'GOHW%-%d+') then
-    branch = string.match(branch, 'GOHW%-%d+')
-    prefix = '[' .. branch .. ']: '
+-- matches
+-- [prefix/]KEY-123[-suffix]
+local rxBranch = "\\v(\\w+/)?(\\u+-\\d+)(-\\w+)*"
+
+local prefix = ''
+
+if vim.fn.match(branch, rxBranch) ~= -1 then
+    prefix = vim.fn.substitute(branch, rxBranch, "\\=submatch(2)", "")
+    prefix = '[' .. (prefix or '') .. '] '
 end
 
 if string.len(prefix) ~= 0 then
