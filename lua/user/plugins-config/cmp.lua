@@ -118,6 +118,7 @@ cmp.setup({
   sources = {
     { name = 'nvim_lsp' },
     { name = 'snippy' },
+    { name = 'go_pkgs' },
     {
       name = 'buffer',
       option = {

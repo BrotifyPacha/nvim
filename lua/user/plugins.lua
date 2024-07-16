@@ -48,6 +48,7 @@ return packer.startup(function(use)
     use 'hrsh7th/cmp-buffer'
     use 'hrsh7th/cmp-cmdline'
     use 'hrsh7th/cmp-nvim-lsp'
+    use 'Snikimonkd/cmp-go-pkgs'
     use 'ray-x/lsp_signature.nvim'
     use 'folke/neodev.nvim'
 
