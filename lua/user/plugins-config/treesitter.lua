@@ -21,6 +21,7 @@ require 'nvim-treesitter.configs'.setup {
   highlight = {
     enable = true,
     use_languagetree = true, -- Use this to enable language injection
+    disable = { "vimdoc" }
   },
   indent = {
     enable = true,
