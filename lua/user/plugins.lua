@@ -41,6 +41,7 @@ return packer.startup(function(use)
     use 'wbthomason/packer.nvim'
 
     use 'brotifypacha/vim-colors-pencil'
+    use 'petertriho/nvim-scrollbar'
 
     -- Completion
     use 'hrsh7th/nvim-cmp'
