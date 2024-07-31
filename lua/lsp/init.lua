@@ -4,7 +4,6 @@ local servers = {
   'html',
   'dockerls',
   'gopls',
-  'phpactor',
   'pyright',
   'lua_ls',
   'tailwindcss',
