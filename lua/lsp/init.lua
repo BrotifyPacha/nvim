@@ -17,11 +17,7 @@ require'mason-lspconfig'.setup {
   ensure_installed = servers
 }
 
-require("lsp-inlayhints").setup({
-  inlay_hints = {
-    highlight = "FoldColumn",
-  }
-})
+vim.lsp.inlay_hint.enable(true)
 
 local function on_attach(client, bufnr)
   -- Set up buffer-local keymaps (vim.api.nvim_buf_set_keymap()), etc.
@@ -210,6 +206,19 @@ lspconfig.gopls.setup {
   cmd = {"gopls", "serve"},
   filetypes = {"go", "gomod"},
   root_dir = util.root_pattern("go.work", "go.mod", ".git"),
+  settings = {
+    gopls = {
+      hints = {
+        -- assignVariableTypes = true,
+        -- compositeLiteralFields = true,
+        -- compositeLiteralTypes = true,
+        -- constantValues = true,
+        -- functionTypeParameters = true,
+        parameterNames = true,
+        -- rangeVariableTypes = true,
+      },
+    },
+  },
 }
 
 require("neodev").setup({
