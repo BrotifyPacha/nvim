@@ -109,8 +109,7 @@ cmp.setup({
         nvim_lsp  = "[LSP]",
         ultisnips = "[UltiSnip]",
         luasnip   = "[LuaSnip]",
-        -- nvim_lua = "[Lua]",
-        -- latex_symbols = "[LaTeX]",
+        ['vim-dadbod-completion'] = "[DB]",
       })[entry.source.name]
       return vim_item
     end
@@ -119,6 +118,7 @@ cmp.setup({
     { name = 'nvim_lsp' },
     { name = 'snippy' },
     { name = 'go_pkgs' },
+    { name = 'vim-dadbod-completion' },
     {
       name = 'buffer',
       option = {
@@ -158,7 +158,7 @@ cmp.setup.cmdline('/', {
 cmp.setup.cmdline(':', {
   mapping = cmp.mapping.preset.cmdline(),
   sources = {
-    { name = 'cmdline' },
+    { name = 'lsp' },
     { name = 'buffer' }
   }
 })

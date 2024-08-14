@@ -64,6 +64,15 @@ return packer.startup(function(use)
     use 'jose-elias-alvarez/null-ls.nvim'
     use 'lvimuser/lsp-inlayhints.nvim'
 
+    -- DB
+    use {
+      'tpope/vim-dadbod',
+      requires = {
+        "kristijanhusak/vim-dadbod-ui",
+        "kristijanhusak/vim-dadbod-completion",
+      },
+    }
+
     -- File explorer
     use {
         'kyazdani42/nvim-tree.lua',
