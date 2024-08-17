@@ -17,7 +17,7 @@ require'mason-lspconfig'.setup {
   ensure_installed = servers
 }
 
-vim.lsp.inlay_hint.enable(true)
+-- vim.lsp.inlay_hint.enable(true)
 
 local function on_attach(client, bufnr)
   -- Set up buffer-local keymaps (vim.api.nvim_buf_set_keymap()), etc.
