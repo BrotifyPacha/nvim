@@ -3,6 +3,7 @@ let b:surround_{char2nr('c')} = "`\r`"
 let b:surround_{char2nr('`')} = "`\r`"
 let b:surround_{char2nr('b')} = "**\r**"
 let b:surround_{char2nr('i')} = "*\r*"
+let b:surround_{char2nr('u')} = "[\r](<-->)"
 
 function! MarkdownFoldExpr()
   let line = getline(v:lnum)
