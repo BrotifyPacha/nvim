@@ -20,10 +20,6 @@ function! MyFoldText()
 endfunction
 set foldtext=MyFoldText()
 
-set winbar=%{%v:lua.require('user.helpers').getMyWinbar()%}
-set tabline=%{%v:lua.require('tabline').myTabline()%}
-set showtabline=2
-
 let g:fugitive_browse_handlers = ['CustomGBrowseHandler']
 function! CustomGBrowseHandler(args)
     " Convert vim assoc array to lua table
@@ -40,6 +36,7 @@ endfunction
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
 
+lua require 'ui'
 lua require 'user.helpers'
 lua require 'user.plugins'
 lua require 'user.plugins-config'

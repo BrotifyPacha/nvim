@@ -65,52 +65,6 @@ function M.winSelectFloat()
   end
 end
 
-function M.getMyWinbar()
-  local devicons, err = require'nvim-web-devicons'
-  local icon = nil
-  local icon_highlight = nil
-
-  local win_id = vim.api.nvim_get_current_win()
-  local buf_id = vim.api.nvim_win_get_buf(win_id)
-
-  if err == nil then
-    icon, icon_highlight = devicons.get_icon_by_filetype(vim.bo.ft)
-  end
-
-  local fname = vim.fn.expand('%')
-  local buftype = vim.bo.buftype
-  if fname == '' then
-    if buftype ~= '' and buftype == 'quickfix' then
-      title = vim.fn.getqflist({title = 1}).title
-      icon = ''
-      if string.match(title, '.+fail.+') then
-        icon_highlight = 'ErrorMsg'
-        title_highlight = '%#ErrorMsg#'
-      else
-        icon_highlight = 'Normal'
-        title_highlight = '%#Normal#'
-      end
-      fname = title_highlight .. title .. '%*%#Comment# - Quickfix%*'
-    else
-      fname = '%#Comment#-No-name-%*'
-    end
-  elseif buftype == 'terminal' then
-    icon = ''
-    fname = vim.fn.getcwd()
-  end
-
-  local icon = '%#' .. icon_highlight .. '#' .. icon .. '%*'
-
-  local output = {
-    ' ',
-    '['.. win_id .. ', '.. buf_id ..'] ',
-    icon,
-    fname
-  }
-
-  return table.concat(output, ' ')
-end
-
 function M.GetGPS()
   local class_highlight     = '%#Type#'
   local container_highlight = class_highlight

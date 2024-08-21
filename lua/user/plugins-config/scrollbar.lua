@@ -1,6 +1,6 @@
 require("scrollbar").setup({
   show = true,
-  show_in_active_only = false,
+  show_in_active_only = true,
   set_highlights = true,
   folds = 1000, -- handle folds, set to number to disable folds if no. of lines in buffer exceeds this
   max_lines = false, -- disables if no. of lines in buffer exceeds this
@@ -8,7 +8,7 @@ require("scrollbar").setup({
   throttle_ms = 100,
   handle = {
     text = " ",
-    blend = 0, -- Integer between 0 and 100. 0 for fully opaque and 100 to full transparent. Defaults to 30.
+    blend = 50, -- Integer between 0 and 100. 0 for fully opaque and 100 to full transparent. Defaults to 30.
     color = nil,
     color_nr = nil, -- cterm
     highlight = "PmenuSbar",
@@ -140,7 +140,7 @@ require("scrollbar").setup({
     },
   },
   handlers = {
-    cursor = true,
+    cursor = false,
     diagnostic = true,
     gitsigns = true, -- Requires gitsigns
     handle = true,

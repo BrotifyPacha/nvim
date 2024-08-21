@@ -43,7 +43,6 @@ vim.opt.termguicolors = true
 vim.opt.updatetime = 100
 
 vim.opt.bg = 'dark'
-vim.cmd [[ colo pencil ]]
 
 vim.opt.fillchars = {
   fold  = '-',
