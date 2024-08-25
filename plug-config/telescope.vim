@@ -14,7 +14,7 @@ highlight! link TelescopeSelection      WinBar
 highlight! link TelescopeSelectionCaret String
 highlight! link TelescopeMultiSelection Title
 highlight! link TelescopeNormal         Normal
-highlight! link TelescopeMatching       Question
+highlight! link TelescopeMatching       DiffText
 highlight! link TelescopePromptPrefix   String
 
 lua << EOF

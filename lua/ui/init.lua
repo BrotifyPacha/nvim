@@ -7,21 +7,32 @@ vim.o.winbar = "%{%v:lua.require('ui.winbar').getMyWinbar()%}"
 vim.o.tabline= "%{%v:lua.require('ui.tabline').myTabline()%}"
 vim.o.showtabline = 2
 
-local color = {
-  "#20BBFC",
-  "#008EC4",
-  "#2C81FB",
-  "#E32791",
-  "#20A5BA",
-  "#4FB8CC",
+local colors = {
 
-  "#a6e5b2",
-  "#a3d6fa",
-  "#f7db91",
-  "#ebb1aa",
-  "#ec7f8e",
-  "#E32791",
+  Cyan = "#4FB8CC",
+  DarkCyan = "#008EC4",
+
+  LightGreen = "#a6e5b2",
+  DarkGreen = "#5FD7A7",
+
+  Red = "#ec7f8e",
+  Yellow = "#F4B047",
+
+  BlueAccent = "#008EC4",
+  RedAccent = "#E32791",
+
+  -- "#20BBFC",
+  -- "#20A5BA",
+  -- "#b6d6fd",
+  -- "#f7db91",
+  -- "#ebb1aa",
+  -- "#2C81FB",
 }
+
+for name, value in pairs(colors) do
+  h.create_hl(name, { fg = value })
+end
+
 
 
 local customize_color_scheme = function ()
@@ -44,34 +55,38 @@ local customize_color_scheme = function ()
   h.create_hl("TabLineDivider", h.extend("TabLine", { fg=normal.bg }))
   h.create_hl("TabLineDividerSelected", { bg = tabline.bg, fg=normal.bg })
 
-  h.create_hl("DiffText", { fg = "#4FB8CC" })
-  h.create_hl("DiffRemove", { fg = "#ec7f8e" })
-  h.create_hl("DiffDelete", { fg = "#ec7f8e" })
-  h.create_hl("DiffChange", { fg = "#F4B047" })
-  h.create_hl("DiffAdd", { fg = "#5FD7A7" })
+  h.link("Directory", "Cyan")
+  h.link("Question", "Cyan")
+  h.link("MoreMsg", "Cyan")
 
-  h.create_hl("Removed", { fg = "#ec7f8e" })
-  h.create_hl("Changed", { fg = "#F4B047" })
-  h.create_hl("Added", { fg = "#5FD7A7" })
+  h.link("DiffText", "Cyan")
+  h.link("DiffRemove", "Red")
+  h.link("DiffDelete", "Red")
+  h.link("DiffChange", "Yellow")
+  h.link("DiffAdd", "DarkGreen")
 
-  h.create_hl("Constant", { fg = "#4FB8CC" })
+  h.link("Removed", "Red")
+  h.link("Changed", "Yellow")
+  h.link("Added", "DarkGreen")
 
-  h.create_hl("Constant", { fg = "#ec7f8e" })
-  h.create_hl("Special", { fg = "#ec7f8e" })
+  h.link("Constant", "Cyan")
 
-  h.create_hl("DiagnosticError", { fg = "#ec7f8e" })
-  h.create_hl("DiagnosticWarn", { fg = "#F4B047" })
-  h.create_hl("DiagnosticInfo", { fg = "#008EC4" })
+  h.link("Constant", "Red")
+  h.link("Special", "Red")
+
+  h.link("DiagnosticError", "Red")
+  h.link("DiagnosticWarn", "Yellow")
+  h.link("DiagnosticInfo", "DarkCyan")
   h.create_hl("DiagnosticHint", { fg = "#b6d6fd" })
-  h.create_hl("DiagnosticOk", { fg = "#5FD7A7" })
+  h.link("DiagnosticOk", "DarkGreen")
 
-  h.create_hl("Statement", { fg = "#008EC4" })
-  h.create_hl("String", { fg = "#a6e5b2" })
-  h.create_hl("Type", { fg = "#4FB8CC" })
-  h.create_hl("Function", { fg = "#4FB8CC" })
+  h.link("Statement", "DarkCyan")
+  h.link("String", "LightGreen")
+  h.link("Type", "Cyan")
+  h.link("Function", "Cyan")
   h.create_hl("Identifier", { fg = normal.fg })
 
-  h.create_hl("Todo", { fg = "#4FB8CC" })
+  h.link("Todo", "Cyan")
 
   h.create_hl("CurSearch", { bg="#E32791", fg=normal.fg })
   h.create_hl("Search", { bg="#008EC4", fg=normal.fg })

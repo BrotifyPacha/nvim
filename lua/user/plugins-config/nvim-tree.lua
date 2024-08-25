@@ -1,6 +1,6 @@
 vim.cmd [[
     highlight! link NvimTreeGitDirty DiagnosticWarn
-    highlight! link NvimTreeGitStaged Statement
+    highlight! link NvimTreeGitStaged DiffText
 ]]
 
 vim.cmd [[
