@@ -1,6 +1,12 @@
 vim.cmd [[
-    highlight! link NvimTreeGitDirty DiagnosticWarn
-    highlight! link NvimTreeGitStaged DiffText
+    highlight! link NvimTreeGitFileDirtyHL DiagnosticWarn
+    highlight! link NvimTreeGitDirtyHL DiagnosticWarn
+    highlight! link NvimTreeGitStaged LightYellow
+    highlight! link NvimTreeGitFileStagedHL LightYellow
+    highlight! link NvimTreeGitFolderStagedHL LightYellow
+    highlight! link NvimTreeGitNew DarkGreen
+    highlight! link NvimTreeGitFileNewHL DarkGreen
+    highlight! link NvimTreeGitFolderNewHL DarkGreen
 ]]
 
 vim.cmd [[

@@ -17,6 +17,7 @@ local colors = {
 
   Red = "#ec7f8e",
   Yellow = "#F4B047",
+  LightYellow = "#f7db91",
 
   BlueAccent = "#008EC4",
   RedAccent = "#E32791",
@@ -55,7 +56,7 @@ local customize_color_scheme = function ()
   h.create_hl("TabLineDivider", h.extend("TabLine", { fg=normal.bg }))
   h.create_hl("TabLineDividerSelected", { bg = tabline.bg, fg=normal.bg })
 
-  h.link("Directory", "Cyan")
+  h.link("Directory", "DarkCyan")
   h.link("Question", "Cyan")
   h.link("MoreMsg", "Cyan")
 
