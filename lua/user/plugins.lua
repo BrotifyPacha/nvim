@@ -120,8 +120,6 @@ return packer.startup(function(use)
     use 'tommcdo/vim-exchange'
     use 'LintaoAmons/scratch.nvim'
     use { 'michaelb/sniprun', run='bash ./install.sh'}
-    -- Visual
-    use 'brotifypacha/goyo.vim'
     -- Filetype specific
     use 'baskerville/vim-sxhkdrc'
     use {

@@ -208,7 +208,6 @@ nnoremap('<leader>H', "<cmd>vsplit<cr>")
 nnoremap('<leader>J', "<cmd>bel split<cr>")
 nnoremap('<leader>K', "<cmd>split<cr>")
 nnoremap('<leader>L', "<cmd>vert bel split<cr>")
-nnoremap('<leader>o', "<cmd>let g:goyo_preset=1 |Goyo<cr>")
 
 wk_reg {
   ["<leader>"] = {
