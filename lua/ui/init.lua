@@ -70,8 +70,6 @@ local customize_color_scheme = function ()
   h.link("Changed", "Yellow")
   h.link("Added", "DarkGreen")
 
-  h.link("Constant", "Cyan")
-
   h.link("Constant", "Red")
   h.link("Special", "Red")
 
@@ -81,10 +79,12 @@ local customize_color_scheme = function ()
   h.create_hl("DiagnosticHint", { fg = "#b6d6fd" })
   h.link("DiagnosticOk", "DarkGreen")
 
-  h.link("Statement", "DarkCyan")
   h.link("String", "LightGreen")
+  h.link("Statement", "DarkCyan") -- if
   h.link("Type", "Cyan")
   h.link("Function", "Cyan")
+  h.link("@property", "Cyan")
+  h.link("@variable.member", "Normal")
   h.create_hl("Identifier", { fg = normal.fg })
 
   h.link("Todo", "Cyan")
