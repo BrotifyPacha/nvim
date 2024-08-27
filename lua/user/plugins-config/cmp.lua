@@ -71,10 +71,15 @@ cmp.setup({
     ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
     ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
     ['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
-    ['<C-e>'] = cmp.mapping({
-      i = cmp.mapping.abort(),
-      c = cmp.mapping.close(),
-    }),
+    ['<C-e>'] = cmp.mapping(function (fallback)
+	  if cmp.visible() then
+		cmp.close()
+	  elseif vim.fn["snippy#can_jump"](1) then
+        vim.api.nvim_feedkeys(t("<Plug>(snippy-next)"), 'm', true)
+	  else
+		fallback()
+	  end
+    end, { 'i', 's', 'c' }),
     ['<Up>']   = cmp.mapping.select_prev_item({ behavior=cmp.SelectBehavior.Insert  }),
     ['<Down>'] = cmp.mapping.select_next_item({ behavior=cmp.SelectBehavior.Insert  }),
     ['<Tab>'] = cmp.mapping(function(fallback)
