@@ -14,3 +14,18 @@ snippet jfield "Json struct field" b
 
 snippet yfield "Yaml struct field" b
 	${1:Field} ${2:string} \`yaml:"${1/.*/\l\0/g}"\`
+
+
+snippet sf "struct function" Ab
+	func (${1/\(.\).*/\l\1} *${1:Type}) ${3}($4) ${5:error} {
+		${0}
+	}
+
+snippet msf "map slice function - []A to []B" Ab
+	func map${1/\v([^.]+)\.?([^.]+)?/\u\1\2}To${2/\v([^.]+)\.?([^.]+)?/\u\1\2}(in []${1}) []${2} {
+		out := make([]$2, 0, len(in))
+		for _, item := range in {
+			out = append(out, $2{$0})
+		}
+		return out
+	}
