@@ -163,8 +163,16 @@ cmp.setup.cmdline('/', {
 cmp.setup.cmdline(':', {
   mapping = cmp.mapping.preset.cmdline(),
   sources = {
+    { name = 'cmdline' },
     { name = 'lsp' },
     { name = 'buffer' }
   }
 })
 
+cmp.setup.cmdline('@', {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = {
+    { name = 'lsp' },
+    { name = 'buffer' }
+  }
+})
