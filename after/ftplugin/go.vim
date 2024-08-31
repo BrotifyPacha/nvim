@@ -34,4 +34,4 @@ iabbrev <buffer> f;= :=
 
 iabbrev <buffer> =! !=
 
-let @e = "siW)%i, error"
+nnoremap @e :lua AddErrorOrSecondReturnArgument()<cr>
