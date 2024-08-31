@@ -1,5 +1,5 @@
 local M = {}
-local wk_reg = require 'which-key'.register
+local wk_reg = require 'which-key'.add
 
 local function map(mode, from, to)
   vim.api.nvim_set_keymap(mode, from, to, { expr = false, noremap = false })
@@ -121,16 +121,14 @@ local dirs = '{'.. workspaceDir ..', '.. pluginsDir ..'}'
 -- F key maps
 nnoremap('<F1>', '<cmd>WhichKey F1<cr>')
 wk_reg {
-  ["F1"] = {
-    name = "Change working directory",
-    ["<F1>"] = { '<cmd>lua require"user.helpers".PickWorkingDir("tcd", '.. dirs ..')<cr>', "workspace/plugins", },
-    ["n"] = { ':tcd ~/.config/nvim | e $MYVIMRC <cr>', "neovim config"},
-    ["l"] = { '<cmd>lua require"user.helpers".PickWorkingDir("lcd", '.. dirs ..')<cr>', "workspace/plugins (local)", },
-    ["K"] = { '<cmd>lua require"user.helpers".PickWorkingDir("tcd", {'.. k8sMigratorDir ..'})<cr>', "k8s-migrator", },
-    ["k"] = { '<cmd>lua require"user.helpers".PickWorkingDir("lcd", {'.. k8sMigratorDir ..'})<cr>', "k8s-migrator (local)", },
-    ["C"] = { '<cmd>lua require"user.helpers".PickWorkingDir("tcd", {'.. configsDir ..'})<cr>', "configs", },
-    ["c"] = { '<cmd>lua require"user.helpers".PickWorkingDir("lcd", {'.. configsDir ..'})<cr>', "configs (local)", },
-  },
+  { "F1", group = "Change working directory" },
+  {  "F1<F1>", '<cmd>lua require"user.helpers".PickWorkingDir("tcd", '.. dirs ..')<cr>', desc = "workspace/plugins", },
+  {  "F1n"   , ':tcd ~/.config/nvim | e $MYVIMRC <cr>', desc = "neovim config"},
+  {  "F1l"   , '<cmd>lua require"user.helpers".PickWorkingDir("lcd", '.. dirs ..')<cr>', desc = "workspace/plugins (local)", },
+  {  "F1K"   , '<cmd>lua require"user.helpers".PickWorkingDir("tcd", {'.. k8sMigratorDir ..'})<cr>', desc = "k8s-migrator", },
+  {  "F1k"   , '<cmd>lua require"user.helpers".PickWorkingDir("lcd", {'.. k8sMigratorDir ..'})<cr>', desc = "k8s-migrator (local)", },
+  {  "F1C"   , '<cmd>lua require"user.helpers".PickWorkingDir("tcd", {'.. configsDir ..'})<cr>', desc = "configs", },
+  {  "F1c"   , '<cmd>lua require"user.helpers".PickWorkingDir("lcd", {'.. configsDir ..'})<cr>', desc = "configs (local)", },
 }
 
 nnoremap('<F2><F2>', '<cmd>set spell!<cr>')
@@ -154,14 +152,13 @@ nnoremap('<F7>', '<cmd>set wrap!<cr>')
 nnoremap('<F8>', '<cmd>ColorizerToggle<cr>')
 
 nnoremap('<F9><F9>',  '<cmd>lua require"terminal".open_terminal()<cr>')
-nnoremap('<F9><F10>',  '<cmd>lua require"terminal".open_new_terminal()<cr>')
-vim.api.nvim_set_keymap('n', '<F9>', ':WhichKey F9<cr>', { expr = false, noremap = true })
+nnoremap('<F9><F10>', '<cmd>lua require"terminal".open_new_terminal()<cr>')
+nnoremap('<F9>', '<cmd>WhichKey F9<cr>')
+
 wk_reg {
-  ["F9"] = {
-    name = "terminal",
-    ["<F9>"] = { '<cmd>lua require"terminal".open_terminal()<cr>', "open/next terminal", },
-    ["<F10>"] = { '<cmd>lua require"terminal".open_new_terminal()<cr>', "open new terminal", },
-  },
+  { "F9", group = "terminal" },
+  { "F9<F9>", desc = "open/next terminal" },
+  { "F9<F10>", desc = "open new terminal" },
 }
 
 -- Terminal mode key maps
@@ -199,7 +196,7 @@ inoremapexpr('<S-Tab>', 'v:lua.smart_tab_backward()')
 
 nnoremap('<leader><leader>', ':call search("<-->", "cw")<cr>c4l')
 nnoremap('<leader>e', "<cmd>NvimTreeToggle<cr>")
-nnoremap('<leader>E', "<cmd>NvimTreeFindFileToggle<cr>")
+nnoremap('<leader>E', "<cmd>NvimTreeFindFile<cr>")
 nnoremap('<leader>l', "<C-w>l")
 nnoremap('<leader>h', "<C-w>h")
 nnoremap('<leader>j', "<C-w>j")
@@ -209,39 +206,42 @@ nnoremap('<leader>J', "<cmd>bel split<cr>")
 nnoremap('<leader>K', "<cmd>split<cr>")
 nnoremap('<leader>L', "<cmd>vert bel split<cr>")
 
-wk_reg {
-  ["<leader>"] = {
-    ["<space>"] = "Goto next <-->",
-    e = "File explorer",
-    E = "Find file in explorer",
-    h = "which_key_ignore",
-    j = "which_key_ignore",
-    k = "which_key_ignore",
-    l = "which_key_ignore",
-    H = "which_key_ignore",
-    J = "which_key_ignore",
-    K = "which_key_ignore",
-    L = "which_key_ignore",
-    o = "goyo",
-
-    d = {
-      name = "debug",
-      a = "start with args",
-      s = "start/continue",
-      p = "repeat previous run",
-      c = "run to cursor",
-      d = "toggle breakpoint",
-      f = "toggle If breakpoint",
-      e = "eval under cursor",
-    },
-  }
-}
+nnoremap('<leader>qc', ':cclose<cr>')
 
 wk_reg {
-  ['<leader>dt'] = {
-    name = "run tests",
-    t = {}
-  }
+  { "<leader><space>", desc = "Goto next <-->" },
+  { "<leader>e", desc = "File explorer" },
+  { "<leader>E", desc = "Find file in explorer" },
+  { "<leader>H", hidden = true },
+  { "<leader>J", hidden = true },
+  { "<leader>K", hidden = true },
+  { "<leader>L", hidden = true },
+  { "<leader>h", hidden = true },
+  { "<leader>j", hidden = true },
+  { "<leader>k", hidden = true },
+  { "<leader>l", hidden = true },
+
+  { "<leader>q", group = "quickfix" },
+  { "<leader>qc", desc = 'close'},
+
+  { "<leader>d", group = "debug" },
+  { "<leader>da", desc = "start with args" },
+  { "<leader>dc", desc = "run to cursor" },
+  { "<leader>dd", desc = "toggle breakpoint" },
+  { "<leader>de", desc = "eval under cursor" },
+  { "<leader>df", desc = "toggle If breakpoint" },
+  { "<leader>dp", desc = "repeat previous run" },
+  { "<leader>ds", desc = "start/continue" },
+  { "<leader>dt", desc = "run tests" },
+
+  { "<leader>t", group = "tabs" },
+  { "<leader>tc", "<cmd>tabclose<cr>", desc = "close tab" },
+  { "<leader>td", "<cmd>tcd %:h<cr>", desc = "switch tab working dir" },
+  { "<leader>th", '<cmd>tabprevious<cr><cmd>call repeat#set("<leader>th")<cr>', desc = "previous tab" },
+  { "<leader>tj", '<cmd>tabmove -1<cr><cmd>call repeat#set("<leader>tj")<cr>', desc = "move tab left" },
+  { "<leader>tk", '<cmd>tabmove +1<cr><cmd>call repeat#set("<leader>tk")<cr>', desc = "move tab right" },
+  { "<leader>tl", '<cmd>tabnext<cr><cmd>call repeat#set("<leader>tl")<cr>', desc = "next tab" },
+  { "<leader>tt", "<cmd>tabnew<cr>", desc = "open tab" },
 }
 
 function moveWindowPreservingNvimTree(wincmd)
@@ -300,29 +300,19 @@ nnoremap('<leader>wh' , '<cmd>lua require("user.helpers").winMoveFloat(0, -1)<cr
 nnoremap('<leader>wj' , '<cmd>lua require("user.helpers").winMoveFloat(1, 0)<cr><cmd>call repeat#set("<leader>wj")<cr>')
 nnoremap('<leader>wk' , '<cmd>lua require("user.helpers").winMoveFloat(-1, 0)<cr><cmd>call repeat#set("<leader>wk")<cr>')
 nnoremap('<leader>wl' , '<cmd>lua require("user.helpers").winMoveFloat(0, 1)<cr><cmd>call repeat#set("<leader>wl")<cr>')
-nnoremap('<leader>w2' , '<cmd>lua vim.api.nvim_win_set_width(0, math.floor(vim.api.nvim_get_option("columns") / 2))<cr>')
-nnoremap('<leader>w3' , '<cmd>lua vim.api.nvim_win_set_width(0, math.floor(vim.api.nvim_get_option("columns") / 3))<cr>')
-nnoremap('<leader>w4' , '<cmd>lua vim.api.nvim_win_set_width(0, math.floor(vim.api.nvim_get_option("columns") / 4))<cr>')
-nnoremap('<leader>w5' , '<cmd>lua vim.api.nvim_win_set_width(0, math.floor(vim.api.nvim_get_option("columns") / 5))<cr>')
+nnoremap('<leader>wd' , '<cmd>lua toggleDiff()<cr>')
 wk_reg {
-  ['<leader>w'] = {
-    name = "windows",
-    q = { '<cmd>q<cr>', 'close window' },
-    w = { '<cmd>w<cr>', 'save' },
-    d = { '<cmd>lua toggleDiff()<cr>', 'diff windows' },
-    r = { '<cmd>r<cr>', 'rotate' },
-    ['2'] = 'resize to 1/2',
-    ['3'] = 'resize to 1/3',
-    ['4'] = 'resize to 1/4',
-    ['5'] = 'resize to 1/5',
-
-    F = 'make window Floating',
-    f = 'select Floating',
-    h = 'move float left',
-    j = 'move float down',
-    k = 'move float top',
-    l = 'move float right',
-  }
+  { "<leader>w", group = "windows" },
+  { "<leader>wF", desc = "make window Floating" },
+  { "<leader>wd", desc = "diff windows" },
+  { "<leader>wf", desc = "select Floating" },
+  { "<leader>wh", desc = "move float left" },
+  { "<leader>wj", desc = "move float down" },
+  { "<leader>wk", desc = "move float top" },
+  { "<leader>wl", desc = "move float right" },
+  { "<leader>wq", "<cmd>q<cr>", desc = "close window" },
+  { "<leader>wr", "<cmd>r<cr>", desc = "rotate" },
+  { "<leader>ww", "<cmd>w<cr>", desc = "save" },
 }
 
 vim.keymap.set('n', '<leader>gK', function ()
@@ -335,49 +325,46 @@ nnoremap('<leader>gop', ':lua require("user/helpers").xdgOpen(require("user/help
 nnoremap('<leader>gom', ':lua require("user/helpers").xdgOpen(require("user/helpers").getRemoteLink() .. "/-/merge_requests")<cr>')
 
 wk_reg {
-  ['<leader>g'] = {
-    name = 'git',
-    t = { '<cmd>Telescope git_branches<cr>',   'branches' },
-    g = { '<cmd>vert G | wincmd L<cr>',    'status' },
-    f = { '<cmd>Telescope git_status<cr>', 'status - telescope' },
+  { "<leader>g", group = "git" },
+  { "<leader>gt", "<cmd>Telescope git_branches<cr>", desc = "branches" },
+  { "<leader>gg", "<cmd>vert G | wincmd L<cr>", desc = "status" },
+  { "<leader>gf", "<cmd>Telescope git_status<cr>", desc = "status - telescope" },
 
-    b = { '<cmd>lua require"gitsigns".blame_line({full=true})<cr>',  'blame' },
-    B = { '<cmd>lua require"gitsigns".blame_line({enter=true})<cr>', 'blame short' },
-    p = { '<cmd>lua require"gitsigns".preview_hunk()<cr>',           'preview hunk' },
-    u = { '<cmd>lua require"gitsigns".reset_hunk()<cr>:do User PachaHunkStatusChanged<cr>', 'undo hunk' },
-    s = { '<cmd>lua require"gitsigns".stage_hunk()<cr>:do User PachaHunkStatusChanged<cr>', 'stage hunk' },
-    v = { '<cmd>bel vert G log --oneline --graph --decorate --branches<cr>',                'commits' },
-    V = { '<cmd>Telescope git_bcommits<cr>',                                                'commits - telescope' },
+  { "<leader>gB", '<cmd>lua require"gitsigns".blame_line({enter=true})<cr>', desc = "blame short" },
+  { "<leader>gb", '<cmd>lua require"gitsigns".blame_line({full=true})<cr>', desc = "blame" },
 
-    h = { '<cmd>G pull<cr>',                'pull' },
-    j = { '<cmd>G fetch --all --tags<cr>',         'fetch' },
-    J = { '<cmd>G fetch --all --prune<cr>', 'fetch prune' },
-    K = 'push (set-upstream)',
-    L = { '<cmd>G push --force<cr>',        'push (force)' },
-    l = { '<cmd>G push<cr>',                'push' },
+  { "<leader>gh", "<cmd>G pull<cr>", desc = "pull" },
+  { "<leader>gj", "<cmd>G fetch --all --tags<cr>", desc = "fetch" },
+  { "<leader>gJ", "<cmd>G fetch --all --prune<cr>", desc = "fetch prune" },
+  { "<leader>gK", desc = "push (set-upstream)" },
+  { "<leader>gL", "<cmd>G push --force<cr>", desc = "push (force)" },
+  { "<leader>gl", "<cmd>G push<cr>", desc = "push" },
 
-    r = {
-      name = 'rebase',
-      i = { '<cmd>G rebase -i master<cr>',              'interactive' },
-      a = { '<cmd>G rebase -i --autosquash master<cr>', 'interactive --autosquash' },
-    },
-    c = {
-      name = 'commit',
-      c = { '<cmd>G commit<cr>',                                  'commit' },
-      f = { ':G commit --fixup <c-r>"<cr>'    ,                   'fixup' },
-      a = { '<cmd>G commit --amend<cr>',                          'amend' },
-      e = { '<cmd>G commit --amend --no-edit<cr>',                'amend (no-edit)' },
-      r = { '<cmd>G commit --amend --no-edit --reset-author<cr>', 'amend (no-edit, reset-author)'},
-    },
-    o = {
-      name = 'open remote',
-      f = 'file',
-      r = 'repo',
-      p = 'pipelines',
-      m = 'merge requests',
-    },
-    m = { '<cmd>G mergetool |Gvdiffsplit!<cr>', '3-way mergetool' },
-  },
+  { "<leader>gV", "<cmd>Telescope git_bcommits<cr>", desc = "commits - telescope" },
+  { "<leader>gv", "<cmd>bel vert G log --oneline --graph --decorate --branches<cr>", desc = "commits" },
+
+  { "<leader>gc", group = "commit" },
+  { "<leader>gca", "<cmd>G commit --amend<cr>", desc = "amend" },
+  { "<leader>gcc", "<cmd>G commit<cr>", desc = "commit" },
+  { "<leader>gce", "<cmd>G commit --amend --no-edit<cr>", desc = "amend (no-edit)" },
+  { "<leader>gcf", ':G commit --fixup <c-r>"<cr>', desc = "fixup" },
+  { "<leader>gcr", "<cmd>G commit --amend --no-edit --reset-author<cr>", desc = "amend (no-edit, reset-author)" },
+
+  { "<leader>gp", '<cmd>lua require"gitsigns".preview_hunk()<cr>', desc = "preview hunk" },
+  { "<leader>gs", '<cmd>lua require"gitsigns".stage_hunk()<cr>:do User PachaHunkStatusChanged<cr>', desc = "stage hunk" },
+  { "<leader>gu", '<cmd>lua require"gitsigns".reset_hunk()<cr>:do User PachaHunkStatusChanged<cr>', desc = "undo hunk" },
+
+  { "<leader>gr", group = "rebase" },
+  { "<leader>gra", "<cmd>G rebase -i --autosquash master<cr>", desc = "interactive --autosquash" },
+  { "<leader>gri", "<cmd>G rebase -i master<cr>", desc = "interactive" },
+
+  { "<leader>go", group = "open remote" },
+  { "<leader>gor", desc = "repo" },
+  { "<leader>gop", desc = "pipelines" },
+  { "<leader>gom", desc = "merge requests" },
+  { "<leader>gof", desc = "file" },
+
+  { "<leader>gm", "<cmd>G mergetool |Gvdiffsplit!<cr>", desc = "3-way mergetool" },
 }
 
 vnoremap('<leader>rs', ':lua require"caseswitcher".swapCaseOfVisualSelection("snake")<cr>')
@@ -388,38 +375,15 @@ vnoremap('<leader>rk', ':lua require"caseswitcher".swapCaseOfVisualSelection("ke
 vnoremap('<leader>rK', ':lua require"caseswitcher".swapCaseOfVisualSelection("kebab-screaming")<cr>')
 
 wk_reg {
-  ['<leader>r'] = {
-    name = 'refactor',
-    r = 'rename variable',
-    t = { '<cmd>call formatting#toggle_multiline_args()<cr>', 'toggle multiline args' },
-    s = { '<cmd>lua require"caseswitcher".swapCaseOfWordUnderCursor("snake")<cr><cmd>call repeat#set("<leader>rs")<cr>', 'turn snake_case' },
-    S = { '<cmd>lua require"caseswitcher".swapCaseOfWordUnderCursor("snake-screaming")<cr><cmd>call repeat#set("<leader>rS")<cr>', 'turn SNAKE_CASE' },
-    c = { '<cmd>lua require"caseswitcher".swapCaseOfWordUnderCursor("camel")<cr><cmd>call repeat#set("<leader>rc")<cr>', 'turn camelCase' },
-    C = { '<cmd>lua require"caseswitcher".swapCaseOfWordUnderCursor("pascal")<cr><cmd>call repeat#set("<leader>rC")<cr>', 'turn CamelCase' },
-    k = { '<cmd>lua require"caseswitcher".swapCaseOfWordUnderCursor("kebab")<cr><cmd>call repeat#set("<leader>rk")<cr>', 'turn kebab-case' },
-    K = { '<cmd>lua require"caseswitcher".swapCaseOfWordUnderCursor("kebab-screaming")<cr><cmd>call repeat#set("<leader>rK")<cr>', 'turn KEBAB-CASE' },
-  }
-}
-
-wk_reg {
-  ['<leader>t'] = {
-    name = 'tabs',
-    d = { '<cmd>tcd %:h<cr>', 'switch tab working dir' },
-    t = { '<cmd>tabnew<cr>', 'open tab' },
-    c = { '<cmd>tabclose<cr>', 'close tab' },
-    h = { '<cmd>tabprevious<cr><cmd>call repeat#set("<leader>th")<cr>', 'previous tab' },
-    l = { '<cmd>tabnext<cr><cmd>call repeat#set("<leader>tl")<cr>', 'next tab' },
-    k = { '<cmd>tabmove +1<cr><cmd>call repeat#set("<leader>tk")<cr>', 'move tab right' },
-    j = { '<cmd>tabmove -1<cr><cmd>call repeat#set("<leader>tj")<cr>', 'move tab left' },
-  }
-}
-
-nnoremap('<leader>qc', ':cclose<cr>')
-wk_reg {
-  ['<leader>q'] = {
-    name = 'quickfix',
-    c = 'close',
-  }
+  { "<leader>r", group = "refactor" },
+  { "<leader>rr", desc = "rename variable" },
+  { "<leader>rt", "<cmd>call formatting#toggle_multiline_args()<cr>", desc = "toggle multiline args" },
+  { "<leader>rC", '<cmd>lua require"caseswitcher".swapCaseOfWordUnderCursor("pascal")<cr><cmd>call repeat#set("<leader>rC")<cr>', desc = "turn CamelCase" },
+  { "<leader>rK", '<cmd>lua require"caseswitcher".swapCaseOfWordUnderCursor("kebab-screaming")<cr><cmd>call repeat#set("<leader>rK")<cr>', desc = "turn KEBAB-CASE" },
+  { "<leader>rS", '<cmd>lua require"caseswitcher".swapCaseOfWordUnderCursor("snake-screaming")<cr><cmd>call repeat#set("<leader>rS")<cr>', desc = "turn SNAKE_CASE" },
+  { "<leader>rc", '<cmd>lua require"caseswitcher".swapCaseOfWordUnderCursor("camel")<cr><cmd>call repeat#set("<leader>rc")<cr>', desc = "turn camelCase" },
+  { "<leader>rk", '<cmd>lua require"caseswitcher".swapCaseOfWordUnderCursor("kebab")<cr><cmd>call repeat#set("<leader>rk")<cr>', desc = "turn kebab-case" },
+  { "<leader>rs", '<cmd>lua require"caseswitcher".swapCaseOfWordUnderCursor("snake")<cr><cmd>call repeat#set("<leader>rs")<cr>', desc = "turn snake_case" },
 }
 
 vim.cmd
@@ -430,21 +394,48 @@ autocmd FileType * lua require'user.mappings'.set_filetype_specific_mappings()
 augroup end
 ]]
 
--- Make commands
--- nnoremap('<leader>fk', '<cmd>!make up<cr>')
--- nnoremap('<leader>fj', '<cmd>!make down<cr>')
--- nnoremap('<leader>fl', '<cmd>!make run<cr>')
-nnoremap('<leader>fh', '<cmd>lua require("nvim-treesitter-playground.hl-info").show_hl_captures()<cr>')
+nnoremap('<leader>fh', '<cmd>TSHighlightCapturesUnderCursor<cr>')
 wk_reg {
-  ["<leader>f"] = {
-    name = "filetype specific",
-    h = "print highlight under cursor",
-  }
+  { "<leader>f", group = "filetype specific" },
+  { "<leader>fh", desc = "highlight under cursor" }
 }
+
+wk_reg {
+  { "go", group = "go" },
+  { "got", desc = 'test file' },
+  { "goT", desc = "test project" },
+  { "gob", desc = 'build' },
+  { "goB", desc = 'build project' },
+  { "gof", desc = 'fill struct' },
+  { "goi", desc = 'implement' },
+  { "goc", desc = 'toggle coverage' },
+  { "gol", desc = 'lint' },
+  { "goL", desc = 'lint project' },
+  { "goa", desc = 'jump to tests and back' },
+  { "gom", desc = 'mock interface' },
+
+  { "vim", group = "vim" },
+  { "vimh", desc = "print highlight under cursor" },
+  { "vims", desc = "save & source" },
+
+  { "lua", group = "lua" },
+  { "luah", desc = "print highlight under cursor" },
+  { "luas", desc = "save & source" },
+
+  { "markdown", group = "markdown" },
+  { "markdownp", desc = "preview" },
+
+  { "json", group = "json" },
+  { "jsonp", desc = "format" },
+}
+
 
 function M.set_filetype_specific_mappings()
   local ft = vim.api.nvim_buf_get_option(0, 'ft')
   local fprefix = '<leader>f'
+
+  buf_nnoremap(fprefix, ':WhichKey ' .. ft .. '<cr>')
+
   if ft == "vim" then
     -- Vim
     buf_nnoremap(fprefix .. 's', ':w | so %<cr>')
@@ -465,6 +456,7 @@ function M.set_filetype_specific_mappings()
     buf_nnoremap(fprefix .. 'l', '<cmd>GoMetaLinter --sort-results<cr>')
     buf_nnoremap(fprefix .. 'L', '<cmd>GoMetaLinter! --sort-results ./...<cr>')
     buf_nnoremap(fprefix .. 'a', '<cmd>GoAlternate<cr>')
+    buf_nnoremap(fprefix .. 'm', ':lua MockInterfaceUnderCusor()<cr>')
   elseif ft == 'qf' then
     buf_nnoremap('dd', '<cmd>call setqflist(filter(getqflist(), {idx -> idx != line(".") - 1}), "r")<cr>')
   elseif ft == 'json' then
