@@ -122,12 +122,22 @@ function M.PickGoMainFile()
     local item = vim.split(filename, ':')
     local fullpath = item[1]
 
-    if fullpath == "main.go" then
-      fullpath = "."
+    local path_segments = vim.split(fullpath, "/", { trimempty = true })
+    table.remove(path_segments, #path_segments)
+    local pkg = table.concat(path_segments, "/")
+    if pkg == "" then
+      pkg = "."
     end
 
+    items[#items+1] = "./" .. pkg
     items[#items+1] = fullpath
+
   end
+
+  table.sort(items, function (a, b)
+    local find = ".go"
+    return a:sub(-#find + 1) == find
+  end)
 
   if #items == 1 then
     return items[1]
