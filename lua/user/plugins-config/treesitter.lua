@@ -33,8 +33,8 @@ require 'nvim-treesitter.configs'.setup {
       disable = { "php" }
     },
     highlight_definitions = {
-      enable = true,
-      disable = { "markdown" }
+      enable = false,
+      disable = { "markdown" },
     },
     smart_rename = {
       enable = true,
