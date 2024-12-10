@@ -1,5 +1,7 @@
 setlocal formatprg=gofmt noexpandtab shiftwidth=4
 
+iabbrev <buffer> cosnt const
+
 iabbrev <buffer> sring string
 iabbrev <buffer> strign string
 iabbrev <buffer> strinv string
@@ -28,6 +30,7 @@ iabbrev <buffer> reutnr return
 iabbrev <buffer> returnc return
 
 iabbrev <buffer> errrors errors
+iabbrev <buffer> errro error
 
 iabbrev <buffer> ;= :=
 iabbrev <buffer> f;= :=
