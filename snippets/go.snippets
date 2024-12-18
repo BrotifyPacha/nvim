@@ -9,12 +9,26 @@ snippet main "main function" b
 		${0}
 	}
 
-snippet jfield "Json struct field" b
+snippet jfield "Json tagged field" b
 	${1:Field} ${2:string} \`json:"${1/.*/\l\0/g}"\`
+	${0}
+
+snippet jstruct "Json tagged struct field" bA
+	${1:Field} struct{
+		${0}
+	} \`json:"${1/.*/\l\0/g}"\`
+
+snippet jstring "Json tagged string field" bA
+	${1:Field} string \`json:"${1/.*/\l\0/g}"\`
+	${0}
+
+snippet jint "Json tagged int field" bA
+	${1:Field} ${2:int64} \`json:"${1/.*/\l\0/g}"\`
+	${0}
 
 snippet yfield "Yaml struct field" b
 	${1:Field} ${2:string} \`yaml:"${1/.*/\l\0/g}"\`
-
+	${0}
 
 snippet sf "struct function" Ab
 	func (${1/\(.\).*/\l\1} *${1:Type}) ${3}($4) ${5:error} {
