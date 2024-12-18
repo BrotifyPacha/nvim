@@ -170,10 +170,10 @@ dap.configurations.python = {
     }
 }
 
-vim.fn.sign_define('DapBreakpoint',          { text='', texthl='RedAccent', linehl = '', numhl = 'RedAccent' })
-vim.fn.sign_define('DapBreakpointCondition', { text='⯈', texthl='RedAccent', linehl = '', numhl = 'RedAccent' })
-vim.fn.sign_define('DapBreakpointRejected',  { text='󰝦', texthl='RedAccent', linehl = '', numhl = 'RedAccent' })
-vim.fn.sign_define('DapStopped', { text='', texthl='', linehl = '', numhl = 'CurSearch' })
+vim.fn.sign_define('DapBreakpoint',          { text='', texthl='Red', linehl = '', numhl = 'Red' })
+vim.fn.sign_define('DapBreakpointCondition', { text='⯈', texthl='Red', linehl = '', numhl = 'Red' })
+vim.fn.sign_define('DapBreakpointRejected',  { text='󰝦', texthl='Red', linehl = '', numhl = 'Red' })
+vim.fn.sign_define('DapStopped',             { text='',  texthl='',    linehl = '', numhl = 'DapStopped' })
 
 -- Dap UI
 require("dapui").setup({

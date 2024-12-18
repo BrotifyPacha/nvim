@@ -92,6 +92,8 @@ local customize_color_scheme = function ()
   h.create_hl("CurSearch", { bg="#E32791", fg=normal.fg })
   h.create_hl("Search", { bg="#008EC4", fg=normal.fg })
 
+  h.create_hl("DapStopped", { bg=colors.Red, fg=normal.fg })
+
 end
 
 customize_color_scheme()
