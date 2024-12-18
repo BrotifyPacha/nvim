@@ -36,10 +36,15 @@ snippet sf "struct function" Ab
 	}
 
 snippet msf "map slice function - []A to []B" Ab
-	func map${1/\v([^.]+)\.?([^.]+)?/\u\1\2}To${2/\v([^.]+)\.?([^.]+)?/\u\1\2}(in []${1}) []${2} {
+	func map${1/\v\*?([^.]+)\.?([^.]+)?/\u\1\2}To${2/\v\*?([^.]+)\.?([^.]+)?/\u\1\2}(in []${1}) []${2} {
 		out := make([]$2, 0, len(in))
 		for _, item := range in {
-			out = append(out, $2{$0})
+			out = append(out, $${2/\v*/\&/g}{$0})
 		}
 		return out
+	}
+
+snippet mf "map function - A to B" Ab
+	func map${1/\v\*?([^.]+)\.?([^.]+)?/\u\1\2}To${2/\v\*?([^.]+)\.?([^.]+)?/\u\1\2}(in ${1}) ${2} {
+		return ${2/\v*/\&/g}{$0}
 	}
