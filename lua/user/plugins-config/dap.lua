@@ -199,7 +199,7 @@ require("dapui").setup({
         {
             elements = {
                 'repl',
-                -- 'stacks'
+                'stacks'
             },
             size = 0.30,
             position = 'bottom',
