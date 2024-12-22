@@ -1,4 +1,5 @@
 setlocal formatprg=gofmt noexpandtab shiftwidth=4
+setlocal formatoptions=roj
 
 iabbrev <buffer> cosnt const
 
