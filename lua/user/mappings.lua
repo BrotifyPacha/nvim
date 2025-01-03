@@ -168,19 +168,15 @@ tnoremap('<Esc>', '<C-\\><C-n>')
 inoremap('<C-f>', '<C-x><C-f>')
 inoremap('<C-l>', '<C-x><C-l>')
 
-inoremap('<C-i>d', './<C-R>=expand("%:h")<cr>')
-inoremap('<C-i>p', './<C-R>=expand("%")<cr>')
-inoremap('<C-i>P', '<C-R>=expand("%:p")<cr>')
-inoremap('<C-i>f', '<C-R>=expand("%:t:r")<cr>')
-inoremap('<C-i>F', '<C-R>=expand("%:t")<cr>')
-
 inoremap('<down>', '<-')
 inoremap('<up>', '->')
 
 inoremap('<C-r>c', '<C-r>=trim(v:lua.require(\'user.helpers\').getStdoutOf(\'kcolorchooser --print 2>/dev/null\')[0])<cr>')
-inoremap('<C-r>f', '<C-r>=expand(\'%\')<cr>')
-inoremap('<C-r>t', '<C-r>=expand(\'%:t\')<cr>')
-inoremap('<C-r>r', '<C-r>=expand(\'%:t:r\')<cr>')
+inoremap('<C-r>d', './<C-r>=expand("%:h")<cr>')
+inoremap('<C-r>p', './<C-r>=expand("%")<cr>')
+inoremap('<C-r>P', '<C-r>=expand("%:p")<cr>')
+inoremap('<C-r>f', '<C-r>=expand("%:t:r")<cr>')
+inoremap('<C-r>F', '<C-r>=expand("%:t")<cr>')
 
 -- Smart tab
 local function t(str)
