@@ -85,8 +85,8 @@ nnoremap('dsf', '<cmd>call formatting#delete_surrounding_func()<cr>')
 nnoremap('csf', '<cmd>call formatting#change_surrounding_func("")<cr>')
 
 -- Unimpared extension
-nnoremap('[t', ':tabprevious<cr>')
-nnoremap(']t', ':tabnext<cr>')
+nnoremap('[[', ':tabprevious<cr>')
+nnoremap(']]', ':tabnext<cr>')
 nnoremap('[g', '<cmd>lua require"gitsigns".prev_hunk()<cr>')
 nnoremap(']g', '<cmd>lua require"gitsigns".next_hunk()<cr>')
 nnoremap('g]p', 'ddmm}P`m:call repeat#set("m]p")<cr>')
