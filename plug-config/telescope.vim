@@ -71,7 +71,7 @@ require "telescope".setup{
                 'rg',
                 '--files',
                 '--glob',
-                '!{.git,node_modules,.svn}',
+                '!{.git,node_modules,.svn,zsh-hist}',
                 '--no-ignore',
                 '--hidden'
             }
