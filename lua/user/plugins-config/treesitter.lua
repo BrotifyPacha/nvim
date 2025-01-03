@@ -21,7 +21,11 @@ require 'nvim-treesitter.configs'.setup {
   highlight = {
     enable = true,
     use_languagetree = true, -- Use this to enable language injection
-    disable = { "vimdoc" }
+    disable = { "vimdoc", "typescriptreact" }
+  },
+  fold = {
+    enable = true,
+    disable = { "typescriptreact" },
   },
   indent = {
     enable = true,
@@ -34,7 +38,7 @@ require 'nvim-treesitter.configs'.setup {
     },
     highlight_definitions = {
       enable = false,
-      disable = { "markdown" },
+      disable = { "markdown", "typescriptreact" },
     },
     smart_rename = {
       enable = true,
