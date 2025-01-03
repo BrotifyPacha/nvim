@@ -168,6 +168,12 @@ tnoremap('<Esc>', '<C-\\><C-n>')
 inoremap('<C-f>', '<C-x><C-f>')
 inoremap('<C-l>', '<C-x><C-l>')
 
+inoremap('<C-i>d', './<C-R>=expand("%:h")<cr>')
+inoremap('<C-i>p', './<C-R>=expand("%")<cr>')
+inoremap('<C-i>P', '<C-R>=expand("%:p")<cr>')
+inoremap('<C-i>f', '<C-R>=expand("%:t:r")<cr>')
+inoremap('<C-i>F', '<C-R>=expand("%:t")<cr>')
+
 inoremap('<down>', '<-')
 inoremap('<up>', '->')
 
