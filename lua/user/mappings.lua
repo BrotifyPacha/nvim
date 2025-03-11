@@ -326,6 +326,11 @@ nnoremap('<leader>gor', ':lua require("user/helpers").xdgOpen(require("user/help
 nnoremap('<leader>gop', ':lua require("user/helpers").xdgOpen(require("user/helpers").getRemoteLink() .. "/-/pipelines")<cr>')
 nnoremap('<leader>gom', ':lua require("user/helpers").xdgOpen(require("user/helpers").getRemoteLink() .. "/-/merge_requests")<cr>')
 
+function viewGitHistory()
+  vim.cmd [[ bel vert G log --oneline --graph --branches --decorate ]]
+  vim.fn.search("(HEAD ->")
+end
+
 wk_reg {
   { "<leader>g", group = "git" },
   { "<leader>gt", "<cmd>Telescope git_branches<cr>", desc = "branches" },
@@ -343,7 +348,7 @@ wk_reg {
   { "<leader>gl", "<cmd>G push<cr>", desc = "push" },
 
   { "<leader>gV", "<cmd>Telescope git_bcommits<cr>", desc = "commits - telescope" },
-  { "<leader>gv", "<cmd>bel vert G log --oneline --graph --decorate --branches<cr>", desc = "commits" },
+  { "<leader>gv", "<cmd>lua viewGitHistory()<cr>", desc = "commits" },
 
   { "<leader>gc", group = "commit" },
   { "<leader>gca", "<cmd>G commit --amend<cr>", desc = "amend" },
