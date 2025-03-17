@@ -51,10 +51,12 @@ require "telescope".setup{
         },
         mappings = {
             i = {
+                ["<C-q>"] = require('telescope.actions').smart_send_to_qflist + require('telescope.actions').open_qflist,
                 ["<C-t>"] = require('telescope.actions').toggle_selection + require('telescope.actions').move_selection_next,
                 ["<Tab>"] = require('telescope.actions').toggle_selection
             },
             n = {
+                ["<C-q>"] = require('telescope.actions').smart_send_to_qflist + require('telescope.actions').open_qflist,
                 ["<C-t>"] = require('telescope.actions').toggle_selection + require('telescope.actions').move_selection_next,
                 ["<Tab>"] = require('telescope.actions').toggle_selection
             }
