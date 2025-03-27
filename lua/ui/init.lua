@@ -39,7 +39,6 @@ end
 local customize_color_scheme = function ()
   local normal = h.get_hl("Normal")
   local tabline = h.get_hl("TabLine")
-  local winbar = h.get_hl("WinBar")
 
   h.create_hl("P_Split", { bg = tabline.bg, fg = normal.bg })
 
@@ -51,8 +50,9 @@ local customize_color_scheme = function ()
   h.link("ColorColumn", "NvimDarkGrey1.5")
 
   -- register tabline hl groups
-  h.create_hl("TabLineSelBold", h.extend("TablineSel", { bold = true, cterm = { bold = true } }))
-  h.create_hl("TabLineSel", h.extend("TablineSel", { bold = false, cterm = { bold = false } }))
+  h.create_hl("TabLine", tabline)
+  h.create_hl("TabLineSelBold", h.extend("TablineSel", { bold = true, cterm = { bold = true }, bg = normal.bg }))
+  h.create_hl("TabLineSel", h.extend("TablineSel", { bold = false, cterm = { bold = false }, bg = normal.bg }))
   h.create_hl("TabLineDivider", h.extend("TabLine", { fg=normal.bg }))
   h.create_hl("TabLineDividerSelected", { bg = tabline.bg, fg=normal.bg })
 
