@@ -70,7 +70,7 @@ require('gitsigns').setup {
     delay = 1000,
     ignore_whitespace = false,
   },
-  sign_priority = 1,
+  sign_priority = 99,
   update_debounce = 100,
   status_formatter = nil, -- Use default
   max_file_length = 40000,
