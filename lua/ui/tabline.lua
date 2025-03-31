@@ -1,21 +1,5 @@
 local M = {}
 
-local h = require "ui.helpers"
-
-local registerTablineHLs = function ()
-  local normal = h.get_hl("Normal")
-  local tabline = h.get_hl("TabLine")
-
-  h.create_hl("TabLineSelBold", h.extend("TablineSel", { bold = true, cterm = { bold = true } }))
-  h.create_hl("TabLineSel", h.extend("TablineSel", { bold = false, cterm = { bold = false } }))
-  h.create_hl("TabLineDivider", h.extend("TabLine", { fg=normal.bg }))
-  h.create_hl("TabLineDividerSelected", { bg = tabline.bg, fg=normal.bg })
-end
-
-registerTablineHLs()
-
-vim.api.nvim_create_autocmd("ColorScheme", { callback = registerTablineHLs })
-
 function M.myTabline()
   local tabs = {}
   local selectedTabNumber = vim.fn.tabpagenr()
