@@ -114,7 +114,6 @@ cmp.setup({
         nvim_lsp  = "[LSP]",
         ultisnips = "[UltiSnip]",
         luasnip   = "[LuaSnip]",
-        ['vim-dadbod-completion'] = "[DB]",
       })[entry.source.name]
       return vim_item
     end
@@ -123,7 +122,6 @@ cmp.setup({
     { name = 'nvim_lsp' },
     { name = 'snippy' },
     { name = 'go_pkgs' },
-    { name = 'vim-dadbod-completion' },
     {
       name = 'buffer',
       option = {

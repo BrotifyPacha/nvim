@@ -13,4 +13,3 @@ require 'user.plugins-config.which-key'
 require 'nvim-gps'.setup()
 require 'user.plugins-config.sniprun'
 require 'user.plugins-config.scrollbar'
-require 'user.plugins-config.dadbod'
