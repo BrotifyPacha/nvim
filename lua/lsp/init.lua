@@ -6,9 +6,9 @@ local servers = {
   'gopls',
   'pyright',
   'lua_ls',
-  'tailwindcss',
   'vimls',
   'jsonls',
+  'jsonnet_ls',
   'omnisharp',
 }
 
