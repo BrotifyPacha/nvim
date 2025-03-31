@@ -38,6 +38,7 @@ vim.opt.wildmenu = true
 vim.opt.wildoptions:append('pum')
 vim.opt.inccommand = 'nosplit'
 vim.opt.termguicolors = true
+vim.opt.winborder = 'single'
 
 -- Update time for gitsigns
 vim.opt.updatetime = 100
