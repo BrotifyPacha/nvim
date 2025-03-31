@@ -3,6 +3,8 @@ setlocal formatoptions=roj
 
 iabbrev <buffer> cosnt const
 
+iabbrev <buffer> tyep type
+
 iabbrev <buffer> sring string
 iabbrev <buffer> strign string
 iabbrev <buffer> strinv string
