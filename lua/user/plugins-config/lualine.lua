@@ -99,7 +99,7 @@ require 'lualine'.setup({
       },
       {
         'branch',
-        color = { fg = colors.green },
+        -- color = { fg = colors.green, bg = colors.status_bg },
         icon = '',
         padding = { left = 1, right = 1 }
       },
