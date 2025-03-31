@@ -74,6 +74,12 @@ xnoremap('id', "<cmd>lua require 'mytextobj'.documentTextObj()<cr>")
 onoremap('ii', "<cmd>lua require 'mytextobj'.indentTextObj()<cr>")
 xnoremap('ii', "<cmd>lua require 'mytextobj'.indentTextObj()<cr>")
 
+-- Telescope
+nnoremap('<C-p>', '<cmd>Telescope find_files<cr>')
+nnoremap('<C-g>', '<cmd>Telescope live_grep<cr>')
+nnoremap('<C-h>', '<cmd>Telescope git_status<cr>')
+nnoremap('-', '<cmd>Telescope current_buffer_fuzzy_find<cr>')
+
 -- camelCaseWordTestingArt3Times
 vim.api.nvim_set_keymap('n', '<A-w>', ':call search("[A-Z]")<cr>', { expr = false, noremap = true, nowait = true, silent = true })
 vim.api.nvim_set_keymap('n', '<A-b>', ':call search("[A-Z]", "b")<cr>', { expr = false, noremap = true, nowait = true, silent = true })

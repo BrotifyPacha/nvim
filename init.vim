@@ -45,7 +45,6 @@ lua require 'lsp.null-ls'
 
 execute "source " . g:config_location ."/"."plug-config/welle-targets.vim"
 execute "source " . g:config_location ."/"."plug-config/delimitMate.vim"
-execute "source " . g:config_location ."/"."plug-config/telescope.vim"
 execute "source " . g:config_location ."/"."plug-config/vim-go.vim"
 
 let g:easy_align_delimiters = {
