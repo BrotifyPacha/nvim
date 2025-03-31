@@ -198,6 +198,11 @@ function M.combineParts(combiner, list)
   return tbl_join(list, "")
 end
 
+function M.recombineWord(combiner, word)
+  local parts = M.splitParts(word)
+  return M.combineParts(combiner, parts)
+end
+
 local function test_integrated()
   local tests = {
     {
