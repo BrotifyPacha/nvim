@@ -104,8 +104,6 @@ nnoremap('N', 'Nzz')
 nnoremap('gf', 'gF')
 nnoremap('gF', ':e <cfile><cr>')
 nnoremap('cy', '"*y')
-nnoremap('p', "mpp=']`p")
-nnoremap('P', "mpP='[`p")
 
 nnoremap('cw', 'ciw')
 nnoremap('vv', '^v$h')
