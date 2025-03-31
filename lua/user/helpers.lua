@@ -114,6 +114,50 @@ function M.GetGPS()
   return {}
 end
 
+-- test_items = {
+--   "./cmd/a",
+--   "./cmd/b",
+--   "./cmd/c",
+--   "./cmd/d",
+--   "./cmd/grafana-itc-bridge",
+--   "./cmd/grafana-itc-bridge/main.go",
+--   "./scripts/main.go",
+--   "./scripts",
+-- }
+
+function M.sort_entrypoints(entry_points)
+  table.sort(
+    entry_points,
+    function (a, b)
+      local cmd_pattern = "^./cmd/"
+      local go_file_pattern = "%.go$"
+      local a_val, b_val = 0, 0
+
+      local sort_test = function (test, cost)
+        if test then
+          return cost
+        end
+        return 0
+      end
+
+      a_val = a_val + sort_test(a:find(cmd_pattern) ~= nil, 100)
+      b_val = b_val + sort_test(b:find(cmd_pattern) ~= nil, 100)
+
+      a_val = a_val + sort_test(a:find(go_file_pattern) ~= nil, -10)
+      b_val = b_val + sort_test(b:find(go_file_pattern) ~= nil, -10)
+
+      a_val = a_val + sort_test(a < b, 1)
+      b_val = b_val + sort_test(a > b, 1)
+
+      print(a, b, a_val, b_val)
+      -- if a:sub(-#find) == find then
+      --   return a:
+      -- end
+      return a_val > b_val
+    end
+  )
+end
+
 function M.PickGoMainFile()
   local results = io.popen("rg '^\\s*func main()' --glob '*.go' --vimgrep")
   local items = {}
@@ -134,10 +178,7 @@ function M.PickGoMainFile()
 
   end
 
-  table.sort(items, function (a, b)
-    local find = ".go"
-    return a:sub(-#find + 1) == find
-  end)
+  M.sort_entrypoints(items)
 
   if #items == 1 then
     return items[1]
