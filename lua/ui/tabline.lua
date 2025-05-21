@@ -9,7 +9,7 @@ function M.myTabline()
 
     local tabLabel = M.myTabLabel(isSelected, index, id)
     local tabSelector = '%' .. index .. 'T'
-    local tabCloser = '%' .. index  .. 'X窱'
+    local tabCloser = '%' .. index  .. 'X '
     local tabButton = tabSelector .. tabLabel .. ' ' .. tabCloser
 
     local sep_highlight = '%#TabLineDivider#'
