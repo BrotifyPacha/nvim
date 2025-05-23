@@ -16,7 +16,7 @@ end
 
 function M.getRemoteLink()
   local handle = io.popen('git remote -v | head -n 1 | awk \'{print $2}\' | sed s/\\r$// ')
-  local remote = handle:read("*a")
+  local remote = handle:read("*l")
   handle:close()
   remote = string.gsub(remote, '^http://', '')
   remote = string.gsub(remote, '^https://', '')
