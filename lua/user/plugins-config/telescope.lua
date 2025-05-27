@@ -24,8 +24,8 @@ require "telescope".setup{
       '\\.spl$',
       '\\.sug$',
     },
-    multi_icon = '   ',
-    selection_caret = '   ',
+    multi_icon = ' 󰄯  ',
+    selection_caret = ' 󰄰  ',
     entry_prefix = '    ',
     prompt_prefix = '   ',
     vimgrep_arguments = {

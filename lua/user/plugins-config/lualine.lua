@@ -152,7 +152,7 @@ require 'lualine'.setup({
           if vim.t.latest_test_run_failed == nil then
             return ''
           end
-          local icon = ''
+          local icon = '󰂓'
           local color = ''
           local text = ''
           local status_bg = require('lualine.utils.utils').extract_highlight_colors('StatusLine', 'bg')

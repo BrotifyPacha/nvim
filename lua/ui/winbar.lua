@@ -25,7 +25,7 @@ function M.getMyWinbar()
   if fname == '' then
     if buftype ~= '' and buftype == 'quickfix' then
       local title = vim.fn.getqflist({title = 1}).title
-      icon = ''
+      icon = '󰉺'
       if string.match(title, '.+fail.+') then
         highlight = 'WinbarErr'
         icon_highlight = highlight

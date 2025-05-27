@@ -26,7 +26,7 @@ require 'nvim-web-devicons'.setup {
 
     txt = {
       color = default,
-      icon = "",
+      icon = "󰉿",
       name = "customTxt"
     },
     Dockerfile = {
