@@ -349,7 +349,7 @@ wk_reg {
   { "<leader>gj", "<cmd>G fetch --all --tags<cr>", desc = "fetch" },
   { "<leader>gJ", "<cmd>G fetch --all --prune<cr>", desc = "fetch prune" },
   { "<leader>gK", desc = "push (set-upstream)" },
-  { "<leader>gL", "<cmd>G push --force<cr>", desc = "push (force)" },
+  { "<leader>gL", "<cmd>G push --force-with-lease<cr>", desc = "push (force)" },
   { "<leader>gl", "<cmd>G push<cr>", desc = "push" },
 
   { "<leader>gV", "<cmd>Telescope git_bcommits<cr>", desc = "commits - telescope" },
