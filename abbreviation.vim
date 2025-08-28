@@ -1,9 +1,6 @@
 " Command line
 cnoreabbrev h vertical botright help
-cnoreabbrev vsf vert bel s
-cnoreabbrev vsp bel vs
 
-cnoreabbrev sp bel sp
 cnoreabbrev bw! bn \| bw! #
 cnoreabbrev cd tcd
 
