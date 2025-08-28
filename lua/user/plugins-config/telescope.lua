@@ -90,10 +90,10 @@ require "telescope".setup{
             local current = action_state.get_current_line()
 
             local looplist = {
-              "release/COREMON-",
-              "COREMON-",
-              "feature/COREMON-",
-              "hotfix/COREMON-",
+              "release/SYSMON-",
+              "SYSMON-",
+              "feature/SYSMON-",
+              "hotfix/SYSMON-",
               "release/" .. vim.fn.strftime("%Y-%m-%d-01"),
             }
 
