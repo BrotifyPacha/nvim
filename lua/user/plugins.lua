@@ -61,7 +61,6 @@ return packer.startup(function(use)
     use 'neovim/nvim-lspconfig'
     use 'williamboman/mason.nvim'
     use 'williamboman/mason-lspconfig.nvim'
-    use 'jose-elias-alvarez/null-ls.nvim'
     use 'lvimuser/lsp-inlayhints.nvim'
 
     -- File explorer
