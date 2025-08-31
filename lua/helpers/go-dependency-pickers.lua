@@ -23,7 +23,7 @@ local __go_list_dependency_dirs = function ()
   return dirs
 end
 
-M.go_dependency_live_grep = function ()
+M.live_grep = function ()
 
   local dependency_dirs = __go_list_dependency_dirs()
 

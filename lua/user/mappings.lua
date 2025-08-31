@@ -470,7 +470,7 @@ function M.set_filetype_specific_mappings()
     buf_nnoremap(fprefix .. 'a', '<cmd>GoAlternate<cr>')
     buf_nnoremap(fprefix .. 'm', ':lua MockInterfaceUnderCusor()<cr>')
 
-    vim.keymap.set('n', fprefix .. 'gm', require'user.plugins-config.telescope-extensions'.go_dependency_live_grep, { desc = 'Live grep go dependencies' })
+    vim.keymap.set('n', fprefix .. 'gm', require'helpers.go-dependency-pickers'.live_grep, { desc = 'Live grep go dependencies' })
 
   elseif ft == 'qf' then
     buf_nnoremap('dd', '<cmd>call setqflist(filter(getqflist(), {idx -> idx != line(".") - 1}), "r")<cr>')
