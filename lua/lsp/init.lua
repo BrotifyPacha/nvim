@@ -12,9 +12,16 @@ local servers = {
   'omnisharp',
 }
 
-require'mason'.setup()
-require'mason-lspconfig'.setup {
-  ensure_installed = servers
+
+local server_install_cmds = {
+  -- gopls
+  "go install golang.org/x/tools/gopls@latest",
+  -- vim-ls
+  "npm install -g vim-language-server",
+  -- lua-ls
+  "brew install lua-language-server",
+  -- dockerls
+  "go install github.com/docker/docker-language-server/cmd/docker-language-server@latest"
 }
 
 -- vim.lsp.inlay_hint.enable(true)
@@ -168,45 +175,6 @@ local capabilities = require'cmp_nvim_lsp'.default_capabilities(vim.lsp.protocol
 local lspconfig = require('lspconfig')
 local util = require('lspconfig/util')
 
-for _, server in ipairs(servers) do
-  server = vim.tbl_get(lspconfig, server)
-  server.setup{
-    on_attach = on_attach,
-    capabilities = capabilities
-  }
-end
-
-require('mason-lspconfig').setup_handlers({
-  function(server)
-    lspconfig[server].setup({
-      on_attach = on_attach,
-      capabilities = capabilities
-    })
-  end,
-})
-
-lspconfig.pyright.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-  settings = {
-    python = {
-      venvPath = '.'
-    }
-  }
-}
-
-lspconfig.jsonls.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-}
-
-lspconfig.phpactor.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-  cmd = { 'phpactor', 'language-server' },
-  root_dir = util.root_pattern("composer.json")
-}
-
 lspconfig.gopls.setup {
   on_attach = on_attach,
   capabilities = capabilities,
@@ -226,6 +194,16 @@ lspconfig.gopls.setup {
       },
     },
   },
+}
+
+lspconfig.lua_ls.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+}
+
+lspconfig.vimls.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
 }
 
 require("neodev").setup({
