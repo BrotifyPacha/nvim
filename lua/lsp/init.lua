@@ -1,17 +1,5 @@
 
-local servers = {
-  'cssls',
-  'html',
-  'dockerls',
-  'gopls',
-  'pyright',
-  'lua_ls',
-  'vimls',
-  'jsonls',
-  'jsonnet_ls',
-  'omnisharp',
-}
-
+require "lsp.signs"
 
 local server_install_cmds = {
   -- gopls
@@ -24,187 +12,53 @@ local server_install_cmds = {
   "go install github.com/docker/docker-language-server/cmd/docker-language-server@latest"
 }
 
--- vim.lsp.inlay_hint.enable(true)
+vim.api.nvim_create_autocmd('LspAttach', {
+  group = vim.api.nvim_create_augroup('my.lsp', {}),
+  callback = function(args)
+    local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
 
-local function on_attach(client, bufnr)
-  -- Set up buffer-local keymaps (vim.api.nvim_buf_set_keymap()), etc.
-  local opts = { noremap = true, silent = true }
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
-  vim.keymap.set("n", "ge", function ()
-    vim.cmd [[ tab split ]]
-    vim.cmd [[ normal gd ]]
-    vim.lsp.buf.definition({ on_list = function (options)
-      require 'helpers.fs'.change_tab_dir_to_root()
-    end })
-  end, { buffer = bufnr })
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "<C-k>", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
-  vim.api.nvim_buf_set_keymap(bufnr, "v", "<C-k>", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-  -- vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>s", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>rr", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
-  -- vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>f", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "[d", '<cmd>lua vim.diagnostic.goto_prev({ border = "single" })<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "]d", '<cmd>lua vim.diagnostic.goto_next({ border = "single" })<CR>', opts)
-  -- vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>q", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
-  vim.cmd [[ command! Format execute 'lua vim.lsp.buf.format(nil)' ]]
+    local opts = { buffer = true }
 
-  require 'lsp_signature'.on_attach({
-    bind = true,
-    floating_window_above_cur_line = true,
-    max_width = 120,
-    hi_parameter = 'Cursor',
-    hint_enable = false,
-    handler_opts = {
-      border = 'single'
-    }
-  }, bufnr)
-  -- require 'lsp-inlayhints'.on_attach(client, bufnr)
-end
+    vim.keymap.set("n", "gl", vim.diagnostic.open_float, opts)
+    vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+    vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+    vim.keymap.set("n", "ge", function ()
+      vim.cmd [[ tab split ]]
+      vim.cmd [[ normal gd ]]
+      vim.lsp.buf.definition({ on_list = function () require 'helpers.fs'.change_tab_dir_to_root() end })
+    end, opts)
+    vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+    vim.keymap.set("n", "<C-k>", vim.lsp.buf.code_action, opts)
+    vim.keymap.set("v", "<C-k>", vim.lsp.buf.code_action, opts)
+    vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
+    vim.keymap.set("n", "<leader>rr", vim.lsp.buf.rename, opts)
+    vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+    vim.cmd [[ command! Format execute 'lua vim.lsp.buf.format(nil)' ]]
 
--- Always on mappings
-local opts = { noremap = true, silent = true }
-vim.api.nvim_set_keymap(
-  "n",
-  "gl",
-  '<cmd>lua vim.diagnostic.open_float()<cr>',
-  opts
-)
+    require 'lsp_signature'.on_attach({
+      bind = true,
+      floating_window_above_cur_line = true,
+      max_width = 120,
+      hi_parameter = 'Cursor',
+      hint_enable = false,
+      handler_opts = {
+        border = 'single'
+      }
+    }, args.buf)
 
-local signs = {
-  { name = "DiagnosticSignError", text = "" },
-  { name = "DiagnosticSignWarn", text = "" },
-  { name = "DiagnosticSignHint", text = "" },
-  { name = "DiagnosticSignInfo", text = "" },
-}
-
-for _, sign in ipairs(signs) do
-  vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
-end
-
-vim.diagnostic.config({
-  virtual_text = false,
-  signs = false, --disable signs here to customly display them later
-  update_in_insert = true,
-  underline = true,
-  severity_sort = true,
-  float = {
-    focusable = false,
-    style = "minimal",
-    border = "single",
-    source = "always",
-    header = "Diagnostics:",
-  }
-})
-
--- Create a namespace. This won't be used to add any diagnostics,
--- only to display them.
-local ns = vim.api.nvim_create_namespace("my_namespace")
-
--- Create a reference to the original function
-local show = vim.diagnostic.show
-
-local function contains_diagnostic_with_severity(diagnostics, diagnostic)
-  for _, present_diag in pairs(diagnostics) do
-    if present_diag.severity == diagnostic.severity then
-      return true
-    end
-  end
-  return false
-end
-
-local function set_signs(bufnr)
-  -- Get all diagnostics from the current buffer
-  local diagnostics = vim.diagnostic.get(bufnr)
-  -- Find the "worst" diagnostic per line
-  local one_sign_per_severity_per_line = {}
-  for _, d in pairs(diagnostics) do
-    if one_sign_per_severity_per_line[d.lnum] then
-      local present_diags = one_sign_per_severity_per_line[d.lnum]
-      if contains_diagnostic_with_severity(present_diags, d) ~= true then
-        one_sign_per_severity_per_line[d.lnum] = table.insert(present_diags, d)
-      end
-    else
-      one_sign_per_severity_per_line[d.lnum] = {d}
-    end
-  end
-  local filtered_diagnostics = {}
-  for _, v in pairs(one_sign_per_severity_per_line) do
-    for _, j in pairs(v) do
-      table.insert(filtered_diagnostics, j)
-    end
-  end
-  -- Show the filtered diagnostics using the custom namespace. Use the
-  -- reference to the original function to avoid a loop.
-  show(ns, bufnr, filtered_diagnostics, {
-    virtual_text = false,
-    signs = {
-      active = signs
-    },
-    update_in_insert = true,
-    underline = true,
-    severity_sort = true,
-    float = {
-      focusable = false,
-      style = "minimal",
-      border = "single",
-      source = "always",
-      header = "",
-      prefix = "",
-    }
-  })
-end
-
-function vim.diagnostic.show(namespace, bufnr, ...)
-  show(namespace, bufnr, ...)
-  set_signs(bufnr)
-end
-
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-  border = "single",
-})
-
-vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-  border = "single",
+  end,
 })
 
 
 local capabilities = require'cmp_nvim_lsp'.default_capabilities(vim.lsp.protocol.make_client_capabilities())
-local lspconfig = require('lspconfig')
-local util = require('lspconfig/util')
 
-lspconfig.gopls.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-  cmd = {"gopls", "serve"},
-  filetypes = {"go", "gomod"},
-  root_dir = util.root_pattern("go.work", "go.mod", ".git"),
-  settings = {
-    gopls = {
-      hints = {
-        -- assignVariableTypes = true,
-        -- compositeLiteralFields = true,
-        -- compositeLiteralTypes = true,
-        -- constantValues = true,
-        -- functionTypeParameters = true,
-        parameterNames = true,
-        -- rangeVariableTypes = true,
-      },
-    },
-  },
-}
 
-lspconfig.lua_ls.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-}
+vim.lsp.config('*', { capabilities = capabilities })
 
-lspconfig.vimls.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-}
+vim.lsp.enable({
+  "gopls",
+  "vimls",
+})
 
 require("neodev").setup({
   library = {
@@ -233,9 +87,8 @@ require("neodev").setup({
 local runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
-lspconfig.lua_ls.setup{
-  on_attach = on_attach,
-  capabilities = capabilities,
+
+require('lspconfig').lua_ls.setup{
   settings = {
     Lua = {
       runtime ={
@@ -245,21 +98,6 @@ lspconfig.lua_ls.setup{
       diagnostics = {
         globals = { 'vim' },
       },
-      workspace = {
-        -- library = vim.api.nvim_get_runtime_file("", true),
-        -- library = {
-        --     [ vim.fn.expand("$VIMRUNTIME") ] = true,
-        --     [ vim.fn.expand("$VIMRUNTIME/lua/jit") ] = true,
-        --     [ vim.fn.expand("$VIMRUNTIME/lua/vim") ] = true,
-        --     [ vim.fn.expand("$VIMRUNTIME/lua/vim/lsp") ] = true,
-        --     [ vim.fn.stdpath("config") .. '/lua' ] = true,
-        -- }
-      }
     }
   }
-}
-
-require'lspconfig'.omnisharp.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
 }
