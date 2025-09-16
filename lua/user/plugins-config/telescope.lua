@@ -8,8 +8,30 @@ h.link('TelescopeNormal',         'Normal')
 h.link('TelescopeMatching',       'DiffText')
 h.link('TelescopePromptPrefix',   'String')
 
+local lga_actions = require("telescope-live-grep-args.actions")
 
 require "telescope".setup{
+  extensions = {
+    live_grep_args = {
+      auto_quoting = true, -- enable/disable auto-quoting
+      -- define mappings, e.g.
+      mappings = { -- extend mappings
+        i = {
+          ["<C-q>"] = lga_actions.quote_prompt(),
+          ["<C-f>"] = lga_actions.quote_prompt({ postfix = " --iglob=*.go " }),
+          ["<C-t>"] = lga_actions.quote_prompt({ postfix = " --iglob=!*_test.go " }),
+          ["<C-g>"] = lga_actions.quote_prompt({ postfix = " --iglob=" }),
+          ["<C-n>"] = lga_actions.quote_prompt({ postfix = " --no-ignore " }),
+          -- freeze the current list and start a fuzzy search in the frozen list
+          ["<C-s>"] = lga_actions.to_fuzzy_refine,
+        },
+      },
+      -- ... also accepts theme settings, for example:
+      -- theme = "dropdown", -- use dropdown theme
+      -- theme = { }, -- use own theme spec
+      -- layout_config = { mirror=true }, -- mirror preview pane
+    }
+  },
   defaults = {
     layout_strategy = 'vertical',
     layout_config = {
@@ -58,17 +80,17 @@ require "telescope".setup{
       theme = 'dropdown',
       previewer = false
     },
-    live_grep = {
-      only_sort_text = true,
-      mappings = {
-        i = {
-          ["<C-f>"] = require('telescope.actions').to_fuzzy_refine,
-        },
-        n = {
-          ["<C-f>"] = require('telescope.actions').to_fuzzy_refine,
-        },
-      },
-    },
+    -- live_grep = {
+    --   only_sort_text = true,
+    --   mappings = {
+    --     i = {
+    --       ["<C-f>"] = require('telescope.actions').to_fuzzy_refine,
+    --     },
+    --     n = {
+    --       ["<C-f>"] = require('telescope.actions').to_fuzzy_refine,
+    --     },
+    --   },
+    -- },
     find_files = {
       -- theme = 'dropdown'
       find_command = {

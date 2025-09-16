@@ -94,6 +94,7 @@ return packer.startup(function(use)
     use 'editorconfig/editorconfig-vim'
     -- General
     use 'nvim-telescope/telescope.nvim'
+    use 'nvim-telescope/telescope-live-grep-args.nvim'
     use 'lewis6991/gitsigns.nvim'
     use 'norcalli/nvim-colorizer.lua'
     use 'junegunn/vim-easy-align'

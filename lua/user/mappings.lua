@@ -76,7 +76,7 @@ xnoremap('ii', "<cmd>lua require 'mytextobj'.indentTextObj()<cr>")
 
 -- Telescope
 nnoremap('<C-p>', '<cmd>Telescope find_files<cr>')
-nnoremap('<C-g>', '<cmd>Telescope live_grep<cr>')
+nnoremap('<C-g>', '<cmd>Telescope live_grep_args<cr>')
 nnoremap('<C-h>', '<cmd>Telescope git_status<cr>')
 nnoremap('-', '<cmd>Telescope current_buffer_fuzzy_find<cr>')
 
