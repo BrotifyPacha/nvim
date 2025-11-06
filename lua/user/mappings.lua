@@ -343,6 +343,9 @@ wk_reg {
   { "<leader>gg", "<cmd>vert G | wincmd L<cr>", desc = "status" },
   { "<leader>gf", "<cmd>Telescope git_status<cr>", desc = "status - telescope" },
 
+  { "<leader>gq", "<cmd>G stash<cr>", desc = "stash" },
+  { "<leader>ge", "<cmd>G stash pop<cr>", desc = "unstash" },
+
   { "<leader>gB", '<cmd>lua require"gitsigns".blame_line({enter=true})<cr>', desc = "blame short" },
   { "<leader>gb", '<cmd>lua require"gitsigns".blame_line({full=true})<cr>', desc = "blame" },
 
