@@ -27,12 +27,6 @@ function! CustomGBrowseHandler(args)
     return luaeval("require'fugitivehandlers'.CustomGBrowseHandler(" . table . ")")
 endfunction
 
-command! -nargs=1 Browse :call BrowseFunc(<q-args>)<cr>
-function! BrowseFunc(opts)
-    let opts = substitute(a:opts, '#', '\\#', 'g')
-    silent execute '!xdg-open ' . trim(opts)
-endfunction
-
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
 
