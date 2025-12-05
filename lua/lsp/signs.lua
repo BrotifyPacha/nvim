@@ -1,15 +1,4 @@
 
-local signs = {
-  { name = "DiagnosticSignError", text = "" },
-  { name = "DiagnosticSignWarn", text = "" },
-  { name = "DiagnosticSignHint", text = "" },
-  { name = "DiagnosticSignInfo", text = "" },
-}
-
-for _, sign in ipairs(signs) do
-  vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
-end
-
 vim.diagnostic.config({
   virtual_text = false,
   signs = false, --disable signs here to customly display them later
@@ -20,7 +9,7 @@ vim.diagnostic.config({
     focusable = false,
     style = "minimal",
     border = "single",
-    source = "always",
+    source = "if_many",
     header = "Diagnostics:",
   }
 })
@@ -67,7 +56,12 @@ local function set_signs(bufnr)
   show(ns, bufnr, filtered_diagnostics, {
     virtual_text = false,
     signs = {
-      active = signs
+      text = {
+        [vim.diagnostic.severity.ERROR] = "",
+        [vim.diagnostic.severity.WARN] = "",
+        [vim.diagnostic.severity.HINT] = "",
+        [vim.diagnostic.severity.INFO] = "",
+      },
     },
     update_in_insert = true,
     underline = true,
@@ -76,7 +70,7 @@ local function set_signs(bufnr)
       focusable = false,
       style = "minimal",
       border = "single",
-      source = "always",
+      source = "if_many",
       header = "",
       prefix = "",
     }
