@@ -1,10 +1,9 @@
 require "ui.winbar"
-require "ui.tabline"
 
 local h = require "ui.helpers"
 
 vim.o.winbar = "%{%v:lua.require('ui.winbar').getMyWinbar()%}"
-vim.o.tabline= "%{%v:lua.require('ui.tabline').myTabline()%}"
+vim.o.tabline = "%!v:lua.require('tabs-as-projects.ui').tabline()"
 vim.o.showtabline = 2
 
 local colors = {

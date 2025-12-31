@@ -118,23 +118,28 @@ nnoremap('q?', '<nop>')
 
 cnoremap('<C-f>', '<C-f>F/l')
 
-local workspaceDir = '{ path="$HOME/workspace/", category="workspace", maxdepth=2 }'
-local pluginsDir = '{ path="$HOME/.local/share/nvim/site/pack/packer/start/", category="plugin" }'
-local k8sMigratorDir = '{ path="/tmp/k8s-repository-migrator-git/", category="k8s-migrator" }'
-local configsDir = '{ path="$HOME/.config/", category="configs" }'
-local dirs = '{'.. workspaceDir ..', '.. pluginsDir ..'}'
+local search_dirs = {
+  { category = "workspace", path = "~/workspace/ozon-main" },
+  { category = "workspace", path = "~/workspace/personal" },
+  { category = "workspace", path = "~/workspace/notes" },
+  { category = "source", path = "~/workspace/sources" },
+  { category = "plugins", path = "~/.local/share/nvim/site/pack/packer/opt", path_parts_to_display=1 },
+  { category = "plugins", path = "~/.local/share/nvim/site/pack/packer/start", path_parts_to_display=1 },
+  { category = "config", path = "~/.config", path_parts_to_display=1 },
+}
 -- F key maps
 nnoremap('<F1>', '<cmd>WhichKey F1<cr>')
 wk_reg {
   { "F1", group = "Change working directory" },
-  {  "F1<F1>", '<cmd>lua require"user.helpers".PickWorkingDir("tcd", '.. dirs ..')<cr>', desc = "workspace/plugins", },
+  {  "F1<F1>", desc = "workspace/plugins", },
+  {  "F1l"   , desc = "workspace/plugins (local)", },
   {  "F1n"   , ':tcd ~/.config/nvim | e $MYVIMRC <cr>', desc = "neovim config"},
-  {  "F1l"   , '<cmd>lua require"user.helpers".PickWorkingDir("lcd", '.. dirs ..')<cr>', desc = "workspace/plugins (local)", },
-  {  "F1K"   , '<cmd>lua require"user.helpers".PickWorkingDir("tcd", {'.. k8sMigratorDir ..'})<cr>', desc = "k8s-migrator", },
-  {  "F1k"   , '<cmd>lua require"user.helpers".PickWorkingDir("lcd", {'.. k8sMigratorDir ..'})<cr>', desc = "k8s-migrator (local)", },
-  {  "F1C"   , '<cmd>lua require"user.helpers".PickWorkingDir("tcd", {'.. configsDir ..'})<cr>', desc = "configs", },
-  {  "F1c"   , '<cmd>lua require"user.helpers".PickWorkingDir("lcd", {'.. configsDir ..'})<cr>', desc = "configs (local)", },
 }
+
+local tabs_as_projects = require("tabs-as-projects")
+
+vim.keymap.set("n", "<F1><F1>", tabs_as_projects.pick_project({ search_dirs = search_dirs, pick_cmd = "tcd", }))
+vim.keymap.set("n", "<F1>l", tabs_as_projects.pick_project({ search_dirs = search_dirs, pick_cmd = "lcd", }))
 
 nnoremap('<F2><F2>', '<cmd>set spell!<cr>')
 nnoremap('<F2>g',    'zg')

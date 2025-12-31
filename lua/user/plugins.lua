@@ -41,6 +41,7 @@ return packer.startup(function(use)
     use 'wbthomason/packer.nvim'
 
     use 'brotifypacha/vim-colors-pencil'
+    use 'brotifypacha/tabs-as-projects.nvim'
     use 'petertriho/nvim-scrollbar'
 
     -- Completion
