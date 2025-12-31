@@ -109,6 +109,7 @@ nnoremap('cw', 'ciw')
 nnoremap('vv', '^v$h')
 nnoremap('Y', 'yg_')
 vnoremap('*', "y/\\V<C-r>=escape(@\", '\\/')<cr><cr>")
+vnoremap('p', '"_dP')
 vim.api.nvim_set_keymap("s", "*", "a<BS>*", { noremap = true })
 
 nnoremap('Q', '@@')
