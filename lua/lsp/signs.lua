@@ -81,28 +81,3 @@ function vim.diagnostic.show(namespace, bufnr, ...)
   show(namespace, bufnr, ...)
   set_signs(bufnr)
 end
-
-local open_float = vim.diagnostic.open_float
-
-function vim.diagnostic.open_float(...)
-
-  local diagnostics = vim.diagnostic.get(0)
-
-  local withoutTags = {}
-
-  local namespace = 0
-
-  for _, d in ipairs(diagnostics) do
-
-    namespace = d.namespace
-
-    if d._tags == nil then
-      withoutTags[#withoutTags+1] = d
-    end
-  end
-
-  vim.diagnostic.set(namespace, 0, withoutTags)
-
-  open_float(...)
-
-end

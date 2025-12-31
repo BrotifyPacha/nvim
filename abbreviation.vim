@@ -2,9 +2,6 @@
 cnoreabbrev h vertical botright help
 
 cnoreabbrev bw! bn \| bw! #
-cnoreabbrev cd tcd
-
-cnoreabbrev new vert new
 
 cnoreabbrev psuh push
 cnoreabbrev pshu push
