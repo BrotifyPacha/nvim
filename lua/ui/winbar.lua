@@ -7,9 +7,6 @@ function M.getMyWinbar()
   local icon = nil
   local icon_highlight = nil
 
-  local win_id = vim.api.nvim_get_current_win()
-  local buf_id = vim.api.nvim_win_get_buf(win_id)
-
   if err == nil then
     icon, icon_highlight = devicons.get_icon_by_filetype(vim.bo.ft)
   end
@@ -19,7 +16,24 @@ function M.getMyWinbar()
   h.create_hl("WinbarNormal", h.extend("Normal", { bg = winbarHL.bg }))
   h.create_hl("WinbarNone", h.extend("FoldColumn", { bg = winbarHL.bg }))
 
+  local tab_id = vim.api.nvim_get_current_tabpage()
+  local cwds = {}
+  for _, win_id in ipairs(vim.api.nvim_tabpage_list_wins(tab_id)) do
+    local cwd = vim.fn.getcwd(win_id, tab_id)
+    if not vim.tbl_contains(cwds, cwd) then
+      cwds[#cwds+1] = cwd
+    end
+  end
+
   local fname = vim.fn.expand('%')
+
+  for _, wd in ipairs(cwds) do
+    local relname = vim.fs.relpath(wd, fname)
+    if relname ~= nil and relname ~= "." then
+      fname = relname
+    end
+  end
+
   local buftype = vim.bo.buftype
   local highlight = "WinbarNone"
   if fname == '' then
@@ -36,9 +50,16 @@ function M.getMyWinbar()
       icon_highlight = highlight
       fname = '%#'.. highlight .. '#' .. '-No-name-' .. '%*'
     end
-  elseif buftype == 'terminal' then
-    icon = ''
-    fname = 'Terminal'
+  else
+    if buftype == 'terminal' then
+      icon = ''
+      fname = 'Terminal'
+    else
+      local win_cwd = vim.fn.getcwd(vim.api.nvim_get_current_win())
+      if #cwds > 1 then
+        fname = "(" .. vim.fs.basename(win_cwd) .. ") " .. fname
+      end
+    end
   end
 
   icon = '%#' .. icon_highlight .. '#' .. icon .. '%*'
