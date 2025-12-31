@@ -8,6 +8,7 @@ iabbrev <buffer> tyep type
 iabbrev <buffer> sring string
 iabbrev <buffer> strign string
 iabbrev <buffer> strinv string
+iabbrev <buffer> stirng string
 iabbrev <buffer> flaot float
 
 iabbrev <buffer> cahn chan
@@ -33,7 +34,9 @@ iabbrev <buffer> reutnr return
 iabbrev <buffer> returnc return
 
 iabbrev <buffer> errrors errors
+iabbrev <buffer> errros errors
 iabbrev <buffer> errro error
+iabbrev <buffer> erorr error
 
 iabbrev <buffer> ;= :=
 iabbrev <buffer> f;= :=
