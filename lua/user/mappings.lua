@@ -207,7 +207,7 @@ inoremapexpr('<S-Tab>', 'v:lua.smart_tab_backward()')
 
 -- Leader mappings
 
-nnoremap('<leader><leader>', ':call search("<-->", "cw")<cr>c4l')
+nnoremap('<leader><leader>', ':call search("<-->", "cw")<cr>"_c4l')
 nnoremap('<leader>e', "<cmd>NvimTreeToggle<cr>")
 nnoremap('<leader>E', "<cmd>NvimTreeFindFile<cr>")
 nnoremap('<leader>l', "<C-w>l")
