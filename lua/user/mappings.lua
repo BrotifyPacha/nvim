@@ -129,18 +129,13 @@ local search_dirs = {
   { category = "config", path = "~/.config", path_parts_to_display=1 },
 }
 -- F key maps
-nnoremap('<F1>', '<cmd>WhichKey F1<cr>')
 wk_reg {
-  { "F1", group = "Change working directory" },
-  {  "F1<F1>", desc = "workspace/plugins", },
-  {  "F1l"   , desc = "workspace/plugins (local)", },
-  {  "F1n"   , ':tcd ~/.config/nvim | e $MYVIMRC <cr>', desc = "neovim config"},
+  {  "F1", desc = "workspace/plugins", },
+  {  "<F2>n" , ':tcd ~/.config/nvim | e $MYVIMRC <cr>', desc = "neovim config"},
 }
 
 local tabs_as_projects = require("tabs-as-projects")
-
-vim.keymap.set("n", "<F1><F1>", tabs_as_projects.pick_project({ search_dirs = search_dirs, pick_cmd = "tcd", }))
-vim.keymap.set("n", "<F1>l", tabs_as_projects.pick_project({ search_dirs = search_dirs, pick_cmd = "lcd", }))
+vim.keymap.set("n", "<F1>", tabs_as_projects.pick_project({ search_dirs = search_dirs }))
 
 nnoremap('<F2><F2>', '<cmd>set spell!<cr>')
 nnoremap('<F2>g',    'zg')

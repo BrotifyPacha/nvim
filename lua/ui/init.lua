@@ -2,6 +2,12 @@ require "ui.winbar"
 
 local h = require "ui.helpers"
 
+require("tabs-as-projects").setup({
+  ui = {
+    use_nerd_font = true,
+  }
+})
+
 vim.o.winbar = "%{%v:lua.require('ui.winbar').getMyWinbar()%}"
 vim.o.tabline = "%!v:lua.require('tabs-as-projects.ui').tabline()"
 vim.o.showtabline = 2
