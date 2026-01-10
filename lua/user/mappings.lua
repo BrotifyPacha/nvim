@@ -396,10 +396,15 @@ vnoremap('<leader>rp', ':lua require"caseswitcher".swapCaseOfVisualSelection("pa
 vnoremap('<leader>rk', ':lua require"caseswitcher".swapCaseOfVisualSelection("kebab")<cr>')
 vnoremap('<leader>rK', ':lua require"caseswitcher".swapCaseOfVisualSelection("kebab-screaming")<cr>')
 
+
+local formatting = require("formatting")
+
+vim.keymap.set("n", "<leader>rt", formatting.toggle_multiline_args)
+
 wk_reg {
   { "<leader>r", group = "refactor" },
   { "<leader>rr", desc = "rename variable" },
-  { "<leader>rt", "<cmd>call formatting#toggle_multiline_args()<cr>", desc = "toggle multiline args" },
+  { "<leader>rt", desc = "toggle multiline args" },
   { "<leader>rC", '<cmd>lua require"caseswitcher".swapCaseOfWordUnderCursor("pascal")<cr><cmd>call repeat#set("<leader>rC")<cr>', desc = "turn CamelCase" },
   { "<leader>rK", '<cmd>lua require"caseswitcher".swapCaseOfWordUnderCursor("kebab-screaming")<cr><cmd>call repeat#set("<leader>rK")<cr>', desc = "turn KEBAB-CASE" },
   { "<leader>rS", '<cmd>lua require"caseswitcher".swapCaseOfWordUnderCursor("snake-screaming")<cr><cmd>call repeat#set("<leader>rS")<cr>', desc = "turn SNAKE_CASE" },
@@ -479,6 +484,10 @@ function M.set_filetype_specific_mappings()
     buf_nnoremap(fprefix .. 'L', '<cmd>GoMetaLinter! --sort-results ./...<cr>')
     buf_nnoremap(fprefix .. 'a', '<cmd>GoAlternate<cr>')
     buf_nnoremap(fprefix .. 'm', ':lua MockInterfaceUnderCusor()<cr>')
+
+    vim.keymap.set("n", "<leader>rt", function ()
+      formatting.toggle_multiline_args({ last_item_coma = true })
+    end, { buffer = true })
 
     vim.keymap.set('n', fprefix .. 'gm', require'helpers.go-dependency-pickers'.live_grep, { desc = 'Live grep go dependencies' })
 
