@@ -16,10 +16,9 @@ function M.getMyWinbar()
   h.create_hl("WinbarNormal", h.extend("Normal", { bg = winbarHL.bg }))
   h.create_hl("WinbarNone", h.extend("FoldColumn", { bg = winbarHL.bg }))
 
-  local tab_id = vim.api.nvim_get_current_tabpage()
   local cwds = {}
-  for _, win_id in ipairs(vim.api.nvim_tabpage_list_wins(tab_id)) do
-    local cwd = vim.fn.getcwd(win_id, tab_id)
+  for _, win_id in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+    local cwd = vim.fn.getcwd(win_id, 0)
     if not vim.tbl_contains(cwds, cwd) then
       cwds[#cwds+1] = cwd
     end
