@@ -12,6 +12,8 @@ require 'nvim-treesitter.configs'.setup {
     'lua',
     'go',
     'vim',
+    'yaml',
+    'proto',
   },
   query_linter = {
     enable = true,
