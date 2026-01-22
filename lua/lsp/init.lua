@@ -65,6 +65,15 @@ local runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
 
+vim.lsp.config('gopls', {
+  settings = {
+    gopls = {
+      buildFlags = { "-tags=integration" },
+      directoryFilters = { "-**/node_modules", "-.git" },
+    }
+  }
+})
+
 vim.lsp.config('lua_ls', {
   settings = {
     Lua = {
