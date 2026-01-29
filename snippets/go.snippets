@@ -31,7 +31,7 @@ snippet yfield "Yaml struct field" b
 	${0}
 
 snippet sf "struct function" Ab
-	func (${1/\(.\).*/\l\1} *${1:Type}) ${3}($4) ${5:error} {
+	func (${1/.*/\\=v:lua.require('user.snippets').getGolangFunctionReceiverLetter(submatch(0))/} *${1:Type}) ${3}($4) ${5:error} {
 		${0}
 	}
 
