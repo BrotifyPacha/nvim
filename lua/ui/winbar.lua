@@ -36,6 +36,7 @@ function M.getMyWinbar()
   local buftype = vim.bo.buftype
   local highlight = "WinbarNone"
   if fname == '' then
+    icon = ''
     if buftype ~= '' and buftype == 'quickfix' then
       local title = vim.fn.getqflist({title = 1}).title
       icon = '󰉺'

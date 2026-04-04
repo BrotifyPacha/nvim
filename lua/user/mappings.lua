@@ -124,8 +124,7 @@ local search_dirs = {
   { category = "workspace", path = "~/workspace/personal" },
   { category = "workspace", path = "~/workspace/notes" },
   { category = "source", path = "~/workspace/sources" },
-  { category = "plugins", path = "~/.local/share/nvim/site/pack/packer/opt", path_parts_to_display=1 },
-  { category = "plugins", path = "~/.local/share/nvim/site/pack/packer/start", path_parts_to_display=1 },
+  { category = "plugins", path = "~/.local/share/nvim/site/pack/core/opt", path_parts_to_display=1 },
   { category = "config", path = "~/.config", path_parts_to_display=1 },
 }
 -- F key maps

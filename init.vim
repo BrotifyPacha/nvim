@@ -1,9 +1,14 @@
 " Specify a directory for plugins
 let g:config_location = stdpath('config')
 
-lua require 'user.autocmds'
 lua require 'user.options'
+lua require 'user.plugins'
+lua require 'ui'
+lua require 'user.plugins-config'
+lua require 'user.helpers'
+lua require 'user.autocmds'
 lua require 'user.mappings'
+lua require 'lsp'
 
 execute "source " . g:config_location ."/"."abbreviation.vim"
 
@@ -29,12 +34,6 @@ endfunction
 
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
-
-lua require 'ui'
-lua require 'user.helpers'
-lua require 'user.plugins'
-lua require 'user.plugins-config'
-lua require 'lsp'
 
 execute "source " . g:config_location ."/"."plug-config/welle-targets.vim"
 execute "source " . g:config_location ."/"."plug-config/delimitMate.vim"

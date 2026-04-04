@@ -1,11 +1,5 @@
 local helpers = require('user.helpers')
 
--- Dap install
-local dap_install = require('dap-install')
-dap_install.setup({
-    installation_path = vim.fn.stdpath('config') .. '/debuggers/',
-})
-
 -- Dap core
 local dap = require('dap')
 dap.set_log_level('TRACE')

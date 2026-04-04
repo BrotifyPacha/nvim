@@ -7,7 +7,7 @@ vim.api.nvim_command [[
     highlight! link @namespace @text
 ]]
 
-require 'nvim-treesitter.configs'.setup {
+require 'nvim-treesitter.config'.setup {
   ensure_installed = {
     'lua',
     'go',

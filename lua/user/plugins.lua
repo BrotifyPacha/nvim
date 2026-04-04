@@ -1,143 +1,91 @@
-local fn = vim.fn
 
-local install_path = fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
-if fn.empty(fn.glob(install_path)) > 0 then
-    PACKER_BOOTSTRAP = fn.system {
-        'git',
-        'clone',
-        '--depth',
-        '1',
-        'https://github.com/wbthomason/packer.nvim',
-        install_path
-    }
-    print 'Installing packer close and Reopen Neovim...'
-    vim.cmd [[packadd packer.nvim]]
-end
+local gh = function(x) return 'https://github.com/' .. x end
 
-vim.cmd [[
-    augroup packer_user_config
-        autocmd!
-        autocmd BufWritePost plugins.lua source <afile> | PackerSync
-    augroup end
-]]
+vim.pack.add({
 
--- Safely require packer
-local status_ok, packer = pcall(require, 'packer')
-if not status_ok then
-    return
-end
+    gh('brotifypacha/vim-colors-pencil'),
 
-packer.init {
-    display = {
-        open_fn = function()
-            return require('packer.util').float({})
-        end
-    }
-}
-
-return packer.startup(function(use)
-
-    -- Let packer manage itself
-    use 'wbthomason/packer.nvim'
-
-    use 'brotifypacha/vim-colors-pencil'
-    use 'brotifypacha/tabs-as-projects.nvim'
-    use 'petertriho/nvim-scrollbar'
+    -- gh('~/workspace/personal/tabs-as-projects.nvim'),
+    gh('brotifypacha/tabs-as-projects.nvim'),
+    gh('petertriho/nvim-scrollbar'),
 
     -- Completion
-    use 'hrsh7th/nvim-cmp'
-    use 'hrsh7th/cmp-path'
-    use 'hrsh7th/cmp-buffer'
-    use 'hrsh7th/cmp-cmdline'
-    use 'hrsh7th/cmp-nvim-lsp'
-    use 'Snikimonkd/cmp-go-pkgs'
-    use 'ray-x/lsp_signature.nvim'
+    gh('hrsh7th/nvim-cmp'),
+    gh('hrsh7th/cmp-path'),
+    gh('hrsh7th/cmp-buffer'),
+    gh('hrsh7th/cmp-cmdline'),
+    gh('hrsh7th/cmp-nvim-lsp'),
+    gh('Snikimonkd/cmp-go-pkgs'),
+    gh('ray-x/lsp_signature.nvim'),
+
+    -- AI
+    gh('milanglacier/minuet-ai.nvim'),
 
     -- Snippets
-    use 'dcampos/nvim-snippy'
-    use 'dcampos/cmp-snippy'
+    gh('dcampos/nvim-snippy'),
+    gh('dcampos/cmp-snippy'),
+    gh('michaelb/sniprun'), --run='bash ./install.sh'}
 
     -- Lsp stuff
-    use 'neovim/nvim-lspconfig'
-    use 'lvimuser/lsp-inlayhints.nvim'
+    gh('neovim/nvim-lspconfig'),
+    gh('lvimuser/lsp-inlayhints.nvim'),
 
     -- File explorer
-    use {
-        'kyazdani42/nvim-tree.lua',
-        requires = {
-            'kyazdani42/nvim-web-devicons', -- optional, for file icon
-        }
-    }
-
-    use 'nvim-lualine/lualine.nvim'
+    gh('kyazdani42/nvim-web-devicons'), -- optional, for file icon
+    gh('kyazdani42/nvim-tree.lua'),
+    gh('nvim-lualine/lualine.nvim'),
 
     -- Utils
-    use 'nvim-lua/popup.nvim'
-    use 'nvim-lua/plenary.nvim'
-    use 'nvim-treesitter/nvim-treesitter'
-    use 'nvim-treesitter/nvim-treesitter-refactor'
-    use 'nvim-treesitter/nvim-treesitter-textobjects'
-    use 'SmiteshP/nvim-gps'
-    use 'folke/which-key.nvim'
-    use 'mfussenegger/nvim-dap'
-    use {
-        'rcarriga/nvim-dap-ui',
-        requires = {
-          'nvim-neotest/nvim-nio',
-        }
-    }
-    use {
-        'Pocco81/DAPInstall.nvim',
-        branch = 'dev',
-    }
-    use 'nvim-treesitter/playground'
-    use 'editorconfig/editorconfig-vim'
+    gh('nvim-lua/popup.nvim'),
+    gh('nvim-lua/plenary.nvim'),
+    gh('nvim-treesitter/nvim-treesitter'),
+    gh('nvim-treesitter/nvim-treesitter-textobjects'),
+    gh('folke/which-key.nvim'),
+    gh('editorconfig/editorconfig-vim'),
+
+    -- DAP
+    gh('mfussenegger/nvim-dap'),
+    gh('nvim-neotest/nvim-nio'),
+    gh('rcarriga/nvim-dap-ui'),
+    gh('mfussenegger/nvim-dap-python'),
+
     -- General
-    use 'nvim-telescope/telescope.nvim'
-    use 'nvim-telescope/telescope-live-grep-args.nvim'
-    use 'lewis6991/gitsigns.nvim'
-    use 'norcalli/nvim-colorizer.lua'
-    use 'junegunn/vim-easy-align'
-    use 'wellle/targets.vim'
-    use 'Raimondi/delimitMate'
-    use 'tpope/vim-commentary'
-    use 'tpope/vim-unimpaired'
-    use 'tpope/vim-surround'
-    use 'tpope/vim-fugitive'
-    use 'tpope/vim-repeat'
-    use 'easymotion/vim-easymotion'
-    use 'tommcdo/vim-exchange'
-    use 'LintaoAmons/scratch.nvim'
-    use { 'michaelb/sniprun', run='bash ./install.sh'}
+    gh('nvim-telescope/telescope.nvim'),
+    gh('nvim-telescope/telescope-live-grep-args.nvim'),
+    gh('lewis6991/gitsigns.nvim'),
+    gh('norcalli/nvim-colorizer.lua'),
+    gh('junegunn/vim-easy-align'),
+    gh('wellle/targets.vim'),
+    gh('Raimondi/delimitMate'),
+    gh('tpope/vim-commentary'),
+    gh('tpope/vim-unimpaired'),
+    gh('tpope/vim-surround'),
+    gh('tpope/vim-fugitive'),
+    gh('tpope/vim-repeat'),
+    gh('easymotion/vim-easymotion'),
+    gh('tommcdo/vim-exchange'),
+    gh('LintaoAmons/scratch.nvim'),
+
     -- Filetype specific
-    use 'baskerville/vim-sxhkdrc'
-    use {
-        'StanAngeloff/php.vim',
-        opt = true,
-        ft = { 'php', 'html', 'blade.php' }
-    }
-    use 'nelsyeung/twig.vim'
-    use 'jwalton512/vim-blade'
-    use 'towolf/vim-helm'
-    use { 'iamcco/markdown-preview.nvim', run = 'cd app && yarn install' }
-    use { 'fatih/vim-go' }
-    use { 'olexsmir/gopher.nvim', branch="develop", config = function ()
-    require("gopher").setup {
-      gotests = {
-        -- path to a directory containing custom test code templates
-        template_dir = "/home/" .. vim.env.USER .. "/.config/nvim/go-templates",
-        -- switch table tests from using slice to map (with test name for the key)
-        -- works only with gotests installed from develop branch
-        named = false,
-      },
-    }
-    end }
-    use { 'mfussenegger/nvim-dap-python' }
+    gh('baskerville/vim-sxhkdrc'),
+    gh('towolf/vim-helm'),
+    gh('iamcco/markdown-preview.nvim'), --run = 'cd app && yarn install',
+
+    gh('fatih/vim-go'),
+    gh('olexsmir/gopher.nvim'),
+
+    -- require("gopher").setup {
+    --   gotests = {
+    --     -- path to a directory containing custom test code templates
+    --     template_dir = "/Users/" .. vim.env.USER .. "/.config/nvim/go-templates",
+    --     -- switch table tests from using slice to map (with test name for the key)
+    --     -- works only with gotests installed from develop branch
+    --     named = false,
+    --   },
+    -- }
+    -- end
+
     -- Tools
-    use { 'qpkorr/vim-renamer', cmd = 'Renamer' }
+    gh('qpkorr/vim-renamer')
 
-    if PACKER_BOOTSTRAP then
-        require('packer').sync()
-    end
-end)
-
+})
