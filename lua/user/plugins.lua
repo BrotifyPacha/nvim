@@ -39,6 +39,8 @@ vim.pack.add({
     gh('nvim-lua/popup.nvim'),
     gh('nvim-lua/plenary.nvim'),
     gh('nvim-treesitter/nvim-treesitter'),
+    gh('nvim-treesitter/nvim-treesitter-context'),
+    gh('nvim-treesitter/nvim-treesitter-locals'),
     gh('nvim-treesitter/nvim-treesitter-textobjects'),
     gh('folke/which-key.nvim'),
     gh('editorconfig/editorconfig-vim'),
