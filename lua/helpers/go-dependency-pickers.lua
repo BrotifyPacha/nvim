@@ -35,6 +35,9 @@ M.live_grep = function ()
       local modules_dir = vim.env.HOME .. "/go/pkg/mod/"
 
       local dependency, version, file = string.match(entry:gsub(modules_dir, ""), "(.*)@([^/]*)(.+)")
+      if file == nil then
+        return
+      end
       -- vim.print(entry)
       return {
         value = entry,

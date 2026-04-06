@@ -11,6 +11,13 @@ function M.getMyWinbar()
     icon, icon_highlight = devicons.get_icon_by_filetype(vim.bo.ft)
   end
 
+  if icon == nil then
+    icon = ''
+  end
+  if icon_highlight == nil then
+    icon_highlight = ''
+  end
+
   local winbarHL = h.get_hl("WinBar")
   h.create_hl("WinbarErr", h.extend("ErrorMsg", { bg = winbarHL.bg }))
   h.create_hl("WinbarNormal", h.extend("Normal", { bg = winbarHL.bg }))

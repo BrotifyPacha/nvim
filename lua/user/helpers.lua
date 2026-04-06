@@ -149,7 +149,7 @@ function M.sort_entrypoints(entry_points)
       a_val = a_val + sort_test(a < b, 1)
       b_val = b_val + sort_test(a > b, 1)
 
-      print(a, b, a_val, b_val)
+      -- print(a, b, a_val, b_val)
       -- if a:sub(-#find) == find then
       --   return a:
       -- end
