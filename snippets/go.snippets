@@ -9,6 +9,27 @@ snippet main "main function" b
 		${0}
 	}
 
+snippet init "main function" b
+	func init() {
+		${0}
+	}
+
+snippet test "test function" b
+	func Test${1:XXX}(t *testing.T) {
+		${0}
+	}
+
+snippet benchmark "test function" b
+	func benchmark${1:XXX}(b *testing.B) {
+
+		for b.Loop() {
+
+			${0}
+
+		}
+
+	}
+
 snippet jfield "Json tagged field" b
 	${1:Field} ${2:string} \`json:"${1/.*/\l\0/g}"\`
 	${0}
@@ -39,7 +60,7 @@ snippet msf "map slice function - []A to []B" Ab
 	func map${1/\v\*?([^.]+)\.?([^.]+)?/\u\1\2}To${2/\v\*?([^.]+)\.?([^.]+)?/\u\1\2}(in []${1}) []${2} {
 		out := make([]$2, 0, len(in))
 		for _, item := range in {
-			out = append(out, $${2/\v*/\&/g}{$0})
+			out = append(out, ${2/\v*/\&/g}{$0})
 		}
 		return out
 	}
