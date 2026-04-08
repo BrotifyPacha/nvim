@@ -32,6 +32,8 @@ vim.opt.regexpengine = 1
 vim.opt.diffopt:append('vertical')
 vim.opt.virtualedit = 'block'
 
+vim.o.autoread = true
+
 -- vim.opt.grepprg = grep\ -Rin\ $*\ --exclude-dir={.git,vendor,logs}\ /dev/null
 
 vim.opt.wildmenu = true
