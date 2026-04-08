@@ -7,83 +7,24 @@ vim.api.nvim_command [[
     highlight! link @namespace @text
 ]]
 
-require 'nvim-treesitter.config'.setup {
-  ensure_installed = {
-    'lua',
-    'go',
-    'vim',
-    'yaml',
-    'proto',
-  },
-  query_linter = {
-    enable = true,
-    use_virtual_text = true,
-    lint_events = {"BufWrite", "CursorHold"},
-  },
-  highlight = {
-    enable = true,
-    use_languagetree = true, -- Use this to enable language injection
-    disable = { "vimdoc", "typescriptreact" }
-  },
-  fold = {
-    enable = true,
-    disable = { "typescriptreact" },
-  },
-  indent = {
-    enable = true,
-    disable = { "go" }
-  },
-  refactor = {
-    highlight_current_scope = {
-      enable = false,
-      disable = { "php" }
-    },
-    highlight_definitions = {
-      enable = false,
-      disable = { "markdown", "typescriptreact" },
-    },
-    smart_rename = {
-      enable = true,
-      keymaps = {
-        smart_rename = "<space>rR"
-      }
-    },
-    navigation = {
-      enable = true,
-      keymaps = {
-        list_definitions_toc = "gO"
-      }
-    }
-  },
-  textobjects = {
-    select = {
-      enable = true,
-      -- Automatically jump forward to textobj, similar to targets.vim 
-      lookahead = true,
-      keymaps = {
-        ["af"] = "@function.outer",
-        ["if"] = "@function.inner",
-        ["ie"] = "@expression.inner",
-      },
-    },
-  },
-  -- Use :TSPlaygroundToggle
-  playground = {
-    enable = true,
-    disable = {},
-    updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
-    persist_queries = false, -- Whether the query persists across vim sessions
-    keybindings = {
-      toggle_query_editor = 'o',
-      toggle_hl_groups = 'i',
-      toggle_injected_languages = 't',
-      toggle_anonymous_nodes = 'a',
-      toggle_language_display = 'I',
-      focus_language = 'f',
-      unfocus_language = 'F',
-      update = 'R',
-      goto_node = '<cr>',
-      show_help = '?',
-    }
-  }
+local highlight_filetypes = {
+  'go',
+  'lua',
+  'vim',
+  'yaml',
 }
+
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = highlight_filetypes,
+  callback = function() vim.treesitter.start() end,
+})
+
+vim.keymap.set({ "x", "o" }, "af", function()
+  require "nvim-treesitter-textobjects.select".select_textobject("@function.outer", "textobjects")
+end)
+vim.keymap.set({ "x", "o" }, "if", function()
+  require "nvim-treesitter-textobjects.select".select_textobject("@function.inner", "textobjects")
+end)
+vim.keymap.set({ "x", "o" }, "ie", function()
+  require "nvim-treesitter-textobjects.select".select_textobject("@expression.inner", "textobjects")
+end)
