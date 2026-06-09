@@ -45,12 +45,16 @@ local function set_signs(bufnr)
       one_sign_per_severity_per_line[d.lnum] = {d}
     end
   end
+  local buf_lines = vim.api.nvim_buf_line_count(bufnr)
   local filtered_diagnostics = {}
   for _, v in pairs(one_sign_per_severity_per_line) do
     for _, j in pairs(v) do
+      j.lnum = math.min(j.lnum, buf_lines - 1)
+      j.end_lnum = math.min(j.end_lnum, buf_lines - 1)
       table.insert(filtered_diagnostics, j)
     end
   end
+  -- vim.print(diagnostics, filtered_diagnostics)
   -- Show the filtered diagnostics using the custom namespace. Use the
   -- reference to the original function to avoid a loop.
   show(ns, bufnr, filtered_diagnostics, {
