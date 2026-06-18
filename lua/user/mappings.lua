@@ -176,12 +176,23 @@ inoremap('<C-l>', '<C-x><C-l>')
 inoremap('<down>', '<-')
 inoremap('<up>', '->')
 
-inoremap('<C-r>c', '<C-r>=trim(v:lua.require(\'user.helpers\').getStdoutOf(\'kcolorchooser --print 2>/dev/null\')[0])<cr>')
-inoremap('<C-r>d', './<C-r>=expand("%:h")<cr>')
-inoremap('<C-r>p', './<C-r>=expand("%")<cr>')
-inoremap('<C-r>P', '<C-r>=expand("%:p")<cr>')
-inoremap('<C-r>f', '<C-r>=expand("%:t:r")<cr>')
-inoremap('<C-r>F', '<C-r>=expand("%:t")<cr>')
+wk_reg {
+  mode = 'i',
+  { '<C-r>', group = 'quick insert' },
+  { '<C-r>f', group = 'info related to currently open file' },
+  { '<C-r>fd', './<C-r>=expand("%:h")<cr>', desc = "file's directory" },
+  { '<C-r>fp', './<C-r>=expand("%")<cr>',   desc = "relative path to file" },
+  { '<C-r>fa', '<C-r>=expand("%:p")<cr>',   desc = "absolute path to file" },
+  { '<C-r>fn', '<C-r>=expand("%:t:r")<cr>', desc = "file name (no ext)" },
+  { '<C-r>fe', '<C-r>=expand("%:t")<cr>',   desc = "file name (w/ ext)" },
+}
+
+vim.keymap.set('i', '<C-r>', function ()
+  require("which-key").show({
+    keys = "<C-r>",
+  })
+end)
+
 
 -- Smart tab
 local function t(str)
