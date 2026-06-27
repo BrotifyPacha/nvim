@@ -82,6 +82,7 @@ vim.lsp.config('lua_ls', {
         library = {
           vim.fn.expand("~/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua"),
           vim.fn.expand("~/.local/share/nvim/site/pack/packer/start/plenary.nvim/lua"),
+          vim.fn.expand("$VIMRUNTIME")
         }
       },
       diagnostics = { globals = { 'vim' } },
