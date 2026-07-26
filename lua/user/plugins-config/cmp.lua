@@ -61,9 +61,8 @@ local cmp = require 'cmp'
 cmp.setup({
   snippet = {
     expand = function(args)
-      -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
-      -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
-      require('snippy').expand_snippet(args.body)
+      -- Use neovim's default snippet engine for snippets
+      vim.snippet.expand(args.body)
     end,
   },
   mapping = {
