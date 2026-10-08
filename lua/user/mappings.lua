@@ -36,9 +36,6 @@ end
 local function xnoremap(from, to)
   noremap('x', from, to)
 end
-local function cnoremap(from, to)
-  noremap('c', from, to)
-end
 
 local function nmap(from, to)
   map('n', from, to)
@@ -99,25 +96,27 @@ nnoremap('g]p', 'ddmm}P`m:call repeat#set("m]p")<cr>')
 nnoremap('g[p', 'ddkmm{p`m:call repeat#set("m[p")<cr>')
 
 -- Misc key maps
-nnoremap('n', 'nzz')
-nnoremap('N', 'Nzz')
-nnoremap('gf', 'gF')
-nnoremap('gF', ':e <cfile><cr>')
-nnoremap('cy', '"*y')
+vim.keymap.set("n", "n", "nzz")
+vim.keymap.set("n", "N", "Nzz")
+vim.keymap.set("n", "gf", "gF")
+vim.keymap.set("n", "gF", ":e <cfile><cr>")
+vim.keymap.set("n", "cy", "\"*y")
 
-nnoremap('cw', 'ciw')
-nnoremap('vv', '^v$h')
-nnoremap('Y', 'yg_')
-vnoremap('*', "y/\\V<C-r>=escape(@\", '\\/')<cr><cr>")
-vnoremap('p', '"_dP')
-vim.api.nvim_set_keymap("s", "*", "a<BS>*", { noremap = true })
+-- https://any-domain/ -> any-domain
+vim.keymap.set("n", "dss", "f/xF:Fhd2f/")
 
-nnoremap('Q', '@@')
-nnoremap('q:', '<nop>')
-nnoremap('q/', '<nop>')
-nnoremap('q?', '<nop>')
+vim.keymap.set("n", "cw", "ciw")
+vim.keymap.set("n", "vv", "^v$h")
+vim.keymap.set("n", "Y", "yg_")
+vim.keymap.set("v", "*", "y/\\V<C-r>=escape(@\", '\\/')<cr><cr>")
+vim.keymap.set("s", "*", "a<BS>*", { noremap = true })
 
-cnoremap('<C-f>', '<C-f>F/l')
+vim.keymap.set("n", "Q", "@@")
+vim.keymap.set("n", "q:", "<nop>")
+vim.keymap.set("n", "q/", "<nop>")
+vim.keymap.set("n", "q?", "<nop>")
+
+vim.keymap.set("c", "<C-f>", "<C-f>F/l")
 
 local search_dirs = {
   { category = "workspace", path = "~/workspace/ozon-main" },
