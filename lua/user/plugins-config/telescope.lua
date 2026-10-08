@@ -41,7 +41,7 @@ require "telescope".setup{
     winblend = -1,
     file_ignore_patterns = {
       'node_modules',
-      'vendor',
+      '\\/vendor\\/',
       '\\.git',
       '\\.spl$',
       '\\.sug$',
