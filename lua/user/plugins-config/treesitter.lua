@@ -10,6 +10,8 @@ vim.api.nvim_command [[
 local highlight_filetypes = {
   'go',
   'lua',
+  'typescript',
+  'typescriptreact',
   'vim',
   'yaml',
 }
