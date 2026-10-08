@@ -66,12 +66,16 @@ require "telescope".setup{
       i = {
         ["<C-q>"] = require('telescope.actions').smart_send_to_qflist + require('telescope.actions').open_qflist,
         ["<C-t>"] = require('telescope.actions').toggle_selection + require('telescope.actions').move_selection_next,
-        ["<Tab>"] = require('telescope.actions').toggle_selection
+        ["<Tab>"] = require('telescope.actions').toggle_selection,
+        ["<Up>"] = require("telescope.actions").cycle_history_prev,
+        ["<Down>"] = require("telescope.actions").cycle_history_next,
       },
       n = {
         ["<C-q>"] = require('telescope.actions').smart_send_to_qflist + require('telescope.actions').open_qflist,
         ["<C-t>"] = require('telescope.actions').toggle_selection + require('telescope.actions').move_selection_next,
-        ["<Tab>"] = require('telescope.actions').toggle_selection
+        ["<Tab>"] = require('telescope.actions').toggle_selection,
+        ["<Up>"] = require("telescope.actions").cycle_history_prev,
+        ["<Down>"] = require("telescope.actions").cycle_history_next,
       }
     }
   },
@@ -96,6 +100,7 @@ require "telescope".setup{
       find_command = {
         'rg',
         '--files',
+        '--follow',
         '--glob',
         '!{.git,node_modules,.svn,zsh-hist}',
         '--no-ignore',
