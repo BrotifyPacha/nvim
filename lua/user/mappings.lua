@@ -155,6 +155,18 @@ nnoremap('<F6>', '<cmd>set list!<cr>')
 nnoremap('<F7>', '<cmd>set wrap!<cr>')
 nnoremap('<F8>', '<cmd>ColorizerToggle<cr>')
 
+local agent = require "agent"
+
+vim.keymap.set("n", "<F8><F8>", function() agent.summon("claude")   end, { desc = "Agent: claude" })
+vim.keymap.set("n", "<F8><F9>", function() agent.open("claude")     end, { desc = "Agent: new claude" })
+vim.keymap.set("n", "<F8>oo",   function() agent.summon("opencode") end, { desc = "Agent: opencode" })
+vim.keymap.set("n", "<F8>on",   function() agent.open("opencode")   end, { desc = "Agent: new opencode" })
+vim.keymap.set({ "n", "x" }, "<leader>o", function()
+  vim.o.operatorfunc = "v:lua.require'agent'.send_link"
+  return "g@"
+end, { expr = true, desc = "Agent: send link to motion/selection" })
+vim.keymap.set("n", "<leader>oo", "<leader>o_", { remap = true, desc = "Agent: send link to line" })
+
 nnoremap('<F9><F9>',  '<cmd>lua require"terminal".open_terminal()<cr>')
 nnoremap('<F9><F10>', '<cmd>lua require"terminal".open_new_terminal()<cr>')
 nnoremap('<F9>', '<cmd>WhichKey F9<cr>')
