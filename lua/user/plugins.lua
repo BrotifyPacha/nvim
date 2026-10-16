@@ -55,7 +55,7 @@ vim.pack.add({
     gh('nvim-telescope/telescope.nvim'),
     gh('nvim-telescope/telescope-live-grep-args.nvim'),
     gh('lewis6991/gitsigns.nvim'),
-    gh('norcalli/nvim-colorizer.lua'),
+    gh('catgoose/nvim-colorizer.lua'),
     gh('junegunn/vim-easy-align'),
     gh('wellle/targets.vim'),
     gh('Raimondi/delimitMate'),
